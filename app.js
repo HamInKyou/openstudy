@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+<<<<<<< HEAD
 const { sequelize } = require('./models');
 const app = express();
 
@@ -19,6 +20,15 @@ app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 8001);
 //db
 sequelize.sync();
+=======
+
+const app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+app.set('port', process.env.PORT || 8001);
+>>>>>>> 738a5405881b8a27e36f186d03e67db03e438803
 
 app.use(morgan('dev'));
 app.use(express.json());

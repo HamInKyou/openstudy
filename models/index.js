@@ -41,7 +41,7 @@ db.Board.belongsTo(db.Study);
 //board post
 db.Board.hasMany(db.Post);
 db.Post.belongsTo(db.Board);
-//post comment
+//post commen
 db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post);
 //submit board
@@ -64,6 +64,4 @@ db.Tag.belongsToMany(db.User,{
     foreignKey : 'userId',
     through : 'userTag',
 });
-
-
 module.exports = db;
