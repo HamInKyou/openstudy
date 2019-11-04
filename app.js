@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
+const { sequelize } = require('./models');
 const app = express();
 
 // view engine setup
@@ -17,6 +17,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 app.set('port', process.env.PORT || 8001);
+//db
+sequelize.sync();
 
 app.use(morgan('dev'));
 app.use(express.json());
