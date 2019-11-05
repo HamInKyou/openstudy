@@ -2,36 +2,90 @@
 <html lang="ko">
 <head>
    <meta charset="UTF-8">
-   <title>title</title>
+   <title>회원 가입</title>
    <link rel="stylesheet" href="css/bootstrap.css">
+   <link rel="shortcut icon" href="img/shortcut-logo.png">
 
 </head>
 <body style="background:#ffbc3b">
-   <form class="form-signin">
-      <div class="text-center mb-4">
-        <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
-      </div>
-    
-      <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputEmail">Email address</label>
-      </div>
-    
-      <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <label for="inputPassword">Password</label>
-      </div>
-    
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
-    </form>
+  
+  <div class="container">
+            
+    <div class ="signUp" 
+        style = "width:80%; margin:auto;margin-top:80px;margin-bottom:80px;">
+            
+
+        <div class ="form-signUp"
+            style="background:#1A1A37; padding:10%;">
+
+            <div class="row"> 
+                <img src="img/logo.png" style="margin:auto;">
+            </div>
+        
+            <div class = "row">
+                <h4 
+                style="margin:auto; font-size:25px;color:white; margin-top:10%; margin-bottom:4%; font-weight:bold; color:#ffbc3b">회 원 가 입</h4>
+            </div>
+
+            <hr class="my-4" style = background-color:white;>
+        
+            <p style="color:white; margin-top:10%;">
+                
+                이름
+                <input type="text" placeholder="이름을 입력하세요" 
+                    style="width:80%; margin-left:14.5%; height:25px; background-color:#1A1A37; color:white; font-size:15px; align-items:right;
+                           border-right:0px; border-top:0px; border-left:0px; border-bottom:2px solid #ffbc3b">
+            </p>
+
+            <p>&nbsp;</p>
+
+            <p style="color:white;">
+                
+                생년월일
+                <input type="text" placeholder="주민등록번호 앞 6자리" 
+                    style="width:80%; margin-left:10%; height:25px; background-color:#1A1A37; color:white; font-size:15px; border-right:0px; border-top:0px; border-left:0px; border-bottom:2px solid #ffbc3b">
+            </p>
+
+            <p>&nbsp;</p>
+
+            <p style="color:white;">
+                
+                ID
+                <input type="text" placeholder="ID" 
+                    style="width:80%; margin-left:17%; height:25px; background-color:#1A1A37; color:white; font-size:15px; border-right:0px; border-top:0px; border-left:0px; border-bottom:2px solid #ffbc3b">
+            </p>
+
+            <p>&nbsp;</p>
+
+            <p 
+                style="color:white;">
+
+                PW
+                <input type = "password" placeholder="Password"
+                    style="width:80%; margin-left:16%; height:25px; background-color:#1A1A37; color:white; font-size:15px; border-right:0px; border-top:0px; border-left:0px;border-bottom:2px solid #ffbc3b;">
+            </p>
+
+            <p>&nbsp;</p>
+
+            <p 
+                style="color:white;">
+
+                PW 확인
+                <input type = "password" placeholder="Password를 다시 입력해주세요"
+                    style="width:80%; margin-left:10.5%; height:25px; background-color:#1A1A37; color:white; font-size:15px; border-right:0px; border-top:0px; border-left:0px;border-bottom:2px solid #ffbc3b;">
+            </p>
+        
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <button type ="submit" onclick="window.location.href = 'home.html';" 
+                style ="margin-left:25%; width:52.5%; height:30px; background-color:#ffbc3b; border:0px; outline:none;   color:white; font-size:15px; font-weight:bold;">완료</button>
+        
+        
+        </div>
+    </div>
+</div>
+  
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
