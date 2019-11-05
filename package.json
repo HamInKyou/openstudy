@@ -6,20 +6,19 @@
     "start": "nodemon app"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
-<<<<<<< HEAD
     "ejs": "^2.7.1",
-=======
->>>>>>> 738a5405881b8a27e36f186d03e67db03e438803
     "express": "~4.16.1",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql": "^2.17.1",
     "mysql2": "^2.0.0",
-    "pug": "^2.0.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {

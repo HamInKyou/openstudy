@@ -9,8 +9,11 @@
   },
   "release": {
     "username": "root",
-    "password": "yonghu",
-    "database": "openstudy"
+    "password": "Openstudy123!@#",
+    "host" : "104.196.68.14",
+    "database": "openstudy",
+    "dialect": "mysql",
+    "operatorsAliases": false
   },
   "production": {
     "username": "root",

@@ -1,39 +1,30 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const session = require('express-session');
+const passport = require('passport');
 require('dotenv').config();
-
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-<<<<<<< HEAD
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 const app = express();
+
+const pageRouter = require('./routes/index');
+const userRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+
+
 
 // view engine setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-
 app.set('port', process.env.PORT || 8001);
-//db
 sequelize.sync();
-=======
-
-const app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.set('port', process.env.PORT || 8001);
->>>>>>> 738a5405881b8a27e36f186d03e67db03e438803
-
+passportConfig(passport);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
@@ -46,8 +37,9 @@ app.use(session({
   },
 }));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', pageRouter);
+app.use('/user', userRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
