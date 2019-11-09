@@ -12,10 +12,11 @@ const app = express();
 const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const boardRouter = require('./routes/board');
 
 
 
-// view engine setup
+// middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
@@ -39,10 +40,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+//router
 app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
+app.use('/board', boardRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

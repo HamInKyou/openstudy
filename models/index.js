@@ -26,13 +26,13 @@ db.User.hasMany(db.Comment);
 db.Comment.belongsTo(db.User);
 //user study
 db.User.belongsToMany(db.Study,{
-    as : 'e_user',
-    foreignKey : 'studyId',
+    as : 'EnrolledStudy',
+    foreignKey : 'userId',
     through : 'Enroll',
 });
 db.Study.belongsToMany(db.User,{
-    as : 'e_study',
-    foreignKey : 'userId',
+    as : 'Member',
+    foreignKey : 'studyId',
     through : 'Enroll',
 });
 //study board
@@ -41,7 +41,7 @@ db.Board.belongsTo(db.Study);
 //board post
 db.Board.hasMany(db.Post);
 db.Post.belongsTo(db.Board);
-//post commen
+//post comment
 db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post);
 //submit board
@@ -55,13 +55,18 @@ db.Tag.hasOne(db.Chatlog);
 db.User.hasOne(db.Calendar);
 //user tag
 db.User.belongsToMany(db.Tag,{
-    as : 't_user',
-    foreignKey : 'tagId',
-    through : 'userTag',
-});
-db.Tag.belongsToMany(db.User,{
-    as : 't_tag',
+    as : 'enrolledTag',
     foreignKey : 'userId',
     through : 'userTag',
 });
+db.Tag.belongsToMany(db.User,{
+    as : 'Member',
+    foreignKey : 'tagId',
+    through : 'userTag',
+});
+//user(owner) study
+db.User.hasMany(db.Study,{
+    foreignKey: 'owner'
+});
+
 module.exports = db;
