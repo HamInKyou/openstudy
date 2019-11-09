@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "tui-calendar": ["./../../index.d.ts"]
+    }
+  },
+  "files": [
+    "../../index.d.ts",
+    "./type-tests.ts"
+  ]
+}
