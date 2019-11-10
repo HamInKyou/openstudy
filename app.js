@@ -13,7 +13,7 @@ const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const boardRouter = require('./routes/board');
-
+const studyRouter = require('./routes/study');
 
 
 // middleware setup
@@ -45,6 +45,7 @@ app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/board', boardRouter);
+app.use('/study', studyRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
