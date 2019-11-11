@@ -1,8 +1,12 @@
 const express = require('express');
-const passport = require('passport');
 const { Study } = require('../models');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const Op = sequelize.Op;
+/*
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } });
+*/
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
     const {id, name, info} = req.body;
@@ -15,7 +19,6 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
                 msg : '이미 있는 그룹'
             });
         }
-
         await Study.create({
             id,
             name,
@@ -25,9 +28,83 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
             res : true,
             msg : '그룹 생성 완료'
         });
-        
     } catch (err) {
         console.error(err);
         next(err);
     }
 });
+
+/*
+router.post('/upload/photo', upload.array('photo', 1), (req, res, next) => {
+    try { 
+        const files = req.files; 
+        let originalName = ''; 
+        let fileName = ''; let mimeType = ''; 
+        let size = 0; 
+        
+        if (Array.isArray(files)) { 
+            console.log(`files is array~`); 
+            originalName = files[0].originalname; 
+            fileName = files[0].filename; 
+            mimeType = files[0].mimetype; 
+            size = files[0].size; 
+        } else { 
+            console.log(`files is not array~`); 
+            
+            originalName = files[0].originalname; 
+            fileName = files[0].filename; 
+            mimeType = files[0].mimetype; 
+            size = files[0].size; 
+        } 
+        
+        console.log(`file inform : ${originalName}, ${fileName}, ${mimeType}, ${size}`);
+        res.writeHead('200', { 
+            'Content-type': 'text/html;charset=utf8' 
+        }); 
+        res.write('<h3>upload success</h3>'); 
+        res.write(`<p>original name = ${originalName}, saved name = ${fileName}<p>`); 
+        res.write(`<p>mime type : ${mimeType}<p>`);
+        res.write(`<p>file size : ${size}<p>`); 
+        res.end(); 
+    } catch (err) { 
+        console.error(err); 
+    }
+});
+*/
+
+router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
+    try{
+        const groups = await Study.findAll();
+        res.render('group', {groups});
+    } catch(error){
+        console.error(err);
+    }
+});
+
+router.get('/find', async(req, res, next) => { //유사검색 가능
+    let searchStudy = req.params.searchStudy
+
+    Study.findAll({
+        where:{
+            name: {
+                [Op.like]: "%" + searchStudy + "%"
+            }
+        }
+    })
+        .then( result => {
+            res.json(result)
+        })
+        .catch( err => {
+            console.log(err)
+        })
+});
+
+/*
+router.post('/join', isLoggedIn, async(req,res,next) => { //그룹 가입
+    const {id, name, info} = req.body;
+    const study = await Study.findOne({where : {id}});
+
+});
+*/
+
+module.exports = router;
