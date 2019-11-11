@@ -12,7 +12,7 @@ const app = express();
 const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-
+const imgRouter = require('./routes/img');
 
 
 // middleware setup
@@ -25,7 +25,7 @@ passportConfig(passport);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   resave: false,
@@ -43,6 +43,7 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
+app.use('/img', imgRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
