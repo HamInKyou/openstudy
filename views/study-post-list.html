@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+<style>
+    #hover{
+        color:#343a40;
+    }
+
+</style>
+</head>
+<body style="background:#e9ecef">
+   
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#" style = color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+      
+      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+  
+      <div class="dropdown">
+          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+            MY MENU
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="#">개인정보 설정</a>
+                   <a class="dropdown-item"  href="#">로그아웃</a>
+          </div>
+      </div>
+  
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+        <div class="container">
+          <div class = "row">
+              <div class = "col-lg-10">
+          <script>
+              var studyName = ['OpenSource Project'];
+            document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
+          </script>
+          </div>
+          <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
+            <p></p>
+        </div>
+        </div>
+            <p class="lead">스터디 소개글 여기에 넣기~ </p>
+        </div>
+    </div>
+
+<section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex">
+            <div class="text-center mr-4">
+              <div class="p-4 bg-warning text-white">
+                  <span class="h2 d-block">05</span> SEP,2019
+              </div>
+            </div>
+            <!-- notice content -->
+            <div>
+              <h3 class="mb-4">4주차 Polynomial and sparse matrix</h3>
+              <ul class="list-styled mb-5">
+                <li>다항식</li>
+                <li>희소 행렬</li>
+                <li>효율적인 희소행렬 표현</li>
+                <li>배열의 표현</li>
+                <li>스트링 추상 데이타 타입</li>
+              </ul>
+            </div>
+          </div>
+          <div class = "row">
+            <div class="col-lg-12 col-sm-8 mb-5 mb-lg-0">
+              <button type="button" class="btn btn-warning" style = "margin-left:12%; margin-bottom: 5%;" onclick="location.href='post.html'">POST</button>
+            </div>
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style = "width:70%;">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col" style = "width:10%;">작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr data-toggle="modal" data-target="#postModal" href="#" >
+  
+                    <th scope="row">5</th>
+                    <td><a href="#" id = "hover">4주차 허예은</a></td>
+                    <td>허예은</td>
+                    <td>2019-10-10</td>
+                  </tr>
+  
+                <tr>
+                      <th scope="row">4</th>
+                      <td>4주차 허예은</td>
+                      <td>허예은</td>
+                      <td>2019-10-10</td>
+                    </tr>    
+              <tr>
+                <th scope="row">3</th>
+                <td>4주차 허예은</td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>4주차 허예은</td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>4주차 허예은</td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <!-- modal -->
+          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content rounded-0 border-0 p-4">
+                      <div class="modal-header border-0">
+                         <p> <h3>4주차 허예은</h3></p>
+  
+                          
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th scope="col">No.</th>
+                                  <th scope="col">작성자</th>
+                                  <th scope="col" style = "width:20%;">작성일</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>5</td>
+                                  <td>허예은</td>
+                                  <td>2019-10-10</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table>
+                              <div class="col-lg-12" style = "border: 1px solid #dee2e6;">
+                                  <p>김익수</p>
+                                  <p>교수님</p>
+                                  <p>최고</p>
+                                  <p>◟( ˘ ³˘)◞ ♡</p>
+                                  <p>김익수</p>
+                                  <p>교수님</p>
+                                  <p>최고</p>
+                                  <p>◟( ˘ ³˘)◞ ♡</p>
+                              </div>
+                            </table>
+  
+                          <form action="#" class="row">
+                              <div class="col-12">
+                                  <p>&nbsp</p>
+                              </div>
+                            <div class = "col-12">
+                                <p> <h5>댓글달기</h5></p>
+                            </div>
+                              
+                            <p style = "margin-left:2%;"><i class="fas fa-user mr-2"></i>허예은</p>
+                              <div class="col-12">
+                                  <input type="text" class="form-control mb-3" id="upload" name="upload" placeholder="댓글을 입력하세요.">
+                              </div>
+                              <div class="col-12">
+                                  <button type="submit" class="btn btn-warning">댓글달기</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>   
+</html>
