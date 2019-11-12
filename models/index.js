@@ -37,6 +37,9 @@ db.Study.belongsToMany(db.User,{
 });
 //study board
 db.Study.hasMany(db.Board);
+db.Study.belongsTo(db.User, {
+    foreignKey: 'owner'
+});
 db.Board.belongsTo(db.Study);
 //board post
 db.Board.hasMany(db.Post);

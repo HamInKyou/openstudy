@@ -9,7 +9,7 @@ const upload = multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } 
 */
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
-    const {id, name, info} = req.body;
+    const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
     try{
         const exStudy = await Study.findOne({where : {name}});
         const result = {};
@@ -23,6 +23,9 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
             id,
             name,
             info,
+            createdAt,
+            updatedAt,
+            //owner,
         });
         return res.json({
             res : true,
@@ -33,44 +36,6 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
         next(err);
     }
 });
-
-/*
-router.post('/upload/photo', upload.array('photo', 1), (req, res, next) => {
-    try { 
-        const files = req.files; 
-        let originalName = ''; 
-        let fileName = ''; let mimeType = ''; 
-        let size = 0; 
-        
-        if (Array.isArray(files)) { 
-            console.log(`files is array~`); 
-            originalName = files[0].originalname; 
-            fileName = files[0].filename; 
-            mimeType = files[0].mimetype; 
-            size = files[0].size; 
-        } else { 
-            console.log(`files is not array~`); 
-            
-            originalName = files[0].originalname; 
-            fileName = files[0].filename; 
-            mimeType = files[0].mimetype; 
-            size = files[0].size; 
-        } 
-        
-        console.log(`file inform : ${originalName}, ${fileName}, ${mimeType}, ${size}`);
-        res.writeHead('200', { 
-            'Content-type': 'text/html;charset=utf8' 
-        }); 
-        res.write('<h3>upload success</h3>'); 
-        res.write(`<p>original name = ${originalName}, saved name = ${fileName}<p>`); 
-        res.write(`<p>mime type : ${mimeType}<p>`);
-        res.write(`<p>file size : ${size}<p>`); 
-        res.end(); 
-    } catch (err) { 
-        console.error(err); 
-    }
-});
-*/
 
 router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     try{

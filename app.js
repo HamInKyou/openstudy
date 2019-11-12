@@ -13,7 +13,7 @@ const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 //const boardRouter = require('./routes/board');
-const studyRouter = require('./routes/study');
+const studyRouter = require('./routes/studies');
 
 
 // middleware setup
