@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link rel=calendar href="lib/tui.calendar-1.12.7/">
+</head>
+<body style="background:#ffbc3b">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style = color:white;>
+            <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+        
+        <a class="nav-link" style = color:white;>HOME</a>
+        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+    
+        <div class="dropdown">
+            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+              MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                     <a class="dropdown-item"  href="#">개인정보 설정</a>
+                     <a class="dropdown-item"  href="#">로그아웃</a>
+            </div>
+        </div>
+    
+      </nav>
+
+    <div class = container style="background:#e9ecef; margin-top: 10%;" >
+
+      <form>
+         <p>&nbsp;</p>
+         <h3>문제 만들기</h3>
+         <p>&nbsp;</p>
+
+         <div class="form-group row">
+               <label for="quizformat" class="col-sm-2 col-form-label">문제 과목</label>
+               <div class="col-sm-10">
+                  <select class="form-control form-control-sm" id='quizformat'>
+                     <option>문제 과목</option>
+                     <option>알고리즘</option>
+                     <option>오픈소스</option>
+                     <option>그 외 1</option>
+                     <option>그 외 2</option>
+                   </select>
+               </div>
+            </div>
+
+         <div class="form-group row">
+            <label for="quizsubject" class="col-sm-2 col-form-label">문제유형</label>
+            <div class="col-sm-10">
+               <select class="form-control form-control-sm" id='quizsubject'>
+                  <option>문제 유형</option>
+                  <option>4지선다</option>
+                  <option>단답식</option>
+                  <option>서술형</option>
+                </select>
+            </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="quizTitle" class="col-sm-2 col-form-label">문제 제목</label>
+               <div class="col-sm-10">
+                     <input class="form-control form-control-sm" type="text" placeholder="제목 입력" aria-label="quizTitle">
+               </div>
+         </div>
+
+         <hr class="my-4" style = background-color:black;>
+         <!--- 객관식일 경우 --->
+         <div class="form-group row">
+               <label for="multipleChoiceQuiz" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10" id = "multipleChoiceQuiz">
+                  <textarea class="form-control" aria-label="descriptivequiz"></textarea>
+                         <div class="form-check">
+                           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" disabled>
+                               <input class="form-control form-control-sm form-check-label" for="exampleRadios1" type="text" placeholder="1번 보기">
+                         </div>
+                         <div class="form-check">
+                           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" disabled>
+                              <input class="form-control form-control-sm form-check-label" for="exampleRadios2" type="text" placeholder="2번 보기">
+                         </div>
+                         <div class="form-check">
+                           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+                              <input class="form-control form-control-sm form-check-label" for="exampleRadios3" type="text" placeholder="3번 보기">
+                         </div>
+                         <div class="form-check">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" disabled>
+                              <input class="form-control form-control-sm form-check-label" for="exampleRadios4" type="text" placeholder="4번 보기">
+                        </div>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="multipleChoiceQuizAnswer" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10">
+                     <div class="form-check form-check-inline" id = "multipleChoiceQuizAnswer">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                           <label class="form-check-label" for="inlineRadio1">1</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                           <label class="form-check-label" for="inlineRadio2">2</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                           <label class="form-check-label" for="inlineRadio2">3</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                           <label class="form-check-label" for="inlineRadio2">4</label>
+                         </div>
+                         
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="explain" class="col-sm-2 col-form-label">해설</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="explain"></textarea>
+               </div>
+         </div>
+         
+         <hr class="my-4" style = background-color:black;>
+         <!--- 단답식일 경우 --->
+         <div class="form-group row">
+               <label for="oneWordQuiz" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="oneWordQuiz"></textarea>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="oneWordQuizAnswer" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10">
+                     <input class="form-control form-control-sm" type="text" placeholder="정답 입력" aria-label="neWordQuizAnswer">
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="explain" class="col-sm-2 col-form-label">해설</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="explain"></textarea>
+               </div>
+         </div>
+         
+         <hr class="my-4" style = background-color:black;>
+         <!--- 서술형일 경우 --->
+         <div class="form-group row">
+               <label for="descriptivequiz" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="descriptivequiz"></textarea>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="descriptivequizAnswer" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="descriptivequizAnswer"></textarea>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="explain" class="col-sm-2 col-form-label">해설</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="explain"></textarea>
+               </div>
+         </div>
+
+         <p>&nbsp;</p>
+         
+         <button type ="submit" 
+                style ="margin-left:25%; width:52.5%; height:30px; background-color:#ffbc3b; border:0px; outline:none; color:white; font-size:15px; font-weight:bold;">완료</button>
+
+      </form>
+      <p>&nbsp;</p>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>   
+</html>
