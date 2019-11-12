@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link rel=calendar href="lib/tui.calendar-1.12.7/">
+</head>
+<body style="background:#ffbc3b">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style = color:white;>
+            <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+        
+        <a class="nav-link" style = color:white;>HOME</a>
+        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+    
+        <div class="dropdown">
+            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+              MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                     <a class="dropdown-item"  href="#">개인정보 설정</a>
+                     <a class="dropdown-item"  href="#">로그아웃</a>
+            </div>
+        </div>
+    
+      </nav>
+
+    <div class = container style="background:#e9ecef; margin-top: 10%;" >
+
+      <form>
+         <p>&nbsp;</p>
+         <h3>TEST</h3>
+         <p>&nbsp;</p>
+
+         <hr class="my-4" style = background-color:black;>
+         <!--- 객관식일 경우 --->
+         <div class="form-group row">
+               <label for="quiztitle" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10">
+                     <textarea readonly class="form-control-plaintext" aria-label="quiztitle">문제내용
+                     </textarea>
+               </div>
+               <label for="multipleChoiceQuiz" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10" id = "multipleChoiceQuiz">
+                        <div class="form-check">
+                           <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="answer1">
+                           <label class="form-check-label" for="exampleRadios1">
+                             답1
+                           </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="answer2">
+                              <label class="form-check-label" for="exampleRadios2">
+                                답2
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="answer3">
+                              <label class="form-check-label" for="exampleRadios3">
+                                답3
+                              </label>
+                        </div>
+                        <div class="form-check">
+                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="answer4">
+                              <label class="form-check-label" for="exampleRadios4">
+                                답4
+                              </label>
+                        </div>   
+               </div>
+         </div>
+
+         <hr class="my-4" style = background-color:black;>
+         <!--- 단답식일 경우 --->
+         <div class="form-group row">
+               <label for="quiztitle" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10">
+                     <textarea readonly class="form-control-plaintext" aria-label="quiztitle">문제내용
+                     </textarea>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="oneWordQuizAnswer" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10">
+                     <input class="form-control form-control-sm" type="text" placeholder="정답 입력" aria-label="neWordQuizAnswer">
+               </div>
+         </div>
+         
+         <hr class="my-4" style = background-color:black;>
+         <!--- 서술형일 경우 --->
+         <div class="form-group row">
+               <label for="quiztitle" class="col-sm-2 col-form-label">문제</label>
+               <div class="col-sm-10">
+                     <textarea readonly class="form-control-plaintext" aria-label="quiztitle">문제내용
+                     </textarea>
+               </div>
+         </div>
+
+         <div class="form-group row">
+               <label for="descriptivequizAnswer" class="col-sm-2 col-form-label">정답</label>
+               <div class="col-sm-10">
+                     <textarea class="form-control" aria-label="descriptivequizAnswer"></textarea>
+               </div>
+         </div>
+         
+         <p>&nbsp;</p>
+         
+         <button type ="submit" 
+                style ="margin-left:25%; width:52.5%; height:30px; background-color:#ffbc3b; border:0px; outline:none; color:white; font-size:15px; font-weight:bold;">완료</button>
+
+      </form>
+      <p>&nbsp;</p>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>   
+</html>
