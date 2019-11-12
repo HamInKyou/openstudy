@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         updatedAt : {
             type : 'TIMESTAMP',
-            allowNull : false,
+            allowNull : true,
         },
         deletedAt : {
             type : 'TIMESTAMP',
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         owner : {
             type : DataTypes.INTEGER,
             primaryKey : true,
+            allowNull : false,
         },
     },{
         timestamps : true,
