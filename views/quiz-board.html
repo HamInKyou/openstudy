@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link rel=calendar href="lib/tui.calendar-1.12.7/">
+</head>
+<body style="background:#e9ecef">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style = color:white;>
+            <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+        
+        <a class="nav-link" style = color:white;>HOME</a>
+        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+    
+        <div class="dropdown">
+            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+              MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                     <a class="dropdown-item"  href="my-test.html">MY TEST</a>
+                     <a class="dropdown-item"  href="#">개인정보 설정</a>
+                     <a class="dropdown-item"  href="#">로그아웃</a>
+            </div>
+        </div>
+    
+      </nav>
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+        <div class="container">
+          <h1 class="display-4">문제 게시판</h1>
+          <p class="lead">친구들에게 문제를 올릴 수도 있고, 친구들의 문제의 해설을 볼 수 있습니다.</p>
+          <p class="lead">이 문제들은 시험을 볼 때 랜덤으로 골라져서 나옵니다.</p>
+        </div>
+      </div>
+
+    <div class = container>
+
+      <h1>과목이름</h1>
+      <div class = "row" style="margin-left: 5px;">
+            <h3>몇주차</h3>
+            <h3>&nbsp;-&nbsp;</h3>
+            <h3>범위 이름</h3>
+        </div>
+      
+      
+      <table class="table table-sm table-hover" style="margin-top: 30px;">
+         <thead>
+           <tr >
+             <th scope="col" style="width: 5%;">#</th>
+             <th scope="col" style="width: 10%;">날짜</th>
+             <th scope="col" style="width: 10%;">출제자</th>
+             <th scope="col" style="width: 65%;">문제제목</th>
+             <th scope="col" style="width: 10%;">문제유형</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+            <th scope="row">4</th>
+            <td>2019/11/11</td>
+            <td>김길동</td>
+            <td>다음 빈칸에 들어갈 알맞은 말?</td>
+            <td>단답식</td>
+           </tr>
+           <tr>
+             <th scope="row">3</th>
+             <td>2019/11/11</td>
+             <td>고길동</td>
+             <td>다음중 옳은것은?</td>
+            <td>4지선다</td>
+           </tr>            
+           <tr>
+             <th scope="row">2</th>
+             <td>2019/11/11</td>
+             <td>홍길동</td>
+             <td>문제 제목~~~</td>
+            <td>서술형</td>
+           </tr>
+           <tr>
+             <th scope="row">1</th>
+             <td>2019/11/11</td>
+             <td>최길동</td>
+             <td>문제 제목~~~~</td>
+             <td>객관식</td>
+           </tr>
+         </tbody>
+       </table>
+       <button type="button" class="btn btn-outline-dark float-right">문제 추가하기</button></div>
+       <nav aria-label="Page navigation example" style="margin-top: 70px;">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>   
+</html>
