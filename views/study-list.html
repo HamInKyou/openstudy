@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        
+   <style>
+   .page-link.a{
+       color:#ffbc3b!important;
+   }
+   </style>
+</head>
+
+
+
+<body style="background:#e9ecef;">
+   
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#" style = color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+      
+      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+  
+      <div class="dropdown">
+          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+            MY MENU
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="#">개인정보 설정</a>
+                   <a class="dropdown-item"  href="#">로그아웃</a>
+          </div>
+      </div>
+  
+    </nav>
+    
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+            <div class="container">
+              <div class = row>
+              <div class = "col-lg-4">
+                <script>
+                    var studyType=["My\tStudy","Open\tStudy"];
+                    var data = ["My\tStudy"];
+                        if(data == studyType[0]){
+                            document.write('<p class="display-4">'+studyType[0]+'</p>');
+                        } else {
+                            document.write('<p class="display-4">'+studyType[1]+'</p>'); 
+                        }
+                </script>
+              </div>
+              <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
+                <p></p>
+              </div>
+    
+            </div>
+              <p class="lead">사용자가 속해있는 스터디를 한눈에 볼 수 있습니다. </p>
+            </div>
+          </div>
+
+    <div class = "container">
+        <div class = "row">
+            <div class="col-sm-4" >
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">오픈소스</h5>
+                        <p class="card-text">==== 내용 ====</p>
+                        <a href="#" class="btn btn-warning">입장하기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">c++</h5>
+                            <p class="card-text">==== 내용 ====</p>
+                            <a href="#" class="btn btn-warning">입장하기</a>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">안드로이드</h5>
+                            <p class="card-text">==== 내용 ====</p>
+                            <a href="#" class="btn btn-warning">입장하기</a>
+                    </div>
+                </div>
+            </div>   
+        </div>
+        &nbsp;
+        <div class = "row">
+                <div class="col-sm-4" >
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">오픈소스</h5>
+                            <p class="card-text">==== 내용 ====</p>
+                            <a href="#" class="btn btn-warning">입장하기</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">c++</h5>
+                                <p class="card-text">==== 내용 ====</p>
+                                <a href="#" class="btn btn-warning">입장하기</a>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">안드로이드</h5>
+                                <p class="card-text">==== 내용 ====</p>
+                                <a href="#" class="btn btn-warning">입장하기</a>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            &nbsp;
+            <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+    </div>
+   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>   
+</html>
