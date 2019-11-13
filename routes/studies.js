@@ -40,28 +40,33 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
 router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     try{
         const groups = await Study.findAll();
-        res.render('group', {groups});
+        res.json(groups);
+        return;
     } catch(error){
         console.error(err);
     }
 });
 
-router.get('/find', async(req, res, next) => { //유사검색 가능
-    let searchStudy = req.params.searchStudy
-
-    Study.findAll({
-        where:{
-            name: {
-                [Op.like]: "%" + searchStudy + "%"
+router.get('/find/:studyName', async(req, res, next) => { //유사검색 가능
+    const studyName = req.params.studyName;
+    if(!searchName){
+        console.log("Not Found");
+    }
+    try{
+        const result = await Study.findAll({
+            where:{
+                name: {
+                    [Op.like]: "%" + studyName + "%"
+                }
             }
+        })
+        if(result){
+            res.json(result);
+            return;
         }
-    })
-        .then( result => {
-            res.json(result)
-        })
-        .catch( err => {
-            console.log(err)
-        })
+    } catch (error){
+            console.error(err);
+    }
 });
 
 /*
