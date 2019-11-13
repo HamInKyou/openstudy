@@ -47,19 +47,18 @@ router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     }
 });
 
-router.get('/find/:studyName', async(req, res, next) => { //유사검색 가능
+router.get('/search/:studyName', async(req, res, next) => { //검색 가능
     const studyName = req.params.studyName;
-    if(!searchName){
-        console.log("Not Found");
+    if(!studyName){
+        res.json("Not Found");
+        return;
     }
     try{
         const result = await Study.findAll({
             where:{
-                name: {
-                    [Op.like]: "%" + studyName + "%"
-                }
+                name:studyName
             }
-        })
+        });
         if(result){
             res.json(result);
             return;
