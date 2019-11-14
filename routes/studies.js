@@ -3,10 +3,6 @@ const { Study } = require('../models');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const Op = sequelize.Op;
-/*
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } });
-*/
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
     const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
@@ -20,12 +16,8 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
             });
         }
         await Study.create({
-            id,
             name,
-            info,
-            createdAt,
-            updatedAt,
-            //owner,
+            info
         });
         return res.json({
             res : true,
@@ -47,7 +39,7 @@ router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     }
 });
 
-router.get('/search/:studyName', async(req, res, next) => { //검색 가능
+router.get('/search/:studyName', async(req, res, next) => { //검색 기능
     const studyName = req.params.studyName;
     if(!studyName){
         res.json("Not Found");
@@ -67,13 +59,5 @@ router.get('/search/:studyName', async(req, res, next) => { //검색 가능
             console.error(err);
     }
 });
-
-/*
-router.post('/join', isLoggedIn, async(req,res,next) => { //그룹 가입
-    const {id, name, info} = req.body;
-    const study = await Study.findOne({where : {id}});
-
-});
-*/
 
 module.exports = router;
