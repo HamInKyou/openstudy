@@ -39,7 +39,7 @@ router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     }
 });
 
-router.get('/search/:studyName', async(req, res, next) => { //검색 기능
+router.get('/search/:studyName', async(req, res, next) => { //그룹 이름으로 검색
     const studyName = req.params.studyName;
     if(!studyName){
         res.json("Not Found");
