@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+<body style="background:#e9ecef">
+   
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#" style = color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+      
+      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+  
+      <div class="dropdown">
+          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+            MY MENU
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="my-test.html">MY TEST</a>
+                   <a class="dropdown-item"  href="#">개인정보 설정</a>
+                   <a class="dropdown-item"  href="#">로그아웃</a>
+          </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+        <div class="container">
+            <script>
+                var users = ['김용후', '김예지', '채예진', '함인규'];
+                var myName = null;
+                var studyName = "C++ Language Programming";
+                if(myName){
+                    document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                } else{
+                    document.write('<h1 class="display-4">'+"Open Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                }
+            </script>
+            <hr class="my-4">
+            <p class = "lead"> 여기에 소개글! </p>
+        </div>
+    </div>
+
+    <div class = "container">
+        <div class = "row align-items-center mb-5">
+            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> <h1> c++ Language Programming </h1></div>
+            <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+                <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-users fa-2x"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">　PARTICIPANTS</h6>
+                                <script>
+                                    
+                                    document.write('<p class="mb-0">'+"　TOTAL "+users.length+'</p>');
+                                </script>
+                            </div>
+                    </div>
+                </li>
+            </div>
+            <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+                <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                    <div class="d-flex align-items-center">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">　PROBLEM NO.</h6>
+                                <script>
+                                    var problems = [1,2,3,4,5,6,7,8];
+                                    document.write('<p class="mb-0">'+"　TOTAL "+problems.length+'</p>');
+                                </script>
+                            </div>
+                    </div>
+                </li>
+            </div>
+            
+                <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
+                    <script>
+                    if(myName){document.write('<a href="study-lesson.html" class="btn btn-warning">'+"출석하기"+'</a>');}
+                    else{document.write('<a href="study-lesson.html" class="btn btn-warning">'+"참여하기"+'</a>');
+                        myName.push("허예은");
+                        alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
+                        }
+                    </script>
+                </div>
+        </div>
+        
+        <hr class="my-4">
+
+        <div class = "col-12 mb-4">
+            <h3>ABOUT STUDY</h3>
+            <p>스터디에 대한 대략적인 내용 기재</p>
+        </div>
+
+        <div class="col-12 mb-4">
+            <h3 class="mb-3">STUDY OUTLINE</h3>
+            
+            <div class="col-12 px-0">
+                
+                <div class="row">
+                <div class="col-md-6">
+                  <ul class="list-styled">
+                    <script>
+                        var contents = ['1. 코딩 능력 향상','2. 알고리즘 분석력 강화','3. c++ 정보 습득', '4. 성취도 향상'];
+                        var i = 0;
+                        while(i<contents.length){
+                            document.write('<li>'+contents[i]+'</li>');
+                            i++;
+                        }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class = "col-12 mb-4">
+                <h3>OTHER STUDIES</h3>
+                <div class = "row">
+                
+                </div>
+            </div>
+
+    </div>
+
+    <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
+        <p style = color:white;>Footer bar</p>      
+    </nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>   
+</html>
