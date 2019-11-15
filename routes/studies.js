@@ -85,6 +85,21 @@ router.post('/enroll/:studyId', async(req,res,next)=>{
         next(err);
     }
 });
-
+router.post('/leave/:studyId', async (req, res, next) => {
+    try{
+        const exStudy = await Study.findOne({
+            where : {id : req.params.studyId}
+        });
+        const exUser = await User.findOne({
+            where : {id : req.user.id}
+        });
+        await exStudy.removeMember(exUser);
+        await exUser.removeEnrolledStudy(exStudy);
+        res.send(exUser.id + ' leaved study:' + exStudy.id);
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;
