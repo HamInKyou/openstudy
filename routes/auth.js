@@ -11,10 +11,8 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     try{
         const exUser = await User.findOne({where : {email}});
         if(exUser){
-            return res.json({
-                res : false,
-                msg : '이미 가입된 메일'
-            });
+            req.flash('msg','이미 가입된 메일' );
+            return res.redirect('/register');
         }
         const hash = await bcrypt.hash(password,12);
         await User.create({
@@ -22,10 +20,8 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             nick,
             password : hash,
         });
-        return res.json({
-            res : true,
-            msg : '회원가입 성공'
-        });
+        req.flash('msg','회원가입 성공');
+        return res.redirect('/register');
         
     } catch (err) {
         console.error(err);

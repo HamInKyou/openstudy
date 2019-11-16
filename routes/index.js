@@ -16,7 +16,7 @@ router.get('/my_test', function(req, res, next) {
   res.render('my_test');
 });
 router.get('/register', function(req, res, next) {
-  res.render('register');
+  res.render('register', { msg : req.flash('msg')});
 });
 router.get('/study-intro', function(req, res, next) {
   res.render('study-intro');
