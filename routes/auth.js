@@ -7,9 +7,9 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
     const {email, nick, password} = req.body;
+   
     try{
         const exUser = await User.findOne({where : {email}});
-        const result = {};
         if(exUser){
             return res.json({
                 res : false,
@@ -40,14 +40,17 @@ router.post('/login', isNotLoggedIn,  (req, res, next) => {
             next(authError);
         }
         if(!user){
-            return res.json({ res : false, msg : info.message} );
+            req.flash('msg' , info.message);
+            return res.redirect('/');
+           
         }
         return req.login(user, (logginError) => {
             if (logginError){
                 console.error(logginError);
                 next(logginError);
             }
-            return res.json({ res : true, msg : '로그인 성공'} );
+            
+            return res.redirect('../home');
             //안되면 지울것
         });
     })(req, res, next) ; //미들웨어 안의 미들웨어에 붙혀줌 authenticate
