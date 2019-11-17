@@ -16,7 +16,6 @@ const studyRouter = require('./routes/studies');
 const imgRouter = require('./routes/img');
 const postRouter = require('./routes/posts');
 
-
 // middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
