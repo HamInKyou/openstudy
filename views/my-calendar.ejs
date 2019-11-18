@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link rel=calendar href="lib/tui.calendar-1.12.7/">
+   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/core/main.css' rel='stylesheet' />
+   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.css' rel='stylesheet' />
+   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.css' rel='stylesheet' />
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/core/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/interaction/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-common/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-daygrid/main.js'></script>
+   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-timegrid/main.js'></script>
+   <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
+      defaultView: 'resourceTimeGridDay',
+      defaultDate: '2019-11-11',
+      editable: true,
+      selectable: true,
+      eventLimit: true, // allow "more" link when too many events
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
+      },
+      views: {
+        resourceTimeGridTwoDay: {
+          type: 'resourceTimeGrid',
+          duration: { days: 2 },
+          buttonText: '2 days',
+        }
+      },
+
+      //// uncomment this line to hide the all-day slot
+      //allDaySlot: false,
+
+      resources: [
+        { id: 'a', title: 'study 1' },
+        { id: 'b', title: 'study 2', eventColor: 'green' },
+        { id: 'c', title: 'study 3', eventColor: 'orange' },
+        { id: 'd', title: 'study 4', eventColor: 'red' }
+      ],
+      events: [
+        { id: '1', resourceId: 'a', start: '2019-11-11', end: '2019-11-13', title: '오픈소스 기초 및 설계 3주차 웹 완성' },
+        { id: '2', resourceId: 'a', start: '2019-11-14T16:30:00', end: '2019-11-22T115:00:00', title: '오픈소스 기초 및 설계 4주차' },
+        { id: '3', resourceId: 'a', start: '2019-11-22T16:30:00', end: '2019-11-29T15:00:00', title: '오픈소스 기초 및 설계 5주차' },
+        { id: '4', resourceId: 'c', start: '2019-11-07T20:30:00', end: '2019-11-13T23:55:00', title: 'javascript 공부' },
+      ],
+
+      select: function(arg) {
+        console.log(
+          'select',
+          arg.startStr,
+          arg.endStr,
+          arg.resource ? arg.resource.id : '(no resource)'
+        );
+      },
+      dateClick: function(arg) {
+        console.log(
+          'dateClick',
+          arg.date,
+          arg.resource ? arg.resource.id : '(no resource)'
+        );
+      }
+    });
+
+    calendar.render();
+  });
+
+</script>
+
+<script>
+  event: function add(arg){
+    for(int )
+  }
+</script>
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 900px;
+    margin: 50px auto;
+  }
+</style>
+
+</head>
+<body style="background:#e9ecef">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style = color:white;>
+            <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+        
+        <a class="nav-link" style = color:white;>HOME</a>
+        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+    
+        <div class="dropdown">
+            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+              MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                     <a class="dropdown-item"  href="#">개인정보 설정</a>
+                     <a class="dropdown-item"  href="#">로그아웃</a>
+            </div>
+        </div>
+    
+      </nav>
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+        <div class="container">
+          <div class = row>
+          <div class = "col-lg-4">
+            <p class="display-4">My Calendar</p>
+          </div>
+          <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">
+              <a class="btn btn-secondary btn-lg" data-toggle = "modal" data-target = "#myModal" role="button" style = "color:white;">일정추가</a>
+
+              <!-- modal -->
+              <div class = "modal fade" id = myModal tabindex="-1" role="dialog" aria-labelledby = "myModalLabel" aria-hidden="true">
+                <div class = "modal-dialog">
+                  <div class = "modal-content">
+                    <div class = "modal-header">
+                        <h4 class = "modal-title" id = "myModalLabel">일정추가</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class = "modal-body">
+                      <div class = "row">
+                        <div class ="name">
+                          <form>
+                            <div class = "col-lg-12">
+                              <input type="text" class="form-control" id="name" placeholder="일정을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <hr class ="my-4">
+                      <div class = "day">
+                      <h5>날짜 선택</h5>
+                      &nbsp;
+                      <form>
+                        <div class = "row">
+                          <p style="margin:2%; margin-left:5%;">시작일
+                            <div class="form-row">
+                                <div class="form-group col-md-7">
+                                  <input type="date" class="form-control" id="startDate" >
+                                </div>
+                                <div class="form-group col-md-5">
+                                  <input type="time" class="form-control" id="startTime" >
+                                </div>
+                              </div>
+                          </p>
+                        </div>
+                          <div class = "row">
+                              <p style="margin:2%; margin-left:5%;">종료일
+                            <div class="form-row">
+                                <div class="form-group col-md-7">
+                                  <input type="date" class="form-control" id="finishDate" >
+                                </div>
+                                <div class="form-group col-md-5">
+                                  <input type="time" class="form-control" id="finishTime">
+                                </div>
+                              </div>
+                            </p>
+                        </div>
+                      </form>
+                    </div>
+                    </div>
+                    &nbsp;
+                    <div class="modal-footer">
+                      <a class ="btn btn-warning btn-lg" role="button" data-dismiss = "modal">Close</a>
+                      <a class = "btn btn-warning btn-lg" role ="button">Save</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <p></p>
+          </div>
+
+
+        </div>
+          <p class="lead">내 캘린더를 이용하여 일정을 정리할 수 있습니다. </p>
+        </div>
+      </div>
+
+    <div class = container>
+      <body>
+
+        <div id='calendar'></div>
+      
+      </body>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>   
+</html>
