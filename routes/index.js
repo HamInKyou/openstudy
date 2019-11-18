@@ -12,8 +12,8 @@ router.get('/home', function(req, res, next) {
 router.get('/my-calendar', function(req, res, next) {
   res.render('my-calendar');
 });
-router.get('/my_test', function(req, res, next) {
-  res.render('my_test');
+router.get('/my-test', function(req, res, next) {
+  res.render('my-test');
 });
 router.get('/register', function(req, res, next) {
   res.render('register', { msg : req.flash('msg')});
@@ -32,6 +32,9 @@ router.get('/study-post', function(req, res, next) {
 });
 router.get('/study-week', function(req, res, next) {
   res.render('study-week');
+});
+router.get('/quiz-post', function(req, res, next) {
+  res.render('quiz-post');
 });
 
 
