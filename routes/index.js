@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Post, User, Study} = require('../models');
+const {Post, User, Study, Board} = require('../models');
 
 
 /* GET home page. */
@@ -65,8 +65,14 @@ router.get('/study-post-list/:boardId', async (req, res, next)=> {
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
-router.get('/study-week', (req, res, next) => {
-  res.render('study-week');
+router.get('/study-week/:studyId', async (req, res, next) => {
+  try{
+    const exBoards = await Board.findAll({where:{id:req.params.studyId}});
+    res.render('study-week',{ boards : JSON.stringify(exBoards)});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
 
