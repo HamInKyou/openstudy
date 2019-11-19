@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OPEN STUDY</title>
+  <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+
+  <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <link rel=calendar href="lib/tui.calendar-1.12.7/">
+
+  <style>
+    #hover {
+      color: #343a40;
+    }
+  </style>
+</head>
+
+<body style="background:#e9ecef">
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#" style=color:white;>
+      <img src="../public/images/logo.png" height="30" alt="HOME">
+    </a>
+
+    <a class="nav-link" style=color:white;>HOME</a>
+    <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
+    <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
+
+    <div class="dropdown">
+      <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+        MY MENU
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
+        <a class="dropdown-item" href="my-test.html">MY TEST</a>
+        <a class="dropdown-item" href="#">개인정보 설정</a>
+        <a class="dropdown-item" href="#">로그아웃</a>
+      </div>
+    </div>
+
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+    <div class="container">
+      <h1 class="display-4">My TEST</h1>
+      <p class="lead" style="margin-top: 4%;">그동안 치뤘던 TEST의 결과, 해설을 볼 수 있습니다. </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="row" style="margin-bottom: 3%; float:right;">
+            <button type="button" class="btn btn-warning">내가 풀은 문제</button>
+            <button type="button" class="btn btn-outline-warning" onclick="href='my-test-post'">내가 제출한 문제</button>
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col" style="width:70%;">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col" style="width:10%;">작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-toggle="modal" data-target="#postModal" href="#">
+
+                <th scope="row">5</th>
+                <td><a href="#" id="hover">4주차 허예은</a></td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+
+              <tr>
+                <th scope="row">4</th>
+                <td><a href="#" id="hover">4주차 허예은</a></td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td><a href="#" id="hover">4주차 허예은</a></td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td><a href="#" id="hover">4주차 허예은</a></td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td><a href="#" id="hover">4주차 허예은</a></td>
+                <td>허예은</td>
+                <td>2019-10-10</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- modal -->
+          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content rounded-0 border-0 p-4">
+                <div class="modal-header border-0">
+                  <p>
+                    <h3>4주차 허예은</h3>
+                  </p>
+
+
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="width:10%;">작성자</th>
+                        <th scope="col" style="width:50%;">제목</th>
+                        <th scope="col" style="width:25%;">과목</th>
+                        <th scope="col" style="width:15%;">작성일</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>허예은</td>
+                        <td>~~제목내용~~</td>
+                        <td>~~과목이름~~</td>
+                        <td>2019-10-10</td>
+                      </tr>
+                      <tr>
+                          <td colspan="4">
+                              <div style="overflow:scroll;height:150px; padding:10px;">
+
+                                  문제<br />
+                                  <br />
+                                  문제<br />
+                                  <br />
+                                  문제<br />
+                                  <br />
+                                </div>
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                   
+
+                  </table>
+
+
+                  <div class="col-12" style="margin-top: 2%;">
+                    <p>
+                      <h5>나의 답</h5>
+                    </p>
+                  </div>
+                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
+                    <p>답 내용</p>
+                  </div>
+                  <div class="col-12" style="margin-top: 2%;">
+                    <p>
+                      <h5>제출자의 답</h5>
+                    </p>
+                  </div>
+                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
+                    <p>답 내용</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center ">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>
+
+</html>

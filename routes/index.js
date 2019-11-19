@@ -12,8 +12,11 @@ router.get('/home', function(req, res, next) {
 router.get('/my-calendar', function(req, res, next) {
   res.render('my-calendar');
 });
-router.get('/my-test', function(req, res, next) {
-  res.render('my-test');
+router.get('/my-test-solve', function(req, res, next) {
+  res.render('my-test-solve');
+});
+router.get('/my-test-post', function(req, res, next) {
+  res.render('my-test-post');
 });
 router.get('/register', function(req, res, next) {
   res.render('register', { msg : req.flash('msg')});
