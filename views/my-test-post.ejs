@@ -59,7 +59,10 @@
             <button type="button" class="btn btn-outline-warning" onclick="href='my-test-solve'">내가 풀은 문제</button>
             <button type="button" class="btn btn-warning">내가 제출한 문제</button>
           </div>
+
+          <!-- 게시판 -->
           <table class="table table-hover">
+            <!-- 게시판 header-->
             <thead>
               <tr>
                 <th scope="col" style="width:5%;">No.</th>
@@ -67,12 +70,12 @@
                 <th scope="col" style="width:15%;">작성일</th>
               </tr>
             </thead>
+            <!-- 게시판 body-->
             <tbody>
               <tr data-toggle="modal" data-target="#postModal" href="#">
                 <th scope="row">5</th>
                 <td><a href="#" id="hover">함인규가 낸 서술형 문제</a></td>
                 <td>2019-10-10</td>
-                
               </tr>
 
               <tr>
@@ -80,21 +83,25 @@
                 <td><a href="#" id="hover">4주차 허예은</a></td>
                 <td>2019-10-10</td>
               </tr>
+              
               <tr>
                 <th scope="row">3</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
                 <td>2019-10-10</td>
               </tr>
+
               <tr>
                 <th scope="row">2</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
                 <td>2019-10-10</td>
               </tr>
+
               <tr>
                 <th scope="row">1</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
                 <td>2019-10-10</td>
               </tr>
+
             </tbody>
           </table>
 
@@ -102,16 +109,18 @@
           <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content rounded-0 border-0 p-4">
+                <!-- modal-header -->
                 <div class="modal-header border-0">
                   <p>
                     <h3>함인규가 낸 서술형 문제</h3>
                   </p>
 
-
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+
+                <!-- modal-body -->
                 <div class="modal-body">
                   <table class="table table-hover">
                     <thead>
@@ -126,8 +135,8 @@
                         <td>오픈소스</td>
                         <td>2019-10-10</td>
                         <td>
-                            <button type="button" class="btn btn-outline-warning" onclick="href='quiz-post'">수정</button>
-                            <button type="button" class="btn btn-outline-warning">삭제</button>
+                          <button type="button" class="btn btn-outline-warning" onclick="href='quiz-post'">수정</button>
+                          <button type="button" class="btn btn-outline-warning">삭제</button>
                         </td>
                       </tr>
                       <tr>
@@ -155,13 +164,13 @@
                     <p>답 내용</p>
                   </div>
                   <div class="col-12" style="margin-top: 2%;">
-                      <p><i class="fas fa-user mr-2"></i>허예은</p>
+                    <p><i class="fas fa-user mr-2"></i>허예은</p>
                   </div>
                   <div class="col-lg-12" style="border: 1px solid #dee2e6;">
                     <p>답 내용</p>
                   </div>
                   <div class="col-12" style="margin-top: 2%;">
-                      <p><i class="fas fa-user mr-2"></i>김용후</p>
+                    <p><i class="fas fa-user mr-2"></i>김용후</p>
                   </div>
                   <div class="col-lg-12" style="border: 1px solid #dee2e6;">
                     <p>답 내용</p>

@@ -59,7 +59,10 @@
             <button type="button" class="btn btn-warning">내가 풀은 문제</button>
             <button type="button" class="btn btn-outline-warning" onclick="href='my-test-post'">내가 제출한 문제</button>
           </div>
+
+          <!-- 게시판 -->
           <table class="table table-hover">
+            <!-- 게시판 header-->
             <thead>
               <tr>
                 <th scope="col">No.</th>
@@ -69,6 +72,7 @@
                 <th scope="col" style="width:10%;">작성일</th>
               </tr>
             </thead>
+            <!-- 게시판 body-->
             <tbody>
               <tr data-toggle="modal" data-target="#postModal" href="#">
 
@@ -86,6 +90,7 @@
                 <td>허예은</td>
                 <td>2019-10-10</td>
               </tr>
+
               <tr>
                 <th scope="row">3</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
@@ -93,6 +98,7 @@
                 <td>허예은</td>
                 <td>2019-10-10</td>
               </tr>
+
               <tr>
                 <th scope="row">2</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
@@ -100,6 +106,7 @@
                 <td>허예은</td>
                 <td>2019-10-10</td>
               </tr>
+
               <tr>
                 <th scope="row">1</th>
                 <td><a href="#" id="hover">4주차 허예은</a></td>
@@ -107,6 +114,7 @@
                 <td>허예은</td>
                 <td>2019-10-10</td>
               </tr>
+
             </tbody>
           </table>
 
@@ -114,16 +122,17 @@
           <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content rounded-0 border-0 p-4">
+                <!-- modal-header -->
                 <div class="modal-header border-0">
                   <p>
                     <h3>허예은이 낸 ox 문제</h3>
                   </p>
 
-
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <!-- modal-body -->
                 <div class="modal-body">
                   <table class="table table-hover">
                     <thead>
@@ -154,7 +163,7 @@
                       </tr>
                     </tbody>
                   </table>
-        
+
                   <div class="col-12" style="margin-top: 2%;">
                     <p>
                       <h5>나의 답</h5>
@@ -172,9 +181,11 @@
                     <p>답 내용</p>
                   </div>
                 </div>
+                <!-- modal-body 끝-->
               </div>
             </div>
           </div>
+          <!-- modal 끝-->
         </div>
       </div>
   </section>
