@@ -30,6 +30,9 @@ router.get('/study-list', function(req, res, next) {
 router.get('/study-post-list', function(req, res, next) {
   res.render('study-post-list');
 });
+router.get('/study-quiz-list', function(req, res, next) {
+  res.render('study-quiz-list');
+});
 router.get('/study-post', function(req, res, next) {
   res.render('study-post');
 });
@@ -39,6 +42,9 @@ router.get('/study-week', function(req, res, next) {
 router.get('/quiz-post', function(req, res, next) {
   res.render('quiz-post');
 });
+
+
+
 
 
 
