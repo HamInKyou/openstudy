@@ -1,3 +1,4 @@
+<!-- 이 페이지를 열려면 url에 study-post-intro/boardID를 parameter로 줘야합니다.-->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,7 +8,11 @@
    
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <script>
+    var posts = <%- posts %>;
+    yconsole.log(posts);
 
+   </script>
 <style>
     #hover{
         color:#343a40;
@@ -22,7 +27,7 @@
           <img src="../public/images/logo.png" height="30" alt="HOME">
       </a>
       
-      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
       <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
       <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
   
@@ -31,7 +36,7 @@
             MY MENU
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
                    <a class="dropdown-item"  href="#">개인정보 설정</a>
                    <a class="dropdown-item"  href="#">로그아웃</a>
           </div>
@@ -80,7 +85,7 @@
           </div>
           <div class = "row">
             <div class="col-lg-12 col-sm-8 mb-5 mb-lg-0">
-              <button type="button" class="btn btn-warning" style = "margin-left:12%; margin-bottom: 5%;" onclick="location.href='post.html'">POST</button>
+              <button type="button" class="btn btn-warning" style = "margin-left:12%; margin-bottom: 5%;" onclick="location.href='post'">POST</button>
             </div>
           </div>
           <table class="table table-hover">
