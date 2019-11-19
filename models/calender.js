@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('post',{
+    return sequelize.define('calender',{
         id : {
             type : DataTypes.INTEGER,
             autoIncrement : true,
