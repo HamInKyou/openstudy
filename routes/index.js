@@ -1,13 +1,22 @@
 var express = require('express');
 var router = express.Router();
-const {Post, User} = require('../models');
+const {Post, User, Study} = require('../models');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('login',{ msg : req.flash('msg') });
 });
-router.get('/home', function(req, res, next) {
-  res.render('home');
+router.get('/home', async (req, res, next) => {
+  try{
+    const exUser = await User.findOne({where : { id : req.user.id}});
+    const enrolledStudies = await exUser.getEnrolledStudy({raw : true});
+    const result = JSON.stringify(enrolledStudies);
+    res.render('home',{myStudies : result });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 router.get('/my-calendar', function(req, res, next) {
   res.render('my-calendar');
