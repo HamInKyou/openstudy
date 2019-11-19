@@ -34,6 +34,27 @@ router.post('/create/:boardID', isLoggedIn, async (req,res,next) => { //게시�
     }
 });
 
+router.get('/get/:postId', async (req, res, next) => { //게시글 가져오기
+    const postId = req.params.postId;
+    if(!postId){
+        res.json("Not Found");
+        return;
+    }
+    const result = await Post.findAll({
+        attributes: ['id', 'content', 'createdAt', 'updatedAt'] //이거 없으면, 현재 userId, boardId를 database에 만들지 않아서 불가함. mysql database 수정 필요
+    }, {
+        where:{
+           id:postId
+       }
+    })
+    .then( result => {
+        res.json(result)
+    })
+    .catch( err => {
+        console.log(err)
+    });
+});
+
 router.put('/update/:boardId/:postId', isLoggedIn, async (req, res, next) => { //게시글 수정
     const postId = req.params.postId;
     const boardId = req.params.boardId;
