@@ -14,7 +14,8 @@ const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const imgRouter = require('./routes/img');
-
+const quizRouter = require('./routes/quiz');
+const answerRouter = require('./routes/answer');
 
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -46,6 +47,8 @@ app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/img', imgRouter);
+app.use('/quiz', quizRouter);
+app.use('/answer', answerRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
