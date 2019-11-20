@@ -7,6 +7,7 @@ const passport = require('passport');
 require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
+const flash = require('connect-flash');
 const app = express();
 
 const pageRouter = require('./routes/index');
@@ -21,6 +22,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 8001);
+app.use(flash());
 sequelize.sync();
 passportConfig(passport);
 app.use(morgan('dev'));

@@ -6,7 +6,8 @@
    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
    
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" action="auth/login"
+   href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
    <style>
    .input-group-prepend span{
@@ -15,10 +16,18 @@
     border:0;
     }
     </style>
+    <script>
+      var imsg = "<%= msg %>";
+      if(imsg)
+        alert(imsg);
+
+    </script>
 </head>
 <body style="background:#ffbc3b">
     <div class = "container">
-    <form class ="login-form col-lg-6 offset-lg-3" style="background:#1a1a37;margin-top:7.5%;margin-bottom:80px;box-shadow: 1.5px 1.5px 5px 5px #333333;border-radius:2.5%;">
+    <form class ="login-form col-lg-6 offset-lg-3" 
+      style="background:#1a1a37;margin-top:7.5%;margin-bottom:80px;box-shadow: 1.5px 1.5px 5px 5px #333333;border-radius:2.5%;"
+      action = "auth/login" method="post">
         <div class = "row justify-content-center" ><img style="margin-top:10%;" src="../public/images/logo.png"></div>
         <p>&nbsp;</p>
 
@@ -32,7 +41,7 @@
                               <div class="input-group-prepend" >
                                 <span class="input-group-text" ><i class="fas fa-user" style="color:#1a1a37"></i></span>
                               </div>
-                              <input type="text" class="form-control" placeholder="ID"  required>
+                              <input name="email" type="text" class="form-control" placeholder="ID"  required>
                             </div>
                     </div>
                 </div>
@@ -46,23 +55,24 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key" style="color:#1a1a37"></i></span>
                               </div>
-                              <input type="text" class="form-control"placeholder="Password"  required>
+                              <input name="password" type="text" class="form-control"placeholder="Password"  required>
                             </div>
                     </div>
             </div>
 
             <p>&nbsp;</p>
 
-           <div class = "row justify-content-center"> <a href="home.html" class="btn btn-warning">LOGIN</a></div>
+            <div class = "row justify-content-center"> <input class="btn btn-warning" type="submit" value="LOGIN"></div>
            
            <p>&nbsp;</p>
 
            <div class = "row justify-content-center"><p style=" color:white;">
-            <a href ="find_id.html" style="color:#ffbc3b"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd.html"style="color:#ffbc3b">비밀번호
+            <a href ="find_id" style="color:#ffbc3b"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd"style="color:#ffbc3b">비밀번호
             </a>를 잃어버리셨다면?</p>
         </div>
-
-
+        </form>
+        
+        <form >
         <div class = "row justify-content-center">
 
             <p style="color:white;">
@@ -73,7 +83,7 @@
 
         
         <div class = "row justify-content-center">
-                <a href="register.html" class="btn btn-outline-warning" style="margin-bottom:10%;">SIGN UP</a>
+                <a href="register" class="btn btn-outline-warning" style="margin-bottom:10%;">SIGN UP</a>
         </div>
 
         </div>
