@@ -14,7 +14,7 @@ const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const imgRouter = require('./routes/img');
-
+const calendarRouter = require('./routes/calendars');
 
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -46,6 +46,7 @@ app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/img', imgRouter);
+app.use('/calendar',calendarRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
