@@ -7,7 +7,11 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+<<<<<<< HEAD
     "connect-flash": "^0.1.1",
+=======
+    "body-parser": "^1.19.0",
+>>>>>>> 15a4a181926fb8756fbf412e27569c283eaa3d12
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

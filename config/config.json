@@ -1,7 +1,8 @@
+//환경설정 정보 저장
 {
   "development": {
     "username": "root",
-    "password": "yonghu",
+    "password": "Ga3785yj)!!#",
     "database": "openstudy",
     "host": "127.0.0.1",
     "dialect": "mysql",

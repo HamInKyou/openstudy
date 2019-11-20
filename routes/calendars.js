@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const { Calendar , User  } = require('../models');
 const bcrypt = require('bcryptjs');
@@ -20,12 +22,7 @@ router.post('/plan', isLoggedIn, async (req,res,next) => { //calendar에 plan �
             color : array[n] //랜덤 칼라
         });
         
-        return res.json({
-            res : true,
-            msg : '일정 생성 완료'
-        });
-
-    } catch (err) {
+    }catch(error){
         console.error(err);
         next(err);
     }
