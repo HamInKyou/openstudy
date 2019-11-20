@@ -7,11 +7,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-<<<<<<< HEAD
     "connect-flash": "^0.1.1",
-=======
-    "body-parser": "^1.19.0",
->>>>>>> 15a4a181926fb8756fbf412e27569c283eaa3d12
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -19,6 +15,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
+    "moment": "^2.24.0",
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
     "mysql": "^2.17.1",

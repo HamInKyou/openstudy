@@ -1,5 +1,5 @@
 const express = require('express');
-const { Comment , User ,Post } = require('../models');
+const { Comment , User  } = require('../models');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
@@ -7,23 +7,27 @@ const moment = require('moment');
 const Op = sequelize.Op;
 
 
-router.post('/', isLoggedIn, async (req,res,next) => { //comment 보여주고 생성
+router.post('/:postId',isLoggedIn, async (req,res,next) => { //comment 보여주고 생성
+    //postId 일단 빼고
     const { content } = req.body;
     try{
-        const comments = await Comment.findAll({where : {postId : req.post.id}});
-        res.json(comments);
         if(!content){
-            const createPlan = await Calendar.create({
-                userId: req.user.id, //사용자의 고유 아이디 받아옴,수정&삭제할때 사용
+            const newComment = await Comment.create({
                 content,  
-                postId: await Post.findOne({where : {userId : req.user.id}}).id, //댓글 게시글에따라 보여줌
+                postId : req.params.postId, //댓글 게시글에따라 보여줌
+                userId : req.user.id,
             });
-            return res.json({
-                res : true,
-                msg : '댓글 생성 완료'
-            });
+            const comments = await Comment.findAll();
+            //완성 후 조건주기{where : {postId : postId}}
+            res.json(comments);
         }
-        return;
+        else{
+            const comments = await Comment.findAll();
+            //완성 후 조건주기{where : {postId : postId}}
+            res.json(comments);
+        }
+ 
+    return;
     } catch (err) {
         console.error(err);
         next(err);
@@ -31,3 +35,4 @@ router.post('/', isLoggedIn, async (req,res,next) => { //comment 보여주고 �
 });
 
 
+module.exports = router;
