@@ -4,19 +4,23 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
 
-router.post('/create/:boardID', isLoggedIn, async (req,res,next) => { //게시글 생성
-    const boardID = req.params.boardID;
+router.post('/create/:boardId', isLoggedIn, async (req,res,next) => { //게시글 생성
+    const boardId = req.params.boardId;
     try{
-        const find = await Board.findOne({attributes: ['deadline']}, {where : {id : boardID}});;
+        const find = await Board.findOne({where : {id : boardId}});
         if(moment(find.deadline).diff(moment().format()) > 0){
+            
             const post = await Post.create({
+                title : req.body.title,
                 content : req.body.content,
-                url : req.body.url //img 파일 경로
+                url : req.body.url, //img 파일 경로
+                userId : req.user.id,
+                boardId : req.params.boardId
             });
     
             const submit = await Submit.create({
                 userId : req.user.id,
-                boardId : boardID
+                boardId : boardId
             });
             
             res.json({
@@ -40,8 +44,6 @@ router.get('/get/:postId', async (req, res, next) => { //게시글 가져오기
         return;
     }
     const result = await Post.findAll({
-        attributes: ['id', 'content', 'createdAt', 'updatedAt'] //이거 없으면, 현재 userId, boardId를 database에 만들지 않아서 불가함. mysql database 수정 필요
-    }, {
         where:{
            id:postId
        }
@@ -60,7 +62,7 @@ router.put('/update/:boardId/:postId', isLoggedIn, async (req, res, next) => { /
     try{
         const deadline = moment(await Board.findOne({attributes: ['deadline']}, {where : {id : boardId}})).format();
         if(moment(deadline).diff(moment().format()) < 0){
-            // if(!req.user.id.equals(post.userId)) return res.json({req : false, msg : '작성자가 일치하지 않습니다.'});  
+            if(!req.user.id.equals(post.userId)) return res.json({req : false, msg : '작성자가 일치하지 않습니다.'});  
             const update = await Post.update({
                 content : req.body.content,
                 url : req.body.url
