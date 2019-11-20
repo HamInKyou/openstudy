@@ -4,7 +4,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
 
-router.post('/create/:boardID', async (req,res,next) => { //게시글 생성
+router.post('/create/:boardID', isLoggedIn, async (req,res,next) => { //게시글 생성
     const boardID = req.params.boardID;
     try{
         const find = await Board.findOne({attributes: ['deadline']}, {where : {id : boardID}});;
@@ -15,7 +15,7 @@ router.post('/create/:boardID', async (req,res,next) => { //게시글 생성
             });
     
             const submit = await Submit.create({
-                userId : 1111,
+                userId : req.user.id,
                 boardId : boardID
             });
             
