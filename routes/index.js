@@ -23,6 +23,11 @@ router.get('/my-calendar', (req, res, next) => {
 });
 router.get('/my_test', (req, res, next) => {
   res.render('my_test');
+router.get('/my-test-solve', function(req, res, next) {
+  res.render('my-test-solve');
+});
+router.get('/my-test-post', function(req, res, next) {
+  res.render('my-test-post');
 });
 router.get('/register', (req, res, next) => {
   res.render('register', { msg : req.flash('msg')});
@@ -65,6 +70,9 @@ router.get('/study-post-list/:boardId', async (req, res, next)=> {
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
+router.get('/study-quiz-list', function(req, res, next) {
+  res.render('study-quiz-list');
+});
 router.get('/study-week/:studyId', async (req, res, next) => {
   try{
     const exBoards = await Board.findAll({where:{id:req.params.studyId}});
@@ -74,6 +82,12 @@ router.get('/study-week/:studyId', async (req, res, next) => {
     next(err);
   }
 });
+router.get('/quiz-post', function(req, res, next) {
+  res.render('quiz-post');
+});
+
+
+
 
 
 
