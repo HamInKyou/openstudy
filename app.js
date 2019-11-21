@@ -15,7 +15,7 @@ const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const studyRouter = require('./routes/studies');
 const imgRouter = require('./routes/img');
-
+const postRouter = require('./routes/posts');
 
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -48,6 +48,7 @@ app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/study', studyRouter);
 app.use('/img', imgRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

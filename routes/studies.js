@@ -1,8 +1,12 @@
 const express = require('express');
-const { Study, User } = require('../models');
+
 const router = express.Router();
-const { isLoggedIn } = require('./middlewares');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { Study, User } = require('../models');
 const Op = sequelize.Op;
+
+router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
+    const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
     const { name, info } = req.body;
@@ -24,11 +28,10 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
             where:{id : req.user.id}
         });
         await createdStudy.addMember(exUser);
-
         return res.json({
             res : true,
             msg : '그룹 생성 완료'
-        });
+        }); 
     } catch (err) {
         console.error(err);
         next(err);
@@ -101,5 +104,4 @@ router.post('/leave/:studyId', async (req, res, next) => {
         next(err);
     }
 });
-
 module.exports = router;
