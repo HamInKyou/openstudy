@@ -13,6 +13,7 @@ const app = express();
 const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const studyRouter = require('./routes/studies');
 const imgRouter = require('./routes/img');
 
 
@@ -45,6 +46,7 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
+app.use('/study', studyRouter);
 app.use('/img', imgRouter);
 
 // catch 404 and forward to error handler
