@@ -7,13 +7,14 @@ const passport = require('passport');
 require('dotenv').config();
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
+const flash = require('connect-flash');
 const app = express();
 
 const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-//const boardRouter = require('./routes/board');
 const studyRouter = require('./routes/studies');
+const imgRouter = require('./routes/img');
 
 
 // middleware setup
@@ -21,12 +22,13 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 8001);
+app.use(flash());
 sequelize.sync();
 passportConfig(passport);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/')));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   resave: false,
@@ -44,8 +46,8 @@ app.use(passport.session());
 app.use('/', pageRouter);
 app.use('/user', userRouter);
 app.use('/auth', authRouter);
-//app.use('/board', boardRouter);
 app.use('/study', studyRouter);
+app.use('/img', imgRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
