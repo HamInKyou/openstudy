@@ -6,9 +6,6 @@ const { Study, User } = require('../models');
 const Op = sequelize.Op;
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
-    const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
-
-router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
     const { name, info } = req.body;
     try{
         const exStudy = await Study.findOne({where : {name}});
