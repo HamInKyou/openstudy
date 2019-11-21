@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         content : {
             type : DataTypes.STRING(50),
-            allowNull : true,
+            allowNull : false,
         },
         postId :{
             type : DataTypes.INTEGER,

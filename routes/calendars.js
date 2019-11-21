@@ -6,8 +6,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
 const Op = sequelize.Op;
 
-//isLoggedIn,
-router.post('/plan', async (req,res,next) => { //calendar에 plan 생성
+router.post('/plan',isLoggedIn, async (req,res,next) => { //calendar에 plan 생성
     const { title,datetime,datetime_end} = req.body;
     try{
         const array = ['Orange','Green','Blue','Yellow','Purple','Aqua'];
@@ -30,26 +29,38 @@ router.post('/plan', async (req,res,next) => { //calendar에 plan 생성
     }
 });
 
-router.get('/',  async(req, res, next) =>{ //등록된 일정 불러오기  현재 날짜와 비교후 맞는 월로 가게함
+router.get('/',isLoggedIn,  async(req, res, next) =>{ //등록된 일정 불러오기  현재 날짜와 비교후 맞는 월로 가게함
     try{  //req.user.id  거기에 있는 정보를 가져옴
         const now =moment();
         const month = now.month;
         const plans = await Calendar.findAll({
             where :{
-                 userId : 1
+                 userId : req.user.id
         }
     });
-        res.json(plans);
+    const result = {
+        month : month,
+        plans : plans
+    };
+    // if(!plans.deletedAt){
+    //     return res.send('no exist plan');
+    // }
+        res.json(result);
         return;
     } catch(err){
         console.error(err);
     }
 });
 
-router.get('/delete/:calendarId',async(req,res,next)=>{
+router.get('/delete/:calendarId',isLoggedIn,async(req,res,next)=>{
     const calendarId = req.params.calendarId;
     try{
-        //const deleteCalendar = await Calendar.findOne({id : req.body.id})
+        const exCalendar = Calendar.findOne({
+            where : {id : calendarId}
+        });
+        // if(!exCalendar.deletedAt){ //필요없음
+        //     return res.send('already deleted calendar');
+        // }
         Calendar.destroy({
             where: { id: calendarId }
         });
@@ -63,11 +74,14 @@ router.get('/delete/:calendarId',async(req,res,next)=>{
     }
 });
 
-router.post('/modify/:calendarId',async(req,res,next)=>{
+router.post('/modify/:calendarId',isLoggedIn,async(req,res,next)=>{
     const calendarId = req.params.calendarId;
     const { title,datetime,datetime_end } = req.body;
     try{
-        //const exStudy = await Study.findOne({})
+        const exCalendar = await Calendar.findOne({where: {id: calendarId}});
+        // if(!exCalendar.deletedAt){ 
+        //     return res.send('no Calendar');
+        // }
         Calendar.update({
             title : title,
             datetime : datetime,
@@ -75,6 +89,7 @@ router.post('/modify/:calendarId',async(req,res,next)=>{
         },{
             where : {id: calendarId}
         });
+        
         const updatedCalendar =Calendar.findOne({
             where : {id: calendarId}
         });

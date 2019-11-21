@@ -21,11 +21,9 @@ router.post('/:postId',isLoggedIn, async (req,res,next) => { //comment 보여주
             //완성 후 조건주기{where : {postId : postId}}
             res.json(comments);
         }
-        else{
             const comments = await Comment.findAll();
             //완성 후 조건주기{where : {postId : postId}}
             res.json(comments);
-        }
  
     return;
     } catch (err) {
