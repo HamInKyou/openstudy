@@ -37,9 +37,6 @@ db.Study.belongsToMany(db.User,{
 });
 //study board
 db.Study.hasMany(db.Board);
-db.Study.belongsTo(db.User, { //추가
-    foreignKey: 'owner'
-});
 db.Board.belongsTo(db.Study);
 //board post
 db.Board.hasMany(db.Post);
@@ -71,5 +68,4 @@ db.Tag.belongsToMany(db.User,{
 db.User.hasMany(db.Study,{
     foreignKey: 'owner'
 });
-
 module.exports = db;

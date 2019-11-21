@@ -1,15 +1,11 @@
 const express = require('express');
-const { Study } = require('../models');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { Study, User } = require('../models');
 const Op = sequelize.Op;
-/*
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } });
-*/
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
-    const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
+    const { name, info } = req.body;
     try{
         const exStudy = await Study.findOne({where : {name}});
         const result = {};
@@ -19,18 +15,19 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
                 msg : '이미 있는 그룹'
             });
         }
-        await Study.create({
-            id,
+        const createdStudy = await Study.create({
             name,
             info,
-            createdAt,
-            updatedAt,
-            //owner,
+            owner : req.user.id
         });
+        const exUser = await User.findOne({
+            where:{id : req.user.id}
+        });
+        await createdStudy.addMember(exUser);
         return res.json({
             res : true,
             msg : '그룹 생성 완료'
-        });
+        }); 
     } catch (err) {
         console.error(err);
         next(err);
@@ -40,36 +37,67 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
 router.get('/', async(req, res, next) =>{ //등록된 그룹 불러오기
     try{
         const groups = await Study.findAll();
-        res.render('group', {groups});
+        res.json(groups);
+        return;
     } catch(error){
         console.error(err);
     }
 });
 
-router.get('/find', async(req, res, next) => { //유사검색 가능
-    let searchStudy = req.params.searchStudy
-
-    Study.findAll({
-        where:{
-            name: {
-                [Op.like]: "%" + searchStudy + "%"
+router.get('/search/:studyName', async(req, res, next) => { //그룹 이름으로 검색
+    const studyName = req.params.studyName;
+    if(!studyName){
+        res.json("Not Found");
+        return;
+    }
+    try{
+        const result = await Study.findAll({
+            where:{
+                name:studyName
             }
+        });
+        if(result){
+            res.json(result);
+            return;
         }
-    })
-        .then( result => {
-            res.json(result)
-        })
-        .catch( err => {
-            console.log(err)
-        })
+    } catch (error){
+            console.error(err);
+    }
 });
 
-/*
-router.post('/join', isLoggedIn, async(req,res,next) => { //그룹 가입
-    const {id, name, info} = req.body;
-    const study = await Study.findOne({where : {id}});
-
+router.post('/enroll/:studyId', async(req,res,next)=>{
+    try{
+        const exStudy = await Study.findOne({
+            where: {id : req.params.studyId }
+        });
+        if(!exStudy){
+            return res.send('no exist study');
+        }
+        const exUser = await User.findOne({
+            where : {id: req.user.id}
+        });
+        await exStudy.addMember(exUser);
+        await exUser.addEnrolledStudy(exStudy);
+        return res.send(req.user.id + ' enroll to study:' + exStudy.id);
+    } catch(err){
+        console.error(err);
+        next(err);
+    }
 });
-*/
-
+router.post('/leave/:studyId', async (req, res, next) => {
+    try{
+        const exStudy = await Study.findOne({
+            where : {id : req.params.studyId}
+        });
+        const exUser = await User.findOne({
+            where : {id : req.user.id}
+        });
+        await exStudy.removeMember(exUser);
+        await exUser.removeEnrolledStudy(exStudy);
+        res.send(exUser.id + ' leaved study:' + exStudy.id);
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 module.exports = router;

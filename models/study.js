@@ -14,22 +14,6 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(100),
             allowNull : true,
         },
-        createdAt : {
-            type : 'TIMESTAMP',
-            allowNull : true,
-        },
-        updatedAt : {
-            type : 'TIMESTAMP',
-            allowNull : false,
-        },
-        deletedAt : {
-            type : 'TIMESTAMP',
-            allowNull : true,
-        },
-        owner : {
-            type : DataTypes.INTEGER,
-            primaryKey : true,
-        },
     },{
         timestamps : true,
         paranoid : true,
