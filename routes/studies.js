@@ -1,11 +1,15 @@
 const express = require('express');
-const { Study } = require('../models');
+
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { Study, User } = require('../models');
 const Op = sequelize.Op;
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
     const {id, name, info, createdAt, updatedAt, deletedAt, owner} = req.body;
+
+router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
+    const { name, info } = req.body;
     try{
         const exStudy = await Study.findOne({where : {name}});
         const result = {};
@@ -15,14 +19,19 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
                 msg : '이미 있는 그룹'
             });
         }
-        await Study.create({
+        const createdStudy = await Study.create({
             name,
-            info
+            info,
+            owner : req.user.id
         });
+        const exUser = await User.findOne({
+            where:{id : req.user.id}
+        });
+        await createdStudy.addMember(exUser);
         return res.json({
             res : true,
             msg : '그룹 생성 완료'
-        });
+        }); 
     } catch (err) {
         console.error(err);
         next(err);
@@ -60,4 +69,39 @@ router.get('/search/:studyName', async(req, res, next) => { //그룹 이름으�
     }
 });
 
+router.post('/enroll/:studyId', async(req,res,next)=>{
+    try{
+        const exStudy = await Study.findOne({
+            where: {id : req.params.studyId }
+        });
+        if(!exStudy){
+            return res.send('no exist study');
+        }
+        const exUser = await User.findOne({
+            where : {id: req.user.id}
+        });
+        await exStudy.addMember(exUser);
+        await exUser.addEnrolledStudy(exStudy);
+        return res.send(req.user.id + ' enroll to study:' + exStudy.id);
+    } catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+router.post('/leave/:studyId', async (req, res, next) => {
+    try{
+        const exStudy = await Study.findOne({
+            where : {id : req.params.studyId}
+        });
+        const exUser = await User.findOne({
+            where : {id : req.user.id}
+        });
+        await exStudy.removeMember(exUser);
+        await exUser.removeEnrolledStudy(exStudy);
+        res.send(exUser.id + ' leaved study:' + exStudy.id);
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 module.exports = router;

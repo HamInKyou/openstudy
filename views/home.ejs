@@ -1,3 +1,9 @@
+<!-- home.html
+- 스터디 검색기능
+- 내 스터디리스트 대표 3개(정렬기준은 상관 없음) 띄우기 + 대표 이미지 띄우기
+  (내스터디에 +는 지울거니까 신경쓰지마세요)
+- 오픈스터디 리스트 대표 3개 (정렬기준 상관x) 띄우기 + 대표 이미지 띄우기 -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,11 +13,7 @@
    
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-   <script>
-    var myStudies =<%- myStudies %>;
-    console.log(myStudies);
 
-  </script>
 </head>
 <body 
    style="background:#ffbc3b">
@@ -21,7 +23,7 @@
         <img src="../public/images/logo.png" height="30" alt="HOME">
     </a>
     
-    <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
+    <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
     <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
     <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
 
@@ -30,8 +32,8 @@
           MY MENU
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-                 <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                 <a class="dropdown-item"  href="my-test">MY TEST</a>
+                 <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                 <a class="dropdown-item"  href="my-test.html">MY TEST</a>
                  <a class="dropdown-item"  href="#">개인정보 설정</a>
                  <a class="dropdown-item"  href="#">로그아웃</a>
         </div>
@@ -65,29 +67,32 @@
   </div>
   <div class="row" style = "margin-top: 20px;">
     <div class="col-sm-4">
+        <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY1</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="card">
+          <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY2</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="card">
+          <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY3</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
@@ -103,28 +108,31 @@
   <div class="row" style = "margin-top: 20px;  margin-bottom: 60px;">
     <div class="col-sm-4">
       <div class="card">
+        <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY1</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="card">
+        <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY2</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
+      <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY3</h5>
           <p class="card-text">스터디방 1 소개 내용~~~</p>
-          <a href="#" class="btn btn-primary">입장하기</a>
+          <a href="#" class="btn btn-secondary">입장하기</a>
         </div>
       </div>
     </div>
