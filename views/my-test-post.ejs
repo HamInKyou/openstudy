@@ -20,22 +20,28 @@
 </head>
 
 <body style="background:#e9ecef">
+
+  <!--nav bar 시작-->
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#" style=color:white;>
       <img src="../public/images/logo.png" height="30" alt="HOME">
     </a>
 
+    <!--다른 메뉴로 전환-->
     <a class="nav-link" style=color:white;>HOME</a>
     <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
     <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
 
+    <!--우측상단 드롭다운버튼-->
     <div class="dropdown">
       <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
         MY MENU
       </button>
+      
+      <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
-        <a class="dropdown-item" href="my-test.html">MY TEST</a>
+        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="my-test-post">MY TEST</a>
         <a class="dropdown-item" href="#">개인정보 설정</a>
         <a class="dropdown-item" href="#">로그아웃</a>
       </div>
@@ -43,6 +49,7 @@
 
   </nav>
 
+  <!--jumbotron 시작-->
   <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
     <div class="container">
       <h1 class="display-4">My TEST</h1>
@@ -50,10 +57,13 @@
     </div>
   </div>
 
+  <!--본문 내용 시작-->
   <section class="section">
     <div class="container">
       <div class="row">
         <div class="col-12">
+
+          <!--post랑 solve랑 전환하는 버튼-->
           <div class="row" style="margin-bottom: 3%; float:right;">
             <!--페이지 전환 고쳐야행-->
             <button type="button" class="btn btn-outline-warning" onclick="href='my-test-solve'">내가 풀은 문제</button>
@@ -105,16 +115,15 @@
             </tbody>
           </table>
 
-          <!-- modal -->
+          <!--테이블의 한 행을 누르면 실행되는 modal -->
           <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content rounded-0 border-0 p-4">
-                <!-- modal-header -->
+                <!-- modal-header, 닫는 버튼과 title내용 포함 -->
                 <div class="modal-header border-0">
                   <p>
                     <h3>함인규가 낸 서술형 문제</h3>
                   </p>
-
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -122,7 +131,10 @@
 
                 <!-- modal-body -->
                 <div class="modal-body">
+                  
+                  <!--내가 게시한 문제 정보 올리는 table 시작-->
                   <table class="table table-hover">
+                    <!--table header-->
                     <thead>
                       <tr>
                         <th scope="col" style="width:55%;">과목</th>
@@ -130,15 +142,18 @@
                         <th scope="col" style="width:25%;">관리하기</th>
                       </tr>
                     </thead>
+                    <!--table body-->
                     <tbody>
                       <tr>
                         <td>오픈소스</td>
                         <td>2019-10-10</td>
+                        <!--수정과 삭제 조정 가능하게 하는 버튼-->
                         <td>
                           <button type="button" class="btn btn-outline-warning" onclick="href='quiz-post'">수정</button>
                           <button type="button" class="btn btn-outline-warning">삭제</button>
                         </td>
                       </tr>
+                      <!--문제 내용-->
                       <tr>
                         <td colspan="3">
                           <div style="overflow:scroll;height:150px; padding:10px;">
@@ -155,6 +170,7 @@
                     </tbody>
                   </table>
 
+                  <!--내가 제출한 답-->
                   <div class="col-12" style="margin-top: 2%;">
                     <p>
                       <h5>나의 답</h5>
@@ -163,6 +179,8 @@
                   <div class="col-lg-12" style="border: 1px solid #dee2e6;">
                     <p>답 내용</p>
                   </div>
+
+                  <!--팀원들이 제출한 답-->
                   <div class="col-12" style="margin-top: 2%;">
                     <p><i class="fas fa-user mr-2"></i>허예은</p>
                   </div>
@@ -184,6 +202,7 @@
     </div>
   </section>
 
+  <!--게시글 쪽수 나타내고 변경할 수 있는 page navigation-->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center ">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>
