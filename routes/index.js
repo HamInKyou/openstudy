@@ -32,10 +32,6 @@ router.get('/my-calendar', (req, res, next) => {
   res.render('my-calendar');
 });
 
-router.get('/my_test', (req, res, next) => {
-  res.render('my_test');
-});
-
 router.get('/my-test-solve', (req, res, next) => {
   res.render('my-test-solve');
 });
