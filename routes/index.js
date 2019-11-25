@@ -125,5 +125,8 @@ router.get('/study-week/:studyId', async (req, res, next) => {
 router.get('/quiz-post', (req, res, next) => {
   res.render('quiz-post');
 });
+router.get('/study-quiz-solve', (req, res, next) => {
+  res.render('study-quiz-solve');
+});
 
 module.exports = router;
