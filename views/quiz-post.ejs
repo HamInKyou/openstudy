@@ -25,7 +25,7 @@
 
     function makeStudyContentsList() {
       for (var i = 0, item; item = studyContents[i]; i++) {
-        document.write('<li>'+item+'</li>')
+        document.write('<li>' + item + '</li>')
       }
     }
   </script>
@@ -71,7 +71,8 @@
         <div class="col-lg-10">
           <!--studyName 변수로 설정하여 변화가능-->
           <script>
-            document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> ' + subjectName +'</p>');
+            document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> ' + subjectName +
+              '</p>');
           </script>
         </div>
       </div>
@@ -117,23 +118,30 @@
       </div>
       <!-- notice content 끝-->
 
+      <!--여기부터 퀴즈 제출관련 내용 시작-->
       <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="제목을 입력하세요.">
+
+      <!--첨부관련 내용-->
       <div class="input-group flex-nowrap">
+
         <div class="input-group">
+
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
             <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
           </div>
+
           <div class="input-group-append">
             <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
           </div>
         </div>
-
       </div>
       &nbsp;
-      <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
-        style="height:75%;"></textarea>
 
+      <!--문제 내용 입력하는 곳-->
+      <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."></textarea>
+
+      <!--답과 해설 첨부하기 위한 버튼, 누르면 modal 띄움-->
       <div class="row">
         <button type="button" class="btn btn-warning mx-auto" style="width: 30%;" data-toggle="modal"
           data-target="#postModal" href="#">답과 해설 첨부하기</button>
@@ -143,21 +151,23 @@
       <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content rounded-0 border-0 p-4">
+            <!--modal header, 닫는 버튼과 타이틀 표시-->
             <div class="modal-header border-0">
               <p>
                 <h3>답 첨부하기</h3>
               </p>
-
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
 
+            <!--modal body-->
             <div class="modal-body">
               <form action="#" class="row">
+                <!--답 입력하는 부분-->
                 <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
                   style="height:75%;"></textarea>
-
+                <!--첨부를 위한 부분-->
                 <div class="input-group flex-nowrap">
                   <div class="input-group">
                     <div class="custom-file">
@@ -178,14 +188,12 @@
           </div>
         </div>
       </div>
+      <!--modal 끝-->
 
       <div class="row">
         <button type="button" class="btn btn-warning mx-auto" style="margin-top: 2%;">POST</button>
       </div>
 
-
-
-    </div>
     </div>
   </section>
   <!--본문 내용 끝-->
