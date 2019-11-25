@@ -18,6 +18,11 @@
     background-color: transparent;
     }
    </style>
+    <script>
+      var boards = <%- boards %>;
+      console.log(boards);
+  
+     </script>
 </head>
 <body style="background:#e9ecef">
    
@@ -26,7 +31,7 @@
           <img src="../public/images/logo.png" height="30" alt="HOME">
       </a>
       
-      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
       <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
       <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
   
@@ -35,7 +40,7 @@
             MY MENU
           </button>
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
                    <a class="dropdown-item"  href="#">개인정보 설정</a>
                    <a class="dropdown-item"  href="#">로그아웃</a>
           </div>
@@ -63,7 +68,7 @@
     <div class = "container">
         <!-- /page title -->
         <div class = "row">
-        <div class="col-lg-2 d-md-table-cell text-right pr-0 pr-md-4" style="margin-left:-5%;"><a href="notice-single.html" class="btn btn-warning">문제풀기</a></div>
+        <div class="col-lg-2 d-md-table-cell text-right pr-0 pr-md-4" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div>
         </div>
         &nbsp;
 
@@ -76,7 +81,7 @@
                     <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                             <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">11</span> NOV, 2019</div>
                             <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                            <a href="notice-single.html" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">4주차 Polynomial and sparse matrix </a>
+                            <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">4주차 Polynomial and sparse matrix </a>
                             <ul class="list-styled mb-5">
                                     <li>다항식</li>
                                     <li>희소 행렬</li>
@@ -85,13 +90,13 @@
                                     <li>스트링 추상 데이타 타입</li>
                                 </ul>
                             </div>
-                            <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single.html" class="btn btn-warning">참여하기</a></div>
+                            <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                         </li>
                 <!-- notice item -->
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                         <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">07</span> NOV, 2019</div>
                         <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                          <a href="notice-single.html" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">3주차 array & ADT & 선형리스트 </a>
+                          <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">3주차 array & ADT & 선형리스트 </a>
                           <ul class="list-styled mb-5">
                                 <li>C++에서의 데이타 추상화와 캡슐화 </li>
                                 <li>ADT와 C++ 클래스</li>
@@ -99,13 +104,13 @@
                                 <li>선형 리스트</li>
                             </ul>
                         </div>
-                        <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single.html" class="btn btn-warning">참여하기</a></div>
+                        <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                       </li>
                 <!-- notice item -->
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">25</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single.html" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">2주차 Basic concept of data structures </a>
+                    <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">2주차 Basic concept of data structures </a>
                     <ul class="list-styled mb-5">
                         <li>객체 지향 설계 </li>
                         <li>공간 복잡도</li>
@@ -113,20 +118,20 @@
                         <li>성능 측정</li>
                       </ul>
                   </div>
-                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single.html" class="btn btn-warning">참여하기</a></div>
+                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                 </li>
                 <!-- notice item -->
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">09</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single.html" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">1주차 Introduction of data structures </a>
+                    <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">1주차 Introduction of data structures </a>
                     <ul class="list-styled mb-5">
                         <li>자료구조 개요 </li>
                         <li>자료구조의 분류</li>
                         <li>자료의 표현 </li>
                       </ul>
                   </div>
-                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single.html" class="btn btn-warning">참여하기</a></div>
+                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                 </li>
               </ul>
             </div>
