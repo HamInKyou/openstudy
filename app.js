@@ -15,6 +15,8 @@ const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const studyRouter = require('./routes/studies');
 const imgRouter = require('./routes/img');
+const quizRouter = require('./routes/quiz');
+const answerRouter = require('./routes/answer');
 const calendarRouter = require('./routes/calendars');
 const postRouter = require('./routes/posts');
 
@@ -49,6 +51,8 @@ app.use('/user', userRouter);
 app.use('/auth', authRouter);
 app.use('/study', studyRouter);
 app.use('/img', imgRouter);
+app.use('/quiz', quizRouter);
+app.use('/answer', answerRouter);
 app.use('/calendar',calendarRouter);
 app.use('/post', postRouter);
 
