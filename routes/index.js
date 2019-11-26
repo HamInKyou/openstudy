@@ -35,6 +35,9 @@ router.get('/my-calendar', (req, res, next) => {
 router.get('/my-test-solve', (req, res, next) => {
   res.render('my-test-solve');
 });
+router.get('/my-test-solve-particular', (req, res, next) => {
+  res.render('my-test-solve-particular');
+});
 
 router.get('/my-test-post', (req, res, next) => {
   res.render('my-test-post');

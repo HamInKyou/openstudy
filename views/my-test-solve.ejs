@@ -31,9 +31,9 @@
 
     function outputQuizList() {
       for (var i = quizArray.length - 1; i >= 0; i--) {
-        document.write('<tr data-toggle="modal" data-target="#postModal" href="#">')
+        document.write('<tr>')
         document.write('<th scope="row">' + i + '</th>')
-        document.write('<td><a href="#" id="hover">' + quizArray[i].quizTitle + '</a></td>')
+        document.write('<td><a href="my-test-solve-particular" id="hover">' + quizArray[i].quizTitle + '</a></td>')
         document.write('<td>' + quizArray[i].quizSubject + '</td>')
         document.write('<td>' + quizArray[i].name + '</td>')
         document.write('<td>' + quizArray[i].Date + '</td>')
@@ -114,82 +114,6 @@
             </tbody>
           </table>
 
-          <!--테이블의 한 행을 누르면 실행되는 modal -->
-          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content rounded-0 border-0 p-4">
-                <!-- modal-header, 닫는 버튼과 title내용 포함 -->
-                <div class="modal-header border-0">
-                  <p>
-                    <h3>허예은이 낸 ox 문제</h3>
-                  </p>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-
-                <!-- modal-body -->
-                <div class="modal-body">
-
-                  <!--팀원이 게시한 문제 정보 올리는 table 시작-->
-                  <table class="table table-hover">
-                    <!--table header-->
-                    <thead>
-                      <tr>
-                        <th scope="col" style="width:20%;">작성자</th>
-                        <th scope="col" style="width:60%;">과목</th>
-                        <th scope="col" style="width:20%;">작성일</th>
-                      </tr>
-                    </thead>
-                    <!--table body-->
-                    <tbody>
-                      <!--문제 header-->
-                      <tr>
-                        <td>허예은</td>
-                        <td>오픈소스</td>
-                        <td>2019-10-10</td>
-                      </tr>
-                      <!--문제 내용-->
-                      <tr>
-                        <td colspan="3">
-                          <div style="overflow:scroll;height:150px; padding:10px;">
-                            문제<br />
-                            <br />
-                            문제<br />
-                            <br />
-                            문제<br />
-                            <br />
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <!--내가 제출한 답 정보-->
-                  <div class="col-12" style="margin-top: 2%;">
-                    <p>
-                      <h5>나의 답</h5>
-                    </p>
-                  </div>
-                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-                    <p>답 내용</p>
-                  </div>
-
-                  <!--제출자가 제출한 답 정보-->
-                  <div class="col-12" style="margin-top: 2%;">
-                    <p>
-                      <h5>제출자의 답</h5>
-                    </p>
-                  </div>
-                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-                    <p>답 내용</p>
-                  </div>
-                </div>
-                <!-- modal-body 끝-->
-              </div>
-            </div>
-          </div>
-          <!-- modal 끝-->
         </div>
       </div>
   </section>
