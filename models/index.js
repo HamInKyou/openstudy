@@ -17,6 +17,8 @@ db.Tag = require('./tag')(sequelize,Sequelize);
 db.Submit = require('./submit')(sequelize,Sequelize);
 db.Chatlog = require('./chatlog')(sequelize,Sequelize);
 db.Calendar = require('./calendar')(sequelize, Sequelize);
+db.Quiz = require('./quiz')(sequelize, Sequelize);
+db.Answer = require('./answer')(sequelize, Sequelize);
 
 //user post
 db.User.hasMany(db.Post);
@@ -68,4 +70,9 @@ db.Tag.belongsToMany(db.User,{
 db.User.hasMany(db.Study,{
     foreignKey: 'owner'
 });
+//quiz answer
+db.Quiz.hasMany(db.Answer, {
+    as : 'Answer',
+});
+
 module.exports = db;
