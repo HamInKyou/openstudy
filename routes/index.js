@@ -126,4 +126,9 @@ router.get('/quiz-post', (req, res, next) => {
   res.render('quiz-post');
 });
 
+router.get('/create-study', (req, res, next) => {
+  res.render('create-study');
+});
+
+
 module.exports = router;

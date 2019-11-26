@@ -12,7 +12,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
         const exUser = await User.findOne({where : {email}});
         if(exUser){
             req.flash('msg','이미 가입된 메일' );
-            return res.redirect('/register');
+            return res.redirect('/');
         }
         const hash = await bcrypt.hash(password,12);
         await User.create({
