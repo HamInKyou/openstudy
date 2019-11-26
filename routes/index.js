@@ -39,12 +39,7 @@ router.get('/my_test', (req, res, next) => {
 router.get('/my-test-post', async(req, res, next) => {
   try{
     // const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:3}});
-    // const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:req.user.id}});
-    const myQuiz = await Quiz.findAll({
-      where: {
-        owner : 3
-      }
-    });
+    const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:req.user.id}});
     res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz) });
   }catch(err){
     console.error(err);
@@ -54,10 +49,10 @@ router.get('/my-test-post', async(req, res, next) => {
 
 router.get('/my-test-solve', async(req, res, next) => {
   try{
-    const exMyAnswer = await Answer.findAll({where : {owner : 3}});
-    // const exMyAnswer = await Answer.findAll({where : {owner : req.user.id}});
-    const exQuiz = await Quiz.findAll();
-    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), answer : JSON.stringify(exMyAnswer) });
+    // const exMyAnswer = await Answer.findAll({where : {owner : 3}});
+    const exMyAnswer = await Answer.findAll({attributes : ['id', 'name', 'createdAt']}, {where : {owner : req.user.id}});
+    const exQuiz = await Quiz.findAll({attributes : ['id', 'name', 'owner', 'createdAt']}, {where : {id : exMyAnswer.quizId}});
+    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz) });
   }catch(err){
     console.error(err);
     next(err);
@@ -125,10 +120,11 @@ router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
 
-router.get('/study-quiz-list/:boardId/:quizId', async(req, res, next) => {
+router.get('/study-quiz-list/:boardId', async(req, res, next) => {
   try{
-    const exBoard = await Board.findOne({where : {id : req.params.boardId}});
-    const exQuiz = await Quiz.findOne({attributes : ['name', 'owner', 'createdAt']}, {where : {id : req.params.quizId}});
+    const exBoard = await Board.findOne({attributes : ['name', 'week', 'info', 'createdAt']}, {where : {id : req.params.boardId}});
+    const deadline = exBoard.deadline;
+    const exQuiz = await Quiz.findOne({attributes : ['name', 'owner', 'createdAt']}, {where : {createdAt : exBoard.createdAt}});
     res.render('study-quiz-list', {
       board : JSON.stringify(exBoard),
       quiz : JSON.stringify(exQuiz),
