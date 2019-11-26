@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <script>
+
+   </script>
+
+</head>
+
+
+<body style="background:#e9ecef">
+
+   <!--nav bar 시작-->
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="home" style=color:white;>
+         <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+
+      <!--다른 메뉴로 전환-->
+      <a class="nav-link active" href="home.html" style=color:#ffbc3b;>HOME</a>
+      <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
+      <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
+
+      <!--우측상단 드롭다운버튼-->
+      <div class="dropdown">
+         <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+         </button>
+
+         <!--드롭다운 내부 버튼들-->
+         <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="my-test-post">MY TEST</a>
+            <a class="dropdown-item" href="#">개인정보 설정</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
+         </div>
+      </div>
+
+   </nav>
+
+   <!--jumbotron 시작-->
+   <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+      <div class="container">
+         <h1 class="display-4">My TEST</h1>
+         <p class="lead" style="margin-top: 4%;">그동안 치뤘던 TEST의 결과, 해설을 볼 수 있습니다. </p>
+      </div>
+   </div>
+
+   <!--본문 내용 시작-->
+   <section class="section" style="height:1000px;">
+      <div class="container">
+
+         <div class="row">
+            <p>
+               <h3>함인규가 낸 서술형 문제</h3>
+            </p>
+            <div style="margin-left:5%">
+               <button type="button" class="btn btn-warning" onclick="href='quiz-post'">수정하기</button>
+               <button type="button" class="btn btn-warning" style="margin-left : 5px;">삭제하기</button>
+            </div>
+         </div>
+
+
+         <!--내가 게시한 문제 정보 올리는 table 시작-->
+         <table class="table table-hover" style="margin-top: 3%;">
+            <!--table header-->
+            <thead>
+               <tr>
+                  <th scope="col" style="width:55%;">과목</th>
+                  <th scope="col" style="width:20%;">작성일</th>
+               </tr>
+            </thead>
+            <!--table body-->
+            <tbody>
+               <tr>
+                  <td>오픈소스</td>
+                  <td>2019-10-10</td>
+               </tr>
+               <!--문제 내용-->
+               <tr>
+                  <td colspan="3">
+                     <div style="overflow:scroll;height:150px; padding:10px;">
+
+                        문제<br />
+                        <br />
+                        문제<br />
+                        <br />
+                        문제<br />
+                        <br />
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+
+         <!--내가 제출한 답-->
+         <div class="col-12" style="margin-top: 2%;">
+            <p>
+               <h5>나의 답</h5>
+            </p>
+         </div>
+         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
+            <p>답 내용</p>
+         </div>
+
+         <!--팀원들이 제출한 답-->
+         <div class="col-12" style="margin-top: 2%;">
+            <p><i class="fas fa-user mr-2"></i>허예은</p>
+         </div>
+         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
+            <p>답 내용</p>
+         </div>
+         <div class="col-12" style="margin-top: 2%;">
+            <p><i class="fas fa-user mr-2"></i>김용후</p>
+         </div>
+         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
+            <p>답 내용</p>
+         </div>
+      </div>
+
+
+   </section>
+   <!--본문 내용 끝-->
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>
+
+</html>

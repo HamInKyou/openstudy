@@ -39,6 +39,9 @@ router.get('/my-test-solve', (req, res, next) => {
 router.get('/my-test-post', (req, res, next) => {
   res.render('my-test-post');
 });
+router.get('/my-test-post-particular', (req, res, next) => {
+  res.render('my-test-post-particular');
+});
 
 router.get('/register', (req, res, next) => {
   res.render('register', {
