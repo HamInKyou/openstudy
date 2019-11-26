@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(100),
             allowNull : false,
         },
+        info : {
+            type : DataTypes.STRING(100),
+            allowNull : false,
+        },
     },{
         timestamps : true,
         paranoid : true,
