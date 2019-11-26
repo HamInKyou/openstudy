@@ -6,13 +6,17 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
+        title : {
+            type : DataTypes.STRING(200),
+            allowNull : false,
+        },
         content : {
             type : DataTypes.STRING(500),
-            allowNull : true,
+            allowNull : false,
         },
         url : {
             type : DataTypes.STRING(200),
-            allowNull : false,
+            allowNull : true,
         },
     },{
         timestamps : true,
