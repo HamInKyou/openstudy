@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('answer',{
+    return sequelize.define('post',{
         id : {
             type : DataTypes.INTEGER,
             autoIncrement : true,
@@ -7,22 +7,27 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
         },
         name : {
-            type : DataTypes.STRING(100),
-            allowNull : false,
-        },
-        content : {
-            type : DataTypes.STRING(500),
-            allowNull : true,
-        },
-        url : {
             type : DataTypes.STRING(200),
             allowNull : false,
         },
-        owner : {
-            type : DataTypes.INTEGER,
+        url : {
+            type : DataTypes.STRING(200),
+            allowNull : true,
+        },
+        datetime : {
+            type : 'TIMESTAMP',
+            allowNull : true,
+        },
+        datetime_end : {
+            type : 'TIMESTAMP',
+            allowNull : true,
+        },
+        class : {
+            type : DataTypes.STRING(40),
             allowNull : false,
-        }
+        },
     },{
         timestamps : true,
+        paranoid : true,
     });
 };

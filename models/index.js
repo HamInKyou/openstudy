@@ -70,5 +70,9 @@ db.Tag.belongsToMany(db.User,{
 db.User.hasMany(db.Study,{
     foreignKey: 'owner'
 });
+//quiz answer
+db.Quiz.hasMany(db.Answer, {
+    as : 'Answer',
+});
 
 module.exports = db;

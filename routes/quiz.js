@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {Quiz} = require('../models');
+const {Quiz, Answer} = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 router.post('/create', isLoggedIn, async (req, res, next) => {
@@ -13,6 +13,12 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
             owner : req.user.id,
             ownerAnswerId,            
         });
+        if(ownerAnswerId){
+            const ownerAnswer = await Answer.findOne({
+                where: {id : ownerAnswerId}
+            });
+            quiz.addAnswer(ownerAnswer);
+        }
         const result = {
             res : "success",
             quizId : quiz.id
