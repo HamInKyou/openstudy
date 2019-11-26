@@ -56,6 +56,28 @@
         document.write('<li>' + item + '</li>')
       }
     }
+
+    var quizArray = [];
+
+    for (var i = 0; i < 50; i++) {
+      quizArray.push({
+        "quizTitle": i + "번째 퀴즈 타이틀",
+        "quizSubject": "퀴즈과목",
+        "name": "유저이름",
+        "Date": "00-00-00"
+      });
+    }
+
+    function outputQuizList() {
+      for (var i = quizArray.length - 1; i >= 0; i--) {
+        document.write('<tr data-toggle="modal" data-target="#postModal" href="#">')
+        document.write('<th scope="row">' + i + '</th>')
+        document.write('<td><a href="study-quiz-solve" id="hover">' + quizArray[i].quizTitle + '</a></td>')
+        document.write('<td>' + quizArray[i].name + '</td>')
+        document.write('<td>' + quizArray[i].Date + '</td>')
+        document.write('</tr>')
+      }
+    }
   </script>
 
 </head>
@@ -180,37 +202,9 @@
 
         <!--table body-->
         <tbody>
-          <tr href="#">
-            <th scope="row">5</th>
-            <td><a href="study-quiz-solve" id="hover">허예은이 낸 ox 문제</a></td>
-            <td>허예은</td>
-            <td>2019-10-10</td>
-          </tr>
-
-          <tr>
-            <th scope="row">4</th>
-            <td><a href="#" id="hover">4주차 허예은</a></td>
-            <td>허예은</td>
-            <td>2019-10-10</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td><a href="#" id="hover">4주차 허예은</a></td>
-            <td>허예은</td>
-            <td>2019-10-10</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><a href="#" id="hover">4주차 허예은</a></td>
-            <td>허예은</td>
-            <td>2019-10-10</td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td><a href="#" id="hover">4주차 허예은</a></td>
-            <td>허예은</td>
-            <td>2019-10-10</td>
-          </tr>
+          <script>
+            outputQuizList();
+          </script>
         </tbody>
       </table>
 
