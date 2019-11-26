@@ -17,6 +17,33 @@
       color: #343a40;
     }
   </style>
+
+  <script>
+    var quizArray = [];
+    var selectid;
+
+
+    for (var i = 0; i < 50; i++) {
+      quizArray.push({
+        "quizTitle": i + "번째 퀴즈 타이틀",
+        "quizSubject": "퀴즈과목",
+        "name": "유저이름",
+        "Date": "00-00-00"
+      });
+    }
+
+
+
+    function outputQuizList() {
+      for (var i = quizArray.length - 1; i >= 0; i--) {
+        document.write('<tr data-toggle="modal" data-target="#postModal" href="#">')
+        document.write('<th scope="row">' + i + '</th>')
+        document.write('<td><a href="#" id="hover">' + quizArray[i].quizTitle + '</a></td>')
+        document.write('<td>' + quizArray[i].Date + '</td>')
+        document.write('</tr>')
+      }
+    }
+  </script>
 </head>
 
 <body style="background:#e9ecef">
@@ -37,7 +64,7 @@
       <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
         MY MENU
       </button>
-      
+
       <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="my-calendar">MY Calendar</a>
@@ -82,35 +109,9 @@
             </thead>
             <!-- 게시판 body-->
             <tbody>
-              <tr data-toggle="modal" data-target="#postModal" href="#">
-                <th scope="row">5</th>
-                <td><a href="#" id="hover">함인규가 낸 서술형 문제</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">4</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-              
-              <tr>
-                <th scope="row">3</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">2</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">1</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
+              <script>
+                outputQuizList();
+              </script>
 
             </tbody>
           </table>
@@ -131,7 +132,7 @@
 
                 <!-- modal-body -->
                 <div class="modal-body">
-                  
+
                   <!--내가 게시한 문제 정보 올리는 table 시작-->
                   <table class="table table-hover">
                     <!--table header-->
@@ -194,7 +195,7 @@
                     <p>답 내용</p>
                   </div>
                 </div>
-                <!-- modal-body 끝-->  
+                <!-- modal-body 끝-->
               </div>
             </div>
           </div>
