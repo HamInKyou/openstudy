@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('comment',{
-        id : {
+        id : {  //고유 id
             type : DataTypes.INTEGER,
             autoIncrement : true,
             allowNull : false,
             primaryKey : true,
         },
-        content : {
+        content : { //내용
             type : DataTypes.STRING(50),
             allowNull : false,
         },
