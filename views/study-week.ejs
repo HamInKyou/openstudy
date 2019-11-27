@@ -1,3 +1,8 @@
+<!-- study-week.html (study-intro.html 에서 출석하기를 누르면 처음으로 뜨는 창. 주차별 공부 내용)
+- (이 html에 있는 문제 풀기 버튼을 없앨거에요.)
+- 이 스터디의 owner일때 주차별 항목 추가하는 버튼 생성. owner가 아닐때는 버튼 없앰.
+- owner가 주차별 항목을 추가하면 이 html에서 항목을 추가하고, 그 항목에서 버튼을 누르면 그 주차의 게시글을 볼 수 있는 html 띄우기 -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -68,10 +73,66 @@
     <div class = "container">
         <!-- /page title -->
         <div class = "row">
-        <div class="col-lg-2 d-md-table-cell text-right pr-0 pr-md-4" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div>
+        <div class="col-lg-2 text-right pr-0 pr-md-1" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-lg"></i></button>
         </div>
         &nbsp;
+        
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">주차별 내용 추가</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div class = "row">
+                        <div class ="name">
+                          <form>
+                             
+                            <div class = "col-lg-12">
+                                <h5 style="margin-left:5%;">스터디 제목</h5>
+                              <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
+                            </div>
+                          </form>
+                        </div>
+                      </div>
 
+                      <hr class ="my-4">
+                      <div class = "row">
+                          <p style="margin:2%; margin-left:5%;">마감일
+                        <div class="form-row">
+                            <div class="form-group col-md-7">
+                              <input type="date" class="form-control" id="finishDate" >
+                            </div>
+                            <div class="form-group col-md-5">
+                              <input type="time" class="form-control" id="finishTime">
+                            </div>
+                          </div>
+                        </p>
+                    </div>
+
+                    <hr class ="my-4">
+                    <form>
+                    <div class = "col-lg-12">
+                          <h5 >스터디 목적</h5>
+                          <input type="text" class="form-control" id="name" placeholder="스터디 목적을 입력하세요."style="width:90%;">
+                          <button type="button" class="btn btn-warning"><i class="fas fa-plus fa-lg"></i></button>
+                        
+                      </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-warning">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
     <section class="section">
             <div class="container">
             <div class="row">
