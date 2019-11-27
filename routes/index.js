@@ -123,8 +123,7 @@ router.get('/study-post', (req, res, next) => {
 router.get('/study-quiz-list/:boardId', async(req, res, next) => {
   try{
     const exBoard = await Board.findOne({attributes : ['name', 'week', 'info', 'createdAt']}, {where : {id : req.params.boardId}});
-    const deadline = exBoard.deadline;
-    const exQuiz = await Quiz.findOne({attributes : ['name', 'owner', 'createdAt']}, {where : {createdAt : exBoard.createdAt}});
+    const exQuiz = await Quiz.findAll({attributes : ['name', 'name', 'owner', 'createdAt']}); //boardId를 저장하는 걸 따로 만들 것인지 이야기해보아야함.
     res.render('study-quiz-list', {
       board : JSON.stringify(exBoard),
       quiz : JSON.stringify(exQuiz),
@@ -154,7 +153,7 @@ router.get('/study-week/:studyId', async (req, res, next) => {
 router.get('/quiz-post/:boardId', async(req,res,next) => { //프론트에서 board 설명 가져와야 해서 DB 수정함.
   try{
     const exBoard = await Board.findOne({attributes : ['name', 'info', 'createdAt', 'week']}, {where : {id : req.params.boardId}});
-    res.render('quiz-post', { quiz : JSON.stringify(exBoard) });
+    res.render('quiz-post', { board : JSON.stringify(exBoard) });
   }catch(err){
     console.error(err);
     next(err);
