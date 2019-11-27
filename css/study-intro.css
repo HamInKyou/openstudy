@@ -1,0 +1,19 @@
+.body{
+    background:#e9ecef;
+}
+.navbar{
+    color:white;
+}
+.nav-link{
+color:white;
+}
+.nav-link.active{
+    color:#ffbc3b;
+}
+.jumbotron-fluid{
+    margin-top:2.5%; 
+    background:#ffbc3b
+}
+.bottom.p{
+color:white;
+}
