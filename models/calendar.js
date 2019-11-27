@@ -15,14 +15,6 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(400),
              allowNull : false,
         },
-        name : {
-            type : DataTypes.STRING(400),
-            allowNull : false,
-        },
-        url : {
-            type : DataTypes.STRING(200),
-            allowNull : true,
-        },
         datetime : {
             type : 'TIMESTAMP',
             allowNull : true,
@@ -34,10 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         color:{
             type :  DataTypes.STRING(400),
             allowNull : true,
-        },
-        class : {
-            type : DataTypes.STRING(40),
-            allowNull : false,
         },
     },{
         timestamps : true,
