@@ -36,7 +36,7 @@ router.get('/my_test', (req, res, next) => {
   res.render('my_test');
 });
 
-router.get('/my-test-post', async(req, res, next) => {
+router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
     // const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:3}});
     const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:req.user.id}});
@@ -47,11 +47,11 @@ router.get('/my-test-post', async(req, res, next) => {
   }
 });
 
-router.get('/my-test-solve', async(req, res, next) => {
+router.get('/my-test-solve', async(req, res, next) => { //solve 다시 확인해보기
   try{
     // const exMyAnswer = await Answer.findAll({where : {owner : 3}});
-    const exMyAnswer = await Answer.findAll({attributes : ['id', 'name', 'createdAt']}, {where : {owner : req.user.id}});
-    const exQuiz = await Quiz.findAll({attributes : ['id', 'name', 'owner', 'createdAt']}, {where : {id : exMyAnswer.quizId}});
+    const exMyAnswer = await Answer.findAll({where : {owner : req.user.id}}, {attributes : ['id', 'name', 'createdAt']});
+    const exQuiz = await Quiz.findAll({where : {id : exMyAnswer.quizId}}, {attributes : ['id', 'boardId', 'name', 'owner', 'createdAt']});
     res.render('my-test-solve', { quiz : JSON.stringify(exQuiz) });
   }catch(err){
     console.error(err);
@@ -64,6 +64,7 @@ router.get('/register', (req, res, next) => {
     msg: req.flash('msg')
   });
 });
+
 router.get('/study-intro/:studyId', async (req, res, next) => {
   try {
     const studyId = req.params.studyId;
@@ -82,6 +83,7 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-list', async (req, res, next) => {
   //mystudylist
   try {
@@ -101,6 +103,7 @@ router.get('/study-list', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-post-list/:boardId', async (req, res, next) => {
   try {
     const exPosts = await Post.findAll({
@@ -116,13 +119,14 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
 
 router.get('/study-quiz-list/:boardId', async(req, res, next) => {
   try{
-    const exBoard = await Board.findOne({attributes : ['name', 'week', 'info', 'createdAt']}, {where : {id : req.params.boardId}});
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}}, {attributes : ['name', 'week', 'info', 'createdAt']});
     const exQuiz = await Quiz.findAll({attributes : ['name', 'name', 'owner', 'createdAt']}); //boardId를 저장하는 걸 따로 만들 것인지 이야기해보아야함.
     res.render('study-quiz-list', {
       board : JSON.stringify(exBoard),
@@ -152,7 +156,7 @@ router.get('/study-week/:studyId', async (req, res, next) => {
 
 router.get('/quiz-post/:boardId', async(req,res,next) => { //프론트에서 board 설명 가져와야 해서 DB 수정함.
   try{
-    const exBoard = await Board.findOne({attributes : ['name', 'info', 'createdAt', 'week']}, {where : {id : req.params.boardId}});
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}}, {attributes : ['name', 'info', 'createdAt', 'week']});
     res.render('quiz-post', { board : JSON.stringify(exBoard) });
   }catch(err){
     console.error(err);

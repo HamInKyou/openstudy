@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
+        boardId : {
+            type : DataTypes.INTEGER,
+            allowNull : false,
+        },
         name : {
             type : DataTypes.STRING(100),
             allowNull : false,

@@ -11,7 +11,8 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
             content,
             url,
             owner : req.user.id,
-            ownerAnswerId,            
+            ownerAnswerId,
+            boardId : req.board.id,            
         });
         const result = {
             res : "success",
