@@ -17,29 +17,63 @@
       color: #343a40;
     }
   </style>
+<<<<<<< HEAD
   <script>
     var myQuiz =<%-myQuiz %>;
     console.log(myQuiz);
     </script>
+=======
+
+  <script>
+    var quizArray = [];
+
+    for (var i = 0; i < 50; i++) {
+      quizArray.push({
+        "quizTitle": i + "번째 퀴즈 타이틀",
+        "quizSubject": "퀴즈과목",
+        "name": "유저이름",
+        "Date": "00-00-00"
+      });
+    }
+
+
+
+    function outputQuizList() {
+      for (var i = quizArray.length - 1; i >= 0; i--) {
+        document.write('<tr>')
+        document.write('<th scope="row">' + i + '</th>')
+        document.write('<td><a href="my-test-post-particular" id="hover">' + quizArray[i].quizTitle + '</a></td>')
+        document.write('<td>' + quizArray[i].Date + '</td>')
+        document.write('</tr>')
+      }
+    }
+  </script>
+>>>>>>> 4376137e65e89f8b204d060d8c51d9c1e43b776e
 </head>
 
 <body style="background:#e9ecef">
+
+  <!--nav bar 시작-->
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#" style=color:white;>
       <img src="../public/images/logo.png" height="30" alt="HOME">
     </a>
 
+    <!--다른 메뉴로 전환-->
     <a class="nav-link" style=color:white;>HOME</a>
     <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
     <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
 
+    <!--우측상단 드롭다운버튼-->
     <div class="dropdown">
       <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
         MY MENU
       </button>
+
+      <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
-        <a class="dropdown-item" href="my-test.html">MY TEST</a>
+        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="my-test-post">MY TEST</a>
         <a class="dropdown-item" href="#">개인정보 설정</a>
         <a class="dropdown-item" href="#">로그아웃</a>
       </div>
@@ -47,6 +81,7 @@
 
   </nav>
 
+  <!--jumbotron 시작-->
   <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
     <div class="container">
       <h1 class="display-4">My TEST</h1>
@@ -54,10 +89,13 @@
     </div>
   </div>
 
+  <!--본문 내용 시작-->
   <section class="section">
     <div class="container">
       <div class="row">
         <div class="col-12">
+
+          <!--post랑 solve랑 전환하는 버튼-->
           <div class="row" style="margin-bottom: 3%; float:right;">
             <!--페이지 전환 고쳐야행-->
             <button type="button" class="btn btn-outline-warning" onclick="href='my-test-solve'">내가 풀은 문제</button>
@@ -76,118 +114,19 @@
             </thead>
             <!-- 게시판 body-->
             <tbody>
-              <tr data-toggle="modal" data-target="#postModal" href="#">
-                <th scope="row">5</th>
-                <td><a href="#" id="hover">함인규가 낸 서술형 문제</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">4</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-              
-              <tr>
-                <th scope="row">3</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">2</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
-
-              <tr>
-                <th scope="row">1</th>
-                <td><a href="#" id="hover">4주차 허예은</a></td>
-                <td>2019-10-10</td>
-              </tr>
+              <script>
+                outputQuizList();
+              </script>
 
             </tbody>
           </table>
 
-          <!-- modal -->
-          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-              <div class="modal-content rounded-0 border-0 p-4">
-                <!-- modal-header -->
-                <div class="modal-header border-0">
-                  <p>
-                    <h3>함인규가 낸 서술형 문제</h3>
-                  </p>
-
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-
-                <!-- modal-body -->
-                <div class="modal-body">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col" style="width:55%;">과목</th>
-                        <th scope="col" style="width:20%;">작성일</th>
-                        <th scope="col" style="width:25%;">관리하기</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>오픈소스</td>
-                        <td>2019-10-10</td>
-                        <td>
-                          <button type="button" class="btn btn-outline-warning" onclick="href='quiz-post'">수정</button>
-                          <button type="button" class="btn btn-outline-warning">삭제</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="3">
-                          <div style="overflow:scroll;height:150px; padding:10px;">
-
-                            문제<br />
-                            <br />
-                            문제<br />
-                            <br />
-                            문제<br />
-                            <br />
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <div class="col-12" style="margin-top: 2%;">
-                    <p>
-                      <h5>나의 답</h5>
-                    </p>
-                  </div>
-                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-                    <p>답 내용</p>
-                  </div>
-                  <div class="col-12" style="margin-top: 2%;">
-                    <p><i class="fas fa-user mr-2"></i>허예은</p>
-                  </div>
-                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-                    <p>답 내용</p>
-                  </div>
-                  <div class="col-12" style="margin-top: 2%;">
-                    <p><i class="fas fa-user mr-2"></i>김용후</p>
-                  </div>
-                  <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-                    <p>답 내용</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!--게시글 쪽수 나타내고 변경할 수 있는 page navigation-->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center ">
       <li class="page-item"><a class="page-link" href="#">Previous</a></li>

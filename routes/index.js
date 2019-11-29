@@ -38,8 +38,9 @@ router.get('/my_test', (req, res, next) => {
 
 router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
+    const pageId = req.params.pageId;
     // const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:3}});
-    const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:req.user.id}});
+    const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10}, {where:{owner:req.user.id}});
     res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz) });
   }catch(err){
     console.error(err);
@@ -47,12 +48,44 @@ router.get('/my-test-post/:pageId', async(req, res, next) => {
   }
 });
 
-router.get('/my-test-solve', async(req, res, next) => { //solve 다시 확인해보기
+router.get('/my-test-solve-particular/:quizId', async(req, res, next) => {
   try{
-    // const exMyAnswer = await Answer.findAll({where : {owner : 3}});
-    const exMyAnswer = await Answer.findAll({where : {owner : req.user.id}}, {attributes : ['id', 'name', 'createdAt']});
-    const exQuiz = await Quiz.findAll({where : {id : exMyAnswer.quizId}}, {attributes : ['id', 'boardId', 'name', 'owner', 'createdAt']});
+    const quizId = req.params.quizId;
+    const answerPost = await Answer.findAll({where : {quizId : quizId}});
+    const quizPost = await Quiz.findOne({where : {id : quizId}});
+    let quizAnswer;
+    if(quizPost.ownerAnswerId){
+      quizAnswer = await Answer.findOne({where : {id : quizPost.ownerAnswerId}});
+    }else{
+      quizAnswer = 'No Answer';
+    }
+    const boardName = await Board.findOne({where : {id : quizPost.boardId}}, {attributes : ['name']});
+    res.render('my-test-solve-particular', {myanswer : JSON.stringify(answerPost), quiz : JSON.stringify(quizPost), answer : JSON.stringify(quizAnswer), board : JSON.stringify(boardName)});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/my-test-solve/:pageId', async(req, res, next) => {
+  try{
+    const pageId = req.params.pageId;
+    const exQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10});
+    // const boardName = await Board.findOne({where : {id : exQuiz.boardId}}, {attributes : ['name']});
     res.render('my-test-solve', { quiz : JSON.stringify(exQuiz) });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
+  try{
+    const quizId = req.params.quizId;
+    const quizPost = await Quiz.findOne({where : {id : quizId}});
+    const boardName = await Board.findOne({where : {id : quizPost.boardId}}, {attributes : ['name']});
+    const answerPost = await Answer.findAll({where : {id : quizId}});
+    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), board : JSON.stringify(boardName), answer : JSON.stringify(answerPost)});
   }catch(err){
     console.error(err);
     next(err);
