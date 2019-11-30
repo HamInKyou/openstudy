@@ -19,7 +19,7 @@ router.get('/home', async (req, res, next) => {
       raw: true
     });
     const resultEnrolled = JSON.stringify(enrolledStudies);
-    const Studies = await Study.findAll({});
+    const Studies = await Study.findAll({}); //myStudies와 중복되지 않게 고쳐야함
     const resultStudies = JSON.stringify(Studies);
     res.render('home', {
       myStudies: resultEnrolled,
