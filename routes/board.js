@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post('/', async (req, res, next) => {
     try{
-        /*
         const parentStudy = await Study.findOne({
             where : {
                 id : req.body.studyId
@@ -26,7 +25,7 @@ router.post('/', async (req, res, next) => {
         if(exBoard){
             return res.send(req.body.name + " already exist");
         }
-        */
+        
         const board = await Board.create({
             week : req.body.week,
             deadline : req.body.deadline,

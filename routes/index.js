@@ -39,7 +39,6 @@ router.get('/my_test', (req, res, next) => {
 router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    // const myQuiz = await Quiz.findAll({attributes : ['id', 'name', 'createdAt']}, {where:{owner:3}});
     const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10}, {where:{owner:req.user.id}});
     res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz) });
   }catch(err){
@@ -59,7 +58,7 @@ router.get('/my-test-solve-particular/:quizId', async(req, res, next) => {
     }else{
       quizAnswer = 'No Answer';
     }
-    const boardName = await Board.findOne({where : {id : quizPost.boardId}}, {attributes : ['name']});
+    const boardName = await Board.findOne({where : {id : quizPost.boardId}, attributes : ['name']});
     res.render('my-test-solve-particular', {myanswer : JSON.stringify(answerPost), quiz : JSON.stringify(quizPost), answer : JSON.stringify(quizAnswer), board : JSON.stringify(boardName)});
   }catch(err){
     console.error(err);
@@ -71,7 +70,6 @@ router.get('/my-test-solve/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
     const exQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10});
-    // const boardName = await Board.findOne({where : {id : exQuiz.boardId}}, {attributes : ['name']});
     res.render('my-test-solve', { quiz : JSON.stringify(exQuiz) });
   }catch(err){
     console.error(err);
@@ -83,7 +81,7 @@ router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
   try{
     const quizId = req.params.quizId;
     const quizPost = await Quiz.findOne({where : {id : quizId}});
-    const boardName = await Board.findOne({where : {id : quizPost.boardId}}, {attributes : ['name']});
+    const boardName = await Board.findOne({where : {id : quizPost.boardId}, attributes : ['name']});
     const answerPost = await Answer.findAll({where : {id : quizId}});
     res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), board : JSON.stringify(boardName), answer : JSON.stringify(answerPost)});
   }catch(err){
@@ -157,10 +155,11 @@ router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
 
-router.get('/study-quiz-list/:boardId', async(req, res, next) => {
+router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
   try{
-    const exBoard = await Board.findOne({where : {id : req.params.boardId}}, {attributes : ['name', 'week', 'info', 'createdAt']});
-    const exQuiz = await Quiz.findAll({attributes : ['name', 'name', 'owner', 'createdAt']}); //boardId를 저장하는 걸 따로 만들 것인지 이야기해보아야함.
+    const pageId = req.params.pageId;
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}, attributes : ['name', 'week', 'info', 'createdAt']});
+    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10}, {attributes : ['name', 'name', 'owner', 'createdAt'], where : {boardId : exBoard.id}});
     res.render('study-quiz-list', {
       board : JSON.stringify(exBoard),
       quiz : JSON.stringify(exQuiz),
@@ -187,9 +186,9 @@ router.get('/study-week/:studyId', async (req, res, next) => {
   }
 });
 
-router.get('/quiz-post/:boardId', async(req,res,next) => { //프론트에서 board 설명 가져와야 해서 DB 수정함.
+router.get('/quiz-post/:boardId', async(req,res,next) => {
   try{
-    const exBoard = await Board.findOne({where : {id : req.params.boardId}}, {attributes : ['name', 'info', 'createdAt', 'week']});
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}, attributes : ['name', 'info', 'createdAt', 'week']});
     res.render('quiz-post', { board : JSON.stringify(exBoard) });
   }catch(err){
     console.error(err);
