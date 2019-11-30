@@ -3,33 +3,34 @@ const { Post, Board, Submit } = require('../models');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
+const Op = sequelize.Op;
 
 router.post('/create/:boardId', isLoggedIn, async (req,res,next) => { //게시글 생성
     const boardId = req.params.boardId;
     try{
         const find = await Board.findOne({where : {id : boardId}});
-        if(moment(find.deadline).diff(moment().format()) > 0){
             
-            const post = await Post.create({
-                title : req.body.title,
-                content : req.body.content,
-                url : req.body.url, //img 파일 경로
-                userId : req.user.id,
-                boardId : req.params.boardId
-            });
-    
+        const post = await Post.create({
+            title : req.body.title,
+            content : req.body.content,
+            url : req.body.url, //img 파일 경로
+            userId : req.user.id,
+            boardId : req.params.boardId
+        });
+        
+        if(moment(find.deadline).diff(moment().format()) > 0){
             const submit = await Submit.create({
                 userId : req.user.id,
                 boardId : boardId
             });
-            
-            res.json({
+
+            return res.json({
                 req : true,
                 msg : '게시글 등록 완료'
             });
 
         } else {
-            return res.json({req : false, msg : '기간이 지났습니다'});
+            return res.json({req : false, msg : '기간이 지났습니다. 제출 목록에 포함되지 않습니다.'});
         }
     } catch (err) {
         console.error(err);

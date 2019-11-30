@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const {Post,User,Study,Board} = require('../models');
-
+const {Post,User,Study,Board,Calendar} = require('../models');
+const moment = require('moment');
 
 /* GET home page. */
 router.get('/',  (req, res, next) => {
@@ -18,9 +18,12 @@ router.get('/home', async (req, res, next) => {
     const enrolledStudies = await exUser.getEnrolledStudy({
       raw: true
     });
-    const result = JSON.stringify(enrolledStudies);
+    const resultEnrolled = JSON.stringify(enrolledStudies);
+    const Studies = await Study.findAll({});
+    const resultStudies = JSON.stringify(Studies);
     res.render('home', {
-      myStudies: result
+      myStudies: resultEnrolled,
+      Studies: resultStudies
     });
   } catch (err) {
     console.error(err);
@@ -28,10 +31,26 @@ router.get('/home', async (req, res, next) => {
   }
 });
 
-router.get('/my-calendar', (req, res, next) => {
-  res.render('my-calendar');
+router.get('/my-calendar/', async(req, res, next) => {
+  try {
+    const month = moment().month;
+    const exCalendars = await Calendar.findAll({
+      where: {userId: req.user.id }
+    });
+    const result = JSON.stringify(exCalendars);
+    res.render('my-calendar', {
+      myCalendars: result,
+      nowMonth : month
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
 });
-
+// ex
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 router.get('/my_test', (req, res, next) => {
   res.render('my_test');
 });
