@@ -12,17 +12,8 @@
    
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-   <style>
-   .bg-primary {
-    background-color: #ffbc3b !important;
-}
-    .week {
-    color:#343a40 !important;
-    text-decoration: none;
-    background-color: transparent;
-    }
-   </style>
+   <link rel="stylesheet" href="/css/study-week.css">
+   <link rel="stylesheet" href="/css/global.css">
     <script>
       var boards = <%- boards %>;
       console.log(boards);
@@ -32,13 +23,13 @@
 <body style="background:#e9ecef">
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#" style = color:white;>
+      <a class="navbar-brand" href="#" >
           <img src="../public/images/logo.png" height="30" alt="HOME">
       </a>
       
-      <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
-      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+      <a class="nav-link" href="home" >HOME</a>
+      <a class="nav-link active" href="#">MYSTUDY</a>
+      <a class="nav-link" href="#">OPENSTUDY</a>
   
       <div class="dropdown">
           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -53,7 +44,7 @@
   
     </nav>
     
-    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+    <div class="jumbotron jumbotron-fluid">
         <div class="container">
           <div class = "row">
               <div class = "col-lg-10">
@@ -95,7 +86,7 @@
                           <form>
                              
                             <div class = "col-lg-12">
-                                <h5 style="margin-left:5%;">스터디 제목</h5>
+                                <h5 >스터디 제목</h5>
                               <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
                             </div>
                           </form>
@@ -104,7 +95,8 @@
 
                       <hr class ="my-4">
                       <div class = "row">
-                          <p style="margin:2%; margin-left:5%;">마감일
+                          <p  style="margin:2%!important; 
+                          margin-left:5%!important;">마감일
                         <div class="form-row">
                             <div class="form-group col-md-7">
                               <input type="date" class="form-control" id="finishDate" >
@@ -119,8 +111,8 @@
                     <hr class ="my-4">
                     <form>
                     <div class = "col-lg-12">
-                          <h5 >스터디 목적</h5>
-                          <input type="text" class="form-control" id="name" placeholder="스터디 목적을 입력하세요."style="width:90%;">
+                          <h5 >스터디 내용</h5>
+                          <input type="text" class="form-control" id="name" placeholder="스터디 내용을 입력하세요.">
                           <button type="button" class="btn btn-warning"><i class="fas fa-plus fa-lg"></i></button>
                         
                       </div>
@@ -142,7 +134,7 @@
                     <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                             <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">11</span> NOV, 2019</div>
                             <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                            <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">4주차 Polynomial and sparse matrix </a>
+                            <a href="notice-single" class="h4 mb-3 d-block week" >4주차 Polynomial and sparse matrix </a>
                             <ul class="list-styled mb-5">
                                     <li>다항식</li>
                                     <li>희소 행렬</li>
@@ -157,7 +149,7 @@
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                         <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">07</span> NOV, 2019</div>
                         <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                          <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">3주차 array & ADT & 선형리스트 </a>
+                          <a href="notice-single" class="h4 mb-3 d-block week">3주차 array & ADT & 선형리스트 </a>
                           <ul class="list-styled mb-5">
                                 <li>C++에서의 데이타 추상화와 캡슐화 </li>
                                 <li>ADT와 C++ 클래스</li>
@@ -171,7 +163,7 @@
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">25</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">2주차 Basic concept of data structures </a>
+                    <a href="notice-single" class="h4 mb-3 d-block week">2주차 Basic concept of data structures </a>
                     <ul class="list-styled mb-5">
                         <li>객체 지향 설계 </li>
                         <li>공간 복잡도</li>
@@ -185,7 +177,7 @@
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">09</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single" class="h4 mb-3 d-block week" style = "margin-top:5%; font-weight:bold;">1주차 Introduction of data structures </a>
+                    <a href="notice-single" class="h4 mb-3 d-block week">1주차 Introduction of data structures </a>
                     <ul class="list-styled mb-5">
                         <li>자료구조 개요 </li>
                         <li>자료구조의 분류</li>
