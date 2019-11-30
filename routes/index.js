@@ -104,6 +104,11 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
+
+router.get('/chat/:boardId', (req, res, next) => {
+  res.render('chat');
+});
+
 router.get('/study-quiz-list', (req, res, next) => {
   res.render('study-quiz-list');
 });
