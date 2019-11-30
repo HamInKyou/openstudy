@@ -42,9 +42,6 @@ router.get('/',isLoggedIn,  async(req, res, next) =>{ //등록된 일정 불러�
         month : month,
         plans : plans
     };
-    // if(!plans.deletedAt){
-    //     return res.send('no exist plan');
-    // }
         res.json(result);
         return;
     } catch(err){
@@ -58,9 +55,6 @@ router.get('/delete/:calendarId',isLoggedIn,async(req,res,next)=>{
         const exCalendar = Calendar.findOne({
             where : {id : calendarId}
         });
-        // if(!exCalendar.deletedAt){ //필요없음
-        //     return res.send('already deleted calendar');
-        // }
         Calendar.destroy({
             where: { id: calendarId }
         });
@@ -79,9 +73,7 @@ router.post('/modify/:calendarId',isLoggedIn,async(req,res,next)=>{
     const { title,datetime,datetime_end } = req.body;
     try{
         const exCalendar = await Calendar.findOne({where: {id: calendarId}});
-        // if(!exCalendar.deletedAt){ 
-        //     return res.send('no Calendar');
-        // }
+     
         Calendar.update({
             title : title,
             datetime : datetime,
