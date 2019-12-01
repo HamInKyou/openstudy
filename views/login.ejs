@@ -1,102 +1,227 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-   <meta charset="UTF-8">
-   <title>OPEN STUDY</title>
-   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-   
-   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
-   <link rel="stylesheet" action="auth/login"
-   href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!-- login.html
+	- 아이디/비밀번호 db와 검색 한 것이랑 같으면 로그인 시키기
+	- 이름이나 핸드폰번호를 치면 그 데이터 값에 들어가있는 아이디 찾아주기 (modal에 생성)
+	- 비밀번호를 잃어버렸으면 초기화 ( 예를들면 db에 있는 핸드폰 번호로 초기화 시키기 등등) (modal에 생성)
+  - 아이디 찾기: 이름이나 핸드폰번호를 치면 그 데이터 값에 들어가있는 아이디 찾아주기 
+	- 비밀번호 찾기: 비밀번호를 잃어버렸으면 초기화 ( 예를들면 db에 있는 핸드폰 번호로 초기화 시키기 등등) -->
+	
 
-   <style>
-   .input-group-prepend span{
-    width: 50px;
-    background-color: #ffbc3b;
-    border:0;
-    }
-    </style>
-    <script>
-      var imsg = "<%= msg %>";
-      if(imsg)
-        alert(imsg);
+	<!DOCTYPE html>
+	<html lang="ko">
+	<head>
+	   <meta charset="UTF-8">
+	   <title>OPEN STUDY</title>
+	   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+	   
+	   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+	   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	
 
-    </script>
-</head>
-<body style="background:#ffbc3b">
-    <div class = "container">
-    <form class ="login-form col-lg-6 offset-lg-3" 
-      style="background:#1a1a37;margin-top:7.5%;margin-bottom:80px;box-shadow: 1.5px 1.5px 5px 5px #333333;border-radius:2.5%;"
-      action = "auth/login" method="post">
-        <div class = "row justify-content-center" ><img style="margin-top:10%;" src="../public/images/logo.png"></div>
-        <p>&nbsp;</p>
+	   <style>
+	   .input-group-prepend span{
+	    width: 50px;
+	    background-color: #ffbc3b;
+	    border:0;
+	    }
+	    </style>
+	</head>
+	<body style="background:#ffbc3b">
+	    <div class = "container">
+	    <form class ="login-form col-lg-6 offset-lg-3" style="background:#1a1a37;margin-top:7.5%;box-shadow: 1.5px 1.5px 5px 5px #333333;border-radius:2.5%;">
+	        <div class = "row justify-content-center" ><img style="margin-top:10%;" src="../public/images/logo.png"></div>
+	        <p>&nbsp;</p>
+	
 
-        <div class = "login-form">
-            <div class = "row justify-content-center"><h3 style="color:white;">L O G I N</h3></div>
-            <p>&nbsp;</p>
+	        <div class = "login-form">
+	            <div class = "row justify-content-center"><h3 style="color:white;">L O G I N</h3></div>
+	            <p>&nbsp;</p>
+	
 
-            <div class = "row justify-content-center">
-                    <div class="col-lg-8 col-md-8 col-sm-8">
-                            <div class="input-group">
-                              <div class="input-group-prepend" >
-                                <span class="input-group-text" ><i class="fas fa-user" style="color:#1a1a37"></i></span>
-                              </div>
-                              <input name="email" type="text" class="form-control" placeholder="ID"  required>
-                            </div>
-                    </div>
-                </div>
-            </div>
+	            <div class = "row justify-content-center">
+	                    <div class="col-lg-8 col-md-8 col-sm-8">
+	                            <div class="input-group">
+	                              <div class="input-group-prepend" >
+	                                <span class="input-group-text" ><i class="fas fa-user" style="color:#1a1a37"></i></span>
+	                              </div>
+	                              <input type="text" class="form-control" placeholder="ID"  required>
+	                            </div>
+	                    </div>
+	                </div>
+	            </div>
+	
 
-            <p>&nbsp;</p>
+	            <p>&nbsp;</p>
+	
 
-            <div class = "row  justify-content-center" >
-                    <div class="col-lg-8 col-md-8 col-sm-8">
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key" style="color:#1a1a37"></i></span>
-                              </div>
-                              <input name="password" type="password" class="form-control"placeholder="Password"  required>
-                            </div>
-                    </div>
-            </div>
+	            <div class = "row  justify-content-center" >
+	                    <div class="col-lg-8 col-md-8 col-sm-8">
+	                            <div class="input-group">
+	                              <div class="input-group-prepend">
+	                                <span class="input-group-text"><i class="fas fa-key" style="color:#1a1a37"></i></span>
+	                              </div>
+	                              <input type="password" class="form-control"placeholder="Password"  required>
+	                            </div>
+	                    </div>
+	            </div>
+	
 
-            <p>&nbsp;</p>
+	            <p>&nbsp;</p>
+	
 
-            <div class = "row justify-content-center"> <input class="btn btn-warning" type="submit" value="LOGIN"></div>
-           
-           <p>&nbsp;</p>
+	           <div class = "row justify-content-center"> <a href="home" class="btn btn-warning">LOGIN</a></div>
+	           
+	           <p>&nbsp;</p>
+	
 
-           <div class = "row justify-content-center"><p style=" color:white;">
-            <a href ="find_id" style="color:#ffbc3b"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd"style="color:#ffbc3b">비밀번호
-            </a>를 잃어버리셨다면?</p>
-        </div>
+	           <div class = "row justify-content-center"><p style=" color:white;">
+	            <a href ="find_id.html" style="color:#ffbc3b" data-toggle="modal" data-target="#IdModal"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd.html"style="color:#ffbc3b"data-toggle="modal" data-target="#pwdModal">비밀번호
+	            </a>를 잃어버리셨다면?</p>
+	        </div>
+	        
+	        <!-- Modal -->
+	        <div class="modal fade" id="IdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	          <div class="modal-dialog modal-dialog-centered" role="document">
+	            <div class="modal-content">
+	              <div class="modal-header">
+	                <h5 class="modal-title" id="IdModal">아이디 찾기</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                  <span aria-hidden="true">&times;</span>
+	                </button>
+	              </div>
+	              <div class="modal-body">
+	                  <div class = "row  justify-content-center" style = "margin:5%;" >
+	                      <div class="col-lg-8 col-md-8 col-sm-8">
+	                              <div class="input-group">
+	                                <div class="input-group-prepend">
+	                                  <span class="input-group-text"><i class="fas fa-birthday-cake" style="color:#1a1a37"></i></span>
+	                                </div>
+	                                <input type="text" class="form-control"placeholder="생년월일 8자리"  required>
+	                              </div>
+	                      </div>
+	
 
-        <div class = "row justify-content-center">
+	              </div>
+	                <div class = "row  justify-content-center"style = "margin:5%;" >
+	                  <div class="col-lg-8 col-md-8 col-sm-8">
+	                          <div class="input-group">
+	                            <div class="input-group-prepend">
+	                              <span class="input-group-text"><i class="fas fa-phone" style="color:#1a1a37"></i></span>
+	                            </div>
+	                            <input type="text" class="form-control"placeholder="전화번호"  required>
+	                          </div>
+	                  </div>
+	          </div>
+	              </div>
+	              <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                <!-- <script>
+	                  var user = ["허예은"];
+	                  var id = ["loveiksuplorer"];
+	                    function btn(){
+	                      alert(user[0]+'의 아이디는 '+id[0]+'입니다.');
+	                    }
+	                  </script> -->
+	                <button type="button" class="btn btn-warning" id="acceptBtn" onclick = "javascript:btn()">확인</button>
+	                
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	
 
-          <p style="color:white;">
-          <i class="fas fa-heart" style="color:#ffbc3b">&nbsp;</i>
-          아직 회원이 아니시라면 <i class="fas fa-heart" style="color:#ffbc3b">&nbsp;</i></p>
-      </div>
+	        <!-- Modal -->
+	        <div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+	            <div class="modal-dialog modal-dialog-centered" role="document">
+	              <div class="modal-content">
+	                <div class="modal-header">
+	                  <h5 class="modal-title" id="pwdModal">비밀번호 찾기</h5>
+	                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                  </button>
+	                </div>
+	                <div class="modal-body">
+	                    <div class = "row  justify-content-center" style = "margin:5%;" >
+	                        <div class="col-lg-8 col-md-8 col-sm-8">
+	                                <div class="input-group">
+	                                  <div class="input-group-prepend">
+	                                    <span class="input-group-text"><i class="fas fa-user" style="color:#1a1a37"></i></span>
+	                                  </div>
+	                                  <input type="text" class="form-control"placeholder="아이디" required>
+	                                </div>
+	                        </div>
+	  
+	                </div>
+	
 
-      <div class = "row justify-content-center">
-        <a href="register" class="btn btn-outline-warning" style="margin-bottom:10%;">SIGN UP</a>
-      </div>
-        </form>
-        
-  
-       
+	                <div class = "row  justify-content-center" style = "margin:5%;" >
+	                    <div class="col-lg-8 col-md-8 col-sm-8">
+	                            <div class="input-group">
+	                              <div class="input-group-prepend">
+	                                <span class="input-group-text"><i class="fas fa-birthday-cake" style="color:#1a1a37"></i></span>
+	                              </div>
+	                              <input type="text" class="form-control"placeholder="생년월일 8자리" required>
+	                            </div>
+	                    </div>
+	
+
+	            </div>
+	                  <div class = "row  justify-content-center"style = "margin:5%;" >
+	                    <div class="col-lg-8 col-md-8 col-sm-8">
+	                            <div class="input-group">
+	                              <div class="input-group-prepend">
+	                                <span class="input-group-text"><i class="fas fa-phone" style="color:#1a1a37"></i></span>
+	                              </div>
+	                              <input type="text" class="form-control"placeholder="전화번호"  required>
+	                            </div>
+	                    </div>
+	            </div>
+	                </div>
+	                <div class="modal-footer">
+	                  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	                  <!-- <script>
+	                    var user = ["허예은"];
+	                    var id = ["loveiksuplorer"];
+	                      function btn(){
+	                        alert(user[0]+'의 아이디는 '+id[0]+'입니다.');
+	                      }
+	                    </script> -->
+	                  <button type="button" class="btn btn-warning" id="acceptBtn" onclick = "javascript:btn()">확인</button>
+	                  
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	  
+	
+
+	        <div class = "row justify-content-center">
+	
+
+	            <p style="color:white;">
+	            <i class="fas fa-heart" style="color:#ffbc3b">&nbsp;</i>
+	            아직 회원이 아니시라면 <i class="fas fa-heart" style="color:#ffbc3b">&nbsp;</i></p>
+	        </div>
+	
+
+	
+
+	        
+	        <div class = "row justify-content-center">
+	                <a href="register" class="btn btn-outline-warning" style="margin-bottom:10%;">SIGN UP</a>
+	        </div>
+	
+
+	        </div>
+	
+
+	    </form>
+	
+
+	</div>
+	        
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+	</body>   
+	</html>
 
 
-        
-        
-
-        </div>
-
-    </form>
-
-</div>
-        
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
-</body>   
-</html>
