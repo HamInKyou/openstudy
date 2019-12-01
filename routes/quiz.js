@@ -10,7 +10,7 @@ router.post('/create', isLoggedIn, async (req, res, next) => {
             name,
             content,
             url,
-            owner : req.user.id,
+            userId : req.user.id,
             ownerAnswerId,            
         });
         if(ownerAnswerId){
