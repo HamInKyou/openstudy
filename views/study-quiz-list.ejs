@@ -47,42 +47,29 @@
     var num =<%-num %>;
     console.log(num);
 
-    var subjectName = 'OpenSource Project';
-    var studyIntroduce = '스터디 소개글 여기에 넣기~';
+    var subjectName = study.name;
+    var studyIntroduce = study.info;
+    var date = board.deadline.split(' ',1)[0];
+    console.log(date);
 
-    var mon = 11;
+    var mon = date.split('-',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = 11;
-    var year = 2019;
+    var day = date.split('-',3)[2];
+    var year = date.split('-',3)[0];
 
-    var studyContentsParent = 'Polynomial and sparse matrix';
-    var studyContentsParentWeek = 4;
-    var studyContents = ["다항식", "희소 행렬", "효율적인 희소행렬 표현", "배열의 표현", "스트링 추상 테이터 타입"];
+    var studyContentsParent = board.name;
+    var studyContentsParentWeek = board.week;
+    var studyContents = board.info;
 
-    function makeStudyContentsList() {
-      for (var i = 0, item; item = studyContents[i]; i++) {
-        document.write('<li>' + item + '</li>')
-      }
-    }
-
-    var quizArray = [];
-
-    for (var i = 0; i < 50; i++) {
-      quizArray.push({
-        "quizTitle": i + "번째 퀴즈 타이틀",
-        "quizSubject": "퀴즈과목",
-        "name": "유저이름",
-        "Date": "00-00-00"
-      });
-    }
+    var quizArray = quiz;
 
     function outputQuizList() {
-      for (var i = quizArray.length - 1; i >= 0; i--) {
+      for (var i = 0; i < 10; i++) {
         document.write('<tr data-toggle="modal" data-target="#postModal" href="#">')
-        document.write('<th scope="row">' + i + '</th>')
-        document.write('<td><a href="study-quiz-solve" id="hover">' + quizArray[i].quizTitle + '</a></td>')
-        document.write('<td>' + quizArray[i].name + '</td>')
-        document.write('<td>' + quizArray[i].Date + '</td>')
+        document.write('<th scope="row">' + quizArray[i].id + '</th>')
+        document.write('<td><a href="study-quiz-solve" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td>' + quizArray[i].owner + '</td>')
+        document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
     }
@@ -167,7 +154,7 @@
           <ul class="list-styled mb-5">
             <!--studyContents 리스트화해서 뿌려주기-->
             <script>
-              makeStudyContentsList();
+              document.write('<li>' + studyContents + '</li>')
             </script>
           </ul>
         </div>
@@ -218,17 +205,11 @@
       <!-- page navigation -->
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
           <li class="page-item active" aria-current="page">
             <a class="page-link" href="#" style="background:ffbc3b;">1 <span class="sr-only">(current)</span></a>
           </li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
         </ul>
       </nav>
 
