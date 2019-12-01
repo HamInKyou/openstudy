@@ -32,7 +32,7 @@ router.post('/submit/:quizId', isLoggedIn, async (req, res, next) => {
             name,
             content,
             url,
-            owner : req.user.id,
+            userId : req.user.id,
         });
         const exQuiz = await Quiz.findOne({where:{id:req.params.quizId}});
         exQuiz.addAnswer(answer);
