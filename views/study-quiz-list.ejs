@@ -64,15 +64,30 @@
     var studyContents = board.info;
 
     var quizArray = quiz;
+    var totalPage = parseInt(num/10)+1;
+    console.log(totalPage);
 
     function outputQuizList() {
-      for (var i = 0; i < 10; i++) {
-        document.write('<tr data-toggle="modal" data-target="#postModal" href="#">')
+      for (var i = 0; i < quizArray.length; i++) {
+        document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
-        document.write('<td><a href="study-quiz-solve" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td><a href="/study-quiz-solve/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
         document.write('<td>' + quizArray[i].owner + '</td>')
         document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
+      }
+    }
+
+    function makePageNav() {
+      for(var i = 1; i <= totalPage; i++ ){
+        if(i==page){
+          document.write('<li class="page-item active" aria-current="page">');
+          document.write('<a class="page-link" href="/study-quiz-list/1/'+i+'" style="background:ffbc3b;">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('</li>');
+        }
+        else{
+          document.write('<li class="page-item"><a class="page-link" href="/study-quiz-list/1/'+i+'">'+i+'</a></li>');
+        }
       }
     }
   </script>
@@ -100,8 +115,7 @@
       <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="my-calendar">MY Calendar</a>
-        <a class="dropdown-item" href="my-test-post">MY Calendar</a>
-        <a class="dropdown-item" href="#">개인정보 설정</a>
+        <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
         <a class="dropdown-item" href="#">로그아웃</a>
       </div>
     </div>
@@ -208,11 +222,9 @@
       <!-- page navigation -->
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#" style="background:ffbc3b;">1 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <script>
+            makePageNav();  
+          </script>
         </ul>
       </nav>
 
