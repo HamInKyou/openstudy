@@ -39,9 +39,9 @@ router.get('/my_test', (req, res, next) => {
 router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    const quiz = await Quiz.findAll({where : {boardId : boardId}});
+    const quiz = await Quiz.findAll({where : {owner : req.user.id}});
     const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]}, {where:{owner:req.user.id}});
-    res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), num : quiz.length });
+    res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), num : quiz.length, page : pageId });
   }catch(err){
     console.error(err);
     next(err);
@@ -70,9 +70,10 @@ router.get('/my-test-solve-particular/:quizId', async(req, res, next) => {
 router.get('/my-test-solve/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    const quiz = await Quiz.findAll({where : {boardId : boardId}});
+    // const answer = await Answer.findAll({where : {id : req.user.id}}).quizId;
+    const quiz = await Quiz.findAll();
     const exQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]});
-    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), num : quiz.length });
+    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), num : quiz.length, page : pageId });
   }catch(err){
     console.error(err);
     next(err);
@@ -170,6 +171,7 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
       board : JSON.stringify(exBoard),
       quiz : JSON.stringify(exQuiz),
       num : quiz.length,
+      page : pageId,
     });
   }catch(err){
     console.error(err);
