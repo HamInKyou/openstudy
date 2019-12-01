@@ -25,25 +25,16 @@
     var page =<%-page %>;
     console.log(page);
 
-    var quizArray = [];
-
-    for (var i = 0; i < 50; i++) {
-      quizArray.push({
-        "quizTitle": i + "번째 퀴즈 타이틀",
-        "quizSubject": "퀴즈과목",
-        "name": "유저이름",
-        "Date": "00-00-00"
-      });
-    }
+    var quizArray = quiz.rows;
 
     function outputQuizList() {
-      for (var i = quizArray.length - 1; i >= 0; i--) {
+      for (var i = 0; i < 10; i++) {
         document.write('<tr>')
-        document.write('<th scope="row">' + i + '</th>')
-        document.write('<td><a href="my-test-solve-particular" id="hover">' + quizArray[i].quizTitle + '</a></td>')
-        document.write('<td>' + quizArray[i].quizSubject + '</td>')
-        document.write('<td>' + quizArray[i].name + '</td>')
-        document.write('<td>' + quizArray[i].Date + '</td>')
+        document.write('<th scope="row">' + quizArray[i].id + '</th>')
+        document.write('<td><a href="my-test-solve-particular" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td>' + quizArray[i].boardId + '</td>')
+        document.write('<td>' + quizArray[i].owner + '</td>')
+        document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
     }
