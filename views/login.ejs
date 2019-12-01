@@ -67,10 +67,125 @@
            <p>&nbsp;</p>
 
            <div class = "row justify-content-center"><p style=" color:white;">
-            <a href ="find_id" style="color:#ffbc3b"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd"style="color:#ffbc3b">비밀번호
-            </a>를 잃어버리셨다면?</p>
-        </div>
+						<a href ="find_id.html" style="color:#ffbc3b" data-toggle="modal" data-target="#IdModal"><i class="fas fa-exclamation-circle">&nbsp;</i>아이디</a> / <a href ="find_pwd.html"style="color:#ffbc3b"data-toggle="modal" data-target="#pwdModal">비밀번호
+						</a>를 잃어버리셨다면?</p>
+				</div>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="IdModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="IdModal">아이디 찾기</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+									<div class = "row  justify-content-center" style = "margin:5%;" >
+											<div class="col-lg-8 col-md-8 col-sm-8">
+															<div class="input-group">
+																<div class="input-group-prepend">
+																	<span class="input-group-text"><i class="fas fa-birthday-cake" style="color:#1a1a37"></i></span>
+																</div>
+																<input type="text" class="form-control"placeholder="생년월일 8자리"  required>
+															</div>
+											</div>
 
+
+							</div>
+								<div class = "row  justify-content-center"style = "margin:5%;" >
+									<div class="col-lg-8 col-md-8 col-sm-8">
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i class="fas fa-phone" style="color:#1a1a37"></i></span>
+														</div>
+														<input type="text" class="form-control"placeholder="전화번호"  required>
+													</div>
+									</div>
+					</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+								<!-- <script>
+									var user = ["허예은"];
+									var id = ["loveiksuplorer"];
+										function btn(){
+											alert(user[0]+'의 아이디는 '+id[0]+'입니다.');
+										}
+									</script> -->
+								<button type="button" class="btn btn-warning" id="acceptBtn" onclick = "javascript:btn()">확인</button>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="pwdModal">비밀번호 찾기</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+										<div class = "row  justify-content-center" style = "margin:5%;" >
+												<div class="col-lg-8 col-md-8 col-sm-8">
+																<div class="input-group">
+																	<div class="input-group-prepend">
+																		<span class="input-group-text"><i class="fas fa-user" style="color:#1a1a37"></i></span>
+																	</div>
+																	<input type="text" class="form-control"placeholder="아이디" required>
+																</div>
+												</div>
+	
+								</div>
+
+
+								<div class = "row  justify-content-center" style = "margin:5%;" >
+										<div class="col-lg-8 col-md-8 col-sm-8">
+														<div class="input-group">
+															<div class="input-group-prepend">
+																<span class="input-group-text"><i class="fas fa-birthday-cake" style="color:#1a1a37"></i></span>
+															</div>
+															<input type="text" class="form-control"placeholder="생년월일 8자리" required>
+														</div>
+										</div>
+
+
+						</div>
+									<div class = "row  justify-content-center"style = "margin:5%;" >
+										<div class="col-lg-8 col-md-8 col-sm-8">
+														<div class="input-group">
+															<div class="input-group-prepend">
+																<span class="input-group-text"><i class="fas fa-phone" style="color:#1a1a37"></i></span>
+															</div>
+															<input type="text" class="form-control"placeholder="전화번호"  required>
+														</div>
+										</div>
+						</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+									<!-- <script>
+										var user = ["허예은"];
+										var id = ["loveiksuplorer"];
+											function btn(){
+												alert(user[0]+'의 아이디는 '+id[0]+'입니다.');
+											}
+										</script> -->
+									<button type="button" class="btn btn-warning" id="acceptBtn" onclick = "javascript:btn()">확인</button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+				
         <div class = "row justify-content-center">
 
           <p style="color:white;">
