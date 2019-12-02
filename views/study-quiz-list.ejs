@@ -82,11 +82,11 @@
       for(var i = 1; i <= totalPage; i++ ){
         if(i==page){
           document.write('<li class="page-item active" aria-current="page">');
-          document.write('<a class="page-link" href="/study-quiz-list/1/'+i+'" style="background:ffbc3b;">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('<a class="page-link" href="/study-quiz-list/'+ board.id +'/'+i+'" style="background:ffbc3b;">'+i+'<span class="sr-only">(current)</span>'+'</a>');
           document.write('</li>');
         }
         else{
-          document.write('<li class="page-item"><a class="page-link" href="/study-quiz-list/1/'+i+'">'+i+'</a></li>');
+          document.write('<li class="page-item"><a class="page-link" href="/study-quiz-list/'+ board.id +'/'+i+'">'+i+'</a></li>');
         }
       }
     }
@@ -180,19 +180,15 @@
 
       <!-- 게시글과 문제 post하기 위한 버튼-->
       <div class="col-lg-12">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-warning"
-            style="margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;">게시글 POST</button>
-          <button type="button" class="btn btn-warning" style=" margin-bottom:10%; width:200px;height:50px;">문제
-            POST</button>
-        </div>
+        <button type="button" class="btn btn-warning" style="margin-top:5%; width:200px;height:50px;"
+        onclick = "location.href='/quiz-post/'+ board.id">문제 POST</button>
       </div>
 
       <!-- 게시글과 문제 toggle 버튼-->
       <div class="col-lg-12 offset-10">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-outline-secondary "
-            style="margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;">게시글</button>
+          <button type="button" class="btn btn-outline-secondary " style="margin-bottom: 10% ;  width:100px;height:40px;"
+          onclick = "location.href='/study-post-list/'+ board.id">게시글</button>
           <button type="button" class="btn btn-secondary "
             style=" margin-bottom:10%; width:100px;height:40px;">문제</button>
         </div>
