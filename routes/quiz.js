@@ -4,15 +4,14 @@ const {Quiz} = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 router.post('/create', isLoggedIn, async (req, res, next) => {
-    const {content, url, ownerAnswerId, name, boardId} = req.body;
+    const {content, url, ownerAnswerId, name} = req.body;
     try{
         const quiz = await Quiz.create({
             name,
             content,
             url,
             owner : req.user.id,
-            ownerAnswerId,
-            boardId,            
+            ownerAnswerId            
         });
         const result = {
             res : "success",
