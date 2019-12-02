@@ -47,14 +47,14 @@ db.Post.belongsTo(db.Board);
 db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post);
 //submit board
-db.Board.hasOne(db.Submit);
+db.Board.hasMany(db.Submit);
 //post tag
 db.Post.hasMany(db.Tag);
 db.Tag.belongsTo(db.Post);
 //tag chatlog
-db.Tag.hasOne(db.Chatlog);
+db.Tag.hasMany(db.Chatlog);
 //user calendar
-db.User.hasOne(db.Calendar);
+db.User.hasMany(db.Calendar);
 //user tag
 db.User.belongsToMany(db.Tag,{
     as : 'enrolledTag',
@@ -67,16 +67,17 @@ db.Tag.belongsToMany(db.User,{
     through : 'userTag',
 });
 //user(owner) study
-db.User.hasMany(db.Study,{
-    foreignKey: 'owner'
-});
+db.User.hasMany(db.Study);
 //quiz answer
-db.Quiz.hasMany(db.Answer, {
-    as : 'Answer',
-});
-//user quiz answer
+db.Quiz.hasMany(db.Answer);
+
+//user quiz | answer
 db.User.hasMany(db.Quiz);
 db.Quiz.belongsTo(db.User);
 db.User.hasMany(db.Answer);
 db.Answer.belongsTo(db.User);
+///quiz board
+db.Board.hasMany(db.Quiz);
+db.Quiz.belongsTo(db.Board);
+
 module.exports = db;

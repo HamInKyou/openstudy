@@ -7,10 +7,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-        userId : {
-            type : DataTypes.INTEGER,
-            allowNull : false,
-        },
         title : {
             type : DataTypes.STRING(400),
              allowNull : false,
@@ -27,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             type :  DataTypes.STRING(400),
             allowNull : true,
         },
+        //userId
     },{
         timestamps : true,
         paranoid : true,

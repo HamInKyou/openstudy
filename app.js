@@ -20,10 +20,9 @@ const answerRouter = require('./routes/answer');
 const calendarRouter = require('./routes/calendars');
 const postRouter = require('./routes/posts');
 const boardRouter = require('./routes/board');
-const quizRouter = require('./routes/quiz');
-const answerRouter = require('./routes/answer');
 const commentRouter = require('./routes/comments');
 
+const makeDummyData = require('./routes/makeDummyData');
 // middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -63,6 +62,8 @@ app.use('/board', boardRouter);
 app.use('/quiz', quizRouter);
 app.use('/answer', answerRouter);
 app.use('/comment', commentRouter);
+
+app.use('/makeDummyData', makeDummyData);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

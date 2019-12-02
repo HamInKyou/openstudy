@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-        boardId : {
-            type : DataTypes.INTEGER,
-            allowNull : false,
-        },
         name : {
             type : DataTypes.STRING(100),
             allowNull : false,
@@ -27,6 +23,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : true,
             //답이 없는 문제일 수 도 있다.
         },
+        //boardId
+        //userId
     },{
         timestamps : true,
     });

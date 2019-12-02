@@ -6,14 +6,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-        userId : {
-            type : DataTypes.STRING(50),
+        nick : {
+            type : DataTypes.STRING(100),
             allowNull : false,
         },
         content : {
             type : DataTypes.STRING(200),
             allowNull : false,
         },
+        //userId
+        //tagId
     },{
         timestamps : true,
         paranoid : true,
