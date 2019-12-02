@@ -1,0 +1,21 @@
+.bg-primary {
+    background-color: #ffbc3b !important;
+  }
+
+  .week {
+    color:#343a40 !important;
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+  .h5{
+    margin-left:5%;
+  }
+
+  .form-control{
+    width:90%
+  }
+  .week{
+    margin-top:5%; 
+    font-weight:bold;
+  }

@@ -8,22 +8,26 @@
    
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/study-intro.css">
+   <link rel="stylesheet" href="/css/global.css">
+
+   
    <script>
     var studyInfo =<%-studyInfo %>;
     console.log(studyInfo);
 
   </script>
 </head>
-<body style="background:#e9ecef">
+<body>
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#" style = color:white;>
+      <a class="navbar-brand" href="#">
           <img src="../public/images/logo.png" height="30" alt="HOME">
       </a>
       
-      <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
-      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+      <a class="nav-link" href="home">HOME</a>
+      <a class="nav-link" href="#" >MYSTUDY</a>
+      <a class="nav-link active" href="#">OPENSTUDY</a>
   
       <div class="dropdown">
           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -38,7 +42,7 @@
       </div>
     </nav>
 
-    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+    <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <script>
                 var users = ['김용후', '김예지', '채예진', '함인규'];
@@ -137,7 +141,7 @@
     </div>
 
     <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
-        <p style = color:white;>Footer bar</p>      
+        <p> Footer bar</p>      
     </nav>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>

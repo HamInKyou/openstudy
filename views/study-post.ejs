@@ -1,4 +1,9 @@
 <!-- data 필요없는 화면-->
+<!-- study-post.html (게시글을 작성하는 html)
+- 주차별 정보 띄우기. (날짜, 몇주차인지, 제목, 세부 내용)
+- 여기도 게시글 | 문제 버튼 만들어 글을 게시할때는 게시글, 문제를 게시할때는 문제 버튼을 눌러 게시글의 종류 구별하기.
+- 제목 / 첨부파일 게시/ 내용 post -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -76,36 +81,18 @@
       
               <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="제목을 입력하세요.">
               <div class="input-group flex-nowrap">
-                    <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                    <span class="input-group-text" id="addon-wrapping"><i class="fas fa-file-upload"></i></span>
-                                  </div>
-                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-toggle="modal" data-target="#postModal">첨부하기</button>
-                        </div>
+                <div class="input-group flex-nowrap">
+                  <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile04"
+                          aria-describedby="inputGroupFileAddon04">
+                        <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
                       </div>
-                      
-                      <!-- Modal -->
-                      <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">파일 첨부</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              파일첨부
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-warning">Save changes</button>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="input-group-append">
+                        <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
                       </div>
+                    </div>
+                  </div>
 
                   </div>
               &nbsp;

@@ -162,7 +162,12 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
       },
       where: {
         boardId: req.params.boardId
-      }
+      },
+      include : {
+          model : User,
+          attributes : ['id', 'nick'],
+          raw : true
+      },
     });
     res.render('study-post-list', {
       posts: JSON.stringify(exPosts)
@@ -241,5 +246,24 @@ router.get('/quiz-post/:boardId', async(req,res,next) => {
     next(err);
   }
 }); 
+router.get('/quiz-post', (req, res, next) => {
+  res.render('quiz-post');
+});
+
+router.get('/chat/:tagId', async (req, res, next) => {
+  try{
+    //const tag = await Tag.findOne({where : { id : req.params.tagId}});
+   
+    // const chatlogs = await Chatlog
+    //const io = req.app.get('io');
+    //채팅로그, 태그정보들 가져와서 넘겨주기 
+   
+    //chat.ejs에서 처음 클라에서 소켓 접속
+    res.render('chat', {roomId : req.params.tagId});
+  } catch(err) {
+    console.error(err);
+    next(err);
+  }
+});
 
 module.exports = router;
