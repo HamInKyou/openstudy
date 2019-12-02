@@ -16,6 +16,18 @@
     #hover {
       color: #343a40;
     }
+    .page-item.active .page-link {
+      color: white !important;
+      background-color: #ffbc3b !important;
+      border-color: #ffbc3b !important;
+    }
+
+    .page-link {
+
+      color: #ffbc3b !important;
+      background-color: #fff;
+      border: 1px solid #dee2e6;
+    }
   </style>
   <script>
     var myQuiz =<%-myQuiz %>;
@@ -26,14 +38,29 @@
     console.log(page);
 
     var quizArray = myQuiz.rows;
+    var totalPage = parseInt(num/10)+1;
+    console.log(totalPage);
 
     function outputQuizList() {
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < quizArray.length; i++) {
         document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
-        document.write('<td><a href="my-test-post-particulara" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td><a href="/my-test-post-particular/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
         document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
+      }
+    }
+
+    function makePageNav() {
+      for(var i = 1; i <= totalPage; i++ ){
+        if(i==page){
+          document.write('<li class="page-item active" aria-current="page">');
+          document.write('<a class="page-link" href="/my-test-post/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('</li>');
+        }
+        else{
+          document.write('<li class="page-item"><a class="page-link" href="/my-test-post/'+i+'">'+i+'</a></li>');
+        }
       }
     }
   </script>
@@ -48,7 +75,7 @@
     </a>
 
     <!--다른 메뉴로 전환-->
-    <a class="nav-link" style=color:white;>HOME</a>
+    <a class="nav-link" href="/home" style=color:white;>HOME</a>
     <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
     <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
 
@@ -60,9 +87,8 @@
 
       <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
-        <a class="dropdown-item" href="my-test-post">MY TEST</a>
-        <a class="dropdown-item" href="#">개인정보 설정</a>
+        <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
         <a class="dropdown-item" href="#">로그아웃</a>
       </div>
     </div>
@@ -86,7 +112,8 @@
           <!--post랑 solve랑 전환하는 버튼-->
           <div class="row" style="margin-bottom: 3%; float:right;">
             <!--페이지 전환 고쳐야행-->
-            <button type="button" class="btn btn-outline-warning" onclick="href='my-test-solve'">내가 풀은 문제</button>
+            <button type="button" class="btn btn-outline-warning"
+            onclick="location.href='/my-test-solve/1'">내가 풀은 문제</button>
             <button type="button" class="btn btn-warning">내가 제출한 문제</button>
           </div>
 
@@ -117,11 +144,9 @@
   <!--게시글 쪽수 나타내고 변경할 수 있는 page navigation-->
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center ">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <script>
+            makePageNav();  
+        </script>
     </ul>
   </nav>
 

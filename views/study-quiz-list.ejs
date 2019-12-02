@@ -82,7 +82,7 @@
       for(var i = 1; i <= totalPage; i++ ){
         if(i==page){
           document.write('<li class="page-item active" aria-current="page">');
-          document.write('<a class="page-link" href="/study-quiz-list/'+ board.id +'/'+i+'" style="background:ffbc3b;">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('<a class="page-link" href="/study-quiz-list/'+ board.id +'/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
           document.write('</li>');
         }
         else{
@@ -102,7 +102,7 @@
     </a>
 
     <!--다른 메뉴로 전환-->
-    <a class="nav-link active" href="home" style=color:white;>HOME</a>
+    <a class="nav-link active" href="/home" style=color:white;>HOME</a>
     <a class="nav-link" href="#" style=color:#ffbc3b;>MYSTUDY</a>
     <a class="nav-link active" href="#" style=color:white;>OPENSTUDY</a>
 
@@ -114,7 +114,7 @@
 
       <!--드롭다운 내부 버튼들-->
       <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
         <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
         <a class="dropdown-item" href="#">로그아웃</a>
       </div>
