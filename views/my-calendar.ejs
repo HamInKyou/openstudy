@@ -21,12 +21,17 @@
    <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-timegrid/main.js'></script>
    <script>
 
+    // var mycalendars = <%-myCalendars-%>;
+    // console.log(myCalendar);
+    // var now = <%-now-%>;
+    // cosole.log(now);
+
     document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
-      defaultView: 'resourceTimeGridDay',
+      defaultView: 'dayGridMonth',
       defaultDate: '2019-11-11',
       editable: true,
       selectable: true,
@@ -34,7 +39,7 @@
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
+      
       },
       views: {
         resourceTimeGridTwoDay: {
