@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Post,User,Study,Board} = require('../models');
+const {Post, User, Study, Board, Quiz, Answer} = require('../models');
 
 
 /* GET home page. */
@@ -36,12 +36,75 @@ router.get('/my_test', (req, res, next) => {
   res.render('my_test');
 });
 
-router.get('/my-test-solve', (req, res, next) => {
-  res.render('my-test-solve');
+router.get('/my-test-post/:pageId', async(req, res, next) => {
+  try{
+    const pageId = req.params.pageId;
+    const quiz = await Quiz.findAll({where : {owner : req.user.id}});
+    const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]}, {where:{owner:req.user.id}});
+    res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), num : quiz.length, page : pageId });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
-router.get('/my-test-post', (req, res, next) => {
-  res.render('my-test-post');
+router.get('/my-test-solve-particular/:quizId', async(req, res, next) => {
+  try{
+    const quizId = req.params.quizId;
+    const answerPost = await Answer.findAll({where : {quizId : quizId}});
+    const quizPost = await Quiz.findOne({where : {id : quizId}});
+    let quizAnswer;
+    if(quizPost.ownerAnswerId){
+      quizAnswer = await Answer.findOne({where : {id : quizPost.ownerAnswerId}});
+    }else{
+      quizAnswer = 'No Answer';
+    }
+    const exBoard = await Board.findOne({where : {id : quizPost.boardId}});
+    const subject = await Study.findOne({where : {id : exBoard.studyId}, attributes : ['name']});
+    res.render('my-test-solve-particular', {myanswer : JSON.stringify(answerPost), quiz : JSON.stringify(quizPost), answer : JSON.stringify(quizAnswer), subject : JSON.stringify(subject)});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/my-test-solve/:pageId', async(req, res, next) => {
+  try{
+    const pageId = req.params.pageId;
+    // const answer = await Answer.findAll({where : {id : req.user.id}}).quizId;
+    const quiz = await Quiz.findAll();
+    const exQuiz = await Quiz.findAndCountAll({
+    /*  include : [{
+        model : User,
+        attributes : ['id', 'nick'],
+        raw : true
+      }, {
+        model : Study,
+        attributes : ['name'],
+        raw : true
+         }]}, {*/
+        offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]
+      }
+    );
+    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), num : quiz.length, page : pageId,  });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
+  try{
+    const quizId = req.params.quizId;
+    const quizPost = await Quiz.findOne({where : {id : quizId}});
+    const exBoard = await Board.findOne({where : {id : quizPost.boardId}});
+    const subject = await Study.findOne({where : {id : exBoard.studyId}, attributes : ['name']});
+    const answerPost = await Answer.findAll({where : {id : quizId}});
+    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), subject : JSON.stringify(subject), answer : JSON.stringify(answerPost)});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
 router.get('/register', (req, res, next) => {
@@ -49,6 +112,7 @@ router.get('/register', (req, res, next) => {
     msg: req.flash('msg')
   });
 });
+
 router.get('/study-intro/:studyId', async (req, res, next) => {
   try {
     const studyId = req.params.studyId;
@@ -67,6 +131,7 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-list', async (req, res, next) => {
   //mystudylist
   try {
@@ -86,9 +151,15 @@ router.get('/study-list', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-post-list/:boardId', async (req, res, next) => {
   try {
     const exPosts = await Post.findAll({
+      include : {
+        model : User,
+        attributes : ['id', 'nick'],
+        raw : true
+      },
       where: {
         boardId: req.params.boardId
       },
@@ -106,12 +177,49 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
     next(err);
   }
 });
+
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
-router.get('/study-quiz-list', (req, res, next) => {
-  res.render('study-quiz-list');
+
+router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
+  try{
+    const boardId = req.params.boardId;
+    const pageId = req.params.pageId;
+    const exBoard = await Board.findOne({where : {id : boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    const quiz = await Quiz.findAll({where : {boardId : boardId}});
+    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}});
+    res.render('study-quiz-list', {
+      study : JSON.stringify(exStudy),
+      board : JSON.stringify(exBoard),
+      quiz : JSON.stringify(exQuiz),
+      num : quiz.length,
+      page : pageId,
+    });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
+
+router.get('/study-quiz-solve/:quizId', async(req, res, next) => {
+  try{
+    const quizId = req.params.quizId;
+    const exQuiz = await Quiz.findOne({where : {id : quizId}});
+    const exBoard = await Board.findOne({where : {id : exQuiz.boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    res.render('study-quiz-solve', {
+      study : JSON.stringify(exStudy),
+      board : JSON.stringify(exBoard),
+      quiz : JSON.stringify(exQuiz),
+    });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
 router.get('/study-week/:studyId', async (req, res, next) => {
   try {
     const exBoards = await Board.findAll({
@@ -127,21 +235,21 @@ router.get('/study-week/:studyId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/quiz-post/:boardId', async(req,res,next) => {
+  try{
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    res.render('quiz-post', { board : JSON.stringify(exBoard), study : JSON.stringify(exStudy) });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+}); 
 router.get('/quiz-post', (req, res, next) => {
   res.render('quiz-post');
 });
-// tag 선택 (채팅방 선택)
-// router.get('/tags', async (req, res, next) => {
-//   try{
-//     const exUser = await User.findOne({where : { id : req.user.id}});
-//     const tags = await exUser.getEnrolledTag({raw : true}); 
 
-//     res.render('chat', { tags : JSON.stringify(tags) });
-//   } catch(err) {
-//     console.error(err);
-//     next(err);
-//   }
-// });
 router.get('/chat/:tagId', async (req, res, next) => {
   try{
     //const tag = await Tag.findOne({where : { id : req.params.tagId}});

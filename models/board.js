@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         info : {
             type : DataTypes.STRING(100),
-            allowNull : true,
-        }
+            allowNull : false,
+        },
     },{
         timestamps : true,
         paranoid : true,

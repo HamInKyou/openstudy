@@ -20,6 +20,8 @@ const answerRouter = require('./routes/answer');
 const calendarRouter = require('./routes/calendars');
 const postRouter = require('./routes/posts');
 const boardRouter = require('./routes/board');
+const quizRouter = require('./routes/quiz');
+const answerRouter = require('./routes/answer');
 const commentRouter = require('./routes/comments');
 
 // middleware setup
@@ -57,7 +59,9 @@ app.use('/quiz', quizRouter);
 app.use('/answer', answerRouter);
 app.use('/calendar',calendarRouter);
 app.use('/post', postRouter);
-app.use('/board',boardRouter);
+app.use('/board', boardRouter);
+app.use('/quiz', quizRouter);
+app.use('/answer', answerRouter);
 app.use('/comment', commentRouter);
 
 // catch 404 and forward to error handler

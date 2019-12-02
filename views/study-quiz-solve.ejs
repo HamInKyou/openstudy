@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <script>
+      var study = <%-study %>;
+      console.log(study);
+      var board = <%-board %>;
+      console.log(board);
+      var quiz = <%-quiz %>;
+      console.log(quiz);
+
+      var subjectName = study.name;
+      var studyIntroduce = study.info;
+      var date = board.deadline.split(' ', 1)[0];
+      console.log(date);
+
+      var mon = date.split('-', 3)[1];
+      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      var day = date.split('-', 3)[2];
+      var year = date.split('-', 3)[0];
+
+      var studyContentsParent = board.name;
+      var studyContentsParentWeek = board.week;
+      var studyContents = board.info;
+
+      var quizArray = quiz;
+   </script>
+
+</head>
+
+
+<body style="background:#e9ecef">
+
+   <!--nav bar 시작-->
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="home" style=color:white;>
+         <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+
+      <!--다른 메뉴로 전환-->
+      <a class="nav-link active" href="/home" style=color:white;>HOME</a>
+      <a class="nav-link" href="#" style=color:#ffbc3b;>MYSTUDY</a>
+      <a class="nav-link active" href="#" style=color:white;>OPENSTUDY</a>
+
+      <!--우측상단 드롭다운버튼-->
+      <div class="dropdown">
+         <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+         </button>
+
+         <!--드롭다운 내부 버튼들-->
+         <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
+         </div>
+      </div>
+
+   </nav>
+
+   <!--jumbotron 시작-->
+   <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+      <div class="container">
+
+         <!--row class 시작-->
+         <div class="row">
+            <div class="col-lg-10">
+               <!--studyName 변수로 설정하여 변화가능-->
+               <script>
+                  document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> ' +
+                     subjectName + '</p>');
+               </script>
+            </div>
+         </div>
+         <!--row class 끝-->
+
+         <!--studyIntroduce 변수로 스터디 소개글 변경가능-->
+         <script>
+            document.write('<p class="lead" style="margin-top: 1%;">' + studyIntroduce + '</p>');
+         </script>
+
+      </div>
+   </div>
+   <!--jumbotron 끝-->
+
+   <!--본문 내용 시작-->
+   <section class="section" style="height:1000px;">
+      <div class="container">
+
+         <!-- notice content 시작-->
+         <div class="d-flex">
+            <div class="text-center mr-4">
+               <!-- 노란네모 내용-->
+               <div class="p-4 bg-warning text-white">
+                  <!-- 년, 월, 일 띄워주기-->
+                  <script>
+                     document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+                  </script>
+               </div>
+            </div>
+
+            <!--주차 설명-->
+            <div>
+               <script>
+                  document.write('<h3 class="mb-4">' + studyContentsParentWeek + '주차 ' + studyContentsParent + '</h3>');
+               </script>
+               <ul class="list-styled mb-5">
+                  <script>
+                    document.write('<li>' + studyContents + '</li>')
+                  </script>
+               </ul>
+            </div>
+         </div>
+         <!-- notice content 끝-->
+
+         <p>
+            <h3><script>document.write(quiz.name)</script></h3>
+         </p>
+
+
+         <table class="table table-hover">
+            <thead>
+               <tr>
+                  <th scope="col" style="width:20%;">작성자</th>
+                  <th scope="col" style="width:60%;">과목</th>
+                  <th scope="col" style="width:20%;">작성일</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><script>document.write(quiz.owner)</script></td>
+                  <td><script>document.write(quiz.boardId)</script></td>
+                  <td><script>document.write(quiz.createdAt.split('T',1)[0])</script></td>
+               </tr>
+               <tr>
+                  <td colspan="3">
+                     <div style="overflow:scroll;height:150px; padding:10px;">
+                        <script>document.write(quiz.content)</script>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+
+         <div class="row">
+            <button type="button" class="btn btn-warning mx-auto" style="width: 30%;" data-toggle="modal"
+               data-target="#postModal" href="#">답 첨부하기</button>
+         </div>
+
+         <!-- modal -->
+         <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+               <div class="modal-content rounded-0 border-0 p-4">
+                  <div class="modal-header border-0">
+                     <p>
+                        <h3>답 첨부하기</h3>
+                     </p>
+
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+
+                  <div class="modal-body">
+                     <form action="#" class="row">
+                        <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
+                           style="height:75%;"></textarea>
+
+                        <div class="input-group flex-nowrap">
+                           <div class="input-group">
+                              <div class="custom-file">
+                                 <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                    aria-describedby="inputGroupFileAddon04">
+                                 <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
+                              </div>
+                              <div class="input-group-append">
+                                 <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
+                              </div>
+                           </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
+                     </form>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--본문 내용 끝-->
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>
+
+</html>

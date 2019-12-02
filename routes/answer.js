@@ -3,10 +3,9 @@ const router = express.Router();
 const {Quiz, Answer} = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
-//비동기로 사용
-// 처음 문제 생성할 때 정답 등록하는 용도
 router.post('/create' , isLoggedIn,  async (req, res, next) => {
-    const {name, content, url} = req.body;
+    //비동기로 사용
+    const {name, content, url, quizId} = req.body;
     try{
         const answer = await Answer.create({
             name,
@@ -24,6 +23,7 @@ router.post('/create' , isLoggedIn,  async (req, res, next) => {
         next(err);
     }
 });
+
 //이미 존재하는 퀴즈에 정답 제출하는 용도
 router.post('/submit/:quizId', isLoggedIn, async (req, res, next) => {
     const {name, content, url} = req.body;
