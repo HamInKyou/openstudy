@@ -18,19 +18,13 @@
     var studyIntroduce = '스터디 소개글 여기에 넣기~';
 
     var mon = 11;
-    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = 11;
-    var year = 2019;
+      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      var day = 12;
+      var year = 2019;
 
-    var studyContentsParent = 'Polynomial and sparse matrix';
-    var studyContentsParentWeek = 4;
-    var studyContents = ["다항식", "희소 행렬", "효율적인 희소행렬 표현", "배열의 표현", "스트링 추상 테이터 타입"];
-
-    function makeStudyContentsList() {
-      for (var i = 0, item; item = studyContents[i]; i++) {
-        document.write('<li>' + item + '</li>')
-      }
-    }
+      var studyContentsParent = board.name;
+      var studyContentsParentWeek = board.week;
+      var studyContents = board.info;
   </script>
 </head>
 
@@ -114,7 +108,7 @@
           <ul class="list-styled mb-5">
             <!--studyContents 리스트화해서 뿌려주기-->
             <script>
-              makeStudyContentsList();
+              document.write('<li>' + studyContents + '</li>')
             </script>
           </ul>
         </div>
