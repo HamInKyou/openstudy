@@ -59,8 +59,8 @@
 
          <!--드롭다운 내부 버튼들-->
          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
-            <a class="dropdown-item" href="#">개인정보 설정</a>
+            <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
             <a class="dropdown-item" href="#">로그아웃</a>
          </div>
       </div>
@@ -123,7 +123,7 @@
          <!-- notice content 끝-->
 
          <p>
-            <h3>허예은이 낸 ox 문제</h3>
+            <h3><script>document.write(quiz.name)</script></h3>
          </p>
 
 
@@ -137,20 +137,14 @@
             </thead>
             <tbody>
                <tr>
-                  <td>허예은</td>
-                  <td>오픈소스</td>
-                  <td>2019-10-10</td>
+                  <td><script>document.write(quiz.owner)</script></td>
+                  <td><script>document.write(quiz.boardId)</script></td>
+                  <td><script>document.write(quiz.createdAt.split('T',1)[0])</script></td>
                </tr>
                <tr>
                   <td colspan="3">
                      <div style="overflow:scroll;height:150px; padding:10px;">
-
-                        문제<br />
-                        <br />
-                        문제<br />
-                        <br />
-                        문제<br />
-                        <br />
+                        <script>document.write(quiz.content)</script>
                      </div>
                   </td>
                </tr>
