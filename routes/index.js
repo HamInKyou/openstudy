@@ -39,9 +39,8 @@ router.get('/my_test', (req, res, next) => {
 router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    const quiz = await Quiz.findAll({where : {userId : req.user.id}});
     const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]}, {where:{owner:req.user.id}});
-    res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), num : quiz.length, page : pageId });
+    res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), page : pageId });
   }catch(err){
     console.error(err);
     next(err);
@@ -80,10 +79,6 @@ router.get('/my-test-solve-particular/:answerId', async(req, res, next) => {
 router.get('/my-test-solve/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    const answer = await Answer.findAll({include : [{
-      model : Quiz,
-      raw : true }]
-    , where : {userId : req.user.id}});
     const exQuiz = await Answer.findAndCountAll({include : [{
       model : Quiz,
       raw : true, include : [{
@@ -97,7 +92,7 @@ router.get('/my-test-solve/:pageId', async(req, res, next) => {
       }], where : {userId : req.user.id}, offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]
       }
     );
-    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), num : answer.length, page : pageId });
+    res.render('my-test-solve', { quiz : JSON.stringify(exQuiz), page : pageId });
   }catch(err){
     console.error(err);
     next(err);
@@ -205,13 +200,11 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
     const pageId = req.params.pageId;
     const exBoard = await Board.findOne({where : {id : boardId}});
     const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
-    const quiz = await Quiz.findAll({where : {boardId : boardId}});
     const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}});
     res.render('study-quiz-list', {
       study : JSON.stringify(exStudy),
       board : JSON.stringify(exBoard),
       quiz : JSON.stringify(exQuiz),
-      num : quiz.length,
       page : pageId,
     });
   }catch(err){
