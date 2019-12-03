@@ -32,6 +32,7 @@ router.get('/my-calendar', (req, res, next) => {
   res.render('my-calendar');
 });
 
+
 router.get('/my_test', (req, res, next) => {
   res.render('my_test');
 });
@@ -132,6 +133,29 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
   }
 });
 
+router.get('/openstudy-intro/:studyId', async (req, res, next) => {
+  try {
+    const studyId = req.params.studyId;
+    const exStudy = await Study.findOne({
+      where: {
+        id: studyId
+      }
+    });
+    const result = JSON.stringify(exStudy);
+
+    res.render('openstudy-intro', {
+      studyInfo: result
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/add-outline', (req, res, next) => {
+  res.render('add-outline');
+});
+
 router.get('/study-list', async (req, res, next) => {
   //mystudylist
   try {
@@ -144,6 +168,26 @@ router.get('/study-list', async (req, res, next) => {
     const result = JSON.stringify(enrolledStudies);
 
     res.render('study-list', {
+      myStudies: result
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/mystudy-list', async (req, res, next) => {
+  //mystudylist
+  try {
+    const exUser = await User.findOne({
+      where: {
+        id: req.user.id
+      }
+    });
+    const enrolledStudies = await exUser.getEnrolledStudy({raw: true});
+    const result = JSON.stringify(enrolledStudies);
+
+    res.render('mystudy-list', {
       myStudies: result
     });
   } catch (err) {
