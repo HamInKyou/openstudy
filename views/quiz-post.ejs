@@ -30,22 +30,47 @@
 
     $(function () {
       var AnswerId = 0;
-      var imgurl = "0";
-      
+      var imgurl = "";
+      var imgsrcArray = new Array();
+      var sel_file;
+      var cnt = 1;
       //등록하면 바꿔주기
-      
+      $("#inputGroupFile04").change(function (e) {
+        console.log("uploader called");
+        var files = Array.prototype.slice.call(e.target.files);
+        files.forEach(element => {
+          // if (!element.type.match("imgae.*")) {
+          //   alert('이미지만 올릴 수 있습니다.');
+          //   return;
+          // }
+          console.log(element);
+
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $('#message').append($('<img>',{
+              id:'theImg' + cnt,
+              src : e.target.result
+            }));
+            cnt++;
+            imgsrcArray.push(e.target.result);
+            console.log(imgsrcArray);
+          };
+          reader.readAsDataURL(element)
+        });
+      });
+
       $("#submitBtn").click(function () {
         console.log('submit called');
         $.post("/quiz/create", {
             name: $("#subject").val(),
-            content: $("#message").val(),
-            ownerAnswerId : AnswerId,
-            url : imgurl,
-            boardId : board.id
+            content: $("#message").text(),
+            ownerAnswerId: AnswerId,
+            url: imgurl,
+            boardId: board.id
           },
           function (data, status) {
             alert(data.msg);
-            window.location.href='/study-quiz-list/'+board.id+'/1';
+            window.location.href = '/study-quiz-list/' + board.id + '/1';
           }
         );
       })
@@ -140,81 +165,80 @@
       <!-- notice content 끝-->
 
       <!--여기부터 퀴즈 제출관련 내용 시작-->
-        <input type="text" class="form-control mb-3" id="subject" name="name" placeholder="제목을 입력하세요.">
+      <input type="text" class="form-control mb-3" id="subject" name="name" placeholder="제목을 입력하세요.">
 
-        <!--첨부관련 내용-->
-        <div class="input-group flex-nowrap">
+      <!--첨부관련 내용-->
+      <div class="input-group flex-nowrap">
 
-          <div class="input-group">
+        <div class="input-group">
 
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile04"
-                aria-describedby="inputGroupFileAddon04">
-              <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
-            </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
+          </div>
 
-            <div class="input-group-append">
-              <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
-            </div>
+          <div class="input-group-append">
+            <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
           </div>
         </div>
-        &nbsp;
+      </div>
+      &nbsp;
 
-        <!--문제 내용 입력하는 곳-->
-        <textarea name="content" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."></textarea>
+      <!--문제 내용 입력하는 곳-->
+      <div contentEditable="true" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."></div>
 
-        <!--답과 해설 첨부하기 위한 버튼, 누르면 modal 띄움-->
-        <div class="row">
-          <button type="button" class="btn btn-warning mx-auto" style="width: 30%;" data-toggle="modal"
-            data-target="#postModal" href="#">답과 해설 첨부하기</button>
-        </div>
+      <!--답과 해설 첨부하기 위한 버튼, 누르면 modal 띄움-->
+      <div class="row">
+        <button type="button" class="btn btn-warning mx-auto" style="width: 30%;" data-toggle="modal"
+          data-target="#postModal" href="#">답과 해설 첨부하기</button>
+      </div>
 
-        <!-- modal -->
-        <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content rounded-0 border-0 p-4">
-              <!--modal header, 닫는 버튼과 타이틀 표시-->
-              <div class="modal-header border-0">
-                <p>
-                  <h3>답 첨부하기</h3>
-                </p>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+      <!-- modal -->
+      <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content rounded-0 border-0 p-4">
+            <!--modal header, 닫는 버튼과 타이틀 표시-->
+            <div class="modal-header border-0">
+              <p>
+                <h3>답 첨부하기</h3>
+              </p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-              <!--modal body-->
-              <div class="modal-body">
-                <form action="#" class="row">
-                  <!--답 입력하는 부분-->
-                  <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
-                    style="height:75%;"></textarea>
-                  <!--첨부를 위한 부분-->
-                  <div class="input-group flex-nowrap">
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile04"
-                          aria-describedby="inputGroupFileAddon04">
-                        <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
-                      </div>
-                      <div class="input-group-append">
-                        <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
-                      </div>
+            <!--modal body-->
+            <div class="modal-body">
+              <form action="#" class="row">
+                <!--답 입력하는 부분-->
+                <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
+                  style="height:75%;"></textarea>
+                <!--첨부를 위한 부분-->
+                <div class="input-group flex-nowrap">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile04"
+                        aria-describedby="inputGroupFileAddon04">
+                      <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
+                    </div>
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
                     </div>
                   </div>
+                </div>
 
-                  <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
-                </form>
+                <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
+              </form>
 
-              </div>
             </div>
           </div>
         </div>
-        <!--modal 끝-->
+      </div>
+      <!--modal 끝-->
 
-        <div class="row">
-          <button id="submitBtn" type="button" class="btn btn-warning mx-auto" style="margin-top: 2%;">POST</button>
-        </div>
+      <div class="row">
+        <button id="submitBtn" type="button" class="btn btn-warning mx-auto" style="margin-top: 2%;">POST</button>
+      </div>
 
     </div>
   </section>
