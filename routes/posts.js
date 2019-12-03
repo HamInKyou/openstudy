@@ -4,32 +4,30 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
 
-router.post('/create/:boardId', isLoggedIn, async (req,res,next) => { //게시글 생성
-    const boardId = req.params.boardId;
+router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
     try{
+        const {title, content, url, boardId} = req.body;
         const find = await Board.findOne({where : {id : boardId}});
-        if(moment(find.deadline).diff(moment().format()) > 0){
-            
-            const post = await Post.create({
-                title : req.body.title,
-                content : req.body.content,
-                url : req.body.url, //img 파일 경로
+        const post = await Post.create({
+            title,
+            content,
+            url, //img 파일 경로
+            userId : req.user.id,
+            boardId,
+        });
+        if(moment(find.deadline).diff(moment().format()) > 0){   
+            await Submit.create({
                 userId : req.user.id,
-                boardId : req.params.boardId
+                boardId,
+                postId : post.id,
             });
-    
-            const submit = await Submit.create({
-                userId : req.user.id,
-                boardId : boardId
-            });
-            
-            res.json({
+            return res.json({
                 req : true,
-                msg : '게시글 등록 완료'
+                msg : '게시글 등록 완료 ( 기간 내에 제출 )'
             });
 
         } else {
-            return res.json({req : false, msg : '기간이 지났습니다'});
+            return res.json({req : false, msg : '게시글 등록완료 (기간초과)'});
         }
     } catch (err) {
         console.error(err);

@@ -13,12 +13,13 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
             return res.json({
                 res : false,
                 msg : '이미 있는 그룹'
-            });
+            })
+            ;
         }
         const createdStudy = await Study.create({
             name,
             info,
-            owner : req.user.id
+            userId : req.user.id
         });
         const exUser = await User.findOne({
             where:{id : req.user.id}

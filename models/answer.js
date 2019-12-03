@@ -18,10 +18,8 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(200),
             allowNull : false,
         },
-        quizId : {
-            type : DataTypes.INTEGER,
-            allowNull : false,
-        },
+        //quizid allowNull true
+        //userid
     },{
         timestamps : true,
         paranoid : true,

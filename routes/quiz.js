@@ -4,14 +4,15 @@ const {Quiz, Answer} = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 router.post('/create', isLoggedIn, async (req, res, next) => {
-    const {content, url, ownerAnswerId, name} = req.body;
+    const {content, url, ownerAnswerId, name, boardId } = req.body;
     try{
         const quiz = await Quiz.create({
             name,
             content,
             url,
             userId : req.user.id,
-            ownerAnswerId,            
+            ownerAnswerId,
+            boardId,             
         });
         if(ownerAnswerId){
             const ownerAnswer = await Answer.findOne({

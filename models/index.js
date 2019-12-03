@@ -53,6 +53,7 @@ db.Post.hasMany(db.Tag);
 db.Tag.belongsTo(db.Post);
 //tag chatlog
 db.Tag.hasMany(db.Chatlog);
+db.Chatlog.belongsTo(db.Tag);
 //user calendar
 db.User.hasMany(db.Calendar);
 //user tag

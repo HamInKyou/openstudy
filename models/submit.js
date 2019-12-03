@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         },
        //userId
        //boardId
+       //postId 
     },{
         timestamps : true,
         paranoid : true,

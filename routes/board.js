@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
             }
         });
         
-        if(parentStudy.owner != req.user.id)
+        if(parentStudy.userId != req.user.id)
             return res.send('권한이 없습니다.');
         
         const exBoard = await Board.findOne({
@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
             deadline : req.body.deadline,
             name : req.body.name,
             info : req.body.info,
-            // studyId : req.body.studyId,
+            studyId : req.body.studyId,
         });
         res.send("study : " + board.name + "created");
     }catch(err){
