@@ -39,7 +39,7 @@ router.get('/my_test', (req, res, next) => {
 router.get('/my-test-post/:pageId', async(req, res, next) => {
   try{
     const pageId = req.params.pageId;
-    const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]}, {where:{owner:req.user.id}});
+    const myQuiz = await Quiz.findAndCountAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]}, {where:{userId:req.user.id}});
     res.render('my-test-post', { myQuiz : JSON.stringify(myQuiz), page : pageId });
   }catch(err){
     console.error(err);
@@ -111,7 +111,7 @@ router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
       attributes : ['name'],
       raw : true
       }]});
-    const answerPost = await Answer.findAll({where : {id : quizId}});
+    const answerPost = await Answer.findAll({where : {quizId : quizId}});
     res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), answer : JSON.stringify(answerPost)});
   }catch(err){
     console.error(err);
@@ -190,8 +190,15 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
   }
 });
 
-router.get('/study-post', (req, res, next) => {
-  res.render('study-post');
+router.get('/study-post/:boardId', async(req, res, next) => {
+  try{
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    res.render('study-post', { board : JSON.stringify(exBoard), study : JSON.stringify(exStudy) });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
 router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
