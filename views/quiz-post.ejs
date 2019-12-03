@@ -11,9 +11,9 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <script>
-    var study = <%-study %> ;
+    var study = <%- study %> ;
     console.log(study);
-    var board = <%-board %> ;
+    var board = <%- board %> ;
     console.log(board);
 
     var subjectName = 'OpenSource Project';
@@ -30,42 +30,52 @@
 
     $(function () {
       var AnswerId = 0;
-      var imgurl = "";
+      var attachDataUrl = "";
       var imgsrcArray = new Array();
       var sel_file;
       var cnt = 1;
-      //등록하면 바꿔주기
+      
+      //본문에 이미지 첨부
       $("#inputGroupFile04").change(function (e) {
         console.log("uploader called");
-        var files = Array.prototype.slice.call(e.target.files);
-        files.forEach(element => {
-          // if (!element.type.match("imgae.*")) {
-          //   alert('이미지만 올릴 수 있습니다.');
-          //   return;
-          // }
-          console.log(element);
+        var formData = new FormData();
+        var file = e.target.files[0];
 
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $('#message').append($('<img>',{
-              id:'theImg' + cnt,
-              src : e.target.result
+        console.log(file);
+        formData.append('img', file);
+
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/img",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            $('#message').append($('<img>', {
+              src: data.url
             }));
-            cnt++;
-            imgsrcArray.push(e.target.result);
-            console.log(imgsrcArray);
-          };
-          reader.readAsDataURL(element)
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert("fail");
+          }
         });
       });
 
+      //정답 등록
+      
+      //제출
       $("#submitBtn").click(function () {
         console.log('submit called');
         $.post("/quiz/create", {
             name: $("#subject").val(),
-            content: $("#message").text(),
+            content: $("#message").html(),
             ownerAnswerId: AnswerId,
-            url: imgurl,
+            url: attachDataUrl,
             boardId: board.id
           },
           function (data, status) {
