@@ -77,6 +77,7 @@ db.User.hasMany(db.Quiz);
 db.Quiz.belongsTo(db.User);
 db.User.hasMany(db.Answer);
 db.Answer.belongsTo(db.User);
+db.Answer.belongsTo(db.Quiz);
 ///quiz board
 db.Board.hasMany(db.Quiz);
 db.Quiz.belongsTo(db.Board);
