@@ -32,23 +32,21 @@
   <script>
     var quiz =<%-quiz %>;
     console.log(quiz);
-    var num =<%-num %>;
-    console.log(num);
     var page =<%-page %>;
     console.log(page);
 
     var quizArray = quiz.rows;
-    var totalPage = parseInt(num/10)+1;
+    var totalPage = parseInt(quiz.count/10)+1;
     console.log(totalPage);
 
     function outputQuizList() {
       for (var i = 0; i < quizArray.length; i++) {
         document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
-        document.write('<td><a href="/my-test-solve-particular/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
-        document.write('<td>' + quizArray[i].boardId + '</td>')
-        document.write('<td>' + quizArray[i].owner + '</td>')
-        document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
+        document.write('<td><a href="/my-test-solve-particular/'+quizArray[i].id+'" id="hover">' + quizArray[i].quiz.name + '</a></td>')
+        document.write('<td>' + quizArray[i].quiz.board.name + '</td>')
+        document.write('<td>' + quizArray[i].user.nick + '</td>')
+        document.write('<td>' + quizArray[i].quiz.createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
     }
