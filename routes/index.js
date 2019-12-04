@@ -233,7 +233,17 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
 router.get('/study-quiz-solve/:quizId', async(req, res, next) => {
   try{
     const quizId = req.params.quizId;
-    const exQuiz = await Quiz.findOne({where : {id : quizId}});
+    const exQuiz = await Quiz.findOne({where : {id : quizId}
+      , include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+    }, {
+      model : Board,
+      attributes : ['name'],
+      raw : true
+      }] 
+    });
     const exBoard = await Board.findOne({where : {id : exQuiz.boardId}});
     const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
     res.render('study-quiz-solve', {
