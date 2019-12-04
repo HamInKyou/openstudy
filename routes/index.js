@@ -185,12 +185,7 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
       },
       where: {
         boardId: req.params.boardId
-      },
-      include : {
-          model : User,
-          attributes : ['id', 'nick'],
-          raw : true
-      },
+      }
     });
     res.render('study-post-list', {
       posts: JSON.stringify(exPosts)
@@ -218,7 +213,11 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
     const pageId = req.params.pageId;
     const exBoard = await Board.findOne({where : {id : boardId}});
     const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
-    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}});
+    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}, include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+    }]});
     res.render('study-quiz-list', {
       study : JSON.stringify(exStudy),
       board : JSON.stringify(exBoard),
