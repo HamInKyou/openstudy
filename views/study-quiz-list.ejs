@@ -68,7 +68,7 @@
         document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
         document.write('<td><a href="/study-quiz-solve/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
-        document.write('<td>' + quizArray[i].userId + '</td>')
+        document.write('<td>' + quizArray[i].user.nick + '</td>')
         document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
