@@ -111,8 +111,19 @@ router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
       attributes : ['name'],
       raw : true
       }]});
-    const answerPost = await Answer.findAll({where : {quizId : quizId}});
-    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), answer : JSON.stringify(answerPost)});
+    const value = quizPost.ownerAnswerId;
+    let quizAnswer;
+    if(value == null){
+      quizAnswer = 'No Answer';
+    }else{
+      quizAnswer = await Answer.findOne({where : {quizId : value}});
+    }
+    const answerPost = await Answer.findAll({where : {quizId : quizId}, exclude: [{
+      model : Quiz,
+      attributes : ['id'],
+      raw : true
+    }]});
+    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), answer : JSON.stringify(answerPost), myAnswer : JSON.stringify(quizAnswer)});
   }catch(err){
     console.error(err);
     next(err);
