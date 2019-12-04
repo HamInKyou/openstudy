@@ -31,6 +31,7 @@
     $(function () {
       var AnswerId = 0;
       var attachDataUrl = "";
+      var modalAttachDataUrl = "";
       var imgsrcArray = new Array();
       var sel_file;
       var cnt = 1;
@@ -54,7 +55,7 @@
           cache: false,
           timeout: 600000,
           success: function (data) {
-            $('#message').append($('<img>', {
+            $('#content').append($('<img>', {
               src: data.url
             }));
           },
@@ -65,9 +66,50 @@
           }
         });
       });
+      //정답에 이미지 첨부
+      $("#answerInputGroupFile04").change(function (e) {
+        console.log("modal uploader called");
+        var formData = new FormData();
+        var file = e.target.files[0];
 
-      //정답 등록
+        console.log(file);
+        formData.append('img', file);
+
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/img",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            $('#answerContent').append($('<img>', {
+              src: data.url
+            }));
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert("fail");
+          }
+        });
+      });
       
+      //정답 등록
+      $("#answerSubmitBtn").click(function(){
+        console.log('answer submit called');
+        $.post("/answer/create", {
+          name : $("#answerTitle").val(),
+          content : $("#answerContent").html(),
+          url : modalAttachDataUrl,
+        }, function(data, status){
+          AnswerId = data.answerId;
+          alert(data.res);
+          $('#modal').modal("hide"); //닫기 
+        });
+      });
       //제출
       $("#submitBtn").click(function () {
         console.log('submit called');
@@ -83,7 +125,7 @@
             window.location.href = '/study-quiz-list/' + board.id + '/1';
           }
         );
-      })
+      });
     });
   </script>
 </head>
@@ -195,7 +237,7 @@
       &nbsp;
 
       <!--문제 내용 입력하는 곳-->
-      <div contentEditable="true" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."></div>
+      <div contentEditable="true" id="content" class="form-control mb-3" placeholder="내용을 입력하세요."></div>
 
       <!--답과 해설 첨부하기 위한 버튼, 누르면 modal 띄움-->
       <div class="row">
@@ -220,14 +262,16 @@
             <!--modal body-->
             <div class="modal-body">
               <form action="#" class="row">
+                <!-- title-->
+                <input id="answerTitle" type="text" />
                 <!--답 입력하는 부분-->
-                <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
-                  style="height:75%;"></textarea>
+                <div contentEditable="true" id="answerContent" name="message" class="form-control mb-3" placeholder="내용을 입력하세요."
+                  style="height:75%;"></div>
                 <!--첨부를 위한 부분-->
                 <div class="input-group flex-nowrap">
                   <div class="input-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="inputGroupFile04"
+                      <input type="file" class="custom-file-input" id="answerInputGroupFile04"
                         aria-describedby="inputGroupFileAddon04">
                       <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
                     </div>
@@ -237,7 +281,7 @@
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
+                <button id="answerSubmitBtn" type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
               </form>
 
             </div>
