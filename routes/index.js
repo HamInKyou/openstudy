@@ -169,18 +169,12 @@ router.get('/add-outline', (req, res, next) => {
 });
 
 router.get('/study-list', async (req, res, next) => {
-  //mystudylist
+  //studylist
   try {
-    const exUser = await User.findOne({
-      where: {
-        id: req.user.id
-      }
-    });
-    const enrolledStudies = await exUser.getEnrolledStudy({raw: true});
-    const result = JSON.stringify(enrolledStudies);
+    const exStudy = await Study.findAll();
 
     res.render('study-list', {
-      myStudies: result
+      studies: JSON.stringify(exStudy)
     });
   } catch (err) {
     console.error(err);
@@ -236,6 +230,17 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
 
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
+});
+
+router.get('/study-post/:boardId', async(req, res, next) => {
+  try{
+    const exBoard = await Board.findOne({where : {id : req.params.boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    res.render('study-post', { board : JSON.stringify(exBoard), study : JSON.stringify(exStudy) });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
 router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
