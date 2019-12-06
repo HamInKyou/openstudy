@@ -204,6 +204,15 @@ router.get('/mystudy-list', async (req, res, next) => {
 
 router.get('/study-post-list/:boardId', async (req, res, next) => {
   try {
+    const boardId = req.params.boardId;
+    const exBoard = await Board.findOne({include : {
+      model : Study,
+      attributes : ['name', 'info'],
+      raw : true
+    }, 
+    where : {
+      id : boardId
+    }});
     const exPosts = await Post.findAll({
       include : {
         model : User,
@@ -220,7 +229,7 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
       },
     });
     res.render('study-post-list', {
-      posts: JSON.stringify(exPosts)
+      board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
     });
   } catch (err) {
     console.error(err);
