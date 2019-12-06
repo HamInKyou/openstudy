@@ -39,9 +39,33 @@
         border: 1px solid #dee2e6;  
     }
   </style>
+  
   <script>
     var posts = <%- posts %>
     console.log(posts);
+
+
+    
+    var studyArray = post;
+    var totalPage = parse(nt(num/10)+1);
+    var studyName = posts.name;
+    
+    var boardId  = posts.boardId;
+    var date = posts.createdAt;
+    var id = posts.id;
+    var title = posts.title;
+
+    function list(){
+
+          document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >');
+          document.write('<th scope="row">'+boardId+'</th>');
+          document.write('<td><a href="#" id = "hover">'+post.title+'</a></td>');
+          // <button onclick="window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >알림 &nbsp;<span class="badge badge-light">4</span></button>
+          document.write('<td>'+id+'</td>');
+          document.write('<td>'+date+'</td>');
+    }
+
+
   </script>
   </head>
   <body style="background:#e9ecef">
@@ -73,7 +97,6 @@
             <div class = "row">
                 <div class = "col-lg-10">
             <script>
-                var studyName = ['OpenSource Project'];
               document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
             </script>
             </div>
@@ -123,47 +146,19 @@
             </div>
   
             <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col" style = "width:70%;">제목</th>
-                  <th scope="col">작성자</th>
-                  <th scope="col" style = "width:10%;">작성일</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr data-toggle="modal" data-target="#postModal" href="#" >
-    
-                      <th scope="row">5</th>
-                      <td><a href="#" id = "hover">4주차 허예은</a><button onclick="window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >알림 &nbsp;<span class="badge badge-light">4</span></button> </td>
-                      <td>허예은</td>
-                      <td>2019-10-10</td>
-                    </tr>
-    
+                <thead>
                   <tr>
-                        <th scope="row">4</th>
-                        <td><a href="#" id = "hover">4주차 허예은</a></td>
-                        <td>허예은</td>
-                        <td>2019-10-10</td>
-                      </tr>    
-                <tr>
-                  <th scope="row">3</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
+                    <th scope="col">No.</th>
+                    <th scope="col" style="width:70%;">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col" style="width:10%;">작성일</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                <script>
+                  list();
+                </script>
               </tbody>
             </table>
     

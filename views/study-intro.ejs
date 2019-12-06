@@ -16,6 +16,11 @@
     var studyInfo =<%-studyInfo %>;
     console.log(studyInfo);
 
+    var studyName = studyInfo.name;
+    var studyInfo = studyInfo.info;
+    var studyUsers = studyInfo.userId;
+    var myId = StudyInfo.id;
+
   </script>
 </head>
 <body>
@@ -26,8 +31,8 @@
       </a>
       
       <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link" href="#" >MYSTUDY</a>
-      <a class="nav-link active" href="#">OPENSTUDY</a>
+      <a class="nav-link active" href="study-list.ejs" >MYSTUDY</a>
+      <a class="nav-link " href="openstudy-list.ejs">OPENSTUDY</a>
   
       <div class="dropdown">
           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -44,24 +49,27 @@
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
+            <div class = "row" >
             <script>
-                var users = ['김용후', '김예지', '채예진', '함인규','허예은'];
-                var myName = '허예은';
-                var studyName = "C++ Language Programming";
-                if(myName){
-                    document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
-                } else{
-                    document.write('<h1 class="display-4">'+"Open Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
-                }
+                document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
             </script>
+            </div>
             <hr class="my-4">
-            <p class = "lead"> 여기에 소개글! </p>
+            <p class = "lead"> 
+            <script>
+                document.write('<p class = "lead">'+ studyInfo+'</p>');
+            </script>    
+            </p>
         </div>
     </div>
 
     <div class = "container">
         <div class = "row align-items-center mb-5">
-            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> <h1> c++ Language Programming </h1></div>
+            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> 
+                <script>
+                document.write('<h1>'+studyName+'</h1>');
+                </script>
+            </div>
             <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
                     <div class="d-flex align-items-center">
@@ -69,8 +77,7 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    
-                                    document.write('<p class="mb-0">'+"　TOTAL "+users.length+'</p>');
+                                    document.write('<p class = "mb-0">'+ "&nbsp;&nbsp;&nbsp;&nbsp;TOTAL " + studyUsers + "<p>");
                                 </script>
                             </div>
                     </div>
@@ -78,7 +85,7 @@
             </div>
             <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
-                    <div class="d-flex align-items-center">
+                    <!-- <div class="d-flex align-items-center">
                             <i class="fas fa-question-circle fa-2x"></i>
                             <div class="text-left">
                                 <h6 class="mb-0">　PROBLEM NO.</h6>
@@ -87,18 +94,19 @@
                                     document.write('<p class="mb-0">'+"　TOTAL "+problems.length+'</p>');
                                 </script>
                             </div>
-                    </div>
+                    </div> -->
                 </li>
             </div>
             
                 <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
-                    <script>
+                    <!-- <script>
                     if(myName){document.write('<a href="study-lesson" class="btn btn-warning">'+"출석하기"+'</a>');}
                     else{document.write('<a href="study-lesson" class="btn btn-warning">'+"참여하기"+'</a>');
                         myName.push("허예은");
                         alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
                         }
-                    </script>
+                    </script> -->
+                    <a href="study-week.ejs" class="btn btn-warning">참여하기</a>
                 </div>
         </div>
         
@@ -106,7 +114,9 @@
 
         <div class = "col-12 mb-4">
             <h3>ABOUT STUDY</h3>
-            <p>스터디에 대한 대략적인 내용 기재</p>
+            <script>
+            document.write('<p class = "lead">'+ studyInfo+'</p>');
+        </script>
         </div>
 
         <div class="col-12 mb-4">
@@ -134,12 +144,12 @@
             </div>
           </div>
 
-          <div class = "col-12 mb-4">
+          <!-- <div class = "col-12 mb-4">
                 <h3>OTHER STUDIES</h3>
                 <div class = "row">
                 
                 </div>
-            </div>
+            </div> -->
 
     </div>
 
