@@ -281,13 +281,15 @@ router.get('/study-quiz-solve/:quizId', async(req, res, next) => {
 
 router.get('/study-week/:studyId', async (req, res, next) => {
   try {
+    const studyId = req.params.studyId;
+    const exStudy = await Study.findOne({where : {id : studyId}})
     const exBoards = await Board.findAll({
       where: {
-        id: req.params.studyId
+        studyId: studyId
       }
     });
     res.render('study-week', {
-      boards: JSON.stringify(exBoards)
+      study : JSON.stringify(exStudy), boards: JSON.stringify(exBoards)
     });
   } catch (err) {
     console.error(err);
