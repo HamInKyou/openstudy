@@ -39,16 +39,16 @@
         border: 1px solid #dee2e6;  
     }
   </style>
-  
+
   <script>
     var posts = <%- posts %>
     console.log(posts);
 
 
     
-    var studyArray = post;
-    var totalPage = parse(nt(num/10)+1);
-    var studyName = posts.name;
+    // var studyArray = posts;
+    // var totalPage = parseInt((num/10)+1);
+    // var studyName = posts.name;
     
     var boardId  = posts.boardId;
     var date = posts.createdAt;
@@ -63,6 +63,7 @@
           // <button onclick="window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >알림 &nbsp;<span class="badge badge-light">4</span></button>
           document.write('<td>'+id+'</td>');
           document.write('<td>'+date+'</td>');
+          document.write('</tr>');
     }
 
 
