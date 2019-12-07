@@ -202,6 +202,26 @@ router.get('/mystudy-list', async (req, res, next) => {
   }
 });
 
+router.get('/study-post-content/:postId', async(req, res, next) => {
+  try{
+    const exPost = await Post.findOne({include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+      }],
+      where : {id : req.params.postId}
+    });
+    const exBoard = await Board.findOne({where : {id : exPost.boardId}});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}})
+    res.render('study-post-content', {
+      study : JSON.stringify(exStudy), board : JSON.stringify(exBoard), post : JSON.stringify(exPost)
+    });
+  } catch (err){
+    console.error(err);
+    next(err);
+  }
+});
+
 router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
   try {
     const boardId = req.params.boardId;
@@ -228,10 +248,6 @@ router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
     console.error(err);
     next(err);
   }
-});
-
-router.get('/study-post', (req, res, next) => {
-  res.render('study-post');
 });
 
 router.get('/study-post/:boardId', async(req, res, next) => {
