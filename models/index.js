@@ -67,6 +67,8 @@ db.Tag.belongsToMany(db.User,{
     foreignKey : 'tagId',
     through : 'userTag',
 });
+db.User.hasMany(db.Tag);
+
 //user(owner) study
 db.User.hasMany(db.Study);
 //quiz answer

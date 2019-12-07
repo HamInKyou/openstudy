@@ -9,6 +9,7 @@ const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const flash = require('connect-flash');
 const app = express();
+const webSocket = require('./socket');
 
 const pageRouter = require('./routes/index');
 const userRouter = require('./routes/users');
@@ -21,8 +22,10 @@ const calendarRouter = require('./routes/calendars');
 const postRouter = require('./routes/posts');
 const boardRouter = require('./routes/board');
 const commentRouter = require('./routes/comments');
+const tagRouter = require('./routes/tag');
 
 const makeDummyData = require('./routes/makeDummyData');
+
 // middleware setup
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
@@ -62,6 +65,7 @@ app.use('/board', boardRouter);
 app.use('/quiz', quizRouter);
 app.use('/answer', answerRouter);
 app.use('/comment', commentRouter);
+app.use('/tag', tagRouter);
 
 app.use('/makeDummyData', makeDummyData);
 
@@ -83,7 +87,9 @@ app.use((err, req, res)=> {
   res.render('error');
 });
 
-app.listen(app.get('port'), () =>{
+const server = app.listen(app.get('port'), () =>{
   console.log(app.get('port'),  ': is waitting...');
 });
+webSocket(server, app);
+
 module.exports = app;
