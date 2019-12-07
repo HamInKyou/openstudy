@@ -17,8 +17,18 @@
       console.log(answer);
       var myAnswer =<%-myAnswer %>;
       console.log(myAnswer);
-   </script>
 
+      function outputAnswerList() {
+      for (var i = 0; i < answer.length; i++) {
+        document.write('<div class="col-12" style="margin-top: 2%;">');
+        document.write('<p><i class="fas fa-user mr-2"></i>'+answer[i].user.nick+'</p>');
+        document.write('</div>');
+        document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+        document.write('<p>답 내용</p>');
+        document.write('</div>');
+      }
+    }
+   </script>
 </head>
 
 
@@ -111,18 +121,9 @@
          </div>
 
          <!--팀원들이 제출한 답-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p><i class="fas fa-user mr-2"></i>허예은</p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
-         <div class="col-12" style="margin-top: 2%;">
-            <p><i class="fas fa-user mr-2"></i>김용후</p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputAnswerList();
+         </script>
       </div>
 
 
