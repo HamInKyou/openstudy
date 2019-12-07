@@ -1,3 +1,9 @@
+<!-- study-post-content
+스터디 제목 & info받기
+board 내용 넣기
+게시글 작성자, 시간 내용 넣기
+페이지는 필요 x -->
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -51,6 +57,24 @@
         </div>
 
     <div class = "container">
+            <div class="d-flex">
+                    <div class="text-center mr-4">
+                      <div class="p-4 bg-warning text-white">
+                          <span class="h2 d-block">11</span> NOV,2019
+                      </div>
+                    </div>
+                    <!-- notice content -->
+                    <div>
+                      <h3 class="mb-4">4주차 Polynomial and sparse matrix</h3>
+                      <ul class="list-styled mb-5">
+                        <li>다항식</li>
+                        <li>희소 행렬</li>
+                        <li>효율적인 희소행렬 표현</li>
+                        <li>배열의 표현</li>
+                        <li>스트링 추상 데이타 타입</li>
+                      </ul>
+                    </div>
+                  </div>
             <table class="table">
                     <thead>
                       <tr>
@@ -65,10 +89,10 @@
                         <td>허예은</td>
                         <td>2019-12-07</td>
                         </tr>
-
-                      
                     </tbody>
                   </table>
+                  <div contentEditable="false" id="content" class="form-control mb-3" placeholder="내용을 입력하세요." style ="height:500px;overflow:scroll;background:#e9ecef;"></div>
+                  <div class = "row justify-content-center" style  = "margin-bottom:5%;"><a class = "btn btn-warning">목록</a></div>
     </div>
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
