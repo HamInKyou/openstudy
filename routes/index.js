@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Post, User, Study, Board, Quiz, Answer} = require('../models');
-
+const {Post, User, Study, Board, Quiz, Answer, Sequelize:{Op}} = require('../models');
 
 /* GET home page. */
 router.get('/',  (req, res, next) => {
@@ -111,14 +110,13 @@ router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
       attributes : ['name'],
       raw : true
       }]});
-    const value = quizPost.ownerAnswerId;
     let quizAnswer;
-    if(value == null){
+    if(quizPost.ownerAnswerId == null){
       quizAnswer = 'No Answer';
     }else{
-      quizAnswer = await Answer.findOne({where : {quizId : value}});
+      quizAnswer = await Answer.findOne({where : {id : quizPost.ownerAnswerId}});
     }
-    const answerPost = await Answer.findAll({where : {quizId : quizId}, include : [{
+    const answerPost = await Answer.findAll({where : {id : {[Op.ne] : [quizPost.ownerAnswerId]}, quizId : quizId}, include : [{
       model : User,
       attributes : ['id', 'nick'],
       raw : true
