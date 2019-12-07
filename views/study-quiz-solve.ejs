@@ -7,17 +7,19 @@
    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
 
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
    <script>
-      var study = <%-study %>;
+      var study = <%-study %> ;
       console.log(study);
-      var board = <%-board %>;
+      var board = <%-board %> ;
       console.log(board);
-      var quiz = <%-quiz %>;
+      var quiz = <%-quiz %> ;
       console.log(quiz);
 
+      var modalAttachDataUrl = "";
       var subjectName = study.name;
       var studyIntroduce = study.info;
       var date = board.deadline.split(' ', 1)[0];
@@ -33,6 +35,54 @@
       var studyContents = board.info;
 
       var quizArray = quiz;
+      $(function () {
+         //정답에 이미지 첨부
+         $("#inputGroupFile04").change(function (e) {
+            console.log("modal uploader called");
+            var formData = new FormData();
+            var file = e.target.files[0];
+
+            console.log(file);
+            formData.append('img', file);
+
+            $.ajax({
+               type: "POST",
+               enctype: 'multipart/form-data',
+               url: "/img",
+               data: formData,
+               processData: false,
+               contentType: false,
+               cache: false,
+               timeout: 600000,
+               success: function (data) {
+                  $('#content').append($('<img>', {
+                     src: data.url
+                  }));
+               },
+               error: function (e) {
+                  console.log("ERROR : ", e);
+                  $("#btnSubmit").prop("disabled", false);
+                  alert("fail");
+               }
+            });
+         });
+         //정답 등록
+         $("#submit").click(function () {
+            console.log('answer submit called');
+            $.post("/answer/submit", {
+               name: "", // $("#answerTitle").val(),
+               content: $("#content").html(),
+               url: modalAttachDataUrl,
+               quizId: quiz.id
+            }, function (data, status) {
+               //$('#postModal').modal("hide"); //닫기 
+               console.log(data)
+               alert(data.res);
+               window.location.href = "/my-test-solve-particular/" + data.answerId;
+               //redridect
+            });
+         });
+      });
    </script>
 
 </head>
@@ -115,7 +165,7 @@
                </script>
                <ul class="list-styled mb-5">
                   <script>
-                    document.write('<li>' + studyContents + '</li>')
+                     document.write('<li>' + studyContents + '</li>')
                   </script>
                </ul>
             </div>
@@ -123,7 +173,11 @@
          <!-- notice content 끝-->
 
          <p>
-            <h3><script>document.write(quiz.name)</script></h3>
+            <h3>
+               <script>
+                  document.write(quiz.name)
+               </script>
+            </h3>
          </p>
 
 
@@ -137,14 +191,28 @@
             </thead>
             <tbody>
                <tr>
-                  <td><script>document.write(quiz.owner)</script></td>
-                  <td><script>document.write(quiz.boardId)</script></td>
-                  <td><script>document.write(quiz.createdAt.split('T',1)[0])</script></td>
+                  <td>
+                     <script>
+                        document.write(quiz.owner)
+                     </script>
+                  </td>
+                  <td>
+                     <script>
+                        document.write(quiz.boardId)
+                     </script>
+                  </td>
+                  <td>
+                     <script>
+                        document.write(quiz.createdAt.split('T', 1)[0])
+                     </script>
+                  </td>
                </tr>
                <tr>
                   <td colspan="3">
                      <div style="overflow:scroll;height:150px; padding:10px;">
-                        <script>document.write(quiz.content)</script>
+                        <script>
+                           document.write(quiz.content)
+                        </script>
                      </div>
                   </td>
                </tr>
@@ -171,24 +239,23 @@
                   </div>
 
                   <div class="modal-body">
-                     <form action="#" class="row">
-                        <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
-                           style="height:75%;"></textarea>
+                     <form id="modalForm" action="#" class="row">
+                        <div contentEditable="true" id="content" class="form-control mb-3" placeholder="내용을 입력하세요."
+                           style="height:75%;"></div>
 
-                        <div class="input-group flex-nowrap">
-                           <div class="input-group">
-                              <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="inputGroupFile04"
-                                    aria-describedby="inputGroupFileAddon04">
-                                 <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
-                              </div>
-                              <div class="input-group-append">
-                                 <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
+                           <div class="input-group flex-nowrap">
+                              <div class="input-group">
+                                 <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile04"
+                                       aria-describedby="inputGroupFileAddon04">
+                                    <label class="custom-file-label" for="inputGroupFile04">이미지파일</label>
+                                 </div>
+
                               </div>
                            </div>
-                        </div>
 
-                        <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
+                           <button id="submit" type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답
+                              제출</button>
                      </form>
 
                   </div>

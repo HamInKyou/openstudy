@@ -39,8 +39,11 @@ router.post('/submit', isLoggedIn, async (req, res, next) => {
             where: { id : quizId}});
         exQuiz.addAnswer(answer);
 
-        //나중에 퀴즈화면이나 퀴즈 목록화면으로 리다이렉트 
-        res.send("submitted");
+        const result = {
+            res : "success",
+            answerId : answer.id,
+        };
+        res.json(result);
     }catch(err){
         console.error(err);
         next(err);

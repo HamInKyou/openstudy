@@ -190,8 +190,15 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
   }
 });
 
-router.get('/study-post', (req, res, next) => {
-  res.render('study-post');
+router.get('/study-post/:boardId',async (req, res, next) => {
+  const boardId = req.params.boardId;
+  const exBoard = await Board.findOne({where : {id : boardId}});
+  const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+  
+  res.render('study-post', {
+    board : JSON.stringify(exBoard),
+    study : JSON.stringify(exStudy),
+  });
 });
 
 router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
@@ -256,11 +263,6 @@ router.get('/quiz-post/:boardId', async(req,res,next) => {
     next(err);
   }
 }); 
-
-router.get('/quiz-post', (req, res, next) => {
-  res.render('quiz-post');
-});
-
 router.get('/chat/:tagId', async (req, res, next) => {
   try{
     //const tag = await Tag.findOne({where : { id : req.params.tagId}});
