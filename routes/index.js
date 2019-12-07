@@ -33,14 +33,14 @@ router.get('/home', async (req, res, next) => {
 
 router.get('/my-calendar/', async(req, res, next) => {
   try {
-    const month = moment().month;
+    const now = moment();
     const exCalendars = await Calendar.findAll({
       where: {userId: req.user.id }
     });
     const result = JSON.stringify(exCalendars);
     res.render('my-calendar', {
       myCalendars: result,
-      nowMonth : month
+      now : now
     });
   } catch (err) {
     console.error(err);
