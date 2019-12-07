@@ -57,8 +57,7 @@
     var week = board.week;
     var deadline = board.deadline;
     var content = board.info;
-    
-<<<<<<< HEAD
+
     //  포스트 정보
     var postArray = posts;
     // var postName = posts.title;
@@ -67,25 +66,20 @@
     // var date = posts.createdAt;
     // var postTitle = posts.title;
     // var postUser = posts.user;
-=======
+
     // 시간 정보
     var mon = board.deadline.split('.',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
     var day = board.deadline.split('.',3)[2];
     var year = 20+board.deadline.split('.',3)[0];
-
     //  포스트 정보
     var postArray = posts;
     // var postMonth = post.updatedAt.split('-',5)[0];
     // var postDay = post.updatedAt.split('-',3)[1];
     // var postMon = post.updatedAt.split()
-
   
-
     //페이지 정보
     var totalPage = parseInt(posts.length/10)+1;
-
-
     function openChat(){
       window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');
     }

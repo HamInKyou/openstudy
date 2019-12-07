@@ -21,13 +21,31 @@ board 내용 넣기
     console.log(board);
     var post = <%-post %>
     console.log(post);
+
+    var studyName = study.name;
+    var studyInfo = study.info;
+
+    var week = board.week;
+    var title = board.name;
+    var info = board.info;
+
+    var postId = post.id;
+    var postContent = post.content;
+    var postDate = post.createdAt; 
+    var postUser = post.user;
+
+
+    var mon = board.deadline.split('.',3)[1];
+    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var day = board.deadline.split('.',3)[2];
+    var year = 20+board.deadline.split('.',3)[0];
   </script>
 </head>
 <body style="background:#e9ecef">
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#" style = color:white;>
-          <img src="../public/images/logo.png" height="30" alt="HOME">
+          <img src="/public/images/logo.png" height="30" alt="HOME">
       </a>
       
       <a class="nav-link" href="home" style = color:white;>HOME</a>
@@ -52,7 +70,6 @@ board 내용 넣기
               <div class = "row">
                   <div class = "col-lg-10">
               <script>
-                  var studyName = ['OpenSource Project'];
                 document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
               </script>
               </div>
@@ -60,7 +77,9 @@ board 내용 넣기
                 <p></p>
             </div>
             </div>
-                <p class="lead">스터디 소개글 여기에 넣기~ </p>
+            <script>
+             document.write('<p class="lead">'+ studyInfo+'</p>');
+            </script>   
             </div>
         </div>
 
@@ -68,18 +87,20 @@ board 내용 넣기
             <div class="d-flex">
                     <div class="text-center mr-4">
                       <div class="p-4 bg-warning text-white">
-                          <span class="h2 d-block">11</span> NOV,2019
-                      </div>
+                        <script>  
+                        document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+                    </script>
+                    </div>
                     </div>
                     <!-- notice content -->
                     <div>
-                      <h3 class="mb-4">4주차 Polynomial and sparse matrix</h3>
+                        <script>
+                      document.write('<h3 class="mb-4">'+week+"주차 "+title+'</h3>');
+                    </script>
                       <ul class="list-styled mb-5">
-                        <li>다항식</li>
-                        <li>희소 행렬</li>
-                        <li>효율적인 희소행렬 표현</li>
-                        <li>배열의 표현</li>
-                        <li>스트링 추상 데이타 타입</li>
+                        <script>
+                            document.write('<li>'+info+'</li>');
+                        </script>
                       </ul>
                     </div>
                   </div>
@@ -92,14 +113,19 @@ board 내용 넣기
                       </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>01</td>
-                        <td>허예은</td>
-                        <td>2019-12-07</td>
-                        </tr>
+                        <script>
+                            document.write('<tr>');
+                            document.write('<td>'+postId+'</td>');
+                            document.write('<td>'+postUser+'</td>');
+                            document.write('<td>'+postDate+'</td>');
+                            document.write('</tr>');    
+                        </script>
+                        
                     </tbody>
                   </table>
-                  <div contentEditable="false" id="content" class="form-control mb-3" placeholder="내용을 입력하세요." style ="height:500px;overflow:scroll;background:#e9ecef;"></div>
+                  <script>
+                    document.write('<div contentEditable="false" id="content" class="form-control mb-3"  style ="height:500px;overflow:scroll;background:#e9ecef;">'+postContent+'</div>');
+                  </script>
                   <div class = "row justify-content-center" style  = "margin-bottom:5%;"><a class = "btn btn-warning">목록</a></div>
     </div>
    
