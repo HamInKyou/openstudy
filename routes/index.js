@@ -236,6 +236,10 @@ router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
   }
 });
 
+router.get('/study-post-content', (req, res, next) => {
+  res.render('study-post-content');
+});
+
 router.get('/study-post', (req, res, next) => {
   res.render('study-post');
 });
