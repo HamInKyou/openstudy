@@ -16,13 +16,17 @@
     var studyInfo =<%-studyInfo %>;
     console.log(studyInfo);
 
+    var studyName = studyInfo.name;
+    var studyInfo = studyInfo.info;
+    
+
   </script>
 </head>
 <body>
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#">
-          <img src="../public/images/logo.png" height="30" alt="HOME">
+          <img src="/public/images/logo.png" height="30" alt="HOME">
       </a>
       
       <a class="nav-link" href="home">HOME</a>
@@ -35,8 +39,6 @@
           </button>
           <div class="dropdown-menu dropdown-menu-right">
                    <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="my-test">MY TEST</a>
-                   <a class="dropdown-item"  href="#">개인정보 설정</a>
                    <a class="dropdown-item"  href="#">로그아웃</a>
           </div>
       </div>
@@ -45,23 +47,22 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <script>
-                var users = ['김용후', '김예지', '채예진', '함인규','허예은'];
-                var myName = null;
-                var studyName = "C++ Language Programming";
-                if(myName){
-                    document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
-                } else{
-                    document.write('<h1 class="display-4">'+"Open Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
-                }
+                document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                
             </script>
             <hr class="my-4">
-            <p class = "lead"> 여기에 소개글! </p>
+            <script>
+            document.write('<p class = "lead">'+studyInfo+ '</p>');
+        </script>
         </div>
     </div>
 
     <div class = "container">
         <div class = "row align-items-center mb-5">
-            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> <h1> c++ Language Programming </h1></div>
+            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> 
+                <script>
+                    document.write('<h1>'+studyName+'</h1></div>');
+                </script>
             <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
                     <div class="d-flex align-items-center">
@@ -69,14 +70,13 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    
-                                    document.write('<p class="mb-0">'+"　TOTAL "+users.length+'</p>');
+                                    // document.write('<p class="mb-0">'+"　TOTAL "+users+'</p>');
                                 </script>
                             </div>
                     </div>
                 </li>
             </div>
-            <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+            <!-- <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
                     <div class="d-flex align-items-center">
                             <i class="fas fa-question-circle fa-2x"></i>
@@ -89,15 +89,15 @@
                             </div>
                     </div>
                 </li>
-            </div>
+            </div> -->
             
                 <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
                     <script>
-                    if(myName){document.write('<a href="study-lesson" class="btn btn-warning">'+"출석하기"+'</a>');}
-                    else{document.write('<a href="study-lesson" class="btn btn-warning">'+"참여하기"+'</a>');
-                        myName.push("허예은");
-                        alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
-                        }
+                    document.write('<a href="study-lesson" class="btn btn-warning" onclick = "/study-week/">'+"참여하기"+'</a>');
+                    users.push(userId);//유저 아이디 삽입
+                    alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
+                    
+
                     </script>
                 </div>
         </div>
@@ -106,11 +106,17 @@
 
         <div class = "col-12 mb-4">
             <h3>ABOUT STUDY</h3>
-            <p>스터디에 대한 대략적인 내용 기재</p>
+
+            <script>
+            document.write('<p>'+studyInfo+'</p>');
+            </script>
         </div>
 
         <div class="col-12 mb-4">
-            <h3 class="mb-3">STUDY OUTLINE</h3>
+                <div class = "row">
+                    <h3 class="mb-3">STUDY OUTLINE</h3>
+                    <button onclick="window.open('add-outline.html','add-outline','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-secondary btn-sm" style = "height:30px; width:30px;margin-left:2.5%;" ><i class="fas fa-plus fa-md" style ="margin-left:-27.5%;"></i></button>
+                </div>
             
             <div class="col-12 px-0">
                 
@@ -131,19 +137,12 @@
             </div>
           </div>
 
-          <div class = "col-12 mb-4">
-                <h3>OTHER STUDIES</h3>
-                <div class = "row">
-                
-                </div>
-            </div>
-
     </div>
 
     <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
         <p> Footer bar</p>      
     </nav>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
 </body>   
 </html>
