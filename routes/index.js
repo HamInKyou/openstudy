@@ -202,18 +202,10 @@ router.get('/mystudy-list', async (req, res, next) => {
   }
 });
 
-router.get('/study-post-list/:boardId', async (req, res, next) => {
+router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
   try {
     const boardId = req.params.boardId;
-    const exBoard = await Board.findOne({include : {
-      model : Study,
-      attributes : ['name', 'info'],
-      raw : true
-    }, 
-    where : {
-      id : boardId
-    }});
-    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
+    const pageId = req.params.pageId;
     const exPosts = await Post.findAll({
       include : {
         model : User,
@@ -223,14 +215,10 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
       where: {
         boardId: req.params.boardId
       },
-      include : {
-          model : User,
-          attributes : ['id', 'nick'],
-          raw : true
-      },
+      offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]
     });
     res.render('study-post-list', {
-      study : JSON.stringify(exStudy), board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
+      page : pageId, board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
     });
   } catch (err) {
     console.error(err);
