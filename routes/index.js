@@ -66,7 +66,7 @@ router.get('/my-test-solve-particular/:answerId', async(req, res, next) => {
     if(value == null){
       quizAnswer = 'No Answer';
     }else{
-      quizAnswer = await Answer.findOne({where : {quizId : value}});
+      quizAnswer = await Answer.findOne({where : {id : value}});
     }
     res.render('my-test-solve-particular', {myanswer : JSON.stringify(answerPost), quiz : JSON.stringify(quizPost), answer : JSON.stringify(quizAnswer)});
   }catch(err){
