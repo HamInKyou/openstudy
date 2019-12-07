@@ -213,6 +213,7 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
     where : {
       id : boardId
     }});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
     const exPosts = await Post.findAll({
       include : {
         model : User,
@@ -229,7 +230,7 @@ router.get('/study-post-list/:boardId', async (req, res, next) => {
       },
     });
     res.render('study-post-list', {
-      board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
+      study : JSON.stringify(exStudy), board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
     });
   } catch (err) {
     console.error(err);
