@@ -18,6 +18,18 @@
       var myAnswer =<%-myAnswer %>;
       console.log(myAnswer);
 
+      function outputMyAnswer(){
+         if(myAnswer == 'No Answer'){}
+         else{
+            document.write('<div class="col-12" style="margin-top: 2%;">');
+            document.write('<p>나의 답</p>');
+            document.write('</div>');
+            document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+            document.write(myAnswer.content);
+            document.write('</div>');
+         }
+      }
+
       function outputAnswerList() {
       for (var i = 0; i < answer.length; i++) {
         document.write('<div class="col-12" style="margin-top: 2%;">');
@@ -111,14 +123,9 @@
          </table>
 
          <!--내가 제출한 답-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p>
-               <h5>나의 답</h5>
-            </p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputMyAnswer();
+         </script>
 
          <!--팀원들이 제출한 답-->
          <script>
