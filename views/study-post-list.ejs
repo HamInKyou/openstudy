@@ -39,34 +39,64 @@
         border: 1px solid #dee2e6;  
     }
   </style>
+
   <script>
     var page = <%-page %>
     console.log(page);
+    var study = <%-study %>
+    console.log(study);
     var board = <%-board %>
     console.log(board);
     var posts = <%-posts %>
     console.log(posts);
+    // 스터디 이름 정보
+    var studyName = study.name;
+    var studyInfo = study.info;
+    // 주차 정보
+    var week = board.week;
+    var deadline = board.deadline;
+    var content = board.info;
+    var studyName = board.study.name;
+    var info = board.study.info;
+    
+    //  포스트 정보
+    var postArray = posts;
+    // var postName = posts.title;
+    // var postNo = posts.id;
+    // var pageInfo = posts.boardId;
+    // var date = posts.createdAt;
+    // var postTitle = posts.title;
+    // var postUser = posts.user;
+    function list() {
+      for (var i = 0; i < postArray.length; i++) {
+        document.write('<tr>')
+        document.write('<th scope="row">' + postArray[i].id + '</th>')
+        document.write('<td><a href="/study-quiz-solve/'+postArray[i].title+'" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td>' + postArray[i].user + '</td>')
+        document.write('<td>' + postArray[i].UpdatedAt + '</td>')
+        document.write('</tr>')
+      }
+    }
   </script>
   </head>
   <body style="background:#e9ecef">
      
      <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#" style = color:white;>
-            <img src="../public/images/logo.png" height="30" alt="HOME">
+            <img src="../public/images/logo.png" href="/home" height="30" alt="HOME">
         </a>
         
-        <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
-        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+        <a class="nav-link " href="/home" style = color:white;>HOME</a>
+        <a class="nav-link active" href="/study-list" style = color:#ffbc3b;>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list" style = color:white;>OPENSTUDY</a>
     
         <div class="dropdown">
             <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
               MY MENU
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
-                     <a class="dropdown-item"  href="#">개인정보 설정</a>
-                     <a class="dropdown-item"  href="#">로그아웃</a>
+                     <a class="dropdown-item"  href="/my-calendar">MY Calendar</a>
+                     <a class="dropdown-item"  href="/login">로그아웃</a>
             </div>
         </div>
     
@@ -77,7 +107,6 @@
             <div class = "row">
                 <div class = "col-lg-10">
             <script>
-                var studyName = ['OpenSource Project'];
               document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
             </script>
             </div>
@@ -85,7 +114,9 @@
               <p></p>
           </div>
           </div>
-              <p class="lead">스터디 소개글 여기에 넣기~ </p>
+          <script>
+              document.write('<p class="lead">'+info+ '</p>');
+            </script>
           </div>
       </div>
   
@@ -97,77 +128,54 @@
             <div class="d-flex">
               <div class="text-center mr-4">
                 <div class="p-4 bg-warning text-white">
-                    <span class="h2 d-block">05</span> SEP,2019
+                  <script>
+                    document.write('<span class="h2 d-block">'+deadline);
+                    // <span class="h2 d-block">05</span> SEP,2019
+                    </script>
+                    
                 </div>
               </div>
               <!-- notice content -->
               <div>
-                <h3 class="mb-4">4주차 Polynomial and sparse matrix</h3>
+                <script>
+                
+                document.write('<h3 class="mb-4">'+" "+week+"주차 "+ title +'</h3>');
+              </script>
                 <ul class="list-styled mb-5">
-                  <li>다항식</li>
-                  <li>희소 행렬</li>
-                  <li>효율적인 희소행렬 표현</li>
-                  <li>배열의 표현</li>
-                  <li>스트링 추상 데이타 타입</li>
+                  <script>
+                    document.write('<li>'+content+"</li>");
+                  </script>
                 </ul>
               </div>
             </div>
   
               <div class="col-lg-12">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;">게시글 POST</button>
-                <button type="button" class="btn btn-warning" style = " margin-bottom:10%; width:200px;height:50px;">문제 POST</button>
+                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;" href = "/study-post">게시글 POST</button>
+                <button type="button" class="btn btn-warning" style = " margin-bottom:10%; width:200px;height:50px;" href = "/quiz-post">문제 POST</button>
               </div>
             </div>
             <div class="col-lg-12 offset-10">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;">게시글</button>
-                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;">문제</button>
+                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;" href= "/study-post-list">게시글</button>
+                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;" href = "/quiz-post-list">문제</button>
               </div>
             </div>
   
             <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col" style = "width:70%;">제목</th>
-                  <th scope="col">작성자</th>
-                  <th scope="col" style = "width:10%;">작성일</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr data-toggle="modal" data-target="#postModal" href="#" >
-    
-                      <th scope="row">5</th>
-                      <td><a href="#" id = "hover">4주차 허예은</a><button onclick="window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >알림 &nbsp;<span class="badge badge-light">4</span></button> </td>
-                      <td>허예은</td>
-                      <td>2019-10-10</td>
-                    </tr>
-    
+                <thead>
                   <tr>
-                        <th scope="row">4</th>
-                        <td><a href="#" id = "hover">4주차 허예은</a></td>
-                        <td>허예은</td>
-                        <td>2019-10-10</td>
-                      </tr>    
-                <tr>
-                  <th scope="row">3</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td><a href="#" id = "hover">4주차 허예은</a></td>
-                  <td>허예은</td>
-                  <td>2019-10-10</td>
-                </tr>
+                    <th scope="col">No.</th>
+                    <th scope="col" style="width:70%;">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col" style="width:10%;">작성일</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                <script>
+                  list();
+                </script>
               </tbody>
             </table>
     

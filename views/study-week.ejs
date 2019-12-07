@@ -19,7 +19,22 @@
       console.log(study);
       var boards = <%- boards %>;
       console.log(boards);
-  
+
+      var deadline = boards.deadline.split(' ',1)[0];
+      var studyName = boards.name;
+      var studyInfo = boards.info;
+      var week = boards.week;
+      console.log(date);
+
+      var mon = date.split('-',3)[1];
+      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      var day = date.split('-',3)[2];
+      var year = date.split('-',3)[0];
+
+      var studyContentsParent = boards.name;
+      var studyContentsParentWeek = boards.week;
+      var studyContents = boards.info;
+
      </script>
 </head>
 <body style="background:#e9ecef">
@@ -51,7 +66,7 @@
           <div class = "row">
               <div class = "col-lg-10">
           <script>
-              var studyName = ['OpenSource Project'];
+
             document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
           </script>
           </div>
@@ -59,7 +74,9 @@
             <p></p>
         </div>
         </div>
-            <p class="lead">스터디 소개글 여기에 넣기~ </p>
+        <script>
+            document.write('<p class="lead">'+studyInfo+' </p>');
+          </script>
         </div>
     </div>
 
@@ -134,9 +151,16 @@
                 <ul class="list-unstyled">
                     <!-- notice item -->
                     <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
-                            <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">11</span> NOV, 2019</div>
+                            <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">
+                                <script>
+                                     document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+                                  </script>
+                            </div>
                             <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                            <a href="notice-single" class="h4 mb-3 d-block week" >4주차 Polynomial and sparse matrix </a>
+                            <script>
+                              document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+week+"주차 "+studyName+'</a>') ;
+                              </script>
+                              
                             <ul class="list-styled mb-5">
                                     <li>다항식</li>
                                     <li>희소 행렬</li>

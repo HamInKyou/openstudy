@@ -206,6 +206,10 @@ router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
   try {
     const boardId = req.params.boardId;
     const pageId = req.params.pageId;
+    const exBoard = await Board.findOne({where : {
+      id : boardId
+    }});
+    const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
     const exPosts = await Post.findAll({
       include : {
         model : User,
@@ -218,7 +222,7 @@ router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
       offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')]
     });
     res.render('study-post-list', {
-      page : pageId, board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
+      page : pageId, study : JSON.stringify(exStudy), board : JSON.stringify(exBoard), posts: JSON.stringify(exPosts)
     });
   } catch (err) {
     console.error(err);
