@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Post, User, Study, Board, Quiz, Answer} = require('../models');
-
+const {Post, User, Study, Board, Quiz, Answer, Sequelize:{Op}} = require('../models');
 
 /* GET home page. */
 router.get('/',  (req, res, next) => {
@@ -68,7 +67,7 @@ router.get('/my-test-solve-particular/:answerId', async(req, res, next) => {
     if(value == null){
       quizAnswer = 'No Answer';
     }else{
-      quizAnswer = await Answer.findOne({where : {quizId : value}});
+      quizAnswer = await Answer.findOne({where : {id : value}});
     }
     res.render('my-test-solve-particular', {myanswer : JSON.stringify(answerPost), quiz : JSON.stringify(quizPost), answer : JSON.stringify(quizAnswer)});
   }catch(err){
@@ -112,8 +111,18 @@ router.get('/my-test-post-particular/:quizId', async(req, res, next) => {
       attributes : ['name'],
       raw : true
       }]});
-    const answerPost = await Answer.findAll({where : {id : quizId}});
-    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), answer : JSON.stringify(answerPost)});
+    let quizAnswer;
+    if(quizPost.ownerAnswerId == null){
+      quizAnswer = 'No Answer';
+    }else{
+      quizAnswer = await Answer.findOne({where : {id : quizPost.ownerAnswerId}});
+    }
+    const answerPost = await Answer.findAll({where : {id : {[Op.ne] : [quizPost.ownerAnswerId]}, quizId : quizId}, include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+    }]});
+    res.render('my-test-post-particular', { quiz : JSON.stringify(quizPost), answer : JSON.stringify(answerPost), myAnswer : JSON.stringify(quizAnswer)});
   }catch(err){
     console.error(err);
     next(err);
@@ -267,7 +276,11 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
     const pageId = req.params.pageId;
     const exBoard = await Board.findOne({where : {id : boardId}});
     const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
-    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}});
+    const exQuiz = await Quiz.findAll({offset : (pageId-1) * 10, limit : 10, order : [sequelize.literal('id DESC')], where : {boardId : boardId}, include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+    }]});
     res.render('study-quiz-list', {
       study : JSON.stringify(exStudy),
       board : JSON.stringify(exBoard),
@@ -283,7 +296,17 @@ router.get('/study-quiz-list/:boardId/:pageId', async(req, res, next) => {
 router.get('/study-quiz-solve/:quizId', async(req, res, next) => {
   try{
     const quizId = req.params.quizId;
-    const exQuiz = await Quiz.findOne({where : {id : quizId}});
+    const exQuiz = await Quiz.findOne({where : {id : quizId}
+      , include : [{
+      model : User,
+      attributes : ['id', 'nick'],
+      raw : true
+    }, {
+      model : Board,
+      attributes : ['name'],
+      raw : true
+      }] 
+    });
     const exBoard = await Board.findOne({where : {id : exQuiz.boardId}});
     const exStudy = await Study.findOne({where : {id : exBoard.studyId}});
     res.render('study-quiz-solve', {

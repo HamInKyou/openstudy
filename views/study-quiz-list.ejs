@@ -49,20 +49,18 @@
 
     var subjectName = study.name;
     var studyIntroduce = study.info;
-    var date = board.deadline.split(' ',1)[0];
-    console.log(date);
 
-    var mon = date.split('-',3)[1];
+    var mon = board.deadline.split('.',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = date.split('-',3)[2];
-    var year = date.split('-',3)[0];
+    var day = board.deadline.split('.',3)[2];
+    var year = 20+board.deadline.split('.',3)[0];
 
     var studyContentsParent = board.name;
     var studyContentsParentWeek = board.week;
     var studyContents = board.info;
 
     var quizArray = quiz;
-    var totalPage = parseInt(num/10)+1;
+    var totalPage = parseInt(quiz.length/10)+1;
     console.log(totalPage);
 
     function outputQuizList() {
@@ -70,7 +68,7 @@
         document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
         document.write('<td><a href="/study-quiz-solve/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
-        document.write('<td>' + quizArray[i].owner + '</td>')
+        document.write('<td>' + quizArray[i].user.nick + '</td>')
         document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
