@@ -106,8 +106,8 @@
           url : modalAttachDataUrl,
         }, function(data, status){
           AnswerId = data.answerId;
+          $('#postModal').modal("hide"); //닫기 
           alert(data.res);
-          $('#modal').modal("hide"); //닫기 
         });
       });
       //제출
@@ -115,7 +115,7 @@
         console.log('submit called');
         $.post("/quiz/create", {
             name: $("#subject").val(),
-            content: $("#message").html(),
+            content: $("#content").html(),
             ownerAnswerId: AnswerId,
             url: attachDataUrl,
             boardId: board.id
