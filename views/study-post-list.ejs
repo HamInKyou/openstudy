@@ -41,29 +41,46 @@
   </style>
 
   <script>
-    var posts = <%- posts %>
+    var study = <%-study %>
+    console.log(study);
+    var board = <%-board %>
+    console.log(board);
+    var posts = <%-posts %>
     console.log(posts);
 
+    // 스터디 이름 정보
+    var studyName = study.name;
+    var studyInfo = study.info;
 
+    // 주차 정보
+    var week = board.week;
+    var deadline = board.deadline;
+    var content = board.info;
+    var studyName = board.study.name;
+    var info = board.study.info;
     
-    // var studyArray = posts;
-    // var totalPage = parseInt((num/10)+1);
-    // var studyName = posts.name;
-    
-    var boardId  = posts.boardId;
-    var date = posts.createdAt;
-    var id = posts.id;
-    var title = posts.title;
 
-    function list(){
+    //  포스트 정보
+    var postArray = posts;
+    // var postName = posts.title;
+    // var postNo = posts.id;
+    // var pageInfo = posts.boardId;
+    // var date = posts.createdAt;
+    // var postTitle = posts.title;
+    // var postUser = posts.user;
 
-          document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >');
-          document.write('<th scope="row">'+boardId+'</th>');
-          document.write('<td><a href="#" id = "hover">'+post.title+'</a></td>');
-          // <button onclick="window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >알림 &nbsp;<span class="badge badge-light">4</span></button>
-          document.write('<td>'+id+'</td>');
-          document.write('<td>'+date+'</td>');
-          document.write('</tr>');
+
+
+
+    function list() {
+      for (var i = 0; i < postArray.length; i++) {
+        document.write('<tr>')
+        document.write('<th scope="row">' + postArray[i].id + '</th>')
+        document.write('<td><a href="/study-quiz-solve/'+postArray[i].title+'" id="hover">' + quizArray[i].name + '</a></td>')
+        document.write('<td>' + postArray[i].user + '</td>')
+        document.write('<td>' + postArray[i].UpdatedAt + '</td>')
+        document.write('</tr>')
+      }
     }
 
 
@@ -73,21 +90,20 @@
      
      <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#" style = color:white;>
-            <img src="../public/images/logo.png" height="30" alt="HOME">
+            <img src="../public/images/logo.png" href="/home" height="30" alt="HOME">
         </a>
         
-        <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
-        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+        <a class="nav-link " href="/home" style = color:white;>HOME</a>
+        <a class="nav-link active" href="/study-list" style = color:#ffbc3b;>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list" style = color:white;>OPENSTUDY</a>
     
         <div class="dropdown">
             <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
               MY MENU
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                     <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
-                     <a class="dropdown-item"  href="#">개인정보 설정</a>
-                     <a class="dropdown-item"  href="#">로그아웃</a>
+                     <a class="dropdown-item"  href="/my-calendar">MY Calendar</a>
+                     <a class="dropdown-item"  href="/login">로그아웃</a>
             </div>
         </div>
     
@@ -105,7 +121,9 @@
               <p></p>
           </div>
           </div>
-              <p class="lead">스터디 소개글 여기에 넣기~ </p>
+          <script>
+              document.write('<p class="lead">'+info+ '</p>');
+            </script>
           </div>
       </div>
   
@@ -117,32 +135,37 @@
             <div class="d-flex">
               <div class="text-center mr-4">
                 <div class="p-4 bg-warning text-white">
-                    <span class="h2 d-block">05</span> SEP,2019
+                  <script>
+                    document.write('<span class="h2 d-block">'+deadline);
+                    // <span class="h2 d-block">05</span> SEP,2019
+                    </script>
+                    
                 </div>
               </div>
               <!-- notice content -->
               <div>
-                <h3 class="mb-4">4주차 Polynomial and sparse matrix</h3>
+                <script>
+                
+                document.write('<h3 class="mb-4">'+" "+week+"주차 "+ title +'</h3>');
+              </script>
                 <ul class="list-styled mb-5">
-                  <li>다항식</li>
-                  <li>희소 행렬</li>
-                  <li>효율적인 희소행렬 표현</li>
-                  <li>배열의 표현</li>
-                  <li>스트링 추상 데이타 타입</li>
+                  <script>
+                    document.write('<li>'+content+"</li>");
+                  </script>
                 </ul>
               </div>
             </div>
   
               <div class="col-lg-12">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;">게시글 POST</button>
-                <button type="button" class="btn btn-warning" style = " margin-bottom:10%; width:200px;height:50px;">문제 POST</button>
+                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;" href = "/study-post">게시글 POST</button>
+                <button type="button" class="btn btn-warning" style = " margin-bottom:10%; width:200px;height:50px;" href = "/quiz-post">문제 POST</button>
               </div>
             </div>
             <div class="col-lg-12 offset-10">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;">게시글</button>
-                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;">문제</button>
+                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;" href= "/study-post-list">게시글</button>
+                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;" href = "/quiz-post-list">문제</button>
               </div>
             </div>
   
