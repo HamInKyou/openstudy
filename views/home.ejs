@@ -21,7 +21,7 @@
     console.log(Studies);
     
     
-    $(function() { //Studies부분 myStudies와 겹치지 않도록 고치기!!
+    $(function() { 
       for (var i = 1; i <= 3; i++) { //MyStudy 할당
         if(myStudies.length>=i){
           $("#mystudy"+i).find('h5.card-title').text(myStudies[i-1].name); //0~2
@@ -32,31 +32,30 @@
       }
       var j; var limit =-1 ;
       for (var i = 0; i <= 2; i++) { //openstudy 할당
-        //만약 마이스터디
         j=i;
-        if(myStudies.length==0){//myStudy 개수 0개인 경우
+        if(myStudies.length==0){
           j=i;
 
-        }else if(myStudies.length==1){//myStudy 개수 1개인 경우
+        }else if(myStudies.length==1){
         if(i!=0){ j=limit+1; limit=limit+1;}
-          while(myStudies[0].name==Studies[j].name){//i번째 스터디와 중복되는게 있으면
+          while(myStudies[0].name==Studies[j].name){
           if(i==j)
             j=limit;
-          j=j+1; limit=j; //limit으로 이미 거쳐간 거와 중복 안되도록
+          j=j+1; limit=j;
         }
         }else if(myStudies.length==2){
           if(i!=0){ j=limit+1; limit=limit+1;}
-          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)){//i번째 스터디와 중복되는게 있으면
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)){
           if(i==j)
             j=limit;
-          j=j+1; limit=j; //limit으로 이미 거쳐간 거와 중복 안되도록
+          j=j+1; limit=j;
         }
         }else{
           if(i!=0){ j=limit+1; limit=limit+1;}
-          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)||(myStudies[2].name==Studies[j].name)){//i번째 스터디와 중복되는게 있으면
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)||(myStudies[2].name==Studies[j].name)){
           if(i==j)
             j=limit;
-          j=j+1; limit=j; //limit으로 이미 거쳐간 거와 중복 안되도록
+          j=j+1; limit=j; 
         }
         }
         $("#openstudy"+(i+1)).find('h5.card-title').text(Studies[j].name);
@@ -64,22 +63,6 @@
         console.log( $("#openstudy"+(i+1)).find('h5.card-title'));
         
       }
-
-      // for (var i = 0; i < 3; i++) {
-      // console.log( $("#mystudy3").find('h5.card-title'));
-      // $("#mystudy1").find('h5.card-title').text(myStudies[0].name);
-      // $("#mystudy1").find('p.card-text').text(myStudies[0].info);
-      // $("#mystudy2").find('h5.card-title').text(myStudies[1].name);
-      // $("#mystudy2").find('p.card-text').text(myStudies[1].info);
-      // $("#mystudy3").find('h5.card-title').text(myStudies[2].name);
-      // $("#mystudy3").find('p.card-text').text(myStudies[2].info);
-      // $("#openstudy1").find('h5.card-title').text(Studies[3].name);
-      // $("#openstudy1").find('p.card-text').text(Studies[3].info);
-      // $("#openstudy2").find('h5.card-title').text(Studies[4].name);
-      // $("#openstudy2").find('p.card-text').text(Studies[4].info);
-      // $("#openstudy3").find('h5.card-title').text(Studies[5].name);
-      // $("#openstudy3").find('p.card-text').text(Studies[5].info);
-      // }
     });
     
     </script>   
