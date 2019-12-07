@@ -19,11 +19,12 @@
   <head>
      <meta charset="UTF-8">
      <title>OPEN STUDY</title>
-     <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-     
-     <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
+     <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+
+     <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   
   <style>
       #hover{
           color:#343a40;
@@ -41,6 +42,8 @@
   </style>
 
   <script>
+    var page = <%-page %>
+    console.log(page);
     var study = <%-study %>
     console.log(study);
     var board = <%-board %>
@@ -56,33 +59,52 @@
     var week = board.week;
     var deadline = board.deadline;
     var content = board.info;
-    var studyName = board.study.name;
-    var info = board.study.info;
     
+    // 시간 정보
+    var mon = board.deadline.split('.',3)[1];
+    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var day = board.deadline.split('.',3)[2];
+    var year = 20+board.deadline.split('.',3)[0];
 
     //  포스트 정보
     var postArray = posts;
-    // var postName = posts.title;
-    // var postNo = posts.id;
-    // var pageInfo = posts.boardId;
-    // var date = posts.createdAt;
-    // var postTitle = posts.title;
-    // var postUser = posts.user;
+    // var postMonth = post.updatedAt.split('-',5)[0];
+    // var postDay = post.updatedAt.split('-',3)[1];
+    // var postMon = post.updatedAt.split()
+
+  
+
+    //페이지 정보
+    var totalPage = parseInt(posts.length/10)+1;
 
 
-
+    function openChat(){
+      window.open('/chat','chat','width=430,height=600,location=no,status=no,scrollbars=yes');
+    }
 
     function list() {
       for (var i = 0; i < postArray.length; i++) {
-        document.write('<tr>')
-        document.write('<th scope="row">' + postArray[i].id + '</th>')
-        document.write('<td><a href="/study-quiz-solve/'+postArray[i].title+'" id="hover">' + quizArray[i].name + '</a></td>')
-        document.write('<td>' + postArray[i].user + '</td>')
-        document.write('<td>' + postArray[i].UpdatedAt + '</td>')
-        document.write('</tr>')
+        document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >')
+        document.write('<th scope="row">' + postArray[i].id + '</th>');
+        document.write('<td><a href="/study-post-list/'+postArray[i].id+'" id="hover">' + postArray[i].title + '</a><button onclick = openChat() target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >채팅방</button> </td>');
+        document.write('<td>' + postArray[i].user + '</td>');
+        document.write('<td>' + postArray[i].createdAt + '</td>');
+        document.write('</tr>');
       }
     }
 
+    function makePageNav() {
+      for(var i = 1; i <= totalPage; i++ ){
+        if(i==page){
+          document.write('<li class="page-item active" aria-current="page">');
+          document.write('<a class="page-link" href="/study-post-list/'+ board.id +'/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('</li>');
+        }
+        else{
+          document.write('<li class="page-item"><a class="page-link" href="/study-post-list/'+ board.id +'/'+i+'">'+i+'</a></li>');
+        }
+      }
+    }
 
   </script>
   </head>
@@ -90,7 +112,7 @@
      
      <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#" style = color:white;>
-            <img src="../public/images/logo.png" href="/home" height="30" alt="HOME">
+            <img src="/public/images/logo.png" href="/home" height="30" alt="HOME">
         </a>
         
         <a class="nav-link " href="/home" style = color:white;>HOME</a>
@@ -122,7 +144,7 @@
           </div>
           </div>
           <script>
-              document.write('<p class="lead">'+info+ '</p>');
+              document.write('<p class="lead">'+studyInfo+ '</p>');
             </script>
           </div>
       </div>
@@ -136,8 +158,7 @@
               <div class="text-center mr-4">
                 <div class="p-4 bg-warning text-white">
                   <script>
-                    document.write('<span class="h2 d-block">'+deadline);
-                    // <span class="h2 d-block">05</span> SEP,2019
+                      document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
                     </script>
                     
                 </div>
@@ -146,7 +167,7 @@
               <div>
                 <script>
                 
-                document.write('<h3 class="mb-4">'+" "+week+"주차 "+ title +'</h3>');
+                document.write('<h3 class="mb-4">'+" "+week+"주차 "+ studyName +'</h3>');
               </script>
                 <ul class="list-styled mb-5">
                   <script>
@@ -208,11 +229,15 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>5</td>
-                                    <td>허예은</td>
-                                    <td>2019-10-10</td>
-                                  </tr>
+
+                                  <script>
+                                    document.write('<tr>');
+                                    document.write('<td>'+postArray[i].id+'</td>');
+                                    document.write('<td>'+허예은+'</td>');
+                                    document.write('<td>'+day+" - "+mon_Eng[mon-1]+" - " +year+'</td>');
+                                    document.write('</tr>');
+                                    </script>
+                                  
                                 </tbody>
                               </table>
                               <table>
@@ -260,19 +285,11 @@
   
             <!-- page navigation -->
             <nav aria-label="Page navigation">
-              <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active" aria-current="page">
-                  <a class="page-link" href="#" style = "background:ffbc3b;">1 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-                </li>
-              </ul>
+                <ul class="pagination justify-content-center">
+                    <script>
+                      makePageNav();  
+                    </script>
+                  </ul>
             </nav>
   
           </div>
@@ -280,6 +297,6 @@
       </div>
     </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+  <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
   </body>   
   </html>
