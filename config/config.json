@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "0213",
+    "password": "9379",
     "database": "openstudy",
     "host": "127.0.0.1",
     "dialect": "mysql",
