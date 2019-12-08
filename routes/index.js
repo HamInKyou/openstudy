@@ -17,9 +17,12 @@ router.get('/home', async (req, res, next) => {
     const enrolledStudies = await exUser.getEnrolledStudy({
       raw: true
     });
-    const result = JSON.stringify(enrolledStudies);
+    const resultEnrolled = JSON.stringify(enrolledStudies);
+    const Studies = await Study.findAll({}); //myStudies와 중복되지 않게 고쳐야함
+    const resultStudies = JSON.stringify(Studies);
     res.render('home', {
-      myStudies: result
+      myStudies: resultEnrolled,
+      Studies: resultStudies
     });
   } catch (err) {
     console.error(err);

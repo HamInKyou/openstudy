@@ -17,11 +17,52 @@
   <script>
     var myStudies =<%- myStudies %>;
     console.log(myStudies);
+    var Studies =<%- Studies %>;
+    console.log(Studies);
     
-    $(function() {
-      console.log( $("#mystudy3").find('h5.card-title'));
-      $("#mystudy3").find('h5.card-title').text(myStudies[0].name);
-      $("#mystudy3").find('p.card-text').text(myStudies[0].info);
+    
+    $(function() { 
+      for (var i = 1; i <= 3; i++) { //MyStudy 할당
+        if(myStudies.length>=i){
+          $("#mystudy"+i).find('h5.card-title').text(myStudies[i-1].name); //0~2
+          $("#mystudy"+i).find('p.card-text').text(myStudies[i-1].info);
+          console.log( $("#mystudy"+i).find('h5.card-title'));
+
+        }
+      }
+      var j; var limit =-1 ;
+      for (var i = 0; i <= 2; i++) { //openstudy 할당
+        j=i;
+        if(myStudies.length==0){
+          j=i;
+
+        }else if(myStudies.length==1){
+        if(i!=0){ j=limit+1; limit=limit+1;}
+          while(myStudies[0].name==Studies[j].name){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j;
+        }
+        }else if(myStudies.length==2){
+          if(i!=0){ j=limit+1; limit=limit+1;}
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j;
+        }
+        }else{
+          if(i!=0){ j=limit+1; limit=limit+1;}
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)||(myStudies[2].name==Studies[j].name)){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j; 
+        }
+        }
+        $("#openstudy"+(i+1)).find('h5.card-title').text(Studies[j].name);
+        $("#openstudy"+(i+1)).find('p.card-text').text(Studies[j].info);
+        console.log( $("#openstudy"+(i+1)).find('h5.card-title'));
+        
+      }
     });
     
     </script>   
@@ -30,11 +71,11 @@
    style="background:#ffbc3b">
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="/home" style = "color:rgb(7, 5, 5);">
+    <a class="navbar-brand" href="#" style = "color:rgb(7, 5, 5);">
         <img src="../public/images/logo.png" height="30" alt="HOME">
     </a>
     
-    <a class="nav-link active" href="/home" style = color:#ffbc3b;>HOME</a>
+    <a class="nav-link active" href="home" style = color:#ffbc3b;>HOME</a>
     <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
     <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
 
@@ -43,8 +84,9 @@
           MY MENU
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-                 <a class="dropdown-item"  href="/my-calendar">MY Calendar</a>
-                 <a class="dropdown-item"  href="/my-test-post/1">MY TEST</a>
+                 <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
+                 <a class="dropdown-item"  href="my-test">MY TEST</a>
+                 <a class="dropdown-item"  href="#">개인정보 설정</a>
                  <a class="dropdown-item"  href="#">로그아웃</a>
         </div>
     </div>
@@ -72,102 +114,36 @@
    <div class ="col-lg-offset-1 col-lg-10 col-md-4 col-sm-3"><h2>MY STUDY </h2></div> 
    <div class = "btn-group btn-group-toggle" data-toggle="buttons">
           <div class = "col-lg-offset-4 col-md-offset-2" style="margin-left:5%;"><button type="button" class="btn btn-outline-dark">See More</button></div>
-          <div class = "col-lg-1"><button type="button" class="btn btn-outline-dark" data-toggle = "modal" data-target = "#myModal"><i class="fas fa-plus fa-lg"></i></button></div>
-    </div>
-
-    <!-- modal -->
-    <div class = "modal fade" id = myModal tabindex="-1" role="dialog" aria-labelledby = "myModalLabel" aria-hidden="true">
-      <div class = "modal-dialog modal-dialog-centered">
-        <div class = "modal-content">
-          <div class = "modal-header">
-              <h4 class = "modal-title" id = "myModalLabel">스터디 추가</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-          </div>
-          <div class = "modal-body">
-            <div class = "row">
-              <div class ="name">
-                <form>
-                   
-                  <div class = "col-lg-12">
-                      <h5 style="margin-left:5%;">스터디 과목</h5>
-                    <input type="text" class="form-control" id="name" placeholder="스터디 과목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
-                  </div>
-                </form>
-              </div>
-            </div>
-            <hr class ="my-4">
-            <div class = "row">
-              <div class ="intro">
-                <form>
-                  <div class = "col-lg-12">
-                      <h5 style="margin-left:5%;">스터디 소개글</h5>
-                    <input type="text" class="form-control" id="name" placeholder="스터디 한줄소개글을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
-                  </div>
-                </form>
-              </div>
-            </div>
-                <hr class ="my-4">
-              <div class = "row">
-                  <div class ="image">
-                    <div class = "col-lg-12"><h5 style="margin-left:5%;"> 대표이미지 설정</h5></div>
-                    <div class="input-group flex-nowrap" style="width:110%;">
-                        <div class="input-group" style = "margin-left:7.5%;">
-                          <div class="custom-file">
-                              <div class="input-group-prepend">
-                                  <span class="input-group-text" id="addon-wrapping"><i class="fas fa-file-upload"></i></span>
-                                </div>
-                            <input type="file" class="custom-file-input" id="inputGroupFile04"
-                              aria-describedby="inputGroupFileAddon04">
-                            <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
-                          </div>
-                          <div class="input-group-append">
-                            <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
-                          </div>
-                        </div>
-            
-                      </div>
-                  
-                  </div>
-                </div>
-          </div>
-          &nbsp;
-          <div class="modal-footer">
-            <a class ="btn btn-warning btn-lg" role="button" data-dismiss = "modal">Close</a>
-            <a class = "btn btn-warning btn-lg" role ="button">Save</a>
-          </div>
+          <div class = "col-lg-1"><button type="button" class="btn btn-outline-dark"><i class="fas fa-plus fa-lg"></i></button></div>
         </div>
-      </div>
-    </div>
-
-
   </div>
   <div class="row" style = "margin-top: 20px;">
-    <div class="col-sm-4">
+    <div class="col-sm-4" id = "mystudy1">
         <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY1</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디에 등록해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id = "mystudy2">
       <div class="card">
           <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY2</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디에 등록해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id = "mystudy3">
       <div class="card">
           <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">MYSTUDY3</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디에 등록해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
@@ -179,32 +155,32 @@
              <div class = "col-lg-offset-4 col-md-offset-2" style="margin-left:5%;"><button type="button" class="btn btn-outline-dark">See More</button></div>
      </div>
   <div class="row" style = "margin-top: 20px;  margin-bottom: 60px;">
-    <div class="col-sm-4">
+    <div class="col-sm-4" id = "openstudy1">
       <div class="card">
         <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY1</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디를 생성해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id= "openstudy2">
       <div class="card">
         <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY2</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디를 생성해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
     </div>
-    <div class="col-sm-4" id="mystudy3">
+    <div class="col-sm-4" id="openstudy3">
       <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">OPENSTUDY3</h5>
-          <p class="card-text">스터디방 1 소개 내용~~~</p>
+          <p class="card-text">새로운 스터디를 생성해보세요</p>
           <a href="#" class="btn btn-warning">입장하기</a>
         </div>
       </div>
