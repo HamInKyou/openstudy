@@ -22,13 +22,11 @@
       var modalAttachDataUrl = "";
       var subjectName = study.name;
       var studyIntroduce = study.info;
-      var date = board.deadline.split(' ', 1)[0];
-      console.log(date);
 
-      var mon = date.split('-', 3)[1];
-      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-      var day = date.split('-', 3)[2];
-      var year = date.split('-', 3)[0];
+      var mon = board.deadline.split('.',3)[1];
+    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var day = board.deadline.split('.',3)[2];
+    var year = 20+board.deadline.split('.',3)[0];
 
       var studyContentsParent = board.name;
       var studyContentsParentWeek = board.week;
@@ -191,21 +189,9 @@
             </thead>
             <tbody>
                <tr>
-                  <td>
-                     <script>
-                        document.write(quiz.owner)
-                     </script>
-                  </td>
-                  <td>
-                     <script>
-                        document.write(quiz.boardId)
-                     </script>
-                  </td>
-                  <td>
-                     <script>
-                        document.write(quiz.createdAt.split('T', 1)[0])
-                     </script>
-                  </td>
+                  <td><script>document.write(quiz.user.nick)</script></td>
+                  <td><script>document.write(board.name)</script></td>
+                  <td><script>document.write(quiz.createdAt.split('T',1)[0])</script></td>
                </tr>
                <tr>
                   <td colspan="3">

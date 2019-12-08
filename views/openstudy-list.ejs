@@ -1,10 +1,3 @@
-<!-- study-list.html (home.html에 see more 버튼을 누르면 스터디 목록을 띄워줌)
-- My study 일 때 jumbotron에 My Study 띄우기. openstudy일때는 Open Study 띄우기
-- My Study와 Open Study html 형태가 같아서 
- home.html 의 My Study 글씨 오른쪽에 위치해 있는 see more을 누르면  
- My Study의 목록이 나오고, 
- Open Study 글씨 오른쪽에 위치해 있는 see more을 누르면  Open Study의 목록이 나옴. -->
- 
  <!DOCTYPE html>
  <html lang="ko">
  <head>
@@ -23,10 +16,7 @@
          color:#343a40!important;
      }
     </style>
-    <script>
-        var studies =<%-studies %>;
-        console.log(studies);
-    </script>
+    
  </head>
  
  
@@ -61,7 +51,7 @@
                <div class = "col-lg-4">
                  <script>
                      var studyType=["My\tStudy","Open\tStudy"];
-                     var data = ["My\tStudy"];
+                     var data = ["Open\tStudy"];
                          if(data == studyType[0]){
                              document.write('<p class="display-4">'+studyType[0]+'</p>');
                          } else {

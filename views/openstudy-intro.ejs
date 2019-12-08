@@ -4,9 +4,9 @@
 <head>
    <meta charset="UTF-8">
    <title>OPEN STUDY</title>
-   <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
    
-   <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/study-intro.css">
    <link rel="stylesheet" href="/css/global.css">
@@ -18,8 +18,7 @@
 
     var studyName = studyInfo.name;
     var studyInfo = studyInfo.info;
-    var studyUsers = studyInfo.userId;
-
+    
 
   </script>
 </head>
@@ -31,8 +30,8 @@
       </a>
       
       <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link active" href="study-list.ejs" >MYSTUDY</a>
-      <a class="nav-link " href="openstudy-list.ejs">OPENSTUDY</a>
+      <a class="nav-link" href="#" >MYSTUDY</a>
+      <a class="nav-link active" href="#">OPENSTUDY</a>
   
       <div class="dropdown">
           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -40,8 +39,6 @@
           </button>
           <div class="dropdown-menu dropdown-menu-right">
                    <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="my-test">MY TEST</a>
-                   <a class="dropdown-item"  href="#">개인정보 설정</a>
                    <a class="dropdown-item"  href="#">로그아웃</a>
           </div>
       </div>
@@ -49,17 +46,14 @@
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <div class = "row" >
             <script>
                 document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                
             </script>
-            </div>
             <hr class="my-4">
-            <p class = "lead"> 
             <script>
-                document.write('<p class = "lead">'+ studyInfo+'</p>');
-            </script>    
-            </p>
+            document.write('<p class = "lead">'+studyInfo+ '</p>');
+        </script>
         </div>
     </div>
 
@@ -67,9 +61,8 @@
         <div class = "row align-items-center mb-5">
             <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> 
                 <script>
-                document.write('<h1>'+studyName+'</h1>');
+                    document.write('<h1>'+studyName+'</h1></div>');
                 </script>
-            </div>
             <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
                     <div class="d-flex align-items-center">
@@ -77,15 +70,15 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    document.write('<p class = "mb-0">'+ "&nbsp;&nbsp;&nbsp;&nbsp;TOTAL " + studyUsers + "<p>");
+                                    // document.write('<p class="mb-0">'+"　TOTAL "+users+'</p>');
                                 </script>
                             </div>
                     </div>
                 </li>
             </div>
-            <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+            <!-- <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
                 <li class="list-inline-item mr-4 mb-3 mb-sm-0">
-                    <!-- <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
                             <i class="fas fa-question-circle fa-2x"></i>
                             <div class="text-left">
                                 <h6 class="mb-0">　PROBLEM NO.</h6>
@@ -94,19 +87,18 @@
                                     document.write('<p class="mb-0">'+"　TOTAL "+problems.length+'</p>');
                                 </script>
                             </div>
-                    </div> -->
+                    </div>
                 </li>
-            </div>
+            </div> -->
             
                 <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
-                    <!-- <script>
-                    if(myName){document.write('<a href="study-lesson" class="btn btn-warning">'+"출석하기"+'</a>');}
-                    else{document.write('<a href="study-lesson" class="btn btn-warning">'+"참여하기"+'</a>');
-                        myName.push("허예은");
-                        alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
-                        }
-                    </script> -->
-                    <a href="/study-week" class="btn btn-warning">참여하기</a>
+                    <script>
+                    document.write('<a href="study-lesson" class="btn btn-warning" onclick = "/study-week/">'+"참여하기"+'</a>');
+                    users.push(userId);//유저 아이디 삽입
+                    alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
+                    
+
+                    </script>
                 </div>
         </div>
         
@@ -114,16 +106,17 @@
 
         <div class = "col-12 mb-4">
             <h3>ABOUT STUDY</h3>
+
             <script>
-            document.write('<p class = "lead">'+ studyInfo+'</p>');
-        </script>
+            document.write('<p>'+studyInfo+'</p>');
+            </script>
         </div>
 
         <div class="col-12 mb-4">
-            <div class = "row">
-            <h3 class="mb-3">STUDY OUTLINE</h3>
-            <button onclick="window.open('/add-outline','add-outline','width=600,height=700,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-secondary btn-sm" style = "height:30px; width:30px;margin-left:2.5%;" ><i class="fas fa-plus fa-md" style ="margin-left:-27.5%;"></i></button>
-            </div>
+                <div class = "row">
+                    <h3 class="mb-3">STUDY OUTLINE</h3>
+                    <button onclick="window.open('add-outline.html','add-outline','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-secondary btn-sm" style = "height:30px; width:30px;margin-left:2.5%;" ><i class="fas fa-plus fa-md" style ="margin-left:-27.5%;"></i></button>
+                </div>
             
             <div class="col-12 px-0">
                 
@@ -144,20 +137,12 @@
             </div>
           </div>
 
-          <!-- <div class = "col-12 mb-4">
-                <h3>OTHER STUDIES</h3>
-                <div class = "row">
-                
-                </div>
-            </div> -->
-
     </div>
 
-    <!-- <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
-   
-    </nav> -->
-
+    <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
+        <p> Footer bar</p>      
+    </nav>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
 </body>   
 </html>

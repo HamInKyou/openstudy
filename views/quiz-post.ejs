@@ -11,22 +11,23 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <script>
-    var study = <%- study %> ;
-    console.log(study);
-    var board = <%- board %> ;
-    console.log(board);
+      var study =<%-study %>;
+      console.log(study);
+      var board =<%-board %>;
+      console.log(board);
 
-    var subjectName = 'OpenSource Project';
-    var studyIntroduce = '스터디 소개글 여기에 넣기~';
+      var subjectName = study.name;
+      var studyIntroduce = study.info;
 
-    var mon = 11;
-    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = 12;
-    var year = 2019;
+      var mon = board.deadline.split('.',3)[1];
+      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      var day = board.deadline.split('.',3)[2];
+      var year = 20+board.deadline.split('.',3)[0];
 
-    var studyContentsParent = board.name;
-    var studyContentsParentWeek = board.week;
-    var studyContents = board.info;
+      var studyContentsParent = board.name;
+      var studyContentsParentWeek = board.week;
+      var studyContents = board.info;
+   
 
     $(function () {
       var AnswerId = 0;

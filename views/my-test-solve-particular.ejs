@@ -17,6 +17,31 @@
       console.log(myanswer);
       var answer =<%-answer %>;
       console.log(answer);
+
+      function outputMyAnswer(){
+         if(myanswer == 'No Answer'){}
+         else{
+            document.write('<div class="col-12" style="margin-top: 2%;">');
+            document.write('<p><i class="fas fa-user mr-2"></i>나의 답</p>');
+            document.write('</div>');
+            document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+            document.write(myanswer.content);
+            document.write('</div>');
+         }
+      }
+
+      function outputPresenterAnswer(){
+         if(answer == 'No Answer'){}
+         else{
+            document.write('<div class="col-12" style="margin-top: 2%;">');
+            document.write('<p><i class="fas fa-user mr-2"></i>제출자의 답</p>');
+            document.write('</div>');
+            document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+            document.write(answer.content);
+            document.write('</div>');
+         }
+      }
+
    </script>
 
 </head>
@@ -99,24 +124,14 @@
          </table>
 
          <!--내가 제출한 답 정보-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p>
-               <h5>나의 답</h5>
-            </p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputMyAnswer();
+         </script>
 
          <!--제출자가 제출한 답 정보-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p>
-               <h5>제출자의 답</h5>
-            </p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputPresenterAnswer();
+         </script>
       </div>
 
 
