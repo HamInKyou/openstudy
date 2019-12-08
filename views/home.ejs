@@ -17,65 +17,72 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
-    var myStudies = <%-myStudies %> ;
+    $(function(){
+      var myStudies = <%- myStudies %> ;
     console.log(myStudies);
-    var Studies = <%-Studies %> ;
+    var Studies = <%- Studies %> ;
     console.log(Studies);
 
     for (var i = 1; i <= 3; i++) { //MyStudy 할당
-        if (myStudies.length >= i) {
-          $("#mystudy" + i).find('h5.card-title').text(myStudies[i - 1].name); //0~2
-          $("#mystudy" + i).find('p.card-text').text(myStudies[i - 1].info);
-          $("#mystudy" + i).find('a').attr("href", "/study-intro/" + myStudies[i - 1].id);
-          console.log($("#mystudy" + i).find('h5.card-title'));
+      if (myStudies.length >= i) {
+        $("#mystudy" + i).find('h5.card-title').text(myStudies[i - 1].name); //0~2
+        $("#mystudy" + i).find('p.card-text').text(myStudies[i - 1].info);
+        $("#mystudy" + i).find('a').attr("href", "/study-intro/" + myStudies[i - 1].id);
+        if(myStudies[i - 1].imgUrl != ''){
+          $("#mystudy" + i).find('img').attr('src',myStudies[i - 1].imgUrl);
+        }
+        
+        console.log($("#mystudy" + i).find('h5.card-title'));
+      }
+    }
+    var j;
+    var limit = -1;
+    for (var i = 0; i <= 2; i++) { //openstudy 할당
+      j = i;
+      if (myStudies.length == 0) {
+        j = i;
+      } else if (myStudies.length == 1) {
+        if (i != 0) {
+          j = limit + 1;
+          limit = limit + 1;
+        }
+        while (myStudies[0].name == Studies[j].name) {
+          if (i == j)
+            j = limit;
+          j = j + 1;
+          limit = j;
+        }
+      } else if (myStudies.length == 2) {
+        if (i != 0) {
+          j = limit + 1;
+          limit = limit + 1;
+        }
+        while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name)) {
+          if (i == j)
+            j = limit;
+          j = j + 1;
+          limit = j;
+        }
+      } else {
+        if (i != 0) {
+          j = limit + 1;
+          limit = limit + 1;
+        }
+        while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
+            .name == Studies[j].name)) {
+          if (i == j)
+            j = limit;
+          j = j + 1;
+          limit = j;
         }
       }
-      var j;
-      var limit = -1;
-      for (var i = 0; i <= 2; i++) { //openstudy 할당
-        j = i;
-        if (myStudies.length == 0) {
-          j = i;
-        } else if (myStudies.length == 1) {
-          if (i != 0) {
-            j = limit + 1;
-            limit = limit + 1;
-          }
-          while (myStudies[0].name == Studies[j].name) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
-        } else if (myStudies.length == 2) {
-          if (i != 0) {
-            j = limit + 1;
-            limit = limit + 1;
-          }
-          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name)) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
-        } else {
-          if (i != 0) {
-            j = limit + 1;
-            limit = limit + 1;
-          }
-          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
-              .name == Studies[j].name)) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
-        }
     }
     $("#openstudy" + (i + 1)).find('h5.card-title').text(Studies[j].name);
     $("#openstudy" + (i + 1)).find('p.card-text').text(Studies[j].info);
     $("#openstudy" + (i + 1)).find('a').attr("href", "/study-intro/" + Studies[j].id);
     console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
+    });
+    
   </script>
   <script src="/public/javascripts/homeScript.js"></script>
 
