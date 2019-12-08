@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const {Post, User, Study, Board, Quiz, Answer, Sequelize:{Op}} = require('../models');
+const {Post, User, Study, Board, Quiz, Answer, Sequelize:{Op}, Tag, Chatlog} = require('../models');
+
 
 /* GET home page. */
 router.get('/',  (req, res, next) => {
@@ -352,21 +353,21 @@ router.get('/quiz-post/:boardId', async(req,res,next) => {
     next(err);
   }
 }); 
-
-router.get('/quiz-post', (req, res, next) => {
-  res.render('quiz-post');
-});
-
 router.get('/chat/:tagId', async (req, res, next) => {
   try{
-    //const tag = await Tag.findOne({where : { id : req.params.tagId}});
-   
-    // const chatlogs = await Chatlog
-    //const io = req.app.get('io');
-    //채팅로그, 태그정보들 가져와서 넘겨주기 
-   
+    const tag = await Tag.findOne({where : { id : req.params.tagId}}); 
+    const chatlogs = await Chatlog.findAll({
+      where : { tagId : req.params.tagId },
+      raw : true,
+    });
+    
     //chat.ejs에서 처음 클라에서 소켓 접속
-    res.render('chat', {roomId : req.params.tagId});
+    res.render('chat', {
+      roomId : req.params.tagId,
+      chatlogs : JSON.stringify(chatlogs),
+      user : JSON.stringify(req.user),
+      tag : JSON.stringify(tag),
+    });
   } catch(err) {
     console.error(err);
     next(err);
