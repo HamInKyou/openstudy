@@ -39,6 +39,11 @@ board 내용 넣기
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
     var day = board.deadline.split('.',3)[2];
     var year = 20+board.deadline.split('.',3)[0];
+
+    function openChat(){
+      window.open('/chat/','chat','width=430,height=600,location=no,status=no,scrollbars=yes');
+    }
+
   </script>
 </head>
 <body style="background:#e9ecef">
@@ -104,6 +109,11 @@ board 내용 넣기
                       </ul>
                     </div>
                   </div>
+                  <div class = "row mb-3" >
+                      <button onclick = openChat() target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:90%; margin-right:5%;" >채팅방</button>
+                      
+                  </div>
+
             <table class="table">
                     <thead>
                       <tr>
@@ -123,10 +133,12 @@ board 내용 넣기
                         
                     </tbody>
                   </table>
+
+                  
                   <script>
                     document.write('<div contentEditable="false" id="content" class="form-control mb-3"  style ="height:500px;overflow:scroll;background:#e9ecef;">'+postContent+'</div>');
                   </script>
-                  <div class = "row justify-content-center" style  = "margin-bottom:5%;"><a class = "btn btn-warning">목록</a></div>
+                  <div class = "row justify-content-center" style  = "margin-bottom:5%;" href = "/study-post-list/"><a class = "btn btn-warning">목록</a></div>
     </div>
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

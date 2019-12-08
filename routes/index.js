@@ -338,6 +338,10 @@ router.get('/study-week/:studyId', async (req, res, next) => {
   }
 });
 
+router.get('/add-study-week', (req, res, next) => {
+  res.render('add-study-week');
+});
+
 router.get('/quiz-post/:boardId', async(req,res,next) => {
   try{
     const exBoard = await Board.findOne({where : {id : req.params.boardId}});

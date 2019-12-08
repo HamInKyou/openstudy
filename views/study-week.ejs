@@ -22,42 +22,48 @@
 
       var studyName = study.name;
       var studyInfo = study.info;
-      // var deadline = boards.deadline.split(' ',1)[0];
+      
       // var boardName = boards.name;
       // var boardInfo = boards.info;
       // var boardweek = boards.week;
       // console.log(date);
 
-      // var mon = date.split('-',3)[1];
-      // var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-      // var day = date.split('-',3)[2];
-      // var year = date.split('-',3)[0];
 
-      var boardArray = boards;
-      // function boardList(){
-    //       document.write('<ul class="list-unstyled">');
+      function boardList(){
+        var boardArray = boards;
+        document.write('<ul class="list-unstyled">');
 
-    //       for(var i = 0; i<boardArray.length;i++){
-    //       document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
-    //       document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
-    //       // document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
-    //       document.write('</div>');
-    //       document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
-                            
-    //       document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray.week[i]+"주차 "+boardArray.name[i]+'</a>') ;      
-    //       document.write('<ul class="list-styled mb-5">');
-    //       // for(var j = 0; j<boardArray.info.length;j++){
-    //         document.write('<li>'+boardArray[i].info+'</li>');
-    //       // }
-    //       document.write('</ul>');
-    //       document.write('</div>');
-    //       document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>');
-    //       document.write('</li>');
-    //       }
-    //       document.write('</ul>');
-                      
-    //   }
-      
+        for(var i = 0; i<boardArray.length;i++){
+        var mon = boardArray[i].deadline.split('.',3)[1];
+        var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        var day = boardArray[i].deadline.split('.',3)[2];
+        var year = 20+boardArray[i].deadline.split('.',3)[0];
+
+        document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
+        document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
+        document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+        document.write('</div>');
+        document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
+                          
+        document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray[i].week+"주차 "+boardArray[i].name+'</a>') ;      
+        document.write('<ul class="list-styled mb-5">');
+        // for(var j = 0; j<boardArray.info.length;j++){
+          document.write('<li>'+boardArray[i].info+'</li>');
+        // }
+        document.write('</ul>');
+        document.write('</div>');
+        document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="/study-post-list/'+boardArray[i].id+'" class="btn btn-warning">참여하기</a></div>');
+        document.write('</li>');
+        }
+        document.write('</ul>');
+
+
+      function openAddWeek(){
+        window.open('/add-study-week','studyweek','width=500,height=600,location=no,status=no,scrollbars=yes');
+      }
+
+            
+  }
 
      </script>
 </head>
@@ -105,161 +111,18 @@
 
     <div class = "container">
         <!-- /page title -->
-        <div class = "row">
-        <div class="col-lg-2 text-right pr-0 pr-md-1" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div>
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-lg"></i></button>
+        <div class = " text-right pr-0 pr-md-2">
+        <!-- <div class="" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div> -->
+        <button onclick = openAddWeek() target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:90%; margin-right:5%;" >채팅방</button>
         </div>
         &nbsp;
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">주차별 내용 추가</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class = "row">
-                        <div class ="name">
-                          <form>
-                             
-                            <div class = "col-lg-12">
-                                <h5 >스터디 제목</h5>
-                              <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-
-                      <hr class ="my-4">
-                      <div class = "row">
-                          <p  style="margin:2%!important; 
-                          margin-left:5%!important;">마감일
-                        <div class="form-row">
-                            <div class="form-group col-md-7">
-                              <input type="date" class="form-control" id="finishDate" >
-                            </div>
-                            <div class="form-group col-md-5">
-                              <input type="time" class="form-control" id="finishTime">
-                            </div>
-                          </div>
-                        </p>
-                    </div>
-
-                    <hr class ="my-4">
-                    <form>
-                    <div class = "col-lg-12">
-                          <h5 >스터디 내용</h5>
-                          <input type="text" class="form-control" id="name" placeholder="스터디 내용을 입력하세요.">
-                          <button type="button" class="btn btn-warning"><i class="fas fa-plus fa-lg"></i></button>
-                        
-                      </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-warning">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
     <section class="section">
             <div class="container">
             <div class="row">
                 <div class="col-12">
                   <script>
-                            document.write('<ul class="list-unstyled">');
-
-    for(var i = 0; i<boardArray.length;i++){
-    document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
-    document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
-    // document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
-    document.write('</div>');
-    document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
-                      
-    document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray.week[i]+"주차 "+boardArray.name[i]+'</a>') ;      
-    document.write('<ul class="list-styled mb-5">');
-    // for(var j = 0; j<boardArray.info.length;j++){
-      document.write('<li>'+boardArray[i].info+'</li>');
-    // }
-    document.write('</ul>');
-    document.write('</div>');
-    document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>');
-    document.write('</li>');
-    }
-    document.write('</ul>');
-            
-
-
-
+                  boardList();
                 </script>
-                <!-- <ul class="list-unstyled">
-                    //notice item
-                    <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
-                            <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">
-                                <script>
-                                     document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
-                                  </script>
-                            </div>
-                            <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                            <script>
-                              document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+week+"주차 "+studyName+'</a>') ;
-                              </script>
-                              
-                            <ul class="list-styled mb-5">
-                                    <li>다항식</li>
-                                    <li>희소 행렬</li>
-                                    <li>효율적인 희소행렬 표현</li>
-                                    <li>배열의 표현</li>
-                                    <li>스트링 추상 데이타 타입</li>
-                                </ul>
-                            </div>
-                            <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
-                        </li>
-                //notice item 
-                <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
-                        <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">07</span> NOV, 2019</div>
-                        <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                          <a href="notice-single" class="h4 mb-3 d-block week">3주차 array & ADT & 선형리스트 </a>
-                          <ul class="list-styled mb-5">
-                                <li>C++에서의 데이타 추상화와 캡슐화 </li>
-                                <li>ADT와 C++ 클래스</li>
-                                <li>추상 데이타 타입으로서의 배열 </li>
-                                <li>선형 리스트</li>
-                            </ul>
-                        </div>
-                        <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
-                      </li>
-                //notice item 
-                <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
-                  <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">25</span> OCT, 2019</div>
-                  <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single" class="h4 mb-3 d-block week">2주차 Basic concept of data structures </a>
-                    <ul class="list-styled mb-5">
-                        <li>객체 지향 설계 </li>
-                        <li>공간 복잡도</li>
-                        <li>시간 복잡도 </li>
-                        <li>성능 측정</li>
-                      </ul>
-                  </div>
-                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
-                </li>
-                //notice item 
-                <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
-                  <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">09</span> OCT, 2019</div>
-                  <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
-                    <a href="notice-single" class="h4 mb-3 d-block week">1주차 Introduction of data structures </a>
-                    <ul class="list-styled mb-5">
-                        <li>자료구조 개요 </li>
-                        <li>자료구조의 분류</li>
-                        <li>자료의 표현 </li>
-                      </ul>
-                  </div>
-                  <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
-                </li>
-              </ul> -->
             </div>
           </div>
         </div>
