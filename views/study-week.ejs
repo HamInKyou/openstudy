@@ -56,12 +56,6 @@
         document.write('</li>');
         }
         document.write('</ul>');
-
-
-      function openAddWeek(){
-        window.open('/add-study-week','studyweek','width=500,height=600,location=no,status=no,scrollbars=yes');
-      }
-
             
   }
 
@@ -113,9 +107,63 @@
         <!-- /page title -->
         <div class = " text-right pr-0 pr-md-2">
         <!-- <div class="" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div> -->
-        <button onclick = openAddWeek() target="_blank" type="button" class="btn btn-outline-secondary" style = "margin-left:90%; margin-right:5%;" ><i class="fas fa-plus"></i></button>
+        <button data-toggle = "modal" data-target = "#myModal" type="button" class="btn btn-outline-secondary" style = "margin-left:90%; margin-right:5%;" ><i class="fas fa-plus"></i></button>
         </div>
         &nbsp;
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">주차별 내용 추가</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <div class = "row">
+                      <div class ="name">
+                        <form>
+                           
+                          <div class = "col-lg-12">
+                              <h5 >스터디 제목</h5>
+                            <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    <hr class ="my-4">
+                    <div class = "row">
+                        <p  style="margin:2%!important; 
+                        margin-left:5%!important;">마감일
+                      <div class="form-row">
+                          <div class="form-group col-md-7">
+                            <input type="date" class="form-control" id="finishDate" >
+                          </div>
+                          <div class="form-group col-md-5">
+                            <input type="time" class="form-control" id="finishTime">
+                          </div>
+                        </div>
+                      </p>
+                  </div>
+
+                  <hr class ="my-4">
+                  <form>
+                  <div class = "col-lg-12">
+                        <h5 >스터디 내용</h5>
+                        <input type="text" class="form-control" id="name" placeholder="스터디 내용을 입력하세요.">
+                      
+                    </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
     <section class="section">
             <div class="container">
             <div class="row">
