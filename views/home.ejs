@@ -17,11 +17,50 @@
   <script>
     var myStudies =<%- myStudies %>;
     console.log(myStudies);
+    var Studies =<%- Studies %>;
+    console.log(Studies);
     
-    $(function() {
-      console.log( $("#mystudy3").find('h5.card-title'));
-      $("#mystudy3").find('h5.card-title').text(myStudies[0].name);
-      $("#mystudy3").find('p.card-text').text(myStudies[0].info);
+    
+    $(function() { 
+      for (var i = 1; i <= 3; i++) { //MyStudy 할당
+        if(myStudies.length>=i){
+          $("#mystudy"+i).find('h5.card-title').text(myStudies[i-1].name); //0~2
+          $("#mystudy"+i).find('p.card-text').text(myStudies[i-1].info);
+          console.log( $("#mystudy"+i).find('h5.card-title'));
+        }
+      }
+      var j; var limit =-1 ;
+      for (var i = 0; i <= 2; i++) { //openstudy 할당
+        j=i;
+        if(myStudies.length==0){
+          j=i;
+        }else if(myStudies.length==1){
+        if(i!=0){ j=limit+1; limit=limit+1;}
+          while(myStudies[0].name==Studies[j].name){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j;
+        }
+        }else if(myStudies.length==2){
+          if(i!=0){ j=limit+1; limit=limit+1;}
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j;
+        }
+        }else{
+          if(i!=0){ j=limit+1; limit=limit+1;}
+          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)||(myStudies[2].name==Studies[j].name)){
+          if(i==j)
+            j=limit;
+          j=j+1; limit=j; 
+        }
+        }
+        $("#openstudy"+(i+1)).find('h5.card-title').text(Studies[j].name);
+        $("#openstudy"+(i+1)).find('p.card-text').text(Studies[j].info);
+        console.log( $("#openstudy"+(i+1)).find('h5.card-title'));
+        
+      }
     });
     
     </script>   
@@ -142,7 +181,7 @@
 
   </div>
   <div class="row" style = "margin-top: 20px;">
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="mystudy1">
         <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">
@@ -152,7 +191,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="mystudy2">
       <div class="card">
           <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
@@ -162,7 +201,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="mystudy3">
       <div class="card">
           <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
@@ -179,7 +218,7 @@
              <div class = "col-lg-offset-4 col-md-offset-2" style="margin-left:5%;"><button type="button" class="btn btn-outline-dark">See More</button></div>
      </div>
   <div class="row" style = "margin-top: 20px;  margin-bottom: 60px;">
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="openstudy1">
       <div class="card">
         <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
@@ -189,7 +228,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="openstudy2"> 
       <div class="card">
         <img src="../public/images/course-1.jpg" class="card-img-top">
         <div class="card-body">
@@ -199,7 +238,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4" id="mystudy3">
+    <div class="col-sm-4" id="openstudy3">
       <img src="../public/images/course-1.jpg" class="card-img-top">
       <div class="card">
         <div class="card-body">

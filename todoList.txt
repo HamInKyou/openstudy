@@ -1,0 +1,6 @@
+1. home 화면에서 study 등록
+2. board 등록
+3. home에서 검색 -> openstudy 여러개 나오는 창
+4. home openstudy see more 삭제 
+5. 댓글등록
+6. 그리구 intro에 participant랑 outline 정보도 db넣어주시는거 잊지마세용!!!
