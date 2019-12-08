@@ -217,10 +217,12 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
         id: studyId
       }
     });
-    const result = JSON.stringify(exStudy);
+    const members = await exStudy.getMember();
+    console.log(members);
 
     res.render('study-intro', {
-      studyInfo: result
+      study: JSON.stringify(exStudy),
+      num_member :  members.length
     });
   } catch (err) {
     console.error(err);

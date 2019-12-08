@@ -1,6 +1,7 @@
-1. home 화면에서 study 등록
+1. my study 목록 뜨는곳 화면에 적용 study list
 2. board 등록
-3. home에서 검색 -> openstudy 여러개 나오는 창
+3. home에서 검색 -> openstudy 여러개 나오는 창 (검색된것만 나오게)
 4. home openstudy see more 삭제 
 5. 댓글등록
-6. 그리구 intro에 participant랑 outline 정보도 db넣어주시는거 잊지마세용!!!
+6. study outline
+7. 홈에서 없는 스터디는 안나오게하던가 회색처리하던가 구별하기 

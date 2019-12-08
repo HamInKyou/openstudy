@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(100),
             allowNull : true,
         },
+        imgUrl : {
+            type : DataTypes.STRING(100),
+            allowNull : true,
+        },
         //userId In Enroll Table , because (N:M)
         //userId (owner)
     },{

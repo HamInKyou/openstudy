@@ -29,7 +29,8 @@ router.get('/', async (req, res, next) => {
         const study = await Study.create({
             name : "study" + i,
             info : "study info " + i,
-            userId : rand
+            userId : rand,
+            imgUrl : "temp img url",
         });
     }
     console.log('study done');

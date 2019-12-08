@@ -5,21 +5,20 @@ const { Study, User } = require('../models');
 const Op = sequelize.Op;
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
-    const { name, info } = req.body;
+    const { name, info, imgUrl } = req.body;
     try{
         const exStudy = await Study.findOne({where : {name}});
-        const result = {};
         if(exStudy){
             return res.json({
                 res : false,
                 msg : '이미 있는 그룹'
-            })
-            ;
+            });
         }
         const createdStudy = await Study.create({
             name,
             info,
-            userId : req.user.id
+            userId : req.user.id,
+            imgUrl,
         });
         const exUser = await User.findOne({
             where:{id : req.user.id}
@@ -27,8 +26,8 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //그룹 생성
         await createdStudy.addMember(exUser);
         return res.json({
             res : true,
-            msg : '그룹 생성 완료'
-        }); 
+            msg : '그룹 생성 성공'
+        });
     } catch (err) {
         console.error(err);
         next(err);
