@@ -20,20 +20,44 @@
       var boards = <%- boards %>;
       console.log(boards);
 
-      var deadline = boards.deadline.split(' ',1)[0];
-      var studyName = boards.name;
-      var studyInfo = boards.info;
-      var week = boards.week;
-      console.log(date);
+      var studyName = study.name;
+      var studyInfo = study.info;
+      // var deadline = boards.deadline.split(' ',1)[0];
+      // var boardName = boards.name;
+      // var boardInfo = boards.info;
+      // var boardweek = boards.week;
+      // console.log(date);
 
-      var mon = date.split('-',3)[1];
-      var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-      var day = date.split('-',3)[2];
-      var year = date.split('-',3)[0];
+      // var mon = date.split('-',3)[1];
+      // var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      // var day = date.split('-',3)[2];
+      // var year = date.split('-',3)[0];
 
-      var studyContentsParent = boards.name;
-      var studyContentsParentWeek = boards.week;
-      var studyContents = boards.info;
+      var boardArray = boards;
+      // function boardList(){
+    //       document.write('<ul class="list-unstyled">');
+
+    //       for(var i = 0; i<boardArray.length;i++){
+    //       document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
+    //       document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
+    //       // document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+    //       document.write('</div>');
+    //       document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
+                            
+    //       document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray.week[i]+"주차 "+boardArray.name[i]+'</a>') ;      
+    //       document.write('<ul class="list-styled mb-5">');
+    //       // for(var j = 0; j<boardArray.info.length;j++){
+    //         document.write('<li>'+boardArray[i].info+'</li>');
+    //       // }
+    //       document.write('</ul>');
+    //       document.write('</div>');
+    //       document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>');
+    //       document.write('</li>');
+    //       }
+    //       document.write('</ul>');
+                      
+    //   }
+      
 
      </script>
 </head>
@@ -41,7 +65,7 @@
    
    <nav class="navbar navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#" >
-          <img src="../public/images/logo.png" height="30" alt="HOME">
+          <img src="/public/images/logo.png" height="30" alt="HOME">
       </a>
       
       <a class="nav-link" href="home" >HOME</a>
@@ -54,7 +78,6 @@
           </button>
           <div class="dropdown-menu dropdown-menu-right">
                    <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="#">개인정보 설정</a>
                    <a class="dropdown-item"  href="#">로그아웃</a>
           </div>
       </div>
@@ -87,8 +110,6 @@
         <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-lg"></i></button>
         </div>
         &nbsp;
-        
-          
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -148,8 +169,34 @@
             <div class="container">
             <div class="row">
                 <div class="col-12">
-                <ul class="list-unstyled">
-                    <!-- notice item -->
+                  <script>
+                            document.write('<ul class="list-unstyled">');
+
+    for(var i = 0; i<boardArray.length;i++){
+    document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
+    document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
+    // document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+    document.write('</div>');
+    document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
+                      
+    document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray.week[i]+"주차 "+boardArray.name[i]+'</a>') ;      
+    document.write('<ul class="list-styled mb-5">');
+    // for(var j = 0; j<boardArray.info.length;j++){
+      document.write('<li>'+boardArray[i].info+'</li>');
+    // }
+    document.write('</ul>');
+    document.write('</div>');
+    document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>');
+    document.write('</li>');
+    }
+    document.write('</ul>');
+            
+
+
+
+                </script>
+                <!-- <ul class="list-unstyled">
+                    //notice item
                     <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                             <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">
                                 <script>
@@ -171,7 +218,7 @@
                             </div>
                             <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                         </li>
-                <!-- notice item -->
+                //notice item 
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                         <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">07</span> NOV, 2019</div>
                         <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
@@ -185,7 +232,7 @@
                         </div>
                         <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                       </li>
-                <!-- notice item -->
+                //notice item 
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">25</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
@@ -199,7 +246,7 @@
                   </div>
                   <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                 </li>
-                <!-- notice item -->
+                //notice item 
                 <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
                   <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><span class="h2 d-block">09</span> OCT, 2019</div>
                   <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
@@ -212,7 +259,7 @@
                   </div>
                   <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="notice-single" class="btn btn-warning">참여하기</a></div>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
