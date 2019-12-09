@@ -19,6 +19,7 @@
     var studyName = studyInfo.name;
     var studyInfo = studyInfo.info;
     var studyUsers = studyInfo.userId;
+    var studyId = studyInfo.id;
 
 
   </script>
@@ -31,8 +32,8 @@
       </a>
       
       <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link active" href="study-list.ejs" >MYSTUDY</a>
-      <a class="nav-link " href="openstudy-list.ejs">OPENSTUDY</a>
+      <a class="nav-link active" href="/study-list" >MYSTUDY</a>
+      <a class="nav-link " href="/openstudy-list">OPENSTUDY</a>
   
       <div class="dropdown">
           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -106,7 +107,9 @@
                         alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
                         }
                     </script> -->
-                    <a href="/study-week" class="btn btn-warning">참여하기</a>
+                    <script>
+                    document.write('<a href="/study-week/'+studyInfo.id+'" class="btn btn-warning">참여하기</a>');
+                </script>
                 </div>
         </div>
         

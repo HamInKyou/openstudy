@@ -73,21 +73,18 @@
     var day = board.deadline.split('.',3)[2];
     var year = 20+board.deadline.split('.',3)[0];
     //  포스트 정보
-    var postArray = posts;
-    // var postMonth = post.updatedAt.split('-',5)[0];
-    // var postDay = post.updatedAt.split('-',3)[1];
-    // var postMon = post.updatedAt.split()
   
     //페이지 정보
     var totalPage = parseInt(posts.length/10)+1;
-  
+    
+    var boardId = board.id;
 
 
     function list() {
       for (var i = 0; i < postArray.length; i++) {
         document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >')
         document.write('<th scope="row">' + postArray[i].id + '</th>');
-        document.write('<td><a href="/study-post-list/'+postArray[i].id+'" id="hover" href = "study-post-content">' + postArray[i].title + '</a></td>');
+        document.write('<td><a href="/study-post-content/'+postArray[i].id+'" id="hover">' + postArray[i].title + '</a></td>');
         document.write('<td>' + postArray[i].user + '</td>');
         document.write('<td>' + postArray[i].createdAt + '</td>');
         document.write('</tr>');
@@ -99,7 +96,7 @@
       for(var i = 1; i <= totalPage; i++ ){
         if(i==page){
           document.write('<li class="page-item active" aria-current="page">');
-          document.write('<a class="page-link" href="/study-post-list/'+ board.id +'/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('<a class="page-link" href="/study-post-list/'+ board.id +'/'+page.id+'/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
           document.write('</li>');
         }
         else{
@@ -179,16 +176,16 @@
               </div>
             </div>
   
-              <div class="col-lg-12">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;" href = "/study-post">게시글 POST</button>
-                <button type="button" class="btn btn-warning" style = " margin-bottom:10%; width:200px;height:50px;" href = "/quiz-post">문제 POST</button>
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-warning" style="margin-top:5%; width:200px;height:50px;"
+                onclick = "location.href='/study-post/'+ board.id">게시글 POST</button>
               </div>
-            </div>
+
             <div class="col-lg-12 offset-10">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;" href= "/study-post-list">게시글</button>
-                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;" href = "/quiz-post-list">문제</button>
+                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;" onclick = "location.href='/study-post-list/'+ board.id + '/'+page.id">게시글</button>
+                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;" onclick = "location.href='/quiz-study-list/'+ board.id +'/'+page.id">문제</button>
+
               </div>
             </div>
   
