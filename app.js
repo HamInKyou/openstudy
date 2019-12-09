@@ -23,6 +23,7 @@ const boardRouter = require('./routes/board');
 const commentRouter = require('./routes/comments');
 const percentRouter = require('./routes/percent');
 
+
 const makeDummyData = require('./routes/makeDummyData');
 // middleware setup
 app.set('views', __dirname + '/views');
@@ -65,6 +66,7 @@ app.use('/answer', answerRouter);
 app.use('/comment', commentRouter);
 app.use('/percent',percentRouter);
 app.use('/makeDummyData', makeDummyData);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

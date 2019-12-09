@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   <script>
+
+  var members =<%- members%>;
+  var boards =<%- boards%>;
+  var Submits =<%- Submits%>;
+  
+  var allBoardCount=boards.length;
+  var rank;
+  var boardSubmit = new Array(new Array(members.length), new Array(boards.length));
+  var boardSubmitCount =0;
+  var totalPercent = new Array(members.length);
+  var userId=
+//submit 받은거를 보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함
+//1.내꺼 확인
+  while(mySubmit[i]){
+      for(var k=0;k<boards.length;k++){
+          if(mySubmit[i].boardId==boards[k].id) //board당 submit있는지 확인후 있으면 갓 넣어줌
+            boardSubmit[k]=1;
+        }
+        i=i+1;
+    }
+    
+    var boardSubmitCount=0;
+    for(var k=0;k<boardSubmit.length;k++){
+        if(boardSubmit[k]==1)
+        boardSubmitCount = boardSubmitCount+1;
+    }
+  var totalMyPercent = boardSubmitCount/boards.length;
+  //2.남들꺼 확인
+  for(var j=0; j<members.length;j++){
+      userId = members[j].userId; //스터디 참여 멤버 정보에 따라
+
+    for(var i =0;i<Submits.length;i++){//submit 0~end 다 돌면서 사용자 id와 board id에 따라 분류
+        if(Submit[i].userId==userId){ //사용자 id에 따라 1차 분류
+            for(var k=0;k<boards.length;k++){ //보드 id에 따라 2차 분류
+                if(Submit[i].boardId==boards[k].id) //board당 submit있는지 확인후 있으면 1 넣어줌
+                  boardSubmit[j][k]=1;
+            }
+      } 
+    }
+    boardSubmitCount=0;
+    for(var k=0;k<boards.length;k++){
+        if(boardSubmit[j][k]==1)
+        boardSubmitCount = boardSubmitCount+1;
+    }
+    totalPercent[j]=boardSubmitCount/allBoardCount;
+  }
+
+  
+
+
+
+ 
+   
+   </script> 
+</head>
+<body style="background:#ffbc3b">
+   
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#" style = color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+      </a>
+      
+      <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
+      <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+      <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+  
+      <div class="dropdown">
+          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+            MY MENU
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+                   <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
+                   <a class="dropdown-item"  href="#">개인정보 설정</a>
+                   <a class="dropdown-item"  href="#">로그아웃</a>
+          </div>
+      </div>
+  
+    </nav>
+    <div class="jumbotron" style = "margin-top: 60px;">
+        <div class ="container">
+        <h1 class="display-4">My Stury의 제출율입니다!</h1>
+        <p class="lead">이 곳엔 여러 스터디 방이 열려있으며, 얼마든지 참여 가능합니다!</p>
+        <hr class="my-4">
+        <p>열려있는 스터디방을 검색해보세요</p>
+    
+       
+     </div>
+     
+     <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class = "row" >
+            <script>
+                document.write('<h1 class="display-4">'+"My Study "+" "+"studyInfo.userId"+'</h1>');
+            </script>
+            </div>
+            <hr class="my-4">
+            <p class = "lead"> 
+            <script>
+                document.write('<p class = "lead">'+ 'studyInfo'+'</p>');
+            </script>    
+            </p>
+        </div>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>   
+</html>
