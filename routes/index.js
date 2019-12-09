@@ -387,12 +387,13 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
      const posts = Post.findAll({ 
           where: {studyId: studyId}
      });
-
+     const resultStudy = JSON.stringify(myStudy);
      const resultMembers = JSON.stringify(studyMembers);
      const resultBoards = JSON.stringify(boards);
     const resultSubmits = JSON.stringify(Submits);
-    const resultPosts = JSON.stringify(posts);
+    //const resultPosts = JSON.stringify(posts);
     res.render('/my-study-percent', {
+      myStudy : resultStudy,
      members : resultMembers,
      boards : resultBoards,
      Submits : resultSubmits,

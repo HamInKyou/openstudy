@@ -13,30 +13,19 @@
   var members =<%- members%>;
   var boards =<%- boards%>;
   var Submits =<%- Submits%>;
+  var myUserId =<%-myUserId%>;
   
   var allBoardCount=boards.length;
-  var rank;
   var boardSubmit = new Array(new Array(members.length), new Array(boards.length));
   var boardSubmitCount =0;
   var totalPercent = new Array(members.length);
-  var userId=
+  //var Rank = new Array(members.length);
+  var myPercent;
+  var myRank=0;
+  var userId;
 //submit 받은거를 보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함
-//1.내꺼 확인
-  while(mySubmit[i]){
-      for(var k=0;k<boards.length;k++){
-          if(mySubmit[i].boardId==boards[k].id) //board당 submit있는지 확인후 있으면 갓 넣어줌
-            boardSubmit[k]=1;
-        }
-        i=i+1;
-    }
-    
-    var boardSubmitCount=0;
-    for(var k=0;k<boardSubmit.length;k++){
-        if(boardSubmit[k]==1)
-        boardSubmitCount = boardSubmitCount+1;
-    }
-  var totalMyPercent = boardSubmitCount/boards.length;
-  //2.남들꺼 확인
+
+//1.totalPercent 구하기
   for(var j=0; j<members.length;j++){
       userId = members[j].userId; //스터디 참여 멤버 정보에 따라
 
@@ -53,13 +42,35 @@
         if(boardSubmit[j][k]==1)
         boardSubmitCount = boardSubmitCount+1;
     }
-    totalPercent[j]=boardSubmitCount/allBoardCount;
+    if(boardSubmitCount == 0){
+        totalPercent[j]=0;
+    }else{
+        totalPercent[j]=boardSubmitCount/allBoardCount;
+    }
+
+    if(userId==myUserId){
+        myPercent=totalPercent[j];
+    }
   }
 
-  
-
-
-
+//2.ranking 구하기 자기 rank만
+//모든 사람의 랭킹이외의 정보 ex) nickname 등을 주려면 엄청 복잡해짐.. 
+var changeRank;
+for(var i=0;i<members.length;i++){ //내림차순으로 정렬
+    for(var j=i+1;j<members.length;j++){
+        if(totalPercent[i]<totalPercent[j]){
+            totalPercent[i]=changeRank;
+            totalPercent[i]=totalPercent[j];
+            totalPercent[j]=changeRank;
+        }
+    }
+}
+//3.myrank, mypercent 계산
+var c=0;
+while(myRank!=0){
+    if(totalPercent[c]==myPercent)
+        myRank=c+1; //c는 0부터이므로 +1
+}
  
    
    </script> 
