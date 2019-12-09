@@ -52,9 +52,6 @@ db.Submit.belongsTo(db.Board);
 //user submit
 db.User.hasMany(db.Submit);
 db.Submit.belongsTo(db.User);
-//post submit
-db.Post.hasMany(db.Submit);
-db.Submit.belongsTo(db.Post);
 
 //post tag
 db.Post.hasMany(db.Tag);

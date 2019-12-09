@@ -374,31 +374,28 @@ router.get('/chat/:tagId', async (req, res, next) => {
 
 router.get('/my-study-percent/:studyId', async (req, res, next) => {
   try {
-      const studyId = req.params.studyId;
+      const studyIdParam = req.params.studyId;
       const myStudy = await Study.findOne({ //통계알고싶은 스터디
-          where: {id: studyId}
+          where: {id: studyIdParam}
       });
      const studyMembers = await myStudy.getMember(); //스터디의 인원 알기위해
      const boards = await Board.findAll({ //그 스터디의 게시판
-         where: {studyId: studyId }
+         where: {studyId: studyIdParam }
      });
-     const Submits = Submit.findAll({ //제출-> 프론트에서 여기서 boarId일치하는거 뽑아야함
-     });
-    //  const posts = Post.findAll({ 
-    //       where: {studyId: studyId}
-    //  });
+     const Submits =await Submit.findAll({}); //제출-> 프론트에서 여기서 boarId일치하는거 뽑아야함
+    
      const resultStudy = JSON.stringify(myStudy);
      const resultMembers = JSON.stringify(studyMembers);
      const resultBoards = JSON.stringify(boards);
     const resultSubmits = JSON.stringify(Submits);
+    const resultUserId = JSON.stringify(req.user.id);
     //const resultPosts = JSON.stringify(posts);
     res.render('my-study-percent', {
-      myStudy : resultStudy,
+     myStudy : resultStudy,
      members : resultMembers,
      boards : resultBoards,
      Submits : resultSubmits,
-     myUserId : req.user.id,
-    //  posts : resultPosts
+     myUserId : resultUserId,
     });
   } catch (err) {
     console.error(err);

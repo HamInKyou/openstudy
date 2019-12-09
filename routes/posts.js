@@ -13,9 +13,13 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
             content,
             url, //img 파일 경로
             userId : req.user.id,
-            boardId,
+            boardId
         });
-        if(moment(find.deadline).diff(moment().format()) > 0){   
+        var now = moment();
+
+        var diffTime = moment(find.deadline,"YY-MM-DD").diff(moment(now,"YY-MM-DD"));
+        //moment(find.deadline).diff(moment().format()) > 0
+        if(diffTime>0){   
             await Submit.create({
                 userId : req.user.id,
                 boardId,
