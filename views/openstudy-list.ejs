@@ -9,11 +9,21 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
          
     <style>
-    .page-link.a{
-        color:#ffbc3b!important;
-    }
-    .page-link{
-         color:#343a40!important;
+        #hover {
+       color: #343a40;
+     }
+ 
+     .page-item.active .page-link {
+       color: white !important;
+       background-color: #ffbc3b !important;
+       border-color: #ffbc3b !important;
+     }
+ 
+     .page-link {
+ 
+       color: #ffbc3b !important;
+       background-color: #fff;
+       border: 1px solid #dee2e6;
      }
     </style>
     <script>
@@ -21,6 +31,22 @@
         console.log(studies);
         var page = <%-page %>;
         console.log(page);
+
+        var totalPage = parseInt(myStudies.length/9)+1;
+        console.log(totalPage);
+
+        function makePageNav() {
+        for(var i = 1; i <= totalPage; i++ ){
+            if(i==page){
+            document.write('<li class="page-item active" aria-current="page">');
+            document.write('<a class="page-link" href="/openstudy-list/'+ page+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('</li>');
+            }
+            else{
+            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ page +'">'+i+'</a></li>');
+            }
+        }
+    }
     </script>
  </head>
  
@@ -54,15 +80,7 @@
              <div class="container">
                <div class = row>
                <div class = "col-lg-4">
-                 <script>
-                     var studyType=["My\tStudy","Open\tStudy"];
-                     var data = ["Open\tStudy"];
-                         if(data == studyType[0]){
-                             document.write('<p class="display-4">'+studyType[0]+'</p>');
-                         } else {
-                             document.write('<p class="display-4">'+studyType[1]+'</p>'); 
-                         }
-                 </script>
+                <p class="display-4">My Study</p>
                </div>
                <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
                  <p></p>
