@@ -39,10 +39,12 @@
       $("#inputGroupFile04").change(function (e) {
         console.log("uploader called");
         var formData = new FormData();
-        var file = e.target.files[0];
+        var file = null;
+        file = e.target.files[0];
         console.log(file);
         formData.append('img', file);
-
+        if(file == null)
+          return;
         $.ajax({
           type: "POST",
           enctype: 'multipart/form-data',
@@ -74,7 +76,7 @@
           },
           function (data, status) {
             alert(data.msg);
-            window.location.href = '/study-post-list/' + board.id;
+            window.location.href = '/study-post-list/' + board.id + '/1';
           }
         );
       });

@@ -13,12 +13,13 @@
 
    
    <script>
-    var studyInfo =<%-studyInfo %>;
+    var studyInfo = <%- study %>;
+    var num_member = <%- num_member %>
+
     console.log(studyInfo);
 
     var studyName = studyInfo.name;
     var studyInfo = studyInfo.info;
-    
 
   </script>
 </head>
@@ -30,7 +31,7 @@
       </a>
       
       <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link" href="#" >MYSTUDY</a>
+      <a class="nav-link" href="#" >OPENSTUDY</a>
       <a class="nav-link active" href="#">OPENSTUDY</a>
   
       <div class="dropdown">
@@ -47,7 +48,7 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <script>
-                document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                document.write('<h1 class="display-4">'+"OPENSTUDY "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
                 
             </script>
             <hr class="my-4">
@@ -70,7 +71,7 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    // document.write('<p class="mb-0">'+"　TOTAL "+users+'</p>');
+                                    document.write('<p class="mb-0">'+"　TOTAL "+num_member+'</p>');
                                 </script>
                             </div>
                     </div>

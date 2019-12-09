@@ -68,11 +68,13 @@
       $("#answerInputGroupFile04").change(function (e) {
         console.log("modal uploader called");
         var formData = new FormData();
-        var file = e.target.files[0];
+        var file = null;
+        file = e.target.files[0];
 
         console.log(file);
         formData.append('img', file);
-
+        if(file == null)
+          return;
         $.ajax({
           type: "POST",
           enctype: 'multipart/form-data',

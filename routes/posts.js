@@ -15,6 +15,16 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
             userId : req.user.id,
             boardId,
         });
+        //임시로 채팅방 사용하기
+        /*
+        const exUser = await User.findOne({where : { id : req.user.id}});
+        const createdTag = await Tag.create({
+            name,
+            postId : post.id,
+            userId : req.user.id
+        });
+        createdTag.addMember(exUser);
+        */
         if(moment(find.deadline).diff(moment().format()) > 0){   
             await Submit.create({
                 userId : req.user.id,

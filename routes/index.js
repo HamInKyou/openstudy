@@ -218,7 +218,6 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
       }
     });
     const members = await exStudy.getMember();
-    console.log(members);
 
     res.render('study-intro', {
       study: JSON.stringify(exStudy),
@@ -239,9 +238,11 @@ router.get('/openstudy-intro/:studyId', async (req, res, next) => {
       }
     });
     const result = JSON.stringify(exStudy);
+    const members = await exStudy.getMember();
 
     res.render('openstudy-intro', {
-      studyInfo: result
+      study: result,
+      num_member : members.length
     });
   } catch (err) {
     console.error(err);

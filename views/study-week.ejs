@@ -5,180 +5,207 @@
 
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-   <meta charset="UTF-8">
-   <title>OPEN STUDY</title>
-   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-   
-   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-   <link rel="stylesheet" href="/css/study-week.css">
-   <link rel="stylesheet" href="/css/global.css">
-    <script>
-      var study = <%- study %>;
-      console.log(study);
-      var boards = <%- boards %>;
-      console.log(boards);
+  <meta charset="UTF-8">
+  <title>OPEN STUDY</title>
+  <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
 
-      var studyName = study.name;
-      var studyInfo = study.info;
-      
-      // var boardName = boards.name;
-      // var boardInfo = boards.info;
-      // var boardweek = boards.week;
-      // console.log(date);
+  <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/study-week.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <script>
+    var study = <%- study %> ;
+    console.log(study);
+    var boards = <%- boards %> ;
+    console.log(boards);
 
+    var studyName = study.name;
+    var studyInfo = study.info;
 
-      function boardList(){
-        var boardArray = boards;
-        document.write('<ul class="list-unstyled">');
+    var boardName = boards.name;
+    var boardInfo = boards.info;
+    var boardweek = boards.week;
+    if(boards.length == 0)
+    {
+      alert('아직 생성된 게시판이 없습니다.');
+    }
 
-        for(var i = 0; i<boardArray.length;i++){
-        var mon = boardArray[i].deadline.split('.',3)[1];
+    function boardList() {
+      var boardArray = boards;
+      document.write('<ul class="list-unstyled">');
+
+      for (var i = 0; i < boardArray.length; i++) {
+        var mon = boardArray[i].deadline.split('.', 3)[1];
         var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        var day = boardArray[i].deadline.split('.',3)[2];
-        var year = 20+boardArray[i].deadline.split('.',3)[0];
+        var day = boardArray[i].deadline.split('.', 3)[2];
+        var year = 20 + boardArray[i].deadline.split('.', 3)[0];
 
         document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
-        document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');                       
+        document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');
         document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
         document.write('</div>');
         document.write('<div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">');
-                          
-        document.write('<a href="notice-single" class="h4 mb-3 d-block week" >'+boardArray[i].week+"주차 "+boardArray[i].name+'</a>') ;      
+
+        document.write('<a href="notice-single" class="h4 mb-3 d-block week" >' + boardArray[i].week + "주차 " +
+          boardArray[i].name + '</a>');
         document.write('<ul class="list-styled mb-5">');
         // for(var j = 0; j<boardArray.info.length;j++){
-          document.write('<li>'+boardArray[i].info+'</li>');
+        document.write('<li>' + boardArray[i].info + '</li>');
         // }
         document.write('</ul>');
         document.write('</div>');
-        document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="/study-post-list/'+boardArray[i].id+'" class="btn btn-warning">참여하기</a></div>');
+        document.write('<div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="/study-post-list/' + boardArray[i]
+          .id + '/1" class="btn btn-warning">참여하기</a></div>');
         document.write('</li>');
-        }
-        document.write('</ul>');
-            
-  }
-
-     </script>
+      }
+      document.write('</ul>');
+    }
+    $(function(){
+      $("#submit").click(function(){
+        var deadlineString = $("#finishDate").val();
+        var resDeadlineString = deadlineString.replace(/-/gi,'.');
+        var finalString = resDeadlineString.substr(2,8);
+        alert(finalString.length);
+       
+        var dataToSend = {
+          deadline :  finalString,
+          name : $("#name").val(),
+          info : $("#info").val(),
+          studyId : study.id,
+        };
+        console.log(dataToSend);
+        $.post('/board/', dataToSend, function(data, status){
+          alert(data.msg);
+          location.reload();
+        });
+      });
+    });
+  </script>
 </head>
+
 <body style="background:#e9ecef">
-   
-   <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#" >
-          <img src="/public/images/logo.png" height="30" alt="HOME">
-      </a>
-      
-      <a class="nav-link" href="home" >HOME</a>
-      <a class="nav-link active" href="#">MYSTUDY</a>
-      <a class="nav-link" href="#">OPENSTUDY</a>
-  
-      <div class="dropdown">
-          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
-            MY MENU
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="#">로그아웃</a>
-          </div>
+
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">
+      <img src="/public/images/logo.png" height="30" alt="HOME">
+    </a>
+
+    <a class="nav-link" href="home">HOME</a>
+    <a class="nav-link active" href="#">MYSTUDY</a>
+    <a class="nav-link" href="#">OPENSTUDY</a>
+
+    <div class="dropdown">
+      <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+        MY MENU
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="#">로그아웃</a>
       </div>
-  
-    </nav>
-    
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <div class = "row">
-              <div class = "col-lg-10">
+    </div>
+
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10">
           <script>
-
-            document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
-          </script>
-          </div>
-          <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
-            <p></p>
-        </div>
-        </div>
-        <script>
-            document.write('<p class="lead">'+studyInfo+' </p>');
+            document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> ' + studyName +
+              '</p>');
           </script>
         </div>
+        <div class="col-lg-6 col-mb-4" style="margin-top:1%;">
+          <p></p>
+        </div>
+      </div>
+      <script>
+        document.write('<p class="lead">' + studyInfo + ' </p>');
+      </script>
     </div>
+  </div>
 
-    <div class = "container">
-        <!-- /page title -->
-        <div class = " text-right pr-0 pr-md-2">
-        <!-- <div class="" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div> -->
-        <button data-toggle = "modal" data-target = "#myModal" type="button" class="btn btn-outline-secondary" style = "margin-left:90%; margin-right:5%;" ><i class="fas fa-plus"></i></button>
-        </div>
-        &nbsp;
+  <div class="container">
+    <!-- /page title -->
+    <div class=" text-right pr-0 pr-md-2">
+      <!-- <div class="" style="margin-left:-5%;"><a href="notice-single" class="btn btn-warning">문제풀기</a></div> -->
+      <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-outline-secondary"
+        style="margin-left:90%; margin-right:5%;"><i class="fas fa-plus"></i></button>
+    </div>
+    &nbsp;
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">주차별 내용 추가</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <div class = "row">
-                      <div class ="name">
-                        <form>
-                           
-                          <div class = "col-lg-12">
-                              <h5 >스터디 제목</h5>
-                            <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."style="margin:2%; margin-left:7.5%; width:200%;">
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-
-                    <hr class ="my-4">
-                    <div class = "row">
-                        <p  style="margin:2%!important; 
-                        margin-left:5%!important;">마감일
-                      <div class="form-row">
-                          <div class="form-group col-md-7">
-                            <input type="date" class="form-control" id="finishDate" >
-                          </div>
-                          <div class="form-group col-md-5">
-                            <input type="time" class="form-control" id="finishTime">
-                          </div>
-                        </div>
-                      </p>
-                  </div>
-
-                  <hr class ="my-4">
-                  <form>
-                  <div class = "col-lg-12">
-                        <h5 >스터디 내용</h5>
-                        <input type="text" class="form-control" id="name" placeholder="스터디 내용을 입력하세요.">
-                      
-                    </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-warning">Save changes</button>
-              </div>
-            </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">주차별 내용 추가</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </div>
-    <section class="section">
-            <div class="container">
+          <div class="modal-body">
             <div class="row">
-                <div class="col-12">
-                  <script>
-                  boardList();
-                </script>
+              <div class="name">
+                  <div class="col-lg-12">
+                    <h5>게시판 제목</h5>
+                    <input type="text" class="form-control" id="name" placeholder="이번주에 공부할 스터디 제목을 입력하세요."
+                      style="margin:2%; margin-left:7.5%; width:200%;">
+                  </div>
+              </div>
             </div>
+
+            <hr class="my-4">
+            <div class="row">
+              <p style="margin:2%!important; 
+                        margin-left:5%!important;">마감일
+                <div class="form-row">
+                  <div class="form-group col-md-7">
+                    <input type="date" class="form-control" id="finishDate">
+                  </div>
+                  <div class="form-group col-md-5">
+                    <input type="time" class="form-control" id="finishTime">
+                  </div>
+                </div>
+              </p>
+            </div>
+
+            <hr class="my-4">
+            <form>
+              <div class="col-lg-12">
+                <h5>게시판 내용</h5>
+                <input type="text" class="form-control" id="info" placeholder="게시판 내용을 입력하세요.">
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="submit" type="button" class="btn btn-warning">Save changes</button>
           </div>
         </div>
-      </section>
-      <!-- /notice -->
+      </div>
     </div>
-   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
-</body>   
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <script>
+              boardList();
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /notice -->
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>
+
 </html>
