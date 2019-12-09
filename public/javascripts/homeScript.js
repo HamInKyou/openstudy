@@ -1,9 +1,41 @@
 $(function () {
     
+    function searchStudy(data){
+      $.get("/openstudy-list/1", {
+        name : $("#name").val(),
+      },function(data, status){
+       if(data.res){
+          window.location = "/openstudy-list/1";
+       } else {
+           alert(data.msg);
+       }
+      });
+    }
 
-    //본문에 이미지 첨부
-    var formData = new FormData();
-    var isImgAttached = false; 
+    $("#searchBtn").click(function(){
+      console.log('search butn click');
+      var name = $("#name").val();
+      alert(name); 
+      $.ajax({
+          type: "GET",
+          data: name,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            window.location = "/openstudy-list/1/" + name;
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            alert("fail");
+          }
+      });
+    });
+
+   //본문에 이미지 첨부
+   var formData = new FormData();
+   var isImgAttached = false; 
+   
     $("#inputGroupFile04").change(function (e) {
       console.log("uploader called");
       var file = e.target.files[0];

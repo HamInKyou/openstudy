@@ -253,12 +253,13 @@ router.get('/add-outline', (req, res, next) => {
   res.render('add-outline');
 });
 
-router.get('/openstudy-list/:pageId', async (req, res, next) => {
+router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
   //studylist
   try {
     const pageId = req.params.pageId;
-    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')]});
-
+    const searchName = req.params.name;
+    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')], where : {name : {[Op.like]: "%" + searchName + "%"}}});
+    
     res.render('openstudy-list', {
       studies: JSON.stringify(exStudy),
       page : pageId
@@ -284,7 +285,7 @@ router.get('/study-list/:pageId', async (req, res, next) => {
     });
     const result = JSON.stringify(enrolledStudies);
 
-    res.render('mystudy-list', {
+    res.render('study-list', {
       myStudies: result,
       page : pageId
     });
