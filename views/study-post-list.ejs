@@ -76,7 +76,6 @@
   
     //페이지 정보
     var totalPage = parseInt(posts.length/10)+1;
-    
     var boardId = board.id;
 
 
@@ -84,7 +83,9 @@
       for (var i = 0; i < postArray.length; i++) {
         document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >')
         document.write('<th scope="row">' + postArray[i].id + '</th>');
+
         document.write('<td><a href="/study-post-content/'+postArray[i].id+'" id="hover">' + postArray[i].title + '</a></td>');
+
         document.write('<td>' + postArray[i].user + '</td>');
         document.write('<td>' + postArray[i].createdAt + '</td>');
         document.write('</tr>');

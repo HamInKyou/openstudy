@@ -6,15 +6,16 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-   <meta charset="UTF-8">
-   <title>OPEN STUDY</title>
-   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-   
-   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-   <script>
+<head>
+  <meta charset="UTF-8">
+  <title>OPEN STUDY</title>
+  <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <script>
     var board =<%-board %>;
     console.log(board);
     var study =<%-study %>;
@@ -31,51 +32,95 @@
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
     var day = board.deadline.split('.',3)[2];
     var year = 20+board.deadline.split('.',3)[0];
-   </script>
 
+ $(function () {
+      var attachDataUrl = "";
+      //본문에 이미지 첨부
+      $("#inputGroupFile04").change(function (e) {
+        console.log("uploader called");
+        var formData = new FormData();
+        var file = e.target.files[0];
+        console.log(file);
+        formData.append('img', file);
+
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/img",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            $('#content').append($('<img>', {
+              src: data.url
+            }));
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert("fail");
+          }
+        });
+      });
+      $("#submit").click(function () {
+        console.log('submit called');
+        $.post("/post/create", {
+            title: $("#title").val(),
+            content: $("#content").html(),
+            url: attachDataUrl,
+            boardId: board.id
+          },
+          function (data, status) {
+            alert(data.msg);
+            window.location.href = '/study-post-list/' + board.id;
+          }
+        );
+      });
+    });
+  </script>
 </head>
+
 <body style="background:#e9ecef">
-   
-   <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#" style = color:white;>
-          <img src="/public/images/logo.png" height="30" href = "/home" alt="HOME">
-      </a>
-      
-      <a class="nav-link" href="/home" style = color:white;>HOME</a>
-      <a class="nav-link active" href="/study-list" style = color:#ffbc3b;>MYSTUDY</a>
-      <a class="nav-link" href="/openstudy-list" style = color:white;>OPENSTUDY</a>
-  
-      <div class="dropdown">
-          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
-            MY MENU
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="#">개인정보 설정</a>
-                   <a class="dropdown-item"  href="#">로그아웃</a>
-          </div>
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#" style=color:white;>
+      <img src="/public/images/shortcut-logo.png" height="30" alt="HOME">
+    </a>
+
+    <a class="nav-link active" href="home" style=color:#ffbc3b;>HOME</a>
+    <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
+    <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
+
+    <div class="dropdown">
+      <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+        MY MENU
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="my-calendar">MY Calendar</a>
+        <a class="dropdown-item" href="#">개인정보 설정</a>
+        <a class="dropdown-item" href="#">로그아웃</a>
       </div>
-  
-    </nav>
-    
-    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
-        <div class="container">
-          <div class = "row">
-              <div class = "col-lg-10">
+    </div>
+
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10">
           <script>
             document.write('<p class="display-4">My Study <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
           </script>
-          </div>
-          <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
-            <p></p>
-        </div>
         </div>
             <script>
               document.write('<p class="lead">'+studyInfo+ '</p>');
             </script>
         </div>
+      </div>
+      <!-- <p class="lead">스터디 소개글 여기에 넣기~ </p> -->
     </div>
-
+  </div>
     <section class="section" style = "height:1000px;">
         <div class="container">
           <div class="row">
@@ -98,40 +143,43 @@
                       document.write('<li>'+boardInfo+'</li>');
                     </script>
                   </ul>
+            </div>
+          </div>
+
+          <input type="text" class="form-control mb-3" id="title" name="subject" placeholder="제목을 입력하세요.">
+          <div class="input-group flex-nowrap">
+            <div class="input-group flex-nowrap">
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04">
+                  <label class="custom-file-label" for="inputGroupFile04">이미지 등록</label>
+                </div>
+                <div class="input-group-append">
+                  <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
                 </div>
               </div>
-      
-              <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="제목을 입력하세요.">
-              <div class="input-group flex-nowrap">
-                <div class="input-group flex-nowrap">
-                  <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile04"
-                          aria-describedby="inputGroupFileAddon04">
-                        <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
-                      </div>
-                      <div class="input-group-append">
-                        <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
-                      </div>
-                    </div>
-                  </div>
+            </div>
 
-                  </div>
-              &nbsp;
-                <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요." style = "height:75%;"></textarea>
-      
-              <div class = "row">
-                      <div class="col-lg-12 col-sm-8 mb-5 mb-lg-0">
-                        <button type="button" class="btn btn-warning" style = "margin-top:5%;margin-left:50%;">POST</button>
-                      </div>
+          </div>
+          &nbsp;
+          <div contentEditable="true" name="message" id="content" class="form-control mb-3" placeholder="내용을 입력하세요."
+            style="height:75%;"></div>
+
+            <div class="row">
+              <div class="col-lg-12 col-sm-8 mb-5 mb-lg-0">
+                <button id="submit" type="button" class="btn btn-warning"
+                  style="margin-top:5%;margin-left:50%;">POST</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <!-- /notice details -->
-   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
-</body>   
+      </div>
+  </section>
+  <!-- /notice details -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+</body>
+
 </html>
