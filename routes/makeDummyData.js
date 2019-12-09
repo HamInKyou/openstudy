@@ -65,12 +65,14 @@ router.get('/', async (req, res, next) => {
     await (async()=>{
         for(var b=1; b<=40; b++){
             for(var i=1; i<=4; i++){
+                var rand = Math.floor(Math.random() * 5) + 1;
                 await Post.create({
                     title : "post" + i + "in board:"+b,
                     content : "post content:" + i ,
                     info : "post content " + i ,
                     boardId : b,
-                    url : "/uploads/git-flow_overall_graph1573562198027.png"
+                    url : "/uploads/git-flow_overall_graph1573562198027.png",
+                    userId : rand
                 });
             }
         }

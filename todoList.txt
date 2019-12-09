@@ -1,23 +1,20 @@
 
 급한거
 - 예은 //my study 목록 뜨는곳 화면에 적용 study list
+       //board만들고나서 deadline 부분 계속 크기 바뀜 
 
--      //board만들고나서 deadline 부분 계속 크기 바뀜 
-- 용후 // 댓글등록
+- 용후 // 댓글등록  --> 댓글창이 없는데요???
+- 용후 // Openstudy-intro -> 참여하기 -> study week 
+- 용후 // Openstudy-intro에서 week로 넘어갈 때 데이터 전송 제대로 안됨 ( 여기 안에 db가 null인 것같음)
+- 용후 // 이미지 없을 때 예외처리 수정
+
+
 - 예진 // 검색창 -> Openstudy-list 에서 매칭목록 띄우기
-
-- 인규//Study-post-list/quiz-post-list 버튼 제대로 동작 안함 (이유 모르겠음 quiz쪽은 왜그런지 모르겠으나 post쪽에서는 script 제대로 썼는데도 아예 반응을 안함)  +  전반적으로 버튼 눌렀을 때 페이지가 원활하게 안넘어감. 받는 정보가 달라서 그런건지는 잘 모르겠음…! 예를들면 week에는 페이지 정보가 없는데 study-post-list를 연결해야할 때 page정보가 없으면 연결이 안되는것같다..? 라고 조심스럽게 추측을..
-
-
-- 용후 //Openstudy-intro -> 참여하기 -> study week 
-- Openstudy-intro에서 week로 넘어갈 때 데이터 전송 제대로 안됨 ( 여기 안에 db가 null인 것같음)
-    
-    //mystudy intro 에 참여하기는 왜있는거?? -> study week로 가기로 바꾸면 되나??
-- study-week에서 study-post-list할 때 페이지가 제대로 안넘어감 (study-week에 page 변수 안줘서 그런 것 같음
-    //무슨말인지 모르겟음
+       // deadline 비교 안돼요 다 기간만료로 뜹니다.
 
 
 하면좋은거 
 -홈에서 없는 스터디는 안나오게하던가 회색처리하던가 구별하기 
 - Study-post-content에 tag 넣어주세요 채팅 연동해야 됩니다.
-- 제출율 페이지 
+    =>수욜날 좀 보기 될것같음
+- 예지 // 제출율 페이지 
