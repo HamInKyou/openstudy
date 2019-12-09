@@ -136,14 +136,17 @@ while(myRank==0){
             <script>
                 document.write('<div class = "col-lg-12"><h1 class="display-4">'+"나의 제출율: "+" "+myPercent+" %"+"<br>"+'</h1></div>');
                 document.write('<div class = "col-lg-12"><h1 class="display-4">'+"나의 등수: "+" "+myRank+" 등"+"<br>"+'</h1></div>');
-                document.write('<h1 class="display-4" style = "margin-left:1.5%">'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+'</h1>');
+                document.write('<h1 class="display-4" style = "margin-left:1.5%">'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
+                document.write('<div class = "col-lg-12"><h1 class="display-4">'+"전체 참가자들의 제출율 순위: "+"<br>"+'</h1></div>');
+                for(var i=0;i<totalPercent.length;i++){
+                    document.write('<div class = "col-lg-12"><h1 class="display-4">'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+"<br>"+'</h1></div>');
+                }
             </script>
             </div>
             &nbsp;
             <hr class="my-4">
             <p class = "lead"> 
             <script>
-               // document.write('<p class = "lead">'+ 'studyInfo'+'</p>');
             </script>    
             </p>
         </div>
