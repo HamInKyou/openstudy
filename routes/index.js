@@ -375,21 +375,20 @@ router.get('/chat/:tagId', async (req, res, next) => {
 router.get('/my-study-percent/:studyId', async (req, res, next) => {
   try {
       const studyIdParam = req.params.studyId;
-      const myStudy = await Study.findOne({ //통계알고싶은 스터디
+      const myStudy = await Study.findOne({ 
           where: {id: studyIdParam}
       });
-     const studyMembers = await myStudy.getMember(); //스터디의 인원 알기위해
-     const boards = await Board.findAll({ //그 스터디의 게시판
+     const studyMembers = await myStudy.getMember(); 
+     const boards = await Board.findAll({
          where: {studyId: studyIdParam }
      });
-     const Submits =await Submit.findAll({}); //제출-> 프론트에서 여기서 boarId일치하는거 뽑아야함
+     const Submits =await Submit.findAll({});
     
      const resultStudy = JSON.stringify(myStudy);
      const resultMembers = JSON.stringify(studyMembers);
      const resultBoards = JSON.stringify(boards);
     const resultSubmits = JSON.stringify(Submits);
     const resultUserId = JSON.stringify(req.user.id);
-    //const resultPosts = JSON.stringify(posts);
     res.render('my-study-percent', {
      myStudy : resultStudy,
      members : resultMembers,

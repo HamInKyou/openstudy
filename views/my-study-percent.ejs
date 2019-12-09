@@ -15,15 +15,8 @@
   var Submits =<%- Submits%>;
   var myUserId =<%-myUserId%>;
   var myStudy =<%-myStudy%>;
-//   console.log("hahahahaha test!!!!!!!!");
-//   console.log(Submits);
-//   console.log(myUserId);
-//   console.log(boards);
-//   console.log(boards.length);
-//   console.log(members.length);
-//   var BoardCount=boards.length;
 
-var boardSubmit = new Array();
+  var boardSubmit = new Array();
   var boardSubmitCount =0;
   var totalPercent = new Array();
   var myPercent;
@@ -32,13 +25,7 @@ var boardSubmit = new Array();
   var memberCount=members.length;
   
   //1.totalPercent 구하기
-  //submit 받은거를 보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함
-  console.log(members);
-  console.log(members.length);
-  console.log(boards);
-  console.log(boards.length);
-  console.log(Submits);
-  
+  //submit 받은거를 유저별,보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함  
   for(var i=0;i<members.length;i++){
       boardSubmit[i]=new Array();    
     }
@@ -59,12 +46,7 @@ for(var i=0; i<Submits.length;i++){
     if(boardSubmit[h][hh]!=1){
         boardSubmit[h][hh]= 1;
     }
-    // myArray.splice(2, 0, "A");
-    
 }
-console.log(boardSubmit);
-
-
     for(var j=0; j<boardSubmit.length;j++){
         userId = members[j].id;
         boardSubmitCount=0;
@@ -83,8 +65,6 @@ console.log(boardSubmit);
         }
       }
 console.log(totalPercent);
-console.log(myUserId);
-console.log(myPercent);
 
 //2.ranking 구하기 자기 rank만
 //모든 사람의 랭킹이외의 정보 ex) nickname 등을 주려면 엄청 복잡해짐.. 
@@ -103,6 +83,7 @@ for(var i=0;i<totalPercent.length;i++){ //내림차순으로 정렬
 }
 console.log("rank");
 console.log(totalPercent);
+
 //3.myrank, mypercent 계산
 var c=0;
 myrank=0;
