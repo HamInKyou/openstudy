@@ -253,13 +253,15 @@ router.get('/add-outline', (req, res, next) => {
   res.render('add-outline');
 });
 
-router.get('/study-list', async (req, res, next) => {
+router.get('/openstudy-list/:pageId', async (req, res, next) => {
   //studylist
   try {
-    const exStudy = await Study.findAll();
+    const pageId = req.params.pageId;
+    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')]});
 
-    res.render('study-list', {
-      studies: JSON.stringify(exStudy)
+    res.render('openstudy-list', {
+      studies: JSON.stringify(exStudy),
+      page : pageId
     });
   } catch (err) {
     console.error(err);
@@ -267,21 +269,24 @@ router.get('/study-list', async (req, res, next) => {
   }
 });
 
-router.get('/mystudy-list', async (req, res, next) => {
+router.get('/study-list/:pageId', async (req, res, next) => {
   //mystudylist
   try {
+    const pageId = req.params.pageId;
     const exUser = await User.findOne({
       where: {
         id: req.user.id
       }
     });
     const enrolledStudies = await exUser.getEnrolledStudy({
+      offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')],
       raw: true
     });
     const result = JSON.stringify(enrolledStudies);
 
     res.render('mystudy-list', {
-      myStudies: result
+      myStudies: result,
+      page : pageId
     });
   } catch (err) {
     console.error(err);
