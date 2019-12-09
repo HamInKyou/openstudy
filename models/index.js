@@ -48,6 +48,14 @@ db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post);
 //submit board
 db.Board.hasMany(db.Submit);
+db.Submit.belongsTo(db.Board);
+//user submit
+db.User.hasMany(db.Submit);
+db.Submit.belongsTo(db.User);
+//post submit
+db.Post.hasMany(db.Submit);
+db.Submit.belongsTo(db.Post);
+
 //post tag
 db.Post.hasMany(db.Tag);
 db.Tag.belongsTo(db.Post);

@@ -20,20 +20,21 @@
   var boardSubmit = new Array(new Array(members.length), new Array(boards.length));
   var boardSubmitCount =0;
   var totalPercent = new Array(members.length);
-  //var Rank = new Array(members.length);
   var myPercent;
   var myRank=0;
   var userId;
-//submit 받은거를 보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함
-
-//1.totalPercent 구하기
+  var memberCount=members.length;
+  
+  //1.totalPercent 구하기
+  //submit 받은거를 보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함
+  
   for(var j=0; j<members.length;j++){
       userId = members[j].userId; //스터디 참여 멤버 정보에 따라
 
     for(var i =0;i<Submits.length;i++){//submit 0~end 다 돌면서 사용자 id와 board id에 따라 분류
-        if(Submit[i].userId==userId){ //사용자 id에 따라 1차 분류
+        if(Submits[i].userId==userId){ //사용자 id에 따라 1차 분류
             for(var k=0;k<boards.length;k++){ //보드 id에 따라 2차 분류
-                if(Submit[i].boardId==boards[k].id) //board당 submit있는지 확인후 있으면 1 넣어줌
+                if(Submits[i].boardId==boards[k].id) //board당 submit있는지 확인후 있으면 1 넣어줌
                   boardSubmit[j][k]=1;
             }
       } 
@@ -101,26 +102,25 @@ while(myRank!=0){
     </nav>
     <div class="jumbotron" style = "margin-top: 60px;">
         <div class ="container">
-        <h1 class="display-4">My Study의 제출율</h1>
-        <p class="lead">이 곳에서 자신의 제출율과 제출율 순위를 알 수 있습니다!</p>
-        <hr class="my-4">
+        <h1 class="display-4" style = "font-weight: bold;">My Study의 제출율</h1>
+        <h2 >이 곳에서 자신의 제출율과 제출율 순위를 알 수 있습니다!</h2>
+        &nbsp;
         <script>
-            document.write('<p>'+"myStudy.name"+" "+"의 제출율을 보여줍니다"+'</p>');
+            document.write('<h2>'+myStudy.name+" "+"의 제출율을 보여줍니다"+'</h2>');
         </script>
-        <p></p>
-    
-       
+        <hr class="my-4">
      </div>
      
-     <div class="jumbotron jumbotron-fluid">
+        &nbsp;
         <div class="container">
             <div class = "row" >
             <script>
-                document.write('<h1 class="display-4">'+"나의 참여율: "+" "+"myPercent"+'</h1>');
-                document.write('<h1 class="display-4">'+"나의 등수: "+" "+"myRank"+'</h1>');
-                document.write('<h1 class="display-4">'+"myStudy.name"+"에 참여중인 인원: "+" "+"members.length"+'</h1>');
+                document.write('<div class = "col-lg-12"><h1 class="display-4">'+"나의 참여율: "+" "+myPercent+"<br>"+'</h1></div>');
+                document.write('<div class = "col-lg-12"><h1 class="display-4">'+"나의 등수: "+" "+myRank+"<br>"+'</h1></div>');
+                document.write('<h1 class="display-4" style = "margin-left:1.5%">'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+'</h1>');
             </script>
             </div>
+            &nbsp;
             <hr class="my-4">
             <p class = "lead"> 
             <script>
@@ -128,7 +128,6 @@ while(myRank!=0){
             </script>    
             </p>
         </div>
-    </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>

@@ -378,7 +378,7 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
       const myStudy = await Study.findOne({ //통계알고싶은 스터디
           where: {id: studyId}
       });
-     const studyMembers = myStudy.getMember({ raw : true}); //스터디의 인원 알기위해
+     const studyMembers = await myStudy.getMember(); //스터디의 인원 알기위해
      const boards = await Board.findAll({ //그 스터디의 게시판
          where: {studyId: studyId }
      });
