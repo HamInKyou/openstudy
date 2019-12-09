@@ -23,13 +23,13 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
        const resultMembers = JSON.stringify(studyMembers);
        const resultBoards = JSON.stringify(boards);
       const resultSubmits = JSON.stringify(Submits);
-      const resultPosts = JSON.stringify(posts);
+     // const resultPosts = JSON.stringify(posts);
       res.render('/my-study-percent', {
-       myStudy : resultStudy;
+       myStudy : resultStudy,
        members : resultMembers,
        boards : resultBoards,
        Submits : resultSubmits,
-       MyUserId : req.user.id,
+       myUserId : req.user.id,
       //  posts : resultPosts
       });
     } catch (err) {

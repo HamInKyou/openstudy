@@ -384,20 +384,20 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
      });
      const Submits = Submit.findAll({ //제출-> 프론트에서 여기서 boarId일치하는거 뽑아야함
      });
-     const posts = Post.findAll({ 
-          where: {studyId: studyId}
-     });
+    //  const posts = Post.findAll({ 
+    //       where: {studyId: studyId}
+    //  });
      const resultStudy = JSON.stringify(myStudy);
      const resultMembers = JSON.stringify(studyMembers);
      const resultBoards = JSON.stringify(boards);
     const resultSubmits = JSON.stringify(Submits);
     //const resultPosts = JSON.stringify(posts);
-    res.render('/my-study-percent', {
+    res.render('my-study-percent', {
       myStudy : resultStudy,
      members : resultMembers,
      boards : resultBoards,
      Submits : resultSubmits,
-     userId : req.user.id,
+     myUserId : req.user.id,
     //  posts : resultPosts
     });
   } catch (err) {
