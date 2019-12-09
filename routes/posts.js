@@ -25,7 +25,7 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
         });
         createdTag.addMember(exUser);
         */
-        if(moment(find.deadline).diff(moment().format()) > 0){   
+        if(moment(find.deadline, "YYMMDD").diff(moment().format()) > 0){   
             await Submit.create({
                 userId : req.user.id,
                 boardId,
