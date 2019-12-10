@@ -265,7 +265,8 @@ router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
     res.render('openstudy-list', {
       study : JSON.stringify(study),
       studies: JSON.stringify(exStudy),
-      page : pageId
+      page : pageId,
+      name : JSON.stringify(searchName)
     });
   } catch (err) {
     console.error(err);
@@ -283,7 +284,8 @@ router.get('/openstudy-list/:pageId', async (req, res, next) => {
     res.render('openstudy-list', {
       study : JSON.stringify(study),
       studies: JSON.stringify(exStudy),
-      page : pageId
+      page : pageId,
+      name : JSON.stringify(null)
     });
   } catch (err) {
     console.error(err);

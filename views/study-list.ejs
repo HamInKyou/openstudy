@@ -48,18 +48,18 @@
         for(var i = 1; i <= totalPage; i++ ){
             if(i==page){
             document.write('<li class="page-item active" aria-current="page">');
-            document.write('<a class="page-link" href="/study-list/'+ page+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('<a class="page-link" href="/study-list/'+ i+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
             document.write('</li>');
             }
             else{
-                document.write('<li class="page-item"><a class="page-link" href="/study-study-list/'+ page +'">'+i+'</a></li>');
+                document.write('<li class="page-item"><a class="page-link" href="/study-study-list/'+ i +'">'+i+'</a></li>');
             }
         }
     }
 
     function studyList(){
         for(var i = 0; i<study.length;i++){
-            if(i%3==1){
+            if(i%3==0){
                 document.write('<div class = "row">');
             }
             document.write('<div class="col-sm-4" >');
@@ -72,8 +72,11 @@
             document.write(' </div>');
             document.write( '</div>');
             document.write( '</div>');
-            if(i%3==1){
+            if(i%3==2){
                 document.write('</div>');
+            }
+            else if(i == studies.length-1){
+              document.write('</div>');
             }
             
         }

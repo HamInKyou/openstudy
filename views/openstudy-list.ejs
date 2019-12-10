@@ -34,23 +34,40 @@
         var study =<%-study %>;
         var totalPage = parseInt(study.length/9)+1;
         console.log(totalPage);
+        var searchName =<%-name %>;
+        console.log(searchName);
 
+      if(searchName != null){
         function makePageNav() {
           for(var i = 1; i <= totalPage; i++ ){
             if(i==page){
             document.write('<li class="page-item active" aria-current="page">');
-            document.write('<a class="page-link" href="/openstudy-list/'+ page+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('<a class="page-link" href="/openstudy-list/'+ i+'/'+searchName+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
             document.write('</li>');
             }
             else{
-            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ page +'">'+i+'</a></li>');
+            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ i +'/' + searchName+'">'+i+'</a></li>');
             }
           }
         }
+      }else{
+        function makePageNav() {
+          for(var i = 1; i <= totalPage; i++ ){
+            if(i==page){
+            document.write('<li class="page-item active" aria-current="page">');
+            document.write('<a class="page-link" href="/openstudy-list/'+ i+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('</li>');
+            }
+            else{
+            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ i +'">'+i+'</a></li>');
+            }
+          }
+        }
+      }
 
     function studyList(){
         for(var i = 0; i<studies.length;i++){
-            if(i%3==1){
+            if(i%3==0){
                 document.write('<div class = "row">');
             }
             document.write('<div class="col-sm-4" >');
@@ -63,8 +80,11 @@
             document.write(' </div>');
             document.write( '</div>');
             document.write( '</div>');
-            if(i%3==1){
+            if(i%3==2){
                 document.write('</div>');
+            }
+            else if(i == studies.length-1){
+              document.write('</div>');
             }
             
         }
@@ -120,9 +140,9 @@
                 &nbsp;
                 <nav aria-label="Page navigation">
                    <ul class="pagination justify-content-center">
-                       <script>
-                         makePageNav();  
-                       </script>
+                        <script>
+                          makePageNav();  
+                        </script>
                      </ul>
                </nav>
         </div>
