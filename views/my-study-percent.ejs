@@ -119,14 +119,14 @@ while(myRank==0){
       </div>
   
     </nav>
-    <div class="jumbotron" style = "margin-top: 60px;">
+    <div class="jumbotron" style = "margin-top: 60px; height:2500px;">
         <div class ="container">
         <!-- <h1 class="display-4" style = "font-weight: bold;">My Study의 제출율</h1>
         <h2 >자신의 제출율과 제출율 순위를 알 수 있습니다!</h2> -->
         <!-- &nbsp; -->
         <script>
             document.write('<h1 class="display-4" style = "font-weight: bold; font-size: 4.5em;">'+myStudy.name+" "+"의 제출율"+'</h1>');
-            document.write('<h2 style ="" font-size: 1.0em;">'+"자신의 제출율과 순위를 알 수 있습니다."+'</h2>');
+            document.write('<h2 style =" font-size: 2.0em;">'+"자신의 제출율과 순위를 알 수 있습니다."+'</h2>');
         </script>
         <hr class="my-4">
      </div>
@@ -135,34 +135,32 @@ while(myRank==0){
         <div class="container">
             <div class = "row" >
             <script>
-                
-                document.write('<div class = "col-lg-12"><h1 class="display-4" style = "font-weight: bold;">>'+"나의 제출율 분석"+'</h1></div>&nbsp;&nbsp');
-                document.write(' &nbsp; &nbsp;');
-                document.write('<ul>');
-                document.write('<li><h2 class="display-4" style = "font-weight: normal;">>'+"나의 제출율: "+" "+myPercent+" %"+'</h2></li>&nbsp;');
-                document.write('<li><h2 class="display-4" style = "font-weight: normal;">>'+"나의 등수: "+" "+myRank+" 등"+'</h2></li>&nbsp;');
-                document.write('<li><h2 class="display-4" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+'</h2></li>&nbsp;');
+                //document.write('<style> ul{ list-style:none;}</style>');
+                document.write('<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;"> >'+"나의 제출율 분석"+'</h1>');
+                document.write(' &nbsp; ');
+                document.write('<ul style = "list-style-type : none;"><div style="border: 5px solid #ffbc3b; float: left; width: 100%; padding:20px;">');
+                document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">'+"나의 제출율: "+" "+myPercent+" %"+'</h2></li>&nbsp;');
+                document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">'+"나의 등수: "+" "+myRank+" 등"+'</h2></li>&nbsp;');
+                document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+'</h2></li>&nbsp;');
                 document.write(' &nbsp;');
-                document.write('</ul>');
+                document.write('</ul></div></div>');
                 // document.write('<h1 class="display-4" style = "margin-left:1.5%" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
-                document.write('<div class = "col-lg-12"><h1 class="display-4" style = "font-weight: bold;" >>'+"전체 참가자들의 제출율 순위 "+'</h1></div>&nbsp;&nbsp');
-                document.write(' &nbsp; &nbsp;');
-                document.write('<ul>');
+                document.write('<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;" >>'+"전체 참가자들의 제출율 순위 "+'</h1>');
+                document.write(' &nbsp;');
+                document.write('<ul style = "list-style-type : none;"><div style="border: 5px solid  #ffbc3b; float: left; padding:20px;">');
                 for(var i=0;i<totalPercent.length;i++){
-                    document.write('<li><h2 class="display-4"  style = "font-weight: normal;">>'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+'</h2></li>&nbsp;');
+                    document.write('<li><h2 class="display-4"  style = "font-weight: normal; font-size: 3.0em;">'+(i+1)+" 등 "+" "+totalPercent[i]+" %"+'</h2></li>&nbsp;');
                 }
-                document.write('</ul>');
+                document.write('</div>');
+                document.write('<div style="border: 5px; color: #ffbc3b; float: left; width: 40%; padding:20px;">');
+                for(var i=0;i<totalPercent.length;i++){
+                    if(i==(myRank-1)){
+                    document.write('<li><h2 class="display-4"  style = "font-weight: bold; font-size: 3.0em;">'+"< 나의 등수"+'</h2></li>&nbsp;');
+                    }
+                }
+                document.write('</ul></div>');
                // document.write('<li><div class = "col-lg-12"><h1 class="display-4">'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+"<br>"+'</h1></div></li>');
-                // <div>
-                //   <h2>HelvetiList</h2>
-                //   <ul>
-                //     <li><a href="#">Zurich</a></li>
-                //     <li><a href="#">Geneva</a></li>
-                //     <li><a href="#">Winterthur</a></li>
-                //     <li><a href="#">Lausanne</a></li>
-                //     <li><a href="#">Lucerne</a></li>
-                //   </ul>
-                // </div>
+            
             </script>
 
             </div>
