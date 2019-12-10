@@ -39,10 +39,10 @@
       document.write('<ul class="list-unstyled">');
 
       for (var i = 0; i < boardArray.length; i++) {
-        var mon = boardArray[i].deadline.split('.', 3)[1];
+        var mon = boardArray[i].deadline.split('-', 3)[1];
         var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        var day = boardArray[i].deadline.split('.', 3)[2];
-        var year = 20 + boardArray[i].deadline.split('.', 3)[0];
+        var day = boardArray[i].deadline.split('-', 3)[2];
+        var year = 20 + boardArray[i].deadline.split('-', 3)[0];
 
         document.write('<li class="d-md-table mb-4 w-100 border-bottom hover-shadow">');
         document.write('<div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0">');
@@ -67,8 +67,7 @@
     $(function(){
       $("#submit").click(function(){
         var deadlineString = $("#finishDate").val();
-        var resDeadlineString = deadlineString.replace(/-/gi,'.');
-        var finalString = resDeadlineString.substr(2,8);
+        var finalString = deadlineString.substr(2,8);
         alert(finalString.length);
        
         var dataToSend = {
@@ -110,7 +109,7 @@
         <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
           <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
-          <a class="dropdown-item" href="#">로그아웃</a>
+          <a class="dropdown-item" href="/auth/logout">로그아웃</a>
         </div>
       </div>
   

@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <title>OPEN STUDY</title>
    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-   
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/study-intro.css">
@@ -13,13 +13,32 @@
 
    
    <script>
-    var studyInfo = <%- study %>;
+    var study = <%- study %>;
     var num_member = <%- num_member %>
 
-    console.log(studyInfo);
+    console.log(study);
 
-    var studyName = studyInfo.name;
-    var studyInfo = studyInfo.info;
+    var studyName = study.name;
+    var studyInfo = study.info;
+    $(function(){
+        $("#enrollBtn").click(function(){
+            $.post("/study/enroll/" + study.id, {} , function(data, status){
+                alert(data.msg);
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+            });
+        });
+        $("#moveBtn").click(function(){
+            $.get("/study/isEnrolled/" + study.id, {} , function(data, status){      
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+                else{
+                    alert(data.msg);
+                }
+            });
+        });
+    /////////////////////
+    });
 
   </script>
 </head>
@@ -100,13 +119,9 @@
             </div> -->
             
                 <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
-                    <script>
-                    document.write('<a href="study-lesson" class="btn btn-warning" onclick = "/study-week/">'+"참여하기"+'</a>');
-                    users.push(userId);//유저 아이디 삽입
-                    alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
-                    
+                        <Button id="enrollBtn" class="btn btn-warning">가입하기</Button>
+                        <Button id="moveBtn" class="btn btn-warning">들어가기</Button>
 
-                    </script>
                 </div>
         </div>
         
