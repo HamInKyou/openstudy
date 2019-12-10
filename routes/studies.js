@@ -70,15 +70,25 @@ router.post('/enroll/:studyId', async(req,res,next)=>{
         const exStudy = await Study.findOne({
             where: {id : req.params.studyId }
         });
-        if(!exStudy){
-            return res.send('no exist study');
-        }
         const exUser = await User.findOne({
             where : {id: req.user.id}
         });
+        const enrolled = await exUser.getEnrolledStudy({raw:true});
+        enrolled.some(element => {
+            console.log(element);
+            if(element.id == exStudy.id){
+                return res.json({
+                    msg : '이미 가입됐습니다.',
+                    res : false, 
+                });
+            }
+        });
         await exStudy.addMember(exUser);
         await exUser.addEnrolledStudy(exStudy);
-        return res.send(req.user.id + ' enroll to study:' + exStudy.id);
+        return res.json({
+            msg : exStudy.id + '에 가입됐습니다.',
+            res : true  
+        });
     } catch(err){
         console.error(err);
         next(err);
@@ -99,5 +109,24 @@ router.post('/leave/:studyId', async (req, res, next) => {
         console.error(err);
         next(err);
     }
+});
+router.get('/isEnrolled/:studyId', async(req, res,next)=>{
+    const exStudy = await Study.findOne({
+        where: {id : req.params.studyId }
+    });
+    const members = await exStudy.getMember({raw : true});
+    members.some(element => {
+        console.log(element);
+        if(element.id == req.user.id){
+            return res.json({
+                msg : '이미 가입됐습니다.',
+                res : true, 
+            });
+        }
+    });
+    return res.json({
+        msg : '아직 가입하지 않았습니다.',
+        res : false, 
+    });    
 });
 module.exports = router;

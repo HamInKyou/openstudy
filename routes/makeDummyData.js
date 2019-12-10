@@ -30,7 +30,7 @@ router.get('/', async (req, res, next) => {
             name : "study" + i,
             info : "study info " + i,
             userId : rand,
-            imgUrl : "temp img url",
+            imgUrl : "/uploads/course-1.jpg",
         });
     }
     console.log('study done');
@@ -56,7 +56,7 @@ router.get('/', async (req, res, next) => {
                     name : "board" + i + "in study:"+s,
                     info : "board info " + i,
                     studyId : s,
-                    deadline : "19.12.02"
+                    deadline : 
                 });
             }
         }
@@ -65,12 +65,14 @@ router.get('/', async (req, res, next) => {
     await (async()=>{
         for(var b=1; b<=40; b++){
             for(var i=1; i<=4; i++){
+                var rand = Math.floor(Math.random() * 5) + 1;
                 await Post.create({
                     title : "post" + i + "in board:"+b,
                     content : "post content:" + i ,
                     info : "post content " + i ,
                     boardId : b,
-                    url : "/uploads/git-flow_overall_graph1573562198027.png"
+                    url : "/uploads/course-1.jpg",
+                    userId : rand
                 });
             }
         }
@@ -81,7 +83,7 @@ router.get('/', async (req, res, next) => {
             for(var i=1; i<=4; i++){
                 await Comment.create({
                     content : "comment content in post:" + p ,
-                    url : "/uploads/git-flow_overall_graph1573562198027.png",
+                    url : "/uploads/course-1.jpg",
                     postId : p,
                     userId : p%4+1,
                     nick : "user" + (p%4+1) 
@@ -97,7 +99,7 @@ router.get('/', async (req, res, next) => {
                     name : "quiz" + i + "in board:"+b,
                     content : "quiz content " + i ,
                     ownerAnswerId : null,
-                    url : "/uploads/git-flow_overall_graph1573562198027.png",
+                    url : "/uploads/course-1.jpg",
                     boardId : b,
                     userId : b%4+1
                 });
@@ -111,7 +113,7 @@ router.get('/', async (req, res, next) => {
                 await Answer.create({
                     name : "answer" + i + "in quiz:"+q,
                     content : "answer content " + i ,
-                    url : "/uploads/git-flow_overall_graph1573562198027.png",
+                    url : "/uploads/course-1.jpg",
                     quizId : q,
                     userId : q%4+1
                 });

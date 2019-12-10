@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <title>OPEN STUDY</title>
    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-   
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/study-intro.css">
@@ -13,41 +13,68 @@
 
    
    <script>
-    var studyInfo =<%-studyInfo %>;
-    console.log(studyInfo);
+    var study = <%- study %>;
+    var num_member = <%- num_member %>
 
-    var studyName = studyInfo.name;
-    var studyInfo = studyInfo.info;
-    
+    console.log(study);
+
+    var studyName = study.name;
+    var studyInfo = study.info;
+    $(function(){
+        $("#enrollBtn").click(function(){
+            $.post("/study/enroll/" + study.id, {} , function(data, status){
+                alert(data.msg);
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+            });
+        });
+        $("#moveBtn").click(function(){
+            $.get("/study/isEnrolled/" + study.id, {} , function(data, status){      
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+                else{
+                    alert(data.msg);
+                }
+            });
+        });
+    /////////////////////
+    });
 
   </script>
 </head>
 <body>
    
-   <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">
-          <img src="/public/images/logo.png" height="30" alt="HOME">
-      </a>
-      
-      <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link" href="#" >MYSTUDY</a>
-      <a class="nav-link active" href="#">OPENSTUDY</a>
-  
-      <div class="dropdown">
-          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+<!--nav bar 시작-->
+<nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="home" style=color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+    
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style=color:white;>HOME</a>
+        <a class="nav-link " href="/study-list/1" style="color:white;" >MYSTUDY</a>
+        <a class="nav-link active" href="/openstudy-list/1" style="color:#ffbc3b;">OPENSTUDY</a>
+    
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
             MY MENU
           </button>
+    
+          <!--드롭다운 내부 버튼들-->
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="#">로그아웃</a>
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
           </div>
-      </div>
-    </nav>
+        </div>
+    
+      </nav>
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <script>
-                document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                document.write('<h1 class="display-4">'+"OPENSTUDY "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
                 
             </script>
             <hr class="my-4">
@@ -70,7 +97,7 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    // document.write('<p class="mb-0">'+"　TOTAL "+users+'</p>');
+                                    document.write('<p class="mb-0">'+"　TOTAL "+num_member+'</p>');
                                 </script>
                             </div>
                     </div>
@@ -92,13 +119,9 @@
             </div> -->
             
                 <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
-                    <script>
-                    document.write('<a href="study-lesson" class="btn btn-warning" onclick = "/study-week/">'+"참여하기"+'</a>');
-                    users.push(userId);//유저 아이디 삽입
-                    alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
-                    
+                        <Button id="enrollBtn" class="btn btn-warning">가입하기</Button>
+                        <Button id="moveBtn" class="btn btn-warning">들어가기</Button>
 
-                    </script>
                 </div>
         </div>
         

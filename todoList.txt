@@ -1,7 +1,22 @@
-1. my study 목록 뜨는곳 화면에 적용 study list
-2. board 등록
-3. home에서 검색 -> openstudy 여러개 나오는 창 (검색된것만 나오게)
-4. home openstudy see more 삭제 
-5. 댓글등록
-6. study outline
-7. 홈에서 없는 스터디는 안나오게하던가 회색처리하던가 구별하기 
+
+급한거
+- 예은 //my study 목록 뜨는곳 화면에 적용 study list
+       //board만들고나서 deadline 부분 계속 크기 바뀜 
+
+- 용후 // 댓글등록  --> 댓글창이 없는데요???
+- 용후 // Openstudy-intro -> 참여하기 -> study week 
+- 용후 // Openstudy-intro에서 week로 넘어갈 때 데이터 전송 제대로 안됨 ( 여기 안에 db가 null인 것같음)
+- 용후 // 이미지 없을 때 예외처리 수정(거의 다함)
+
+-logout link 연결하기
+
+
+- 예진 // 검색창 -> Openstudy-list 에서 매칭목록 띄우기
+       // deadline 비교 안돼요 다 기간만료로 뜹니다.
+
+
+하면좋은거 
+-홈에서 없는 스터디는 안나오게하던가 회색처리하던가 구별하기 
+- Study-post-content에 tag 넣어주세요 채팅 연동해야 됩니다.
+    =>수욜날 좀 보기 ,될것같음
+- 예지 // 제출율 페이지 
