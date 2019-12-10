@@ -15,8 +15,32 @@
       console.log(quiz);
       var answer =<%-answer %>;
       console.log(answer);
-   </script>
+      var myAnswer =<%-myAnswer %>;
+      console.log(myAnswer);
 
+      function outputMyAnswer(){
+         if(myAnswer == 'No Answer'){}
+         else{
+            document.write('<div class="col-12" style="margin-top: 2%;">');
+            document.write('<p><i class="fas fa-user mr-2"></i>나의 답</p>');
+            document.write('</div>');
+            document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+            document.write(myAnswer.content);
+            document.write('</div>');
+         }
+      }
+
+      function outputAnswerList() {
+      for (var i = 0; i < answer.length; i++) {
+        document.write('<div class="col-12" style="margin-top: 2%;">');
+        document.write('<p><i class="fas fa-user mr-2"></i>'+answer[i].user.nick+'</p>');
+        document.write('</div>');
+        document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+        document.write(answer[i].content);
+        document.write('</div>');
+      }
+    }
+   </script>
 </head>
 
 
@@ -29,9 +53,9 @@
       </a>
 
       <!--다른 메뉴로 전환-->
-      <a class="nav-link" href="/home" style=color:white;>HOME</a>
-      <a class="nav-link" href="#" style=color:white;>MYSTUDY</a>
-      <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
+      <a class="nav-link active" href="/home" style=color:white;>HOME</a>
+      <a class="nav-link active" href="/study-list" style=color:white;>MYSTUDY</a>
+      <a class="nav-link active" href="/openstudy-list/1" style=color:white;>OPENSTUDY</a>
 
       <!--우측상단 드롭다운버튼-->
       <div class="dropdown">
@@ -43,7 +67,7 @@
          <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
             <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
-            <a class="dropdown-item" href="#">로그아웃</a>
+            <a class="dropdown-item" href="/auth/logout">로그아웃</a>
          </div>
       </div>
 
@@ -99,28 +123,14 @@
          </table>
 
          <!--내가 제출한 답-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p>
-               <h5>나의 답</h5>
-            </p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputMyAnswer();
+         </script>
 
          <!--팀원들이 제출한 답-->
-         <div class="col-12" style="margin-top: 2%;">
-            <p><i class="fas fa-user mr-2"></i>허예은</p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
-         <div class="col-12" style="margin-top: 2%;">
-            <p><i class="fas fa-user mr-2"></i>김용후</p>
-         </div>
-         <div class="col-lg-12" style="border: 1px solid #dee2e6;">
-            <p>답 내용</p>
-         </div>
+         <script>
+            outputAnswerList();
+         </script>
       </div>
 
 

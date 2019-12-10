@@ -1,11 +1,5 @@
 <!-- study-post-list.html (각 주에 공부해야할 항목의 게시글과 만든 문제를 띄우는 html)
-- 주차별 정보 띄우기. (날짜, 몇주차인지, 제목, 세부 내용)
-- post 버튼 밑에 게시글 리스트 왼쪽 상단에 게시글 | 문제 버튼 만들 것임.
- 여기서 게시글 버튼을 누르면 게시글 리스트가 나오고 문제 버튼을 누르면 문제 리스트가 나오게 설정
-- 게시글과 문제의 No. 제목, 작성자, 작성일 띄우기
-- 각 게시글 안에 몇 개의 채팅이 왔는지 띄우기. (디자인은 제가할게요 숫자만 받아와 주세요)
-- 게시글 리스트를 누르면 게시글 정보를 modal 형태로 만들었는데, 게시글 밑에 댓글창이 있어요. 여기에 사용자 이름, 댓글, 대댓글 다는 기능까지 있었으면 좋겠습니다...! (디자인 구성은 제가 할게요)
-- 그리고 문제 리스트도 modal 형태로 띄울 예정인데 거기서도 문제를 올리면 댓글을달고, 댓글을 단 순간 답을 대댓글로(비밀댓글(이것두 따로 작업 하셔야겠죠...?ㅠㅠ)) 보내주는 기능도 필요할 것 같습니다.  -->
+- 주차별 정보 띄우기. (날짜, 몇주차인지, 제목, 세부 내용) -->
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -49,20 +43,18 @@
 
     var subjectName = study.name;
     var studyIntroduce = study.info;
-    var date = board.deadline.split(' ',1)[0];
-    console.log(date);
 
-    var mon = date.split('-',3)[1];
+    var mon = board.deadline.split('.',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = date.split('-',3)[2];
-    var year = date.split('-',3)[0];
+    var day = board.deadline.split('.',3)[2];
+    var year = 20+board.deadline.split('.',3)[0];
 
     var studyContentsParent = board.name;
     var studyContentsParentWeek = board.week;
     var studyContents = board.info;
 
     var quizArray = quiz;
-    var totalPage = parseInt(num/10)+1;
+    var totalPage = parseInt(quiz.length/10)+1;
     console.log(totalPage);
 
     function outputQuizList() {
@@ -70,7 +62,7 @@
         document.write('<tr>')
         document.write('<th scope="row">' + quizArray[i].id + '</th>')
         document.write('<td><a href="/study-quiz-solve/'+quizArray[i].id+'" id="hover">' + quizArray[i].name + '</a></td>')
-        document.write('<td>' + quizArray[i].owner + '</td>')
+        document.write('<td>' + quizArray[i].user.nick + '</td>')
         document.write('<td>' + quizArray[i].createdAt.split('T',1)[0] + '</td>')
         document.write('</tr>')
       }
@@ -101,8 +93,8 @@
 
     <!--다른 메뉴로 전환-->
     <a class="nav-link active" href="/home" style=color:white;>HOME</a>
-    <a class="nav-link" href="#" style=color:#ffbc3b;>MYSTUDY</a>
-    <a class="nav-link active" href="#" style=color:white;>OPENSTUDY</a>
+    <a class="nav-link" href="/study-list" style=color:#ffbc3b;>MYSTUDY</a>
+    <a class="nav-link active" href="/openstudy-list/1" style=color:white;>OPENSTUDY</a>
 
     <!--우측상단 드롭다운버튼-->
     <div class="dropdown">
@@ -114,7 +106,7 @@
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
         <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
-        <a class="dropdown-item" href="#">로그아웃</a>
+        <a class="dropdown-item" href="/auth/logout">로그아웃</a>
       </div>
     </div>
 
@@ -186,7 +178,7 @@
       <div class="col-lg-12 offset-10">
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-outline-secondary " style="margin-bottom: 10% ;  width:100px;height:40px;"
-          onclick = "location.href='/study-post-list/'+ board.id">게시글</button>
+          onclick = "location.href='/study-post-list/'+ board.id+'/1'">게시글</button>
           <button type="button" class="btn btn-secondary "
             style=" margin-bottom:10%; width:100px;height:40px;">문제</button>
         </div>

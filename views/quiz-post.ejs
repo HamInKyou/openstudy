@@ -5,28 +5,128 @@
   <meta charset="UTF-8">
   <title>OPEN STUDY</title>
   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
+
   <script>
-    var study =<%-study %>;
-    console.log(study);
-    var board =<%-board %>;
-    console.log(board);
+      var study =<%-study %>;
+      console.log(study);
+      var board =<%-board %>;
+      console.log(board);
 
-    var subjectName = 'OpenSource Project';
-    var studyIntroduce = '스터디 소개글 여기에 넣기~';
+      var subjectName = study.name;
+      var studyIntroduce = study.info;
 
-    var mon = 11;
+      var mon = board.deadline.split('.',3)[1];
       var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-      var day = 12;
-      var year = 2019;
+      var day = board.deadline.split('.',3)[2];
+      var year = 20+board.deadline.split('.',3)[0];
 
       var studyContentsParent = board.name;
       var studyContentsParentWeek = board.week;
       var studyContents = board.info;
+   
+
+    $(function () {
+      var AnswerId = 0;
+      var attachDataUrl = "";
+      var modalAttachDataUrl = "";
+
+      //본문에 이미지 첨부
+      $("#inputGroupFile04").change(function (e) {
+        console.log("uploader called");
+        var formData = new FormData();
+        var file = e.target.files[0];
+
+        console.log(file);
+        formData.append('img', file);
+
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/img",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            $('#content').append($('<img>', {
+              src: data.url
+            }));
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert("fail");
+          }
+        });
+      });
+      //정답에 이미지 첨부
+      $("#answerInputGroupFile04").change(function (e) {
+        console.log("modal uploader called");
+        var formData = new FormData();
+        var file = null;
+        file = e.target.files[0];
+
+        console.log(file);
+        formData.append('img', file);
+        if(file == null)
+          return;
+        $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/img",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+            $('#answerContent').append($('<img>', {
+              src: data.url
+            }));
+          },
+          error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert("fail");
+          }
+        });
+      });
+      
+      //정답 등록
+      $("#answerSubmitBtn").click(function(){
+        console.log('answer submit called');
+        $.post("/answer/create", {
+          name : $("#answerTitle").val(),
+          content : $("#answerContent").html(),
+          url : modalAttachDataUrl,
+        }, function(data, status){
+          AnswerId = data.answerId;
+          $('#postModal').modal("hide"); //닫기 
+          alert(data.res);
+        });
+      });
+      //제출
+      $("#submitBtn").click(function () {
+        console.log('submit called');
+        $.post("/quiz/create", {
+            name: $("#subject").val(),
+            content: $("#content").html(),
+            ownerAnswerId: AnswerId,
+            url: attachDataUrl,
+            boardId: board.id
+          },
+          function (data, status) {
+            alert(data.msg);
+            window.location.href = '/study-quiz-list/' + board.id + '/1';
+          }
+        );
+      });
+    });
   </script>
 </head>
 
@@ -40,9 +140,9 @@
     </a>
 
     <!--다른 메뉴로 전환-->
-    <a class="nav-link" href="/home" style=color:white;>HOME</a>
-    <a class="nav-link active" href="#" style=color:#ffbc3b;>MYSTUDY</a>
-    <a class="nav-link" href="#" style=color:white;>OPENSTUDY</a>
+    <a class="nav-link active" href="/home" style=color:white;>HOME</a>
+    <a class="nav-link active" href="/study-list" style=color:#ffbc3b;>MYSTUDY</a>
+    <a class="nav-link active" href="/openstudy-list/1" style=color:white;>OPENSTUDY</a>
 
     <!--우측상단 드롭다운버튼-->
     <div class="dropdown">
@@ -54,7 +154,7 @@
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
         <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
-        <a class="dropdown-item" href="#">로그아웃</a>
+        <a class="dropdown-item" href="/auth/logout">로그아웃</a>
       </div>
     </div>
 
@@ -117,7 +217,7 @@
       <!-- notice content 끝-->
 
       <!--여기부터 퀴즈 제출관련 내용 시작-->
-      <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="제목을 입력하세요.">
+      <input type="text" class="form-control mb-3" id="subject" name="name" placeholder="제목을 입력하세요.">
 
       <!--첨부관련 내용-->
       <div class="input-group flex-nowrap">
@@ -126,7 +226,7 @@
 
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-            <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
+            <label class="custom-file-label" for="inputGroupFile04">이미지 등록</label>
           </div>
 
           <div class="input-group-append">
@@ -137,7 +237,7 @@
       &nbsp;
 
       <!--문제 내용 입력하는 곳-->
-      <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."></textarea>
+      <div contentEditable="true" id="content" class="form-control mb-3" placeholder="내용을 입력하세요." style ="height:500px;overflow:scroll;"></div>
 
       <!--답과 해설 첨부하기 위한 버튼, 누르면 modal 띄움-->
       <div class="row">
@@ -147,7 +247,7 @@
 
       <!-- modal -->
       <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content rounded-0 border-0 p-4">
             <!--modal header, 닫는 버튼과 타이틀 표시-->
             <div class="modal-header border-0">
@@ -162,24 +262,28 @@
             <!--modal body-->
             <div class="modal-body">
               <form action="#" class="row">
-                <!--답 입력하는 부분-->
-                <textarea name="message" id="message" class="form-control mb-3" placeholder="내용을 입력하세요."
-                  style="height:75%;"></textarea>
-                <!--첨부를 위한 부분-->
-                <div class="input-group flex-nowrap">
+                <!-- title-->
+                <input id="answerTitle" class="form-control mb-3" type="text" placeholder="제목">
+                 <!--첨부를 위한 부분-->
+                 <div class="input-group flex-nowrap">
                   <div class="input-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="inputGroupFile04"
+                      <input type="file" class="custom-file-input" id="answerInputGroupFile04"
                         aria-describedby="inputGroupFileAddon04">
-                      <label class="custom-file-label" for="inputGroupFile04">첨부파일</label>
+                      <label class="custom-file-label" for="inputGroupFile04">이미지 등록</label>
                     </div>
-                    <div class="input-group-append">
-                      <button class="btn btn-warning" type="button" id="inputGroupFileAddon04">첨부</button>
+                    <div class="input-group-append" style = "margin-bottom:2.5%;">
+                      <button class="btn btn-warning" type="button" id="inputGroupFileAddon04" >첨부</button>
                     </div>
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
+                <!--답 입력하는 부분-->
+                <div contentEditable="true" id="answerContent" name="message" class="form-control mb-3"
+                  style="height:250px;overflow:scroll;"></div>
+               
+
+                <button id="answerSubmitBtn" type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답 제출</button>
               </form>
 
             </div>
@@ -189,7 +293,7 @@
       <!--modal 끝-->
 
       <div class="row">
-        <button type="button" class="btn btn-warning mx-auto" style="margin-top: 2%;">POST</button>
+        <button id="submitBtn" type="button" class="btn btn-warning mx-auto" style="margin-top: 2%;">POST</button>
       </div>
 
     </div>

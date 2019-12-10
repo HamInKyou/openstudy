@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <link rel=calendar href="lib/tui.calendar-1.12.7/">
+</head>
+<body style="background:#e9ecef">
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style = color:white;>
+            <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+        
+        <a class="nav-link" style = color:white;>HOME</a>
+        <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
+        <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+    
+        <div class="dropdown">
+            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+              MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                     <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
+                     <a class="dropdown-item"  href="my-test">MY TEST</a>
+                     <a class="dropdown-item"  href="#">개인정보 설정</a>
+                     <a class="dropdown-item"  href="/auth/logout">로그아웃</a>
+            </div>
+        </div>
+    
+      </nav>
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+        <div class="container">
+          <h1 class="display-4">My TEST</h1>
+          <p class="lead">그동안 치뤘던 TEST의 결과, 해설을 볼 수 있습니다. </p>
+        </div>
+      </div>
+
+    <div class = container>
+      
+      <table class="table table-sm table-hover table-light">
+         <thead>
+           <tr >
+             <th scope="col" style="width: 5%;">#</th>
+             <th scope="col" style="width: 15%;">날짜</th>
+             <th scope="col" style="width: 70%;">시험과목</th>
+             <th scope="col" style="width: 10%;">총 문제 수</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+            <th scope="row">4</th>
+            <td>2019/11/11</td>
+            <td>오픈소스</td>
+            <td>00</td>
+           </tr>
+           <tr>
+             <th scope="row">3</th>
+             <td>2019/11/11</td>
+             <td>오픈소스</td>
+             <td>00</td>
+           </tr>            
+           <tr>
+             <th scope="row">2</th>
+             <td>2019/11/11</td>
+             <td>오픈소스</td>
+             <td>00</td>
+           </tr>
+           <tr>
+             <th scope="row">1</th>
+             <td>2019/11/11</td>
+             <td>오픈소스</td>
+             <td>00</td>
+           </tr>
+         </tbody>
+       </table>
+       <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+
+
+</body>   
+</html>

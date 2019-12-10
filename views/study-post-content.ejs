@@ -1,0 +1,152 @@
+<!-- study-post-content
+스터디 제목 & info받기
+board 내용 넣기
+게시글 작성자, 시간 내용 넣기
+페이지는 필요 x -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   
+   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <script>
+    var study = <%-study %>
+    console.log(study);
+    var board = <%-board %>
+    console.log(board);
+    var post = <%-post %>
+    console.log(post);
+
+    var studyName = study.name;
+    var studyInfo = study.info;
+
+    var week = board.week;
+    var title = board.name;
+    var info = board.info;
+
+    var postId = post.id;
+    var postContent = post.content;
+    var postDate = post.createdAt; 
+    var postUser = post.user;
+
+
+    var mon = board.deadline.split('-',3)[1];
+    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var day = board.deadline.split('-',3)[2];
+    var year = 20+board.deadline.split('-',3)[0];
+
+    function openChat(){
+      window.open('/chat/','chat','width=430,height=600,location=no,status=no,scrollbars=yes');
+    }
+
+  </script>
+</head>
+<body style="background:#e9ecef">
+   
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/home" style=color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+    
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style=color:white;>HOME</a>
+        <a class="nav-link active" href="/study-list/1" style="color:#ffbc3b;">MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style="color:white;">OPENSTUDY</a>
+    
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+          </button>
+    
+          <!--드롭다운 내부 버튼들-->
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item"  href="/auth/logout">로그아웃</a>
+          </div>
+        </div>
+    
+      </nav>
+  
+
+    <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+            <div class="container">
+              <div class = "row">
+                  <div class = "col-lg-10">
+              <script>
+                document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
+              </script>
+              </div>
+              <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
+                <p></p>
+            </div>
+            </div>
+            <script>
+             document.write('<p class="lead">'+ studyInfo+'</p>');
+            </script>   
+            </div>
+        </div>
+
+    <div class = "container">
+            <div class="d-flex">
+                    <div class="text-center mr-4">
+                      <div class="p-4 bg-warning text-white">
+                        <script>  
+                        document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+                    </script>
+                    </div>
+                    </div>
+                    <!-- notice content -->
+                    <div>
+                        <script>
+                      document.write('<h3 class="mb-4">'+week+"주차 "+title+'</h3>');
+                    </script>
+                      <ul class="list-styled mb-5">
+                        <script>
+                            document.write('<li>'+info+'</li>');
+                        </script>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class = "row mb-3" >
+                      <button onclick = openChat() target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:90%; margin-right:5%;" >채팅방</button>
+                      
+                  </div>
+
+            <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col" style = "width:20%;">작성일</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <script>
+                            document.write('<tr>');
+                            document.write('<td>'+postId+'</td>');
+                            document.write('<td>'+postUser.nick+'</td>');
+                            document.write('<td>'+postDate+'</td>');
+                            document.write('</tr>');    
+                        </script>
+                        
+                    </tbody>
+                  </table>
+
+                  
+                  <script>
+                    document.write('<div contentEditable="false" id="content" class="form-control mb-3"  style ="height:500px;overflow:scroll;background:#e9ecef;">'+postContent+'</div>');
+                  </script>
+                  <div class = "row justify-content-center" style  = "margin-bottom:5%;" href = "/study-post-list/"><a class = "btn btn-warning">목록</a></div>
+    </div>
+   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+</body>   
+</html>
