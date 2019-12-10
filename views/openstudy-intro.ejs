@@ -13,41 +13,49 @@
 
    
    <script>
-    var studyInfo =<%-studyInfo %>;
+    var studyInfo = <%- study %>;
+    var num_member = <%- num_member %>
+
     console.log(studyInfo);
 
     var studyName = studyInfo.name;
     var studyInfo = studyInfo.info;
-    
 
   </script>
 </head>
 <body>
    
-   <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">
-          <img src="/public/images/logo.png" height="30" alt="HOME">
-      </a>
-      
-      <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link" href="#" >MYSTUDY</a>
-      <a class="nav-link active" href="#">OPENSTUDY</a>
-  
-      <div class="dropdown">
-          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+<!--nav bar 시작-->
+<nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="home" style=color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+    
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style=color:white;>HOME</a>
+        <a class="nav-link " href="/study-list/1" style="color:white;" >MYSTUDY</a>
+        <a class="nav-link active" href="/openstudy-list/1" style="color:#ffbc3b;">OPENSTUDY</a>
+    
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
             MY MENU
           </button>
+    
+          <!--드롭다운 내부 버튼들-->
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="#">로그아웃</a>
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
           </div>
-      </div>
-    </nav>
+        </div>
+    
+      </nav>
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <script>
-                document.write('<h1 class="display-4">'+"My Study "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                document.write('<h1 class="display-4">'+"OPENSTUDY "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
                 
             </script>
             <hr class="my-4">
@@ -70,7 +78,7 @@
                             <div class="text-left">
                                 <h6 class="mb-0">　PARTICIPANTS</h6>
                                 <script>
-                                    // document.write('<p class="mb-0">'+"　TOTAL "+users+'</p>');
+                                    document.write('<p class="mb-0">'+"　TOTAL "+num_member+'</p>');
                                 </script>
                             </div>
                     </div>

@@ -13,27 +13,32 @@ router.post('/', async (req, res, next) => {
         });
         
         if(parentStudy.userId != req.user.id)
-            return res.send('권한이 없습니다.');
+            return res.json({msg: '권한이 없습니다.' });
         
         const exBoard = await Board.findOne({
             where : {
-                name : req.body.name,
-                week : req.body.week,
+                name : req.body.name
             }
         });
 
         if(exBoard){
-            return res.send(req.body.name + " already exist");
+            return res.json({
+                msg : req.body.name + " already exist"
+            });
         }
-        
+    
+        const boards = await parentStudy.getBoards();
         const board = await Board.create({
+            week : boards.length,
             week : req.body.week,
             deadline : req.body.deadline,
             name : req.body.name,
             info : req.body.info,
             studyId : req.body.studyId,
         });
-        res.send("study : " + board.name + "created");
+        return res.json({
+            msg : board.name + "created!"
+        });
     }catch(err){
         console.error(err);
         next(err);

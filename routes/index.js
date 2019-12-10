@@ -218,7 +218,6 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
       }
     });
     const members = await exStudy.getMember();
-    console.log(members);
 
     res.render('study-intro', {
       study: JSON.stringify(exStudy),
@@ -239,9 +238,11 @@ router.get('/openstudy-intro/:studyId', async (req, res, next) => {
       }
     });
     const result = JSON.stringify(exStudy);
+    const members = await exStudy.getMember();
 
     res.render('openstudy-intro', {
-      studyInfo: result
+      study: result,
+      num_member : members.length
     });
   } catch (err) {
     console.error(err);
@@ -258,11 +259,33 @@ router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
   try {
     const pageId = req.params.pageId;
     const searchName = req.params.name;
+    const study = await Study.findAll({where : {name : {[Op.like]: "%" + searchName + "%"}}});
     const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')], where : {name : {[Op.like]: "%" + searchName + "%"}}});
     
     res.render('openstudy-list', {
+      study : JSON.stringify(study),
       studies: JSON.stringify(exStudy),
-      page : pageId
+      page : pageId,
+      name : JSON.stringify(searchName)
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/openstudy-list/:pageId', async (req, res, next) => {
+  //studylist
+  try {
+    const pageId = req.params.pageId;
+    const study = await Study.findAll();
+    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')]});
+    
+    res.render('openstudy-list', {
+      study : JSON.stringify(study),
+      studies: JSON.stringify(exStudy),
+      page : pageId,
+      name : JSON.stringify(null)
     });
   } catch (err) {
     console.error(err);

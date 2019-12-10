@@ -68,19 +68,24 @@
           j = limit + 1;
           limit = limit + 1;
         }
+        /*
         while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
             .name == Studies[j].name)) {
           if (i == j)
             j = limit;
           j = j + 1;
           limit = j;
-        }
+        }*/
       }
+      $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
+      $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
+      $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
+      if(myStudies[j].imgUrl != '' ){
+          $("#openstudy" + i).find('img').attr('src',Studies[j].imgUrl);
+      }
+      console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
     }
-    $("#openstudy" + (i + 1)).find('h5.card-title').text(Studies[j].name);
-    $("#openstudy" + (i + 1)).find('p.card-text').text(Studies[j].info);
-    $("#openstudy" + (i + 1)).find('a').attr("href", "/study-intro/" + Studies[j].id);
-    console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
+   
     });
     
   </script>

@@ -3,9 +3,9 @@
  <head>
     <meta charset="UTF-8">
     <title>OPEN STUDY</title>
-    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+    <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
     
-    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+    <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
          
     <style>
@@ -31,20 +31,63 @@
         console.log(studies);
         var page = <%-page %>;
         console.log(page);
-
-        var totalPage = parseInt(myStudies.length/9)+1;
+        var study =<%-study %>;
+        var totalPage = parseInt(study.length/9)+1;
         console.log(totalPage);
+        var searchName =<%-name %>;
+        console.log(searchName);
+        var studyName = null;
 
+      if(searchName != null){
         function makePageNav() {
-        for(var i = 1; i <= totalPage; i++ ){
+          for(var i = 1; i <= totalPage; i++ ){
             if(i==page){
             document.write('<li class="page-item active" aria-current="page">');
-            document.write('<a class="page-link" href="/openstudy-list/'+ page+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('<a class="page-link" href="/openstudy-list/'+ i+'/'+searchName+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
             document.write('</li>');
             }
             else{
-            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ page +'">'+i+'</a></li>');
+            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ i +'/' + searchName+'">'+i+'</a></li>');
             }
+          }
+        }
+      }else{
+        function makePageNav() {
+          for(var i = 1; i <= totalPage; i++ ){
+            if(i==page){
+            document.write('<li class="page-item active" aria-current="page">');
+            document.write('<a class="page-link" href="/openstudy-list/'+ i+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('</li>');
+            }
+            else{
+            document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ i +'">'+i+'</a></li>');
+            }
+          }
+        }
+      }
+
+      function studyList(){
+        for(var i = 0; i<study.length;i++){
+            if(i%3==0){
+                document.write('<div class = "row">');
+            }
+            document.write('<div class="col-sm-4" style = "margin-bottom:2%;">');
+            document.write('<img  style = "width:287.98px; height:178.78px;" src="'+study[i].imgUrl+'" class="card-img-top" alt="...">');
+            document.write( '<div class="card">');
+            document.write('<div class="card-body">');
+            document.write('<h5 class="card-title">'+study[i].name+'</h5>');
+            document.write('<p class="card-text">'+study[i].info+'</p>');
+            document.write(' <a href="/study-intro/'+study[i].id+'" class="btn btn-warning">입장하기</a>');
+            document.write(' </div>');
+            document.write( '</div>');
+            document.write( '</div>');
+            if(i%3==2){
+                document.write('</div>');
+            }
+            else if(i == study.length-1){
+              document.write('</div>');
+            }
+            
         }
     }
     </script>
@@ -54,33 +97,40 @@
  
  <body style="background:#e9ecef;">
     
+    <!--nav bar 시작-->
     <nav class="navbar navbar-dark bg-dark fixed-top">
-       <a class="navbar-brand" href="#" style = color:white;>
-           <img src="../public/images/logo.png" height="30" alt="HOME">
-       </a>
-       
-       <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
-       <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-       <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
-   
-       <div class="dropdown">
-           <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
-             MY MENU
-           </button>
-           <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item"  href="my-calendar.html">MY Calendar</a>
-                    <a class="dropdown-item"  href="#">개인정보 설정</a>
-                    <a class="dropdown-item"  href="#">로그아웃</a>
-           </div>
-       </div>
-   
-     </nav>
+        <a class="navbar-brand" href="/home" style=color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style=color:white;>HOME</a>
+        <a class="nav-link " href="/study-list/1" style="color:white;" >MYSTUDY</a>
+        <a class="nav-link active" href="/openstudy-list/1" style="color:#ffbc3b;">OPENSTUDY</a>
+
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+          </button>
+
+          <!--드롭다운 내부 버튼들-->
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
+          </div>
+        </div>
+
+      </nav>
      
      <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
              <div class="container">
                <div class = row>
                <div class = "col-lg-4">
-                <p class="display-4">My Study</p>
+
+                  <p class="display-4">Open Study</p>
+
                </div>
                <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
                  <p></p>
@@ -91,93 +141,21 @@
              </div>
            </div>
  
-     <div class = "container">
-         <div class = "row">
-             <div class="col-sm-4" >
-                     <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                 <div class="card">
-                     <div class="card-body">
-                         <h5 class="card-title">오픈소스</h5>
-                         <p class="card-text">==== 내용 ====</p>
-                         <a href="#" class="btn btn-warning">입장하기</a>
-                     </div>
-                 </div>
-             </div>
-             <div class="col-sm-4">
-                     <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                     <div class="card">
-                         <div class="card-body">
-                             <h5 class="card-title">c++</h5>
-                             <p class="card-text">==== 내용 ====</p>
-                             <a href="#" class="btn btn-warning">입장하기</a>
-                         </div>
-                     </div>
-                 </div>
-             <div class="col-sm-4">
-                     <div class="card">
-                             <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                         <div class="card-body">
-                             <h5 class="card-title">안드로이드</h5>
-                             <p class="card-text">==== 내용 ====</p>
-                             <a href="#" class="btn btn-warning">입장하기</a>
-                     </div>
-                 </div>
-             </div>   
-         </div>
-         &nbsp;
-         <div class = "row">
-                 <div class="col-sm-4" >
-                     <div class="card">
-                             <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                         <div class="card-body">
-                             <h5 class="card-title">오픈소스</h5>
-                             <p class="card-text">==== 내용 ====</p>
-                             <a href="#" class="btn btn-warning">입장하기</a>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-sm-4">
-                         <div class="card">
-                                 <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                             <div class="card-body">
-                                 <h5 class="card-title">c++</h5>
-                                 <p class="card-text">==== 내용 ====</p>
-                                 <a href="#" class="btn btn-warning">입장하기</a>
-                             </div>
-                         </div>
-                     </div>
-                 <div class="col-sm-4">
-                         <div class="card">
-                                 <img src="../public/images/course-1.jpg" class="card-img-top" alt="...">
-                             <div class="card-body">
-                                 <h5 class="card-title">안드로이드</h5>
-                                 <p class="card-text">==== 내용 ====</p>
-                                 <a href="#" class="btn btn-warning">입장하기</a>
-                         </div>
-                     </div>
-                 </div>   
-             </div>
-             &nbsp;
-             <nav aria-label="Page navigation example">
-                     <ul class="pagination justify-content-center">
-                       <li class="page-item">
-                         <a class="page-link" href="#" aria-label="Previous">
-                           <span aria-hidden="true">&laquo;</span>
-                         </a>
-                       </li>
-                       <li class="page-item"><a class="page-link" href="#">1</a></li>
-                       <li class="page-item"><a class="page-link" href="#">2</a></li>
-                       <li class="page-item"><a class="page-link" href="#">3</a></li>
-                       <li class="page-item">
-                         <a class="page-link" href="#" aria-label="Next">
-                           <span aria-hidden="true">&raquo;</span>
-                         </a>
-                       </li>
+           <div class = "container">
+            <script>
+               studyList();
+               </script>
+                &nbsp;
+                <nav aria-label="Page navigation">
+                   <ul class="pagination justify-content-center">
+                        <script>
+                          makePageNav();  
+                        </script>
                      </ul>
-                   </nav>
-     </div>
+               </nav>
+        </div>
     
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+ <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
  </body>   
  </html>

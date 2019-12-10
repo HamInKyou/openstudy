@@ -27,27 +27,32 @@
 </head>
 <body>
    
-   <nav class="navbar navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">
-          <img src="/public/images/logo.png" height="30" alt="HOME">
-      </a>
-      
-      <a class="nav-link" href="home">HOME</a>
-      <a class="nav-link active" href="study-list.ejs" >MYSTUDY</a>
-      <a class="nav-link " href="openstudy-list.ejs">OPENSTUDY</a>
-  
-      <div class="dropdown">
-          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+   <!--nav bar 시작-->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/home" style=color:white;>
+          <img src="../public/images/logo.png" height="30" alt="HOME">
+        </a>
+    
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style=color:white;>HOME</a>
+        <a class="nav-link active" href="/study-list/1" style="color:#ffbc3b;">MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style="color:white;">OPENSTUDY</a>
+    
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
             MY MENU
           </button>
+    
+          <!--드롭다운 내부 버튼들-->
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="my-test">MY TEST</a>
-                   <a class="dropdown-item"  href="#">개인정보 설정</a>
-                   <a class="dropdown-item"  href="#">로그아웃</a>
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="#">로그아웃</a>
           </div>
-      </div>
-    </nav>
+        </div>
+    
+      </nav>
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
@@ -108,7 +113,10 @@
                         alert(myName+"님!"+studyName+"의 멤버가 되신 것을 환영합니다.");
                         }
                     </script> -->
-                    <a href="/study-week" class="btn btn-warning">참여하기</a>
+                    <script>
+                        document.write('<a href=/study-week/' + study.id + ' class="btn btn-warning"> 들어가기 </a>');
+                    </script>
+                    <!-- <a href="/study-week" class="btn btn-warning">들어가기</a> -->
                 </div>
         </div>
         

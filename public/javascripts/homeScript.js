@@ -42,8 +42,8 @@ $(function () {
       console.log(file);
       alert(file + 'mg selected');
       //$('#imgLabel').val("이미지 선택 됨");
-      isImgAttached = true;
       formData.append('img', file);
+      isImgAttached = true;
     });
     function sendPost(data){
         $.post("/study/create", {
@@ -80,7 +80,7 @@ $(function () {
             }
           });
       } else {
-        sendPost({imgUrl : ""});
+        sendPost({imgUrl : "/public/images/course-1.jpg"});
       }
     });
     
