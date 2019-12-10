@@ -56,7 +56,7 @@ router.get('/', async (req, res, next) => {
                     name : "board" + i + "in study:"+s,
                     info : "board info " + i,
                     studyId : s,
-                    deadline : "19-12-02"
+                    deadline : 
                 });
             }
         }

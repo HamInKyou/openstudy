@@ -254,13 +254,19 @@ router.get('/add-outline', (req, res, next) => {
   res.render('add-outline');
 });
 
-router.get('/study-list', async (req, res, next) => {
+router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
   //studylist
   try {
-    const exStudy = await Study.findAll();
-
-    res.render('study-list', {
-      studies: JSON.stringify(exStudy)
+    const pageId = req.params.pageId;
+    const searchName = req.params.name;
+    const study = await Study.findAll({where : {name : {[Op.like]: "%" + searchName + "%"}}});
+    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')], where : {name : {[Op.like]: "%" + searchName + "%"}}});
+    
+    res.render('openstudy-list', {
+      study : JSON.stringify(study),
+      studies: JSON.stringify(exStudy),
+      page : pageId,
+      name : JSON.stringify(searchName)
     });
   } catch (err) {
     console.error(err);
@@ -268,21 +274,43 @@ router.get('/study-list', async (req, res, next) => {
   }
 });
 
-router.get('/mystudy-list', async (req, res, next) => {
+router.get('/openstudy-list/:pageId', async (req, res, next) => {
+  //studylist
+  try {
+    const pageId = req.params.pageId;
+    const study = await Study.findAll();
+    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')]});
+    
+    res.render('openstudy-list', {
+      study : JSON.stringify(study),
+      studies: JSON.stringify(exStudy),
+      page : pageId,
+      name : JSON.stringify(null)
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/study-list/:pageId', async (req, res, next) => {
   //mystudylist
   try {
+    const pageId = req.params.pageId;
     const exUser = await User.findOne({
       where: {
         id: req.user.id
       }
     });
     const enrolledStudies = await exUser.getEnrolledStudy({
+      offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')],
       raw: true
     });
     const result = JSON.stringify(enrolledStudies);
 
-    res.render('mystudy-list', {
-      myStudies: result
+    res.render('study-list', {
+      myStudies: result,
+      page : pageId
     });
   } catch (err) {
     console.error(err);
