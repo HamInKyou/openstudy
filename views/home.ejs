@@ -17,77 +17,71 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
-    $(function(){
+    $(function () {
       var myStudies = <%- myStudies %> ;
-    console.log(myStudies);
-    var Studies = <%- Studies %> ;
-    console.log(Studies);
+      console.log(myStudies);
+      var Studies = <%- Studies %> ;
+      console.log(Studies);
 
-    for (var i = 1; i <= 3; i++) { //MyStudy 할당
-      if (myStudies.length >= i) {
-        $("#mystudy" + i).find('h5.card-title').text(myStudies[i - 1].name); //0~2
-        $("#mystudy" + i).find('p.card-text').text(myStudies[i - 1].info);
-        $("#mystudy" + i).find('a').attr("href", "/study-intro/" + myStudies[i - 1].id);
-        if(myStudies[i - 1].imgUrl != ''){
-          $("#mystudy" + i).find('img').attr('src',myStudies[i - 1].imgUrl);
+      for (var i = 1; i <= 3; i++) { //MyStudy 할당
+        if (myStudies.length >= i) {
+          $("#mystudy" + i).find('h5.card-title').text(myStudies[i - 1].name); //0~2
+          $("#mystudy" + i).find('p.card-text').text(myStudies[i - 1].info);
+          $("#mystudy" + i).find('a').attr("href", "/study-intro/" + myStudies[i - 1].id);
+          $("#mystudy" + i).find('img').attr('src', "/uploads/"+myStudies[i - 1].imgUrl);
         }
-        
         console.log($("#mystudy" + i).find('h5.card-title'));
       }
-    }
-    var j;
-    var limit = -1;
-    for (var i = 0; i <= 2; i++) { //openstudy 할당
-      j = i;
-      if (myStudies.length == 0) {
+
+      var j;
+      var limit = -1;
+      for (var i = 0; i <= 2; i++) { //openstudy 할당
         j = i;
-      } else if (myStudies.length == 1) {
-        if (i != 0) {
-          j = limit + 1;
-          limit = limit + 1;
+        if (myStudies.length == 0) {
+          j = i;
+        } else if (myStudies.length == 1) {
+          if (i != 0) {
+            j = limit + 1;
+            limit = limit + 1;
+          }
+          while (myStudies[0].name == Studies[j].name) {
+            if (i == j)
+              j = limit;
+            j = j + 1;
+            limit = j;
+          }
+        } else if (myStudies.length == 2) {
+          if (i != 0) {
+            j = limit + 1;
+            limit = limit + 1;
+          }
+          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name)) {
+            if (i == j)
+              j = limit;
+            j = j + 1;
+            limit = j;
+          }
+        } else {
+          if (i != 0) {
+            j = limit + 1;
+            limit = limit + 1;
+          }
+          
+          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
+              .name == Studies[j].name)) {
+            if (i == j)
+              j = limit;
+            j = j + 1;
+            limit = j;
+          }
         }
-        while (myStudies[0].name == Studies[j].name) {
-          if (i == j)
-            j = limit;
-          j = j + 1;
-          limit = j;
-        }
-      } else if (myStudies.length == 2) {
-        if (i != 0) {
-          j = limit + 1;
-          limit = limit + 1;
-        }
-        while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name)) {
-          if (i == j)
-            j = limit;
-          j = j + 1;
-          limit = j;
-        }
-      } else {
-        if (i != 0) {
-          j = limit + 1;
-          limit = limit + 1;
-        }
-        /*
-        while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
-            .name == Studies[j].name)) {
-          if (i == j)
-            j = limit;
-          j = j + 1;
-          limit = j;
-        }*/
+        $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
+        $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
+        $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
+        $("#openstudy" + (j + 1)).find('img').attr('src',"/uploads/"+ myStudies[j].imgUrl);
+        console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
       }
-      $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
-      $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
-      $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
-      if(myStudies[j].imgUrl != '' ){
-          $("#openstudy" + i).find('img').attr('src',Studies[j].imgUrl);
-      }
-      console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
-    }
-   
     });
-    
   </script>
   <script src="/public/javascripts/homeScript.js"></script>
 
@@ -111,7 +105,7 @@
       <div class="dropdown-menu dropdown-menu-right">
         <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
         <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
-        <a class="dropdown-item" href="#">로그아웃</a>
+        <a class="dropdown-item" href="/auth/logout">로그아웃</a>
       </div>
     </div>
 
@@ -220,7 +214,7 @@
     </div>
     <div class="row" style="margin-top: 20px;">
       <div class="col-sm-4" id="mystudy1">
-        <img src="../public/images/course-1.jpg" class="card-img-top">
+        <img src="/public/images/course-1.jpg" class="card-img-top">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">MYSTUDY1</h5>
@@ -231,7 +225,7 @@
       </div>
       <div class="col-sm-4" id="mystudy2">
         <div class="card">
-          <img src="../public/images/course-1.jpg" class="card-img-top">
+          <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">MYSTUDY2</h5>
             <p class="card-text">스터디방 1 소개 내용~~~</p>
@@ -241,7 +235,7 @@
       </div>
       <div class="col-sm-4" id="mystudy3">
         <div class="card">
-          <img src="../public/images/course-1.jpg" class="card-img-top">
+          <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">MYSTUDY3</h5>
             <p class="card-text">스터디방 1 소개 내용~~~</p>
@@ -261,7 +255,7 @@
     <div class="row" style="margin-top: 20px;  margin-bottom: 60px;">
       <div class="col-sm-4" id="openstudy1">
         <div class="card">
-          <img src="../public/images/course-1.jpg" class="card-img-top">
+          <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">OPENSTUDY1</h5>
             <p class="card-text">스터디방 1 소개 내용~~~</p>
@@ -271,7 +265,7 @@
       </div>
       <div class="col-sm-4" id="openstudy2">
         <div class="card">
-          <img src="../public/images/course-1.jpg" class="card-img-top">
+          <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">OPENSTUDY2</h5>
             <p class="card-text">스터디방 1 소개 내용~~~</p>
@@ -280,7 +274,7 @@
         </div>
       </div>
       <div class="col-sm-4" id="openstudy3">
-        <img src="../public/images/course-1.jpg" class="card-img-top">
+        <img src="/public/images/course-1.jpg" class="card-img-top">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">OPENSTUDY3</h5>

@@ -35,10 +35,10 @@ board 내용 넣기
     var postUser = post.user;
 
 
-    var mon = board.deadline.split('.',3)[1];
+    var mon = board.deadline.split('-',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = board.deadline.split('.',3)[2];
-    var year = 20+board.deadline.split('.',3)[0];
+    var day = board.deadline.split('-',3)[2];
+    var year = 20+board.deadline.split('-',3)[0];
 
     function openChat(){
       window.open('/chat/','chat','width=430,height=600,location=no,status=no,scrollbars=yes');
@@ -64,7 +64,7 @@ board 내용 넣기
           <div class="dropdown-menu dropdown-menu-right">
                    <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
 
-                   <a class="dropdown-item"  href="#">로그아웃</a>
+                   <a class="dropdown-item"  href="/auth/logout">로그아웃</a>
           </div>
       </div>
   
