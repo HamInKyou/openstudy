@@ -10,11 +10,12 @@
  <head>
     <meta charset="UTF-8">
     <title>OPEN STUDY</title>
-    <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
-    
-    <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+    <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+
+    <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-         
+    <link rel="stylesheet" href="/css/study-intro.css">
+    <link rel="stylesheet" href="/css/global.css">
     <style>
        #hover {
       color: #343a40;
@@ -48,18 +49,18 @@
         for(var i = 1; i <= totalPage; i++ ){
             if(i==page){
             document.write('<li class="page-item active" aria-current="page">');
-            document.write('<a class="page-link" href="/study-list/'+ page+'" >'+i+'<span class="sr-only">(current)</span>'+'</a>');
+            document.write('<a class="page-link" href="/study-list/'+ page+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
             document.write('</li>');
             }
             else{
-                document.write('<li class="page-item"><a class="page-link" href="/study-study-list/'+ page +'">'+i+'</a></li>');
+                document.write('<li class="page-item"><a class="page-link" href="/openstudy-list/'+ page +'">'+i+'</a></li>');
             }
         }
     }
 
     function studyList(){
         for(var i = 0; i<study.length;i++){
-            if(i%3==1){
+            if(i%3==1 && i!=1){
                 document.write('<div class = "row">');
             }
             document.write('<div class="col-sm-4" >');
@@ -87,12 +88,14 @@
     
     <nav class="navbar navbar-dark bg-dark fixed-top">
        <a class="navbar-brand" href="#" style = color:white;>
-           <img src="../public/images/logo.png" height="30" alt="HOME">
+           <img src="/public/images/logo.png" href="/home" height="30" alt="HOME">
        </a>
        
-       <a class="nav-link active" href="home.html" style = color:#ffbc3b;>HOME</a>
-       <a class="nav-link" href="#" style = color:white;>MYSTUDY</a>
-       <a class="nav-link" href="#" style = color:white;>OPENSTUDY</a>
+       <a class="nav-link " href="/home"style = color:white;>HOME</a>
+       <script>
+        document.write('<a class="nav-link active" href="/study-list'+page+'" style = "color:#ffbc3b;">MYSTUDY</a>');
+        document.write('<a class="nav-link" href="/openstudy-list'+page+'"style = "color:white;">OPENSTUDY</a>');
+        </script>
    
        <div class="dropdown">
            <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
@@ -137,6 +140,6 @@
      </div>
     
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+ <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
  </body>   
  </html>
