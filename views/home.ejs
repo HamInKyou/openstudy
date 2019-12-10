@@ -30,6 +30,7 @@
 
         }
       }
+     
       var j; var limit =-1 ;
       for (var i = 0; i <= 2; i++) { //openstudy 할당
         j=i;
@@ -37,30 +38,35 @@
           j=i;
 
         }else if(myStudies.length==1){
-        if(i!=0){ j=limit+1; limit=limit+1;}
-          while(myStudies[0].name==Studies[j].name){
-          if(i==j)
-            j=limit;
-          j=j+1; limit=j;
-        }
+          if(i!=0){ j=limit+1; }
+          if(j<Studies.length){
+            while(myStudies[0].id==Studies[j].id){
+              j=j+1; limit=j;
+              if(j==Studies.length) break;
+          }
+          }else break;
         }else if(myStudies.length==2){
-          if(i!=0){ j=limit+1; limit=limit+1;}
-          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)){
-          if(i==j)
-            j=limit;
-          j=j+1; limit=j;
-        }
+          if(i!=0){ j=limit+1; }
+          if(j<Studies.length){
+            while((myStudies[0].id==Studies[j].id)||(myStudies[1].id==Studies[j].id)){
+              j=j+1; limit=j;
+              if(j==Studies.length) break;
+          }
+          }else break;
         }else{
-          if(i!=0){ j=limit+1; limit=limit+1;}
-          while((myStudies[0].name==Studies[j].name)||(myStudies[1].name==Studies[j].name)||(myStudies[2].name==Studies[j].name)){
-          if(i==j)
-            j=limit;
-          j=j+1; limit=j; 
+          if(i!=0){ j=limit+1; }
+          if(j<Studies.length){
+            while((myStudies[0].id==Studies[j].id)||(myStudies[1].id==Studies[j].id)||(myStudies[2].id==Studies[j].id)){
+              j=j+1; limit=j;
+              if(j==Studies.length) break;
+          }
+          }else break;
         }
+        if(j<Studies.length){
+          $("#openstudy"+(i+1)).find('h5.card-title').text(Studies[j].name);
+          $("#openstudy"+(i+1)).find('p.card-text').text(Studies[j].info);
+          console.log( $("#openstudy"+(i+1)).find('h5.card-title'));
         }
-        $("#openstudy"+(i+1)).find('h5.card-title').text(Studies[j].name);
-        $("#openstudy"+(i+1)).find('p.card-text').text(Studies[j].info);
-        console.log( $("#openstudy"+(i+1)).find('h5.card-title'));
         
       }
     });
