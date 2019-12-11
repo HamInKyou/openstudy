@@ -21,7 +21,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             password : hash,
         });
         req.flash('msg','회원가입 성공');
-        return res.redirect('/login');
+        return res.redirect('/');
         
     } catch (err) {
         console.error(err);

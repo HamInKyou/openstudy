@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
              allowNull : false,
         },
         datetime : {
-            type : 'TIMESTAMP',
+            type : DataTypes.STRING(100),
             allowNull : true,
         },
         datetime_end : {
-            type : 'TIMESTAMP',
+            type : DataTypes.STRING(100),
             allowNull : true,
         },
         color:{
