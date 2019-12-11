@@ -30,55 +30,13 @@
           $("#mystudy" + i).find('img').attr('src', myStudies[i - 1].imgUrl);
         }
       }
-
-      var j;
-      var limit = -1;
-      for (var i = 0; i <= 2; i++) { //openstudy 할당
-        j = i;
-        if (myStudies.length == 0) {
-          j = i;
-        } else if (myStudies.length == 1) {
-          if (i != 0) {
-            j = limit + 1;
-          }
-          if (j < Studies.length) {
-            while (myStudies[0].id == Studies[j].id) {
-              j = j + 1;
-              limit = j;
-              if (j == Studies.length) break;
-            }
-          } else break;
-        } else if (myStudies.length == 2) {
-          if (i != 0) {
-            j = limit + 1;
-          }
-          if (j < Studies.length) {
-            while ((myStudies[0].id == Studies[j].id) || (myStudies[1].id == Studies[j].id)) {
-              j = j + 1;
-              limit = j;
-              if (j == Studies.length) break;
-            }
-          } else break;
-        } else {
-          if (i != 0) {
-            j = limit + 1;
-          }
-          if (j < Studies.length) {
-            while ((myStudies[0].id == Studies[j].id) || (myStudies[1].id == Studies[j].id) || (myStudies[2].id ==
-                Studies[j].id)) {
-              j = j + 1;
-              limit = j;
-              if (j == Studies.length) break;
-            }
-          } else break;
-        }
-        if (j < Studies.length) {
-
-          $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
-          $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
-          $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
-          $("#openstudy" + (j + 1)).find('img').attr('src', myStudies[j].imgUrl);
-        }
+      for (var i = 1; i < 3; i++) { //openstudy 할당
+        if(Studies.length >= i) {
+          $("#openstudy" + i).find('h5.card-title').text(Studies[i-1].name);
+          $("#openstudy" + i).find('p.card-text').text(Studies[i-1].info);
+          $("#openstudy" + i).find('a').attr("href", "/openstudy-intro/" + Studies[i-1].id);
+          $("#openstudy" + i).find('img').attr('src', myStudies[i-1].imgUrl);
+        } 
       }
     });
   </script>
@@ -213,11 +171,11 @@
     </div>
     <div class="row" style="margin-top: 20px;">
       <div class="col-sm-4" id="mystudy1">
-        <img src="/public/images/course-1.jpg" class="card-img-top">
-        <div class="card">
+        <img class="card-img-top" src="/public/images/course-1.jpg" class="card-img-top">
+        <div class="card" >
           <div class="card-body">
-            <h5 class="card-title">em</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -226,8 +184,8 @@
         <div class="card">
           <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">MYSTUDY2</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -236,8 +194,8 @@
         <div class="card">
           <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">MYSTUDY3</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -256,8 +214,8 @@
         <div class="card">
           <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">OPENSTUDY1</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -266,8 +224,8 @@
         <div class="card">
           <img src="/public/images/course-1.jpg" class="card-img-top">
           <div class="card-body">
-            <h5 class="card-title">OPENSTUDY2</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -276,8 +234,8 @@
         <img src="/public/images/course-1.jpg" class="card-img-top">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">OPENSTUDY3</h5>
-            <p class="card-text">스터디방 1 소개 내용~~~</p>
+            <h5 class="card-title">스터디를 추가해주세요</h5>
+            <p class="card-text">설명을 추가해주세요</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
         </div>
@@ -287,10 +245,6 @@
 
 
   </div>
-
-  <nav class="navbar bottom navbar-dark bg-dark justify-content-center">
-    <p style='color:white;'>Footer bar</p>
-  </nav>
 
 
 
