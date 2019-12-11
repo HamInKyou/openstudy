@@ -16,6 +16,7 @@
         var myUserId = <%-myUserId %> ;
         var myPercent = <%-myPercent %> ;
         var totalPercentList = <%-totalPercentList %> ;
+        var myRank;
         console.log(myStudy);
         console.log(myUserId);
         console.log(myPercent);
@@ -31,18 +32,24 @@
             // a must be equal to b
             return 0;
         });
-        /////////////////
+        
+        console.log("after sort function");
+        console.log(totalPercentList);
         var percentValueList = new Array();
         var memberNameArr = new Array();
+        var rank = new Array();
+  
         totalPercentList.forEach(data => {
             percentValueList.push(data.percent);
             memberNameArr.push(data.nick);
+       
         });
+        var i=1;
         var barChartData = {       
             labels: memberNameArr,
              datasets: [{
               label: '제출율',
-              backgroundColor: "#1E90FF",
+              backgroundColor: "#ffb220",
                 data: percentValueList
             }]
         };
@@ -52,10 +59,28 @@
                 type: 'bar',
                 data: barChartData,
                 options: {
+                    title: {
+                    display: true,
+                    text: myStudy.name+' 제출율 현황',
+                    fontSize : 30,
+                    fontColor: "black"
+                     },
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            fontSize : 15,
+                        }
+                    },
                     scales : {
+                        xAxes: [{
+                            ticks:{
+                                fontSize : 20
+                            }
+                        }],
                         yAxes: [{
                             ticks : {
-                                beginAtZero : true
+                                fontSize : 15, 
+                                beginAtZero : true,
                             }
                         }]
                     }
@@ -93,9 +118,9 @@
         <h2 >자신의 제출율과 제출율 순위를 알 수 있습니다!</h2> -->
             <!-- &nbsp; -->
             <script>
-                document.write('<h1 class="display-4" style = "font-weight: bold; font-size: 4.5em;">' + myStudy.name +
+                document.write('<h1 class="display-4" style = " font-size: 3.0em;">' + myStudy.name +
                     " " + "의 제출율" + '</h1>');
-                document.write('<h2 style =" font-size: 2.0em;">' + "자신의 제출율과 순위를 알 수 있습니다." + '</h2>');
+                document.write('<h2 style =" font-size: 1.5em;">' + "자신의 제출율과 순위를 알 수 있습니다" + '</h2>');
             </script>
             <hr class="my-4">
         </div>
@@ -104,45 +129,23 @@
         <div class="container">
             <div class="row">
                 <script>
-                    //document.write('<style> ul{ list-style:none;}</style>');
-                    document.write(
-                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;"> >' +
-                        "나의 제출율 분석" + '</h1>');
+                   
+                  // document.write('<div style="padding: 10px">');
+                    //<h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;"> >' + "나의 제출율" + '</h1>');
                     document.write(' &nbsp; ');
                     document.write(
-                        '<ul style = "list-style-type : none;"><div style="border: 5px solid #ffbc3b; float: left; width: 100%; padding:20px;">'
+                        '<ul style = "list-style-type : none;"><div style=" float: left; width: 100%; ">'
                         );
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
-                        "나의 제출율: " + " " + myPercent + " %" + '</h2></li>&nbsp;');
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
-                        "나의 등수: " + " " + myRank + " 등" + '</h2></li>&nbsp;');
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
-                        myStudy.name + "에 참여중인 인원: " + " " + memberCount + " 명" + '</h2></li>&nbsp;');
-                    document.write(' &nbsp;');
-                    document.write('</ul></div></div>');
-                    // document.write('<h1 class="display-4" style = "margin-left:1.5%" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
-                    document.write(
-                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;" >>' +
-                        "전체 참가자들의 제출율 순위 " + '</h1>');
-                    document.write(' &nbsp;');
-                    document.write(
-                        '<ul style = "list-style-type : none;"><div style="border: 5px solid  #ffbc3b; float: left; padding:20px;">'
-                        );
-                    for (var i = 0; i < totalPercent.length; i++) {
-                        document.write('<li><h2 class="display-4"  style = "font-weight: normal; font-size: 3.0em;">' +
-                            (i + 1) + " 등 " + " " + totalPercent[i] + " %" + '</h2></li>&nbsp;');
-                    }
-                    document.write('</div>');
-                    document.write('<div style="border: 5px; color: #ffbc3b; float: left; width: 40%; padding:20px;">');
-                    for (var i = 0; i < totalPercent.length; i++) {
-                        if (i == (myRank - 1)) {
-                            document.write(
-                                '<li><h2 class="display-4"  style = "font-weight: bold; font-size: 3.0em;">' +
-                                "< 나의 등수" + '</h2></li>&nbsp;');
+                    document.write('<li><h2 class="display-4" style = " font-size: 2.0em;">' +"나의 제출율: " + '<b><b>' + myPercent +'</b></b>'+ " %" + '</h2></li>&nbsp;');
+                        for(var i=0;i<totalPercentList.length;i++){
+                            if(myPercent==totalPercentList[i].percent){
+                                myRank=i+1;
+                                break;
+                            }
                         }
-                    }
-                    document.write('</ul></div>');
-                    // document.write('<li><div class = "col-lg-12"><h1 class="display-4">'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+"<br>"+'</h1></div></li>');
+                    document.write('<li><h2 class="display-4" style = " font-size: 2.0em;">' +
+                        "나의 등수: " + memberNameArr.length+"명 중 "+ '<b><b>' + myRank + '</b></b>'+ " 등" + '</h2></li>');
+                        document.write('</div></ul>');
                 </script>
 
             </div>
@@ -152,7 +155,9 @@
                 <script>
                 </script>
             </p>
-            <canvas id="chart"></canvas> 
+            <div style="border: 20px; padding: 20px; width : 80%;">
+                <canvas id="chart"></canvas> 
+            </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

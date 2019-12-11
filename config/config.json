@@ -1,12 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "yonghu",
+    "password": "9379",
     "database": "openstudy",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false,
-    "logging" : false
+    "operatorsAliases": false
   },
   "release": {
     "username": "root",
