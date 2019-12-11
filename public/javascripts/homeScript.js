@@ -47,7 +47,7 @@ $(function () {
         $.post("/study/create", {
             name : $("#modal_name").val(),
             info : $("#modal_info").val(),
-            imgUrl : data.imgUrl,
+            imgUrl : data.url,
           },function(data, status){
            if(data.res){
                window.location = "/study-list/1";
@@ -78,7 +78,7 @@ $(function () {
             }
           });
       } else {
-        sendPost({imgUrl : "/uploads/course-1.jpg"});
+        sendPost({url : "/uploads/course-1.jpg"});
       }
     });
     
