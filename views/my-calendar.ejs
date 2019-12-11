@@ -12,9 +12,9 @@ Resource
 <head>
    <meta charset="UTF-8">
    <title>OPEN STUDY</title>
-   <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+   <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
    
-   <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+   <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/global.css">
    <link rel="stylesheet" href="/css/my-calendar.ejs">
@@ -118,13 +118,12 @@ Resource
 <body>
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">
-            <img src="../public/images/logo.png" height="30" alt="HOME">
+            <img src="/public/images/logo.png" height="30" alt="HOME">
         </a>
         
-        <a class="nav-link" >HOME</a>
-        <a class="nav-link" href="#" >MYSTUDY</a>
-        <a class="nav-link" href="#" >OPENSTUDY</a>
-    
+        <a class="nav-link" href="/home" style='color:#ffbc3b;'>HOME</a>
+        <a class="nav-link active" href="/study-list/1" style='color:white;'>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
         <div class="dropdown">
             <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
               MY MENU
@@ -229,7 +228,7 @@ Resource
     </nav>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
 
 
 </body>   

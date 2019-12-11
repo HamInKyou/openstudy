@@ -52,7 +52,7 @@ router.post('/login', isNotLoggedIn,  (req, res, next) => {
     })(req, res, next) ; //미들웨어 안의 미들웨어에 붙혀줌 authenticate
 });
 
-router.post('/logout', isLoggedIn, (req, res, next)=> {
+router.get('/logout', isLoggedIn, (req, res, next)=> {
     req.logout();
     req.session.destroy();
     return res.redirect('/');

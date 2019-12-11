@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OPEN STUDY</title>
+    <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+
+    <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var members = <%-members %> ;
+        var boards = <%-boards %> ;
+        var Submits = <%-Submits %> ;
+        var myUserId = <%-myUserId %> ;
+        var myStudy = <%-myStudy %> ;
+        var boardSubmit = new Array();
+        var boardSubmitCount = 0;
+        var totalPercent = new Array();
+        var myPercent;
+        var myRank = 0;
+        var userId;
+        var memberCount = members.length;
+
+        //1.totalPercent 구하기
+        //submit 받은거를 유저별,보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함  
+        for (var i = 0; i < members.length; i++) {
+            boardSubmit[i] = new Array();
+        }
+        console.log(boardSubmit);
+        var h, hh;
+        for (var i = 0; i < Submits.length; i++) {
+            for (var j = 0; j < members.length; j++) {
+                if (Submits[i].userId == members[j].id) {
+                    h = j;
+                }
+            }
+            for (var k = 0; k < boards.length; k++) {
+                if (Submits[i].boardId == boards[k].id) {
+                    hh = k;
+                }
+            }
+            if (boardSubmit[h][hh] != 1) {
+                boardSubmit[h][hh] = 1;
+            }
+        }
+        for (var j = 0; j < boardSubmit.length; j++) {
+            userId = members[j].id;
+            boardSubmitCount = 0;   
+            for (var k = 0; k < boardSubmit[j].length; k++) {
+                if (boardSubmit[j][k] == 1)
+                    boardSubmitCount = boardSubmitCount + 1;
+            }
+            if (boardSubmitCount == 0) {
+                totalPercent[j] = 0;
+            } else {
+                totalPercent[j] = Math.round((boardSubmitCount / boards.length) * 100);
+            }
+
+            if (userId == myUserId) {
+                myPercent = totalPercent[j];
+            }
+        }
+        console.log(totalPercent);
+        //2.ranking 구하기 자기 rank만
+        //모든 사람의 랭킹이외의 정보 ex) nickname 등을 주려면 엄청 복잡해짐.. 
+        var changeRank;
+        for (var i = 0; i < totalPercent.length; i++) { //내림차순으로 정렬
+            for (var j = i + 1; j < totalPercent.length; j++) {
+                if (totalPercent[i] < totalPercent[j]) {
+                    changeRank = totalPercent[i];
+                    totalPercent[i] = totalPercent[j];
+                    totalPercent[j] = changeRank;
+                    console.log("changge");
+                    console.log(changeRank);
+                }
+            }
+        }
+        console.log("rank");
+        console.log(totalPercent);
+        //3.myrank, mypercent 계산
+        var c = 0;
+        myrank = 0;
+        while (myRank == 0) {
+            if (totalPercent[c] == myPercent)
+                myRank = c + 1; //c는 0부터이므로 +1
+            c = c + 1;
+        }
+    </script>
+</head>
+
+<body style="background:#ffbc3b">
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#" style=color:white;>
+            <img src="/public/images/logo.png" height="30" alt="HOME">
+        </a>
+
+        <a class="nav-link active" href="/home" style='color:#ffbc3b;'>HOME</a>
+        <a class="nav-link" href="/study-list/1" style='color:white;'>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
+
+        <div class="dropdown">
+            <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+                MY MENU
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
+                <a class="dropdown-item" href="#">개인정보 설정</a>
+                <a class="dropdown-item" href="#">로그아웃</a>
+            </div>
+        </div>
+
+    </nav>
+    <div class="jumbotron" style="margin-top: 60px; height:2500px;">
+        <div class="container">
+            <!-- <h1 class="display-4" style = "font-weight: bold;">My Study의 제출율</h1>
+        <h2 >자신의 제출율과 제출율 순위를 알 수 있습니다!</h2> -->
+            <!-- &nbsp; -->
+            <script>
+                document.write('<h1 class="display-4" style = "font-weight: bold; font-size: 4.5em;">' + myStudy.name +
+                    " " + "의 제출율" + '</h1>');
+                document.write('<h2 style =" font-size: 2.0em;">' + "자신의 제출율과 순위를 알 수 있습니다." + '</h2>');
+            </script>
+            <hr class="my-4">
+        </div>
+
+        &nbsp;
+        <div class="container">
+            <div class="row">
+                <script>
+                    //document.write('<style> ul{ list-style:none;}</style>');
+                    document.write(
+                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;"> >' +
+                        "나의 제출율 분석" + '</h1>');
+                    document.write(' &nbsp; ');
+                    document.write(
+                        '<ul style = "list-style-type : none;"><div style="border: 5px solid #ffbc3b; float: left; width: 100%; padding:20px;">'
+                        );
+                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
+                        "나의 제출율: " + " " + myPercent + " %" + '</h2></li>&nbsp;');
+                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
+                        "나의 등수: " + " " + myRank + " 등" + '</h2></li>&nbsp;');
+                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
+                        myStudy.name + "에 참여중인 인원: " + " " + memberCount + " 명" + '</h2></li>&nbsp;');
+                    document.write(' &nbsp;');
+                    document.write('</ul></div></div>');
+                    // document.write('<h1 class="display-4" style = "margin-left:1.5%" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
+                    document.write(
+                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;" >>' +
+                        "전체 참가자들의 제출율 순위 " + '</h1>');
+                    document.write(' &nbsp;');
+                    document.write(
+                        '<ul style = "list-style-type : none;"><div style="border: 5px solid  #ffbc3b; float: left; padding:20px;">'
+                        );
+                    for (var i = 0; i < totalPercent.length; i++) {
+                        document.write('<li><h2 class="display-4"  style = "font-weight: normal; font-size: 3.0em;">' +
+                            (i + 1) + " 등 " + " " + totalPercent[i] + " %" + '</h2></li>&nbsp;');
+                    }
+                    document.write('</div>');
+                    document.write('<div style="border: 5px; color: #ffbc3b; float: left; width: 40%; padding:20px;">');
+                    for (var i = 0; i < totalPercent.length; i++) {
+                        if (i == (myRank - 1)) {
+                            document.write(
+                                '<li><h2 class="display-4"  style = "font-weight: bold; font-size: 3.0em;">' +
+                                "< 나의 등수" + '</h2></li>&nbsp;');
+                        }
+                    }
+                    document.write('</ul></div>');
+                    // document.write('<li><div class = "col-lg-12"><h1 class="display-4">'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+"<br>"+'</h1></div></li>');
+                </script>
+
+            </div>
+            &nbsp;
+            <hr class="my-4">
+            <p class="lead">
+                <script>
+                </script>
+            </p>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+</body>
+
+</html>

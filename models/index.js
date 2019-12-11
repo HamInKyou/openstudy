@@ -48,6 +48,10 @@ db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post);
 //submit board
 db.Board.hasMany(db.Submit);
+db.Submit.belongsTo(db.Board);
+//user submit
+db.User.hasMany(db.Submit);
+db.Submit.belongsTo(db.User);
 //post tag
 db.Post.hasMany(db.Tag);
 db.Tag.belongsTo(db.Post);
@@ -56,6 +60,8 @@ db.Tag.hasMany(db.Chatlog);
 db.Chatlog.belongsTo(db.Tag);
 //user calendar
 db.User.hasMany(db.Calendar);
+
+
 //user tag
 db.User.belongsToMany(db.Tag,{
     as : 'enrolledTag',

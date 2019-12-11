@@ -10,27 +10,25 @@
 <head>
   <meta charset="UTF-8">
   <title>OPEN STUDY</title>
-  <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
 
-  <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+  <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
+     var myStudies =<%- myStudies %>;
+    console.log(myStudies);
+    var Studies =<%- Studies %>;
+    console.log(Studies);
     $(function () {
-      var myStudies = <%- myStudies %> ;
-      console.log(myStudies);
-      var Studies = <%- Studies %> ;
-      console.log(Studies);
-
       for (var i = 1; i <= 3; i++) { //MyStudy 할당
         if (myStudies.length >= i) {
           $("#mystudy" + i).find('h5.card-title').text(myStudies[i - 1].name); //0~2
           $("#mystudy" + i).find('p.card-text').text(myStudies[i - 1].info);
           $("#mystudy" + i).find('a').attr("href", "/study-intro/" + myStudies[i - 1].id);
-          $("#mystudy" + i).find('img').attr('src', "/uploads/"+myStudies[i - 1].imgUrl);
+          $("#mystudy" + i).find('img').attr('src', myStudies[i - 1].imgUrl);
         }
-        console.log($("#mystudy" + i).find('h5.card-title'));
       }
 
       var j;
@@ -42,44 +40,45 @@
         } else if (myStudies.length == 1) {
           if (i != 0) {
             j = limit + 1;
-            limit = limit + 1;
           }
-          while (myStudies[0].name == Studies[j].name) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
+          if (j < Studies.length) {
+            while (myStudies[0].id == Studies[j].id) {
+              j = j + 1;
+              limit = j;
+              if (j == Studies.length) break;
+            }
+          } else break;
         } else if (myStudies.length == 2) {
           if (i != 0) {
             j = limit + 1;
-            limit = limit + 1;
           }
-          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name)) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
+          if (j < Studies.length) {
+            while ((myStudies[0].id == Studies[j].id) || (myStudies[1].id == Studies[j].id)) {
+              j = j + 1;
+              limit = j;
+              if (j == Studies.length) break;
+            }
+          } else break;
         } else {
           if (i != 0) {
             j = limit + 1;
-            limit = limit + 1;
           }
-          
-          while ((myStudies[0].name == Studies[j].name) || (myStudies[1].name == Studies[j].name) || (myStudies[2]
-              .name == Studies[j].name)) {
-            if (i == j)
-              j = limit;
-            j = j + 1;
-            limit = j;
-          }
+          if (j < Studies.length) {
+            while ((myStudies[0].id == Studies[j].id) || (myStudies[1].id == Studies[j].id) || (myStudies[2].id ==
+                Studies[j].id)) {
+              j = j + 1;
+              limit = j;
+              if (j == Studies.length) break;
+            }
+          } else break;
         }
-        $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
-        $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
-        $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
-        $("#openstudy" + (j + 1)).find('img').attr('src',"/uploads/"+ myStudies[j].imgUrl);
-        console.log($("#openstudy" + (i + 1)).find('h5.card-title'));
+        if (j < Studies.length) {
+
+          $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
+          $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
+          $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
+          $("#openstudy" + (j + 1)).find('img').attr('src', myStudies[j].imgUrl);
+        }
       }
     });
   </script>
@@ -91,12 +90,12 @@
 
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="/home" style="color:rgb(7, 5, 5);">
-      <img src="../public/images/logo.png" height="30" alt="HOME">
+      <img src="/public/images/logo.png" height="30" alt="HOME">
     </a>
 
     <a class="nav-link active" href="/home" style='color:#ffbc3b;'>HOME</a>
-    <a class="nav-link" href="#" style='color:white;'>MYSTUDY</a>
-    <a class="nav-link" href="#" style='color:white;'>OPENSTUDY</a>
+    <a class="nav-link" href="/study-list/1" style='color:white;'>MYSTUDY</a>
+    <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
 
     <div class="dropdown">
       <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
@@ -217,7 +216,7 @@
         <img src="/public/images/course-1.jpg" class="card-img-top">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">MYSTUDY1</h5>
+            <h5 class="card-title">em</h5>
             <p class="card-text">스터디방 1 소개 내용~~~</p>
             <a href="#" class="btn btn-warning">입장하기</a>
           </div>
@@ -296,7 +295,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+  <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
 </body>
 
 </html>

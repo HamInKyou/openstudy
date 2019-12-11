@@ -9,9 +9,9 @@
 <head>
   <meta charset="UTF-8">
   <title>OPEN STUDY</title>
-  <link rel="stylesheet" href="../public/stylesheets/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
 
-  <link rel="shortcut icon" href="../public/images/shortcut-logo.png">
+  <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -68,7 +68,6 @@
       $("#submit").click(function(){
         var deadlineString = $("#finishDate").val();
         var finalString = deadlineString.substr(2,8);
-        alert(finalString.length);
        
         var dataToSend = {
           deadline :  finalString,
@@ -91,13 +90,13 @@
   <!--nav bar 시작-->
   <nav class="navbar navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="/home" style=color:white;>
-        <img src="../public/images/logo.png" height="30" alt="HOME">
+        <img src="/public/images/logo.png" height="30" alt="HOME">
       </a>
   
       <!--다른 메뉴로 전환-->
-      <a class="nav-link" href="/home" style=color:white;>HOME</a>
-      <a class="nav-link active" href="/study-list/1" style="color:#ffbc3b;">MYSTUDY</a>
-      <a class="nav-link" href="/openstudy-list/1" style="color:white;">OPENSTUDY</a>
+      <a class="nav-link" href="/home" style='color:white;'>HOME</a>
+      <a class="nav-link" href="/study-list/1" style='color:#ffbc3b;'>MYSTUDY</a>
+      <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
   
       <!--우측상단 드롭다운버튼-->
       <div class="dropdown">
@@ -210,7 +209,7 @@
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="../public/javascripts/bootstrap.js"></script>
+  <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,6 @@ router.post('/', async (req, res, next) => {
                 id : req.body.studyId
             }
         });
-        
         if(parentStudy.userId != req.user.id)
             return res.json({msg: '권한이 없습니다.' });
         
@@ -30,7 +29,6 @@ router.post('/', async (req, res, next) => {
         const boards = await parentStudy.getBoards();
         const board = await Board.create({
             week : boards.length,
-            week : req.body.week,
             deadline : req.body.deadline,
             name : req.body.name,
             info : req.body.info,
