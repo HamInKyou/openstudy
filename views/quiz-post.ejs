@@ -98,7 +98,8 @@
       });
       
       //정답 등록
-      $("#answerSubmitBtn").click(function(){
+      $("#answerSubmitBtn").click(function(e){
+        e.preventDefault();
         console.log('answer submit called');
         $.post("/answer/create", {
           name : $("#answerTitle").val(),

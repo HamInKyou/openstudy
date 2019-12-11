@@ -563,29 +563,47 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
   try {
     const studyIdParam = req.params.studyId;
     const myStudy = await Study.findOne({
-      where: {
-        id: studyIdParam
-      }
+      where : { id : studyIdParam}
     });
     const studyMembers = await myStudy.getMember();
-    const boards = await Board.findAll({
-      where: {
-        studyId: studyIdParam
-      }
-    });
-    const Submits = await Submit.findAll({});
 
-    const resultStudy = JSON.stringify(myStudy);
-    const resultMembers = JSON.stringify(studyMembers);
-    const resultBoards = JSON.stringify(boards);
-    const resultSubmits = JSON.stringify(Submits);
-    const resultUserId = JSON.stringify(req.user.id);
+
+    let totalPercentList = new Array();
+    let mPercent;
+    for(var i=0 ; i<studyMembers.length; i++){
+      console.log('turn : ' + studyMembers[i].nick);
+      const p = await Post.findAll({
+        where : {
+           userId : studyMembers[i].id,
+           studyId : studyIdParam
+         }
+      });
+      const s = await Submit.findAll({
+        where : {
+          userId: studyMembers[i].id,
+          studyId : studyIdParam
+        }
+      });
+      console.log(p.length + '/' + s.length);
+      totalPercentList.push({
+        nick : studyMembers[i].nick,
+        percent : s.length/p.length * 100
+      });
+      if(studyMembers[i].id == req.user.id){
+        console.log("same id");
+        mPercent = s.length/p.length * 100;
+        console.log(mPercent);
+      }
+    }
+      
+    
+    console.log(totalPercentList);
+   
     res.render('my-study-percent', {
-      myStudy: resultStudy,
-      members: resultMembers,
-      boards: resultBoards,
-      Submits: resultSubmits,
-      myUserId: resultUserId,
+      myStudy: JSON.stringify(myStudy),
+      myUserId: req.user.id,
+      myPercent : mPercent,
+      totalPercentList : JSON.stringify(totalPercentList),
     });
   } catch (err) {
     console.error(err);
