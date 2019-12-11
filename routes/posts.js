@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post, Board, Submit } = require('../models');
+const { Post, Board, Submit, User , Tag} = require('../models');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const moment = require('moment');
@@ -16,15 +16,15 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
             boardId,
         });
         //임시로 채팅방 사용하기
-        /*
+        
         const exUser = await User.findOne({where : { id : req.user.id}});
         const createdTag = await Tag.create({
-            name,
+            name : title,
             postId : post.id,
             userId : req.user.id
         });
         createdTag.addMember(exUser);
-        */
+        
         if(moment(find.deadline, "YYMMDD").diff(moment().format()) > 0){   
             await Submit.create({
                 userId : req.user.id,

@@ -7,6 +7,7 @@ const {
   Board,
   Quiz,
   Answer,
+  Submit,
   Sequelize: {
     Op
   },
@@ -221,7 +222,7 @@ router.get('/study-intro/:studyId', async (req, res, next) => {
 
     res.render('study-intro', {
       study: JSON.stringify(exStudy),
-      num_member :  members.length
+      num_member: members.length
     });
   } catch (err) {
     console.error(err);
@@ -242,7 +243,7 @@ router.get('/openstudy-intro/:studyId', async (req, res, next) => {
 
     res.render('openstudy-intro', {
       study: result,
-      num_member : members.length
+      num_member: members.length
     });
   } catch (err) {
     console.error(err);
@@ -259,14 +260,29 @@ router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
   try {
     const pageId = req.params.pageId;
     const searchName = req.params.name;
-    const study = await Study.findAll({where : {name : {[Op.like]: "%" + searchName + "%"}}});
-    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')], where : {name : {[Op.like]: "%" + searchName + "%"}}});
-    
+    const study = await Study.findAll({
+      where: {
+        name: {
+          [Op.like]: "%" + searchName + "%"
+        }
+      }
+    });
+    const exStudy = await Study.findAll({
+      offset: (pageId - 1) * 6,
+      limit: 6,
+      order: [sequelize.literal('id DESC')],
+      where: {
+        name: {
+          [Op.like]: "%" + searchName + "%"
+        }
+      }
+    });
+
     res.render('openstudy-list', {
-      study : JSON.stringify(study),
+      study: JSON.stringify(study),
       studies: JSON.stringify(exStudy),
-      page : pageId,
-      name : JSON.stringify(searchName)
+      page: pageId,
+      name: JSON.stringify(searchName)
     });
   } catch (err) {
     console.error(err);
@@ -279,13 +295,17 @@ router.get('/openstudy-list/:pageId', async (req, res, next) => {
   try {
     const pageId = req.params.pageId;
     const study = await Study.findAll();
-    const exStudy = await Study.findAll({offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')]});
-    
+    const exStudy = await Study.findAll({
+      offset: (pageId - 1) * 6,
+      limit: 6,
+      order: [sequelize.literal('id DESC')]
+    });
+
     res.render('openstudy-list', {
-      study : JSON.stringify(study),
+      study: JSON.stringify(study),
       studies: JSON.stringify(exStudy),
-      page : pageId,
-      name : JSON.stringify(null)
+      page: pageId,
+      name: JSON.stringify(null)
     });
   } catch (err) {
     console.error(err);
@@ -303,14 +323,16 @@ router.get('/study-list/:pageId', async (req, res, next) => {
       }
     });
     const enrolledStudies = await exUser.getEnrolledStudy({
-      offset : (pageId-1) * 6, limit : 6, order : [sequelize.literal('id DESC')],
+      offset: (pageId - 1) * 6,
+      limit: 6,
+      order: [sequelize.literal('id DESC')],
       raw: true
     });
     const result = JSON.stringify(enrolledStudies);
 
     res.render('study-list', {
       myStudies: result,
-      page : pageId
+      page: pageId
     });
   } catch (err) {
     console.error(err);
@@ -537,16 +559,54 @@ router.get('/quiz-post/:boardId', async (req, res, next) => {
     next(err);
   }
 });
+router.get('/my-study-percent/:studyId', async (req, res, next) => {
+  try {
+    const studyIdParam = req.params.studyId;
+    const myStudy = await Study.findOne({
+      where: {
+        id: studyIdParam
+      }
+    });
+    const studyMembers = await myStudy.getMember();
+    const boards = await Board.findAll({
+      where: {
+        studyId: studyIdParam
+      }
+    });
+    const Submits = await Submit.findAll({});
+
+    const resultStudy = JSON.stringify(myStudy);
+    const resultMembers = JSON.stringify(studyMembers);
+    const resultBoards = JSON.stringify(boards);
+    const resultSubmits = JSON.stringify(Submits);
+    const resultUserId = JSON.stringify(req.user.id);
+    res.render('my-study-percent', {
+      myStudy: resultStudy,
+      members: resultMembers,
+      boards: resultBoards,
+      Submits: resultSubmits,
+      myUserId: resultUserId,
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
 router.get('/chat/:tagId', async (req, res, next) => {
   try {
+    const postIdParam = req.params.tagId;
+    const post = await Post.findOne({
+      where : { id : postIdParam }
+    });
     const tag = await Tag.findOne({
       where: {
-        id: req.params.tagId
+        postId: postIdParam
       }
     });
     const chatlogs = await Chatlog.findAll({
       where: {
-        tagId: req.params.tagId
+        tagId: tag.id
       },
       raw: true,
     });

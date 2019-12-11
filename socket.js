@@ -1,5 +1,5 @@
 const SocketIO = require('socket.io');
-const {Chatlog} = require('./models');
+const {Chatlog, Tag} = require('./models');
 module.exports = (server, app) => {
     const io = SocketIO(server, { path : '/socket.io'});
     app.set('io', io);
@@ -16,10 +16,11 @@ module.exports = (server, app) => {
             socket.emit('broad', data);
             socket.to(roomId).emit('broad', data);
             
+            const tag = await Tag.findOne({ where : { postId : roomId}});
             await Chatlog.create({
                 userId : data.userId,
                 content : data.msg,
-                tagId : parseInt(roomId),
+                tagId : tag.id,
                 nick : data.nick
             });
         });

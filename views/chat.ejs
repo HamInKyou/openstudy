@@ -297,17 +297,23 @@
                 path: '/socket.io'
             });
             chatlogs.forEach(chat => {
+                var alignflag;
                 console.log(chat);
+                if(user.nick == chat.nick){
+                    alignflag = '<div class="d-flex justify-content-start mb-4" style= "margin-left:70%; :#f9e016">';
+                }else {
+                    alignflag = '<div class="d-flex justify-content-start mb-4">';
+                }
                 $('#card-body').append($('<div>').html(
-                        '<div class="d-flex justify-content-start mb-4" align="left">' +
+                        alignflag +
                         '<div class="img_cont">' +
-                                chat.nick +
+                        chat.nick +
                         '</div>' +
                         '<div class="msg_cotainer">' +
-                                chat.content +
+                        chat.content +
                         '</div>' +
                         '</div>'
-                    ));  
+                    ));
             });
                 
         
