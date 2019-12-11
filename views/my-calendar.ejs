@@ -1,11 +1,3 @@
-<!-- my-calender.html
-- 상단에 일정추가 버튼 누름 => 일정 제목, 시작일 ~ 종료일 db에 저장(시간까지 같이 넣었어요), 
-- defaultDate에서 오늘 날짜 받아오기
-Resource
-- 일정의 id 받아오기
-- 랜덤으로 색상 받아오기
-- 시작일 / 종료일 받아오기
-- title(일정 제목) 받아오기  -->
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,28 +9,46 @@ Resource
    <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="/css/global.css">
-   <link rel="stylesheet" href="/css/my-calendar.ejs">
-
+   <link rel="stylesheet" href="/css/my-calendar.css">
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <link rel=calendar href="lib/tui.calendar-1.12.7/">
-   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/core/main.css' rel='stylesheet' />
-   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.css' rel='stylesheet' />
-   <link href='../lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.css' rel='stylesheet' />
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/core/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/interaction/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-common/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-daygrid/main.js'></script>
-   <script src='../lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-timegrid/main.js'></script>
+   <link href='/lib/fullcalendar-scheduler-4.3.1/packages/core/main.css' rel='stylesheet' />
+   <link href='/lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.css' rel='stylesheet' />
+   <link href='/lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.css' rel='stylesheet' />
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages/core/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages/interaction/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages/daygrid/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages/timegrid/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-common/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-daygrid/main.js'></script>
+   <script src='/lib/fullcalendar-scheduler-4.3.1/packages-premium/resource-timegrid/main.js'></script>
    <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
+   $(function() {
+    var plans = <%- plans %>;
+    console.log(plans);
+    function getPlans(){
+      var res = new Array();
+      plans.forEach(element => {
+      const { id, color, start, end, title} = element;
+      res.push({
+        id,
+        color,
+        start,
+        end,
+        title
+      });
+      console.log(res);
+      return res;
+    });
+    }
+   
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
       defaultView: 'resourceTimeGridDay',
-      defaultDate: '2019-11-11',
+      defaultDate: "2019-11-11",
       editable: true,
       selectable: true,
       eventLimit: true, // allow "more" link when too many events
@@ -47,30 +57,7 @@ Resource
         center: 'title',
         right: 'resourceTimeGridDay,resourceTimeGridTwoDay,timeGridWeek,dayGridMonth'
       },
-      views: {
-        resourceTimeGridTwoDay: {
-          type: 'resourceTimeGrid',
-          duration: { days: 2 },
-          buttonText: '2 days',
-        }
-      },
-
-      //// uncomment this line to hide the all-day slot
-      //allDaySlot: false,
-
-      resources: [
-        { id: 'a', title: 'study 1' },
-        { id: 'b', title: 'study 2', eventColor: 'green' },
-        { id: 'c', title: 'study 3', eventColor: 'orange' },
-        { id: 'd', title: 'study 4', eventColor: 'red' }
-      ],
-      events: [
-        { id: '1', resourceId: 'a', start: '2019-11-11', end: '2019-11-13', title: '오픈소스 기초 및 설계 3주차 웹 완성' },
-        { id: '2', resourceId: 'a', start: '2019-11-14T16:30:00', end: '2019-11-22T115:00:00', title: '오픈소스 기초 및 설계 4주차' },
-        { id: '3', resourceId: 'a', start: '2019-11-22T16:30:00', end: '2019-11-29T15:00:00', title: '오픈소스 기초 및 설계 5주차' },
-        { id: '4', resourceId: 'c', start: '2019-11-07T20:30:00', end: '2019-11-13T23:55:00', title: 'javascript 공부' },
-      ],
-
+      events: getPlans(),
       select: function(arg) {
         console.log(
           'select',
@@ -89,14 +76,19 @@ Resource
     });
 
     calendar.render();
+    
+    $("#submit").click(function(){
+        var sendData = {
+          start : $("#i_date1").val(),
+          end   : $("#i_date2").val(),
+          title : $("#i_name").val(),
+        };
+        $.post("/calendar/plan", sendData, function(data, status){
+          alert(data.msg);
+        });
+      });
   });
 
-</script>
-
-<script>
-  event: function add(arg){
-    for(int )
-  }
 </script>
 <style>
 
@@ -159,7 +151,7 @@ Resource
                         <div class ="name">
                           <form>
                             <div class = "col-lg-12">
-                              <input type="text" class="form-control" id="name" placeholder="일정을 입력하세요.">
+                              <input type="text" class="form-control" id="i_name" placeholder="일정을 입력하세요.">
                             </div>
                           </form>
                         </div>
@@ -173,11 +165,9 @@ Resource
                           <p>시작일
                             <div class="form-row">
                                 <div class="form-group col-md-7">
-                                  <input type="date" class="form-control" id="startDate" >
+                                  <input id="i_date1" type="date" class="form-control" >
                                 </div>
-                                <div class="form-group col-md-5">
-                                  <input type="time" class="form-control" id="startTime" >
-                                </div>
+              
                               </div>
                           </p>
                         </div>
@@ -185,11 +175,9 @@ Resource
                               <p>종료일
                             <div class="form-row">
                                 <div class="form-group col-md-7">
-                                  <input type="date" class="form-control" id="finishDate" >
+                                  <input id="i_date2" type="date" class="form-control" >
                                 </div>
-                                <div class="form-group col-md-5">
-                                  <input type="time" class="form-control" id="finishTime">
-                                </div>
+                            
                               </div>
                             </p>
                         </div>
@@ -199,7 +187,7 @@ Resource
                     &nbsp;
                     <div class="modal-footer">
                       <a class ="btn btn-warning btn-lg" role="button" data-dismiss = "modal">Close</a>
-                      <a class = "btn btn-warning btn-lg" role ="button">Save</a>
+                      <a id="submit" class = "btn btn-warning btn-lg" role ="button">Save</a>
                     </div>
                   </div>
                 </div>
