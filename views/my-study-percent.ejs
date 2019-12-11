@@ -117,35 +117,10 @@
                         );
                     document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
                         "나의 제출율: " + " " + myPercent + " %" + '</h2></li>&nbsp;');
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
-                        "나의 등수: " + " " + myRank + " 등" + '</h2></li>&nbsp;');
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
-                        myStudy.name + "에 참여중인 인원: " + " " + memberCount + " 명" + '</h2></li>&nbsp;');
+                  
                     document.write(' &nbsp;');
                     document.write('</ul></div></div>');
                     // document.write('<h1 class="display-4" style = "margin-left:1.5%" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
-                    document.write(
-                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;" >>' +
-                        "전체 참가자들의 제출율 순위 " + '</h1>');
-                    document.write(' &nbsp;');
-                    document.write(
-                        '<ul style = "list-style-type : none;"><div style="border: 5px solid  #ffbc3b; float: left; padding:20px;">'
-                        );
-                    for (var i = 0; i < totalPercent.length; i++) {
-                        document.write('<li><h2 class="display-4"  style = "font-weight: normal; font-size: 3.0em;">' +
-                            (i + 1) + " 등 " + " " + totalPercent[i] + " %" + '</h2></li>&nbsp;');
-                    }
-                    document.write('</div>');
-                    document.write('<div style="border: 5px; color: #ffbc3b; float: left; width: 40%; padding:20px;">');
-                    for (var i = 0; i < totalPercent.length; i++) {
-                        if (i == (myRank - 1)) {
-                            document.write(
-                                '<li><h2 class="display-4"  style = "font-weight: bold; font-size: 3.0em;">' +
-                                "< 나의 등수" + '</h2></li>&nbsp;');
-                        }
-                    }
-                    document.write('</ul></div>');
-                    // document.write('<li><div class = "col-lg-12"><h1 class="display-4">'+(i+1)+" 등: "+" "+totalPercent[i]+" %"+"<br>"+'</h1></div></li>');
                 </script>
 
             </div>
