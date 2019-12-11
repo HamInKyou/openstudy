@@ -12,7 +12,8 @@ const {
     Op
   },
   Tag,
-  Chatlog
+  Chatlog,
+  Calendar
 } = require('../models');
 
 
@@ -45,8 +46,20 @@ router.get('/home', async (req, res, next) => {
   }
 });
 
-router.get('/my-calendar', (req, res, next) => {
-  res.render('my-calendar');
+router.get('/my-calendar', async (req, res, next) => {
+  try{
+    const plans = await Calendar.findAll({
+      where : { userId : req.user.id }
+    });
+    console.log(plans);
+
+    res.render('my-calendar', {
+      plans : JSON.stringify(plans)
+    });
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
 
@@ -584,7 +597,7 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
           studyId : studyIdParam
         }
       });
-      console.log(p.length + '/' + s.length);
+      console.log(s.length + '/' + p.length);
       totalPercentList.push({
         nick : studyMembers[i].nick,
         percent : s.length/p.length * 100
@@ -641,5 +654,6 @@ router.get('/chat/:tagId', async (req, res, next) => {
     next(err);
   }
 });
+
 
 module.exports = router;
