@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>OPEN STUDY</title>
     <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
-
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -23,6 +24,9 @@
         var myRank = 0;
         var userId;
         var memberCount = members.length;
+
+        
+        
 
         //1.totalPercent 구하기
         //submit 받은거를 유저별,보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함  
@@ -88,6 +92,28 @@
                 myRank = c + 1; //c는 0부터이므로 +1
             c = c + 1;
         }
+        //////////////////chart
+        var memberNameArr = new Array();
+        members.forEach(member => {
+            memberNameArr.push(member.nick);
+        });
+
+        var barChartData = {       
+            labels: memberNameArr,
+             datasets: [{
+              label: '제출율',
+              backgroundColor: "#1E90FF",
+                data: totalPercent
+            }]
+        };
+        window.onload = function() {
+            var ctx = $('#chart').get(0).getContext("2d");
+            window.theChart = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {}   
+            });
+        }
     </script>
 </head>
 
@@ -107,9 +133,8 @@
                 MY MENU
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="my-calendar.html">MY Calendar</a>
-                <a class="dropdown-item" href="#">개인정보 설정</a>
-                <a class="dropdown-item" href="#">로그아웃</a>
+                <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+                <a class="dropdown-item" href="/auth/logout">로그아웃</a>
             </div>
         </div>
 
@@ -179,6 +204,7 @@
                 <script>
                 </script>
             </p>
+            <canvas id="chart"></canvas> 
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
