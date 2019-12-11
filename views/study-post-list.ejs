@@ -74,7 +74,7 @@
         document.write('<th scope="row">' + postArray[i].id + '</th>');
         document.write('<td><a href="/study-post-content/'+postArray[i].id+'" id="hover">' + postArray[i].title + '</a><button onclick = openChat(' + `${postArray[i].id}` + ') target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >채팅방</button> </td>');
         document.write('<td>' + postArray[i].user.nick + '</td>');
-        document.write('<td>' + postArray[i].createdAt + '</td>');
+        document.write('<td>' + postArray[i].createdAt.split('T',1)[0] + '</td>');
         document.write('</tr>');
       }
     }
