@@ -23,10 +23,10 @@
       var subjectName = study.name;
       var studyIntroduce = study.info;
 
-      var mon = board.deadline.split('.',3)[1];
+      var mon = board.deadline.split('-',3)[1];
     var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    var day = board.deadline.split('.',3)[2];
-    var year = 20+board.deadline.split('.',3)[0];
+    var day = board.deadline.split('-',3)[2];
+    var year = 20+board.deadline.split('-',3)[0];
 
       var studyContentsParent = board.name;
       var studyContentsParentWeek = board.week;
@@ -207,7 +207,7 @@
 
          <div class="row">
             <button type="button" class="btn btn-warning mx-auto" style="width: 30%;" data-toggle="modal"
-               data-target="#postModal" href="#">답 첨부하기</button>
+               data-target="#postModal" href="#">풀이 제출</button>
          </div>
 
          <!-- modal -->
@@ -216,7 +216,7 @@
                <div class="modal-content rounded-0 border-0 p-4">
                   <div class="modal-header border-0">
                      <p>
-                        <h3>답 첨부하기</h3>
+                        <h3>풀이 제출</h3>
                      </p>
 
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -240,7 +240,7 @@
                               </div>
                            </div>
 
-                           <button id="submit" type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">답
+                           <button id="submit" type="submit" class="btn btn-warning mx-auto" style="margin-top: 3%;">풀이
                               제출</button>
                      </form>
 

@@ -19,10 +19,10 @@
       var subjectName = study.name;
       var studyIntroduce = study.info;
 
-      var mon = board.deadline.split('.',3)[1];
+      var mon = board.deadline.split('-',3)[1];
       var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
-      var day = board.deadline.split('.',3)[2];
-      var year = 20+board.deadline.split('.',3)[0];
+      var day = board.deadline.split('-',3)[2];
+      var year = 20+board.deadline.split('-',3)[0];
 
       var studyContentsParent = board.name;
       var studyContentsParentWeek = board.week;
@@ -107,7 +107,7 @@
         }, function(data, status){
           AnswerId = data.answerId;
           $('#postModal').modal("hide"); //닫기 
-          alert(data.res);
+          //alert(data.res);
         });
       });
       //제출

@@ -77,7 +77,7 @@
           $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
           $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
           $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
-          $("#openstudy" + (j + 1)).find('img').attr('src', myStudies[j].imgUrl);
+          $("#openstudy" + (j + 1)).find('img').attr('src', Studies[j].imgUrl);
         }
       }
     });
