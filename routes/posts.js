@@ -6,7 +6,7 @@ const moment = require('moment');
 
 router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
     try{
-        const {title, content, url, boardId} = req.body;
+        const {title, content, url, boardId, studyId} = req.body;
         const find = await Board.findOne({where : {id : boardId}});
         const post = await Post.create({
             title,
@@ -14,6 +14,7 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
             url, //img 파일 경로
             userId : req.user.id,
             boardId,
+            studyId,
         });
         //임시로 채팅방 사용하기
         
@@ -30,6 +31,7 @@ router.post('/create', isLoggedIn, async (req,res,next) => { //게시글 생성
                 userId : req.user.id,
                 boardId,
                 postId : post.id,
+                studyId,
             });
             return res.json({
                 req : true,

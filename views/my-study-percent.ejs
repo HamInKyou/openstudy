@@ -12,98 +12,38 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        var members = <%-members %> ;
-        var boards = <%-boards %> ;
-        var Submits = <%-Submits %> ;
+        var myStudy = <%-myStudy %>;
         var myUserId = <%-myUserId %> ;
-        var myStudy = <%-myStudy %> ;
-        var boardSubmit = new Array();
-        var boardSubmitCount = 0;
-        var totalPercent = new Array();
-        var myPercent;
-        var myRank = 0;
-        var userId;
-        var memberCount = members.length;
+        var myPercent = <%-myPercent %> ;
+        var totalPercentList = <%-totalPercentList %> ;
+        console.log(myStudy);
+        console.log(myUserId);
+        console.log(myPercent);
+        console.log(totalPercentList);
 
-        
-        
-
-        //1.totalPercent 구하기
-        //submit 받은거를 유저별,보드별로 나눠서 보드당 submit이 하나 이상인지 봐야함  
-        for (var i = 0; i < members.length; i++) {
-            boardSubmit[i] = new Array();
-        }
-        console.log(boardSubmit);
-        var h, hh;
-        for (var i = 0; i < Submits.length; i++) {
-            for (var j = 0; j < members.length; j++) {
-                if (Submits[i].userId == members[j].id) {
-                    h = j;
-                }
+        totalPercentList.sort(function (a, b) {
+            if (a.percent < b.percent) {
+                return 1;
             }
-            for (var k = 0; k < boards.length; k++) {
-                if (Submits[i].boardId == boards[k].id) {
-                    hh = k;
-                }
-            }
-            if (boardSubmit[h][hh] != 1) {
-                boardSubmit[h][hh] = 1;
-            }
-        }
-        for (var j = 0; j < boardSubmit.length; j++) {
-            userId = members[j].id;
-            boardSubmitCount = 0;   
-            for (var k = 0; k < boardSubmit[j].length; k++) {
-                if (boardSubmit[j][k] == 1)
-                    boardSubmitCount = boardSubmitCount + 1;
-            }
-            if (boardSubmitCount == 0) {
-                totalPercent[j] = 0;
-            } else {
-                totalPercent[j] = Math.round((boardSubmitCount / boards.length) * 100);
-            }
-
-            if (userId == myUserId) {
-                myPercent = totalPercent[j];
-            }
-        }
-        console.log(totalPercent);
-        //2.ranking 구하기 자기 rank만
-        //모든 사람의 랭킹이외의 정보 ex) nickname 등을 주려면 엄청 복잡해짐.. 
-        var changeRank;
-        for (var i = 0; i < totalPercent.length; i++) { //내림차순으로 정렬
-            for (var j = i + 1; j < totalPercent.length; j++) {
-                if (totalPercent[i] < totalPercent[j]) {
-                    changeRank = totalPercent[i];
-                    totalPercent[i] = totalPercent[j];
-                    totalPercent[j] = changeRank;
-                    console.log("changge");
-                    console.log(changeRank);
-                }
-            }
-        }
-        console.log("rank");
-        console.log(totalPercent);
-        //3.myrank, mypercent 계산
-        var c = 0;
-        myrank = 0;
-        while (myRank == 0) {
-            if (totalPercent[c] == myPercent)
-                myRank = c + 1; //c는 0부터이므로 +1
-            c = c + 1;
-        }
-        //////////////////chart
-        var memberNameArr = new Array();
-        members.forEach(member => {
-            memberNameArr.push(member.nick);
+            if (a.percent > b.percent) {
+                 return -1;
+             }
+            // a must be equal to b
+            return 0;
         });
-
+        /////////////////
+        var percentValueList = new Array();
+        var memberNameArr = new Array();
+        totalPercentList.forEach(data => {
+            percentValueList.push(data.percent);
+            memberNameArr.push(data.nick);
+        });
         var barChartData = {       
             labels: memberNameArr,
              datasets: [{
               label: '제출율',
               backgroundColor: "#1E90FF",
-                data: totalPercent
+                data: percentValueList
             }]
         };
         window.onload = function() {
@@ -111,7 +51,15 @@
             window.theChart = new Chart(ctx, {
                 type: 'bar',
                 data: barChartData,
-                options: {}   
+                options: {
+                    scales : {
+                        yAxes: [{
+                            ticks : {
+                                beginAtZero : true
+                            }
+                        }]
+                    }
+                }   
             });
         }
     </script>

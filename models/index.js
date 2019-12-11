@@ -89,5 +89,9 @@ db.Answer.belongsTo(db.Quiz);
 ///quiz board
 db.Board.hasMany(db.Quiz);
 db.Quiz.belongsTo(db.Board);
-
+//study submit
+db.Study.hasMany(db.Submit);
+db.Submit.belongsTo(db.Study);
+db.Study.hasMany(db.Post);
+db.Post.belongsTo(db.Study);
 module.exports = db;

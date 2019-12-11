@@ -72,7 +72,8 @@
             title: $("#title").val(),
             content: $("#content").html(),
             url: attachDataUrl,
-            boardId: board.id
+            boardId: board.id,
+            studyId: study.id,
           },
           function (data, status) {
             alert(data.msg);

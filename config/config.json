@@ -14,7 +14,8 @@
     "host" : "104.196.68.14",
     "database": "openstudy",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging" : false
   },
   "production": {
     "username": "root",
