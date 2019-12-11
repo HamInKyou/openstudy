@@ -33,9 +33,10 @@ $(function () {
     //본문에 이미지 첨부
     var formData = new FormData();
     var isImgAttached = false; 
+    var file = null;
     $("#inputGroupFile04").change(function (e) {
       console.log("uploader called");
-      var file = e.target.files[0];
+      file = e.target.files[0];
       console.log(file);
       alert(file + 'mg selected');
       //$('#imgLabel').val("이미지 선택 됨");
@@ -44,9 +45,9 @@ $(function () {
     });
     function sendPost(data){
         $.post("/study/create", {
-            name : $("#name").val(),
-            info : $("#info").val(),
-            imgUrl : data.url,
+            name : $("#modal_name").val(),
+            info : $("#modal_info").val(),
+            imgUrl : data.imgUrl,
           },function(data, status){
            if(data.res){
                window.location = "/study-list/1";
@@ -57,7 +58,7 @@ $(function () {
     }
     $("#submitBtn").click(function(){
       console.log('submit butn click');
-      if(isImgAttached){
+      if(isImgAttached && file != null){
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',

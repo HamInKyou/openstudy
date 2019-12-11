@@ -77,7 +77,7 @@
           $("#openstudy" + (j + 1)).find('h5.card-title').text(Studies[j].name);
           $("#openstudy" + (j + 1)).find('p.card-text').text(Studies[j].info);
           $("#openstudy" + (j + 1)).find('a').attr("href", "/openstudy-intro/" + Studies[j].id);
-          $("#openstudy" + (j + 1)).find('img').attr('src', Studies[j].imgUrl);
+          $("#openstudy" + (j + 1)).find('img').attr('src', myStudies[j].imgUrl);
         }
       }
     });
@@ -155,7 +155,7 @@
                 <div class="name">
                   <div class="col-lg-12">
                     <h5 style="margin-left:5%;">스터디그룹 이름</h5>
-                    <input type="text" class="form-control" id="name" placeholder="스터디 과목을 입력하세요."
+                    <input type="text" class="form-control" id="modal_name" placeholder="스터디 과목을 입력하세요."
                       style="margin:2%; margin-left:7.5%; width:200%;">
                   </div>
 
@@ -167,7 +167,7 @@
 
                   <div class="col-lg-12">
                     <h5 style="margin-left:5%;">스터디 소개글</h5>
-                    <input type="text" class="form-control" id="info" placeholder="스터디 한줄소개글을 입력하세요."
+                    <input type="text" class="form-control" id="modal_info" placeholder="스터디 한줄소개글을 입력하세요."
                       style="margin:2%; margin-left:7.5%; width:200%;">
                   </div>
 
