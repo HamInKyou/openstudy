@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(400),
              allowNull : false,
         },
-        datetime : {
+        start : {
             type : DataTypes.STRING(100),
             allowNull : true,
         },
-        datetime_end : {
+        end : {
             type : DataTypes.STRING(100),
             allowNull : true,
         },
