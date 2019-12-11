@@ -16,6 +16,7 @@
         var myUserId = <%-myUserId %> ;
         var myPercent = <%-myPercent %> ;
         var totalPercentList = <%-totalPercentList %> ;
+        var myRank;
         console.log(myStudy);
         console.log(myUserId);
         console.log(myPercent);
@@ -62,6 +63,8 @@
                 }   
             });
         }
+        //rank/////////////////
+       
     </script>
 </head>
 
@@ -153,6 +156,13 @@
                 </script>
             </p>
             <canvas id="chart"></canvas> 
+            <ol>
+                <script>
+                    totalPercentList.forEach(data => {
+                        document.write('<li>' + data.nick + "</li>");
+                    });
+                </script>
+            </li>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
