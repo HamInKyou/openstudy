@@ -293,7 +293,7 @@
         $(function () {
             $("#user_info").text(user.nick);
             
-            var socket = io.connect('http://localhost:8001', {
+            var socket = io.connect('http://35.190.139.82:8001', {
                 path: '/socket.io'
             });
             chatlogs.forEach(chat => {
