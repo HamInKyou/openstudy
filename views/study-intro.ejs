@@ -28,15 +28,16 @@
 <body>
    
    <!--nav bar 시작-->
-  <nav class="navbar navbar-dark bg-dark fixed-top">
+ <!--nav bar 시작-->
+ <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="/home" style=color:white;>
           <img src="/public/images/logo.png" height="30" alt="HOME">
         </a>
     
         <!--다른 메뉴로 전환-->
-        <a class="nav-link" href="/home" style=color:white;>HOME</a>
-        <a class="nav-link active" href="/study-list/1" style="color:#ffbc3b;">MYSTUDY</a>
-        <a class="nav-link" href="/openstudy-list/1" style="color:white;">OPENSTUDY</a>
+        <a class="nav-link" href="/home" style='color:white;'>HOME</a>
+        <a class="nav-link" href="/study-list/1" style='color:#ffbc3b;'>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
     
         <!--우측상단 드롭다운버튼-->
         <div class="dropdown">
@@ -46,13 +47,14 @@
     
           <!--드롭다운 내부 버튼들-->
           <div class="dropdown-menu dropdown-menu-right">
-                   <a class="dropdown-item"  href="my-calendar">MY Calendar</a>
-                   <a class="dropdown-item"  href="my-test">MY TEST</a>
-                   <a class="dropdown-item"  href="/auth/logout">로그아웃</a>
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="/auth/logout">로그아웃</a>
           </div>
         </div>
     
       </nav>
+  
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
