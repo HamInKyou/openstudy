@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
     
         const boards = await parentStudy.getBoards();
         const board = await Board.create({
-            week : boards.length,
+            week : boards.length + 1,
             deadline : req.body.deadline,
             name : req.body.name,
             info : req.body.info,
