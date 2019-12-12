@@ -96,26 +96,25 @@
         <h2 >자신의 제출율과 제출율 순위를 알 수 있습니다!</h2> -->
             <!-- &nbsp; -->
             <script>
-                document.write('<h1 class="display-4" style = "font-weight: bold; font-size: 4.5em;">' + myStudy.name +
-                    " " + "의 제출율" + '</h1>');
-                document.write('<h2 style =" font-size: 2.0em;">' + "자신의 제출율과 순위를 알 수 있습니다." + '</h2>');
+                document.write('<h3  style = "font-weight: bold; font-size: 3.5em;">' + myStudy.name +
+                    " " + "의 제출율" + '</h3>');
+                document.write('<p style =" font-size: 1.5em;">' + "자신의 제출율과 순위를 알 수 있습니다." + '</p>');
             </script>
             <hr class="my-4">
         </div>
 
-        &nbsp;
         <div class="container">
             <div class="row">
                 <script>
                     //document.write('<style> ul{ list-style:none;}</style>');
                     document.write(
-                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 3.0em;"> >' +
+                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 2.0em;"> >' +
                         "나의 제출율 분석" + '</h1>');
                     document.write(' &nbsp; ');
                     document.write(
                         '<ul style = "list-style-type : none;"><div style="border: 5px solid #ffbc3b; float: left; width: 100%; padding:20px;">'
                         );
-                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 3.0em;">' +
+                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 2.0em;">' +
                         "나의 제출율: " + " " + myPercent + " %" + '</h2></li>&nbsp;');
                   
                     document.write(' &nbsp;');
@@ -130,14 +129,22 @@
                 <script>
                 </script>
             </p>
+            <div class = "container">
+                    &nbsp;
             <canvas id="chart"></canvas> 
+                &nbsp;
+            <hr class ="my-4">
+            <div class = "col-lg-6">
+                <h3><i class="fas fa-crown" style = "color:#ffbc3b"></i> Ranking</h3>
             <ol>
                 <script>
                     totalPercentList.forEach(data => {
-                        document.write('<li>' + data.nick + "</li>");
+                        document.write('<li style = "margin-bottom:1%; margin-left:5%">' + data.nick + "</li>");
                     });
                 </script>
-            </li>
+            </ol>
+        </div>
+        </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
