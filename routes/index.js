@@ -604,7 +604,9 @@ router.get('/my-study-percent/:studyId', async (req, res, next) => {
       });
       if(studyMembers[i].id == req.user.id){
         console.log("same id");
-        mPercent = s.length/p.length * 100;
+        if(s.length == 0)
+          mPercent = 0;
+        else mPercent = s.length/p.length * 100;
         console.log(mPercent);
       }
     }
