@@ -1,16 +1,4 @@
 $(function () {
-  function searchStudy(data){
-    $.get("/openstudy-list/1", {
-      name : $("#name").val(),
-    },function(data, status){
-     if(data.res){
-        window.location = "/openstudy-list/1";
-     } else {
-         alert(data.msg);
-     }
-    });
-  }
-
   $("#searchBtn").click(function(){
     console.log('search butn click');
     var name = $("#name").val();

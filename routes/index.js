@@ -46,27 +46,6 @@ router.get('/home', async (req, res, next) => {
   }
 });
 
-router.get('/my-calendar', async (req, res, next) => {
-  try{
-    const plans = await Calendar.findAll({
-      where : { userId : req.user.id }
-    });
-    console.log(plans);
-
-    res.render('my-calendar', {
-      plans : JSON.stringify(plans)
-    });
-  }catch(err){
-    console.error(err);
-    next(err);
-  }
-});
-
-
-router.get('/my_test', (req, res, next) => {
-  res.render('my_test');
-});
-
 router.get('/my-test-post/:pageId', async (req, res, next) => {
   try {
     const pageId = req.params.pageId;
@@ -264,10 +243,6 @@ router.get('/openstudy-intro/:studyId', async (req, res, next) => {
   }
 });
 
-router.get('/add-outline', (req, res, next) => {
-  res.render('add-outline');
-});
-
 router.get('/openstudy-list/:pageId/:name', async (req, res, next) => {
   //studylist
   try {
@@ -353,39 +328,6 @@ router.get('/study-list/:pageId', async (req, res, next) => {
   }
 });
 
-router.get('/study-post-content/:postId', async (req, res, next) => {
-  try {
-    const exPost = await Post.findOne({
-      include: [{
-        model: User,
-        attributes: ['id', 'nick'],
-        raw: true
-      }],
-      where: {
-        id: req.params.postId
-      }
-    });
-    const exBoard = await Board.findOne({
-      where: {
-        id: exPost.boardId
-      }
-    });
-    const exStudy = await Study.findOne({
-      where: {
-        id: exBoard.studyId
-      }
-    })
-    res.render('study-post-content', {
-      study: JSON.stringify(exStudy),
-      board: JSON.stringify(exBoard),
-      post: JSON.stringify(exPost)
-    });
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-});
-
 router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
   try {
     const boardId = req.params.boardId;
@@ -418,6 +360,39 @@ router.get('/study-post-list/:boardId/:pageId', async (req, res, next) => {
       study: JSON.stringify(exStudy),
       board: JSON.stringify(exBoard),
       posts: JSON.stringify(exPosts)
+    });
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/study-post-content/:postId', async (req, res, next) => {
+  try {
+    const exPost = await Post.findOne({
+      include: [{
+        model: User,
+        attributes: ['id', 'nick'],
+        raw: true
+      }],
+      where: {
+        id: req.params.postId
+      }
+    });
+    const exBoard = await Board.findOne({
+      where: {
+        id: exPost.boardId
+      }
+    });
+    const exStudy = await Study.findOne({
+      where: {
+        id: exBoard.studyId
+      }
+    })
+    res.render('study-post-content', {
+      study: JSON.stringify(exStudy),
+      board: JSON.stringify(exBoard),
+      post: JSON.stringify(exPost)
     });
   } catch (err) {
     console.error(err);
@@ -545,10 +520,6 @@ router.get('/study-week/:studyId', async (req, res, next) => {
     console.error(err);
     next(err);
   }
-});
-
-router.get('/add-study-week', (req, res, next) => {
-  res.render('add-study-week');
 });
 
 router.get('/quiz-post/:boardId', async (req, res, next) => {

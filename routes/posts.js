@@ -66,34 +66,4 @@ router.get('/get/:postId', async (req, res, next) => { //게시글 가져오기
     });
 });
 
-router.put('/update/:boardId/:postId', isLoggedIn, async (req, res, next) => { //게시글 수정
-    const postId = req.params.postId;
-    const boardId = req.params.boardId;
-    try{
-        const deadline = moment(await Board.findOne({attributes: ['deadline']}, {where : {id : boardId}})).format();
-        if(moment(deadline).diff(moment().format()) < 0){
-            if(!req.user.id.equals(post.userId)) return res.json({req : false, msg : '작성자가 일치하지 않습니다.'});  
-            const update = await Post.update({
-                content : req.body.content,
-                url : req.body.url
-            }, {where : {id : postId}});
-        res.json({req : true, msg : '데이터 수정 완료'})
-        }
-    } catch (error){
-        console.error(err);
-    }
-});
-
-router.delete('/delete/:postId', isLoggedIn, async(req, res, next) => {
-    const postId = req.params.postId;
-    try{
-        await Post.destroy({
-            where : {id : postId}
-        });
-        res.json({req : true, msg : '데이터 삭제 완료'});
-    } catch (error){
-        console.error(err);
-    }
-});
-
 module.exports = router;
