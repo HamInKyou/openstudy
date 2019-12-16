@@ -94,12 +94,24 @@
   </nav>
 
   <!--jumbotron 시작-->
-  <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+  <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
     <div class="container">
-      <h1 class="display-4">My TEST</h1>
-      <p class="lead" style="margin-top: 4%;">그동안 치뤘던 TEST의 결과, 해설을 볼 수 있습니다. </p>
+      <div class = "row">
+          <div class = "col-lg-10">
+      <script>
+        document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
+      </script>
+      </div>
+      <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
+        <p></p>
     </div>
-  </div>
+    </div>
+    <script>
+        document.write('<p class="lead">'+studyInfo+ '</p>');
+      </script>
+    </div>
+</div>
+
 
   <!--본문 내용 시작-->
   <section class="section">
