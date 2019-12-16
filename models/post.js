@@ -6,14 +6,20 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-        content : {
-            type : DataTypes.STRING(500),
-            allowNull : true,
-        },
-        url : {
+        title : {
             type : DataTypes.STRING(200),
             allowNull : false,
         },
+        content : {
+            type : DataTypes.STRING(500),
+            allowNull : false,
+        },
+        url : {
+            type : DataTypes.STRING(200),
+            allowNull : true,
+        },
+        //boardId
+        //studyId
     },{
         timestamps : true,
         paranoid : true,

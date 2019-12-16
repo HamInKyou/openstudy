@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+
+   <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+   <script>
+      var quiz =<%-quiz %>;
+      console.log(quiz);
+      var answer =<%-answer %>;
+      console.log(answer);
+      var myAnswer =<%-myAnswer %>;
+      console.log(myAnswer);
+
+      function outputMyAnswer(){
+         if(myAnswer == 'No Answer'){}
+         else{
+            document.write('<div class="col-12" style="margin-top: 2%;">');
+            document.write('<p><i class="fas fa-user mr-2"></i>나의 답</p>');
+            document.write('</div>');
+            document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+            document.write(myAnswer.content);
+            document.write('</div>');
+         }
+      }
+
+      function outputAnswerList() {
+      for (var i = 0; i < answer.length; i++) {
+        document.write('<div class="col-12" style="margin-top: 2%;">');
+        document.write('<p><i class="fas fa-user mr-2"></i>'+answer[i].user.nick+'</p>');
+        document.write('</div>');
+        document.write('<div class="col-lg-12" style="border: 1px solid #dee2e6;">');
+        document.write(answer[i].content);
+        document.write('</div>');
+      }
+    }
+   </script>
+</head>
+
+
+<body style="background:#e9ecef">
+
+   <!--nav bar 시작-->
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="/home" style=color:white;>
+         <img src="/public/images/logo.png" height="30" alt="HOME">
+      </a>
+
+      <!--다른 메뉴로 전환-->
+      <a class="nav-link" href="/home" style=color:white;>HOME</a>
+      <a class="nav-link active" href="/study-list/1" style=color:white;>MYSTUDY</a>
+      <a class="nav-link" href="/openstudy-list/1" style=color:white;>OPENSTUDY</a>
+
+      <!--우측상단 드롭다운버튼-->
+      <div class="dropdown">
+         <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+         </button>
+
+         <!--드롭다운 내부 버튼들-->
+         <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="/auth/logout">로그아웃</a>
+         </div>
+      </div>
+
+   </nav>
+
+   <!--jumbotron 시작-->
+   <div class="jumbotron jumbotron-fluid" style="margin-top:2.5%; background:#ffbc3b">
+      <div class="container">
+         <h1 class="display-4">My TEST</h1>
+         <p class="lead" style="margin-top: 4%;">그동안 치뤘던 TEST의 결과, 해설을 볼 수 있습니다. </p>
+      </div>
+   </div>
+
+   <!--본문 내용 시작-->
+   <section class="section" style="height:1000px;">
+      <div class="container">
+
+         <div class="row">
+            <p>
+               <h3><script>document.write(quiz.name)</script></h3>
+            </p>
+            <div style="margin-left:5%">
+               <button type="button" class="btn btn-warning" onclick="href='quiz-post'">수정하기</button>
+               <button type="button" class="btn btn-warning" style="margin-left : 5px;">삭제하기</button>
+            </div>
+         </div>
+
+
+         <!--내가 게시한 문제 정보 올리는 table 시작-->
+         <table class="table table-hover" style="margin-top: 3%;">
+            <!--table header-->
+            <thead>
+               <tr>
+                  <th scope="col" style="width:55%;">과목</th>
+                  <th scope="col" style="width:20%;">작성일</th>
+               </tr>
+            </thead>
+            <!--table body-->
+            <tbody>
+               <tr>
+                  <td><script>document.write(quiz.board.name)</script></td>
+                  <td><script>document.write(quiz.createdAt.split('T',1)[0])</script></td>
+               </tr>
+               <!--문제 내용-->
+               <tr>
+                  <td colspan="3">
+                     <div style="overflow:scroll;height:500px; padding:10px;">
+                           <script>document.write(quiz.content)</script>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+
+         <!--내가 제출한 답-->
+         <script>
+            outputMyAnswer();
+         </script>
+
+         <!--팀원들이 제출한 답-->
+         <script>
+            outputAnswerList();
+         </script>
+      </div>
+
+
+   </section>
+   <!--본문 내용 끝-->
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+</body>
+
+</html>

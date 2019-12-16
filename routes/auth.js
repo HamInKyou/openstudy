@@ -7,14 +7,12 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
     const {email, nick, password} = req.body;
+   
     try{
         const exUser = await User.findOne({where : {email}});
-        const result = {};
         if(exUser){
-            return res.json({
-                res : false,
-                msg : '이미 가입된 메일'
-            });
+            req.flash('msg','이미 가입된 메일' );
+            return res.redirect('/register');
         }
         const hash = await bcrypt.hash(password,12);
         await User.create({
@@ -22,10 +20,8 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
             nick,
             password : hash,
         });
-        return res.json({
-            res : true,
-            msg : '회원가입 성공'
-        });
+        req.flash('msg','회원가입 성공');
+        return res.redirect('/');
         
     } catch (err) {
         console.error(err);
@@ -40,22 +36,25 @@ router.post('/login', isNotLoggedIn,  (req, res, next) => {
             next(authError);
         }
         if(!user){
-            return res.json({ res : false, msg : info.message} );
+            req.flash('msg' , info.message);
+            return res.redirect('/');
+           
         }
         return req.login(user, (logginError) => {
             if (logginError){
                 console.error(logginError);
                 next(logginError);
             }
-            return res.json({ res : true, msg : '로그인 성공'} );
+            
+            return res.redirect('../home');
             //안되면 지울것
         });
     })(req, res, next) ; //미들웨어 안의 미들웨어에 붙혀줌 authenticate
 });
 
-router.post('/logout', isLoggedIn, (req, res, next)=> {
+router.get('/logout', isLoggedIn, (req, res, next)=> {
     req.logout();
     req.session.destroy();
-    return res.json( { status : 'logged out'});
+    return res.redirect('/');
 })
 module.exports = router;

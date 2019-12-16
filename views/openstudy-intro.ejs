@@ -1,0 +1,162 @@
+<!-- 이 페이지로 넘어가려면 url에 study-intro/스터디ID가 필요합니다.-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <title>OPEN STUDY</title>
+   <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/study-intro.css">
+   <link rel="stylesheet" href="/css/global.css">
+
+   
+   <script>
+    var study = <%- study %>;
+    var num_member = <%- num_member %>
+
+    console.log(study);
+
+    var studyName = study.name;
+    var studyInfo = study.info;
+    $(function(){
+        $("#enrollBtn").click(function(){
+            $.post("/study/enroll/" + study.id, {} , function(data, status){
+                alert(data.msg);
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+            });
+        });
+        $("#moveBtn").click(function(){
+            $.get("/study/isEnrolled/" + study.id, {} , function(data, status){      
+                if(data.res) 
+                    document.location = "/study-week/" + study.id ;
+                else{
+                    alert(data.msg);
+                }
+            });
+        });
+    /////////////////////
+    });
+
+  </script>
+</head>
+<body>
+   
+   <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">
+          <img src="/public/images/logo.png" height="30" alt="HOME">
+      </a>
+      
+      <a class="nav-link" href="/home" style='color:white;'>HOME</a>
+      <a class="nav-link" href="/study-list/1" style='color:white;'>MYSTUDY</a>
+      <a class="nav-link active" href="/openstudy-list/1" style='color:#ffbc3b;'>OPENSTUDY</a>
+  
+      <div class="dropdown">
+          <button   class="btn  btn-warning  dropdown-toggle"   data-toggle="dropdown">
+            MY MENU
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="/auth/logout">로그아웃</a>
+          </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <script>
+                document.write('<h1 class="display-4">'+"OPENSTUDY "+'<i class="fas fa-angle-right"></i>'+" "+studyName+'</h1>');
+                
+            </script>
+            <hr class="my-4">
+            <script>
+            document.write('<p class = "lead">'+studyInfo+ '</p>');
+        </script>
+        </div>
+    </div>
+
+    <div class = "container">
+        <div class = "row align-items-center mb-5">
+            <div class = "col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0"> 
+                <script>
+                    document.write('<h1>'+studyName+'</h1></div>');
+                </script>
+            <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+                <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-users fa-2x"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">　PARTICIPANTS</h6>
+                                <script>
+                                    document.write('<p class="mb-0">'+"　TOTAL "+num_member+'</p>');
+                                </script>
+                            </div>
+                    </div>
+                </li>
+            </div>
+            <!-- <div class = "col-xl-3 order-sm-3 order-xl-2 col-12 order-2">
+                <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                    <div class="d-flex align-items-center">
+                            <i class="fas fa-question-circle fa-2x"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">　PROBLEM NO.</h6>
+                                <script>
+                                    var problems = [1,2,3,4,5,6,7,8];
+                                    document.write('<p class="mb-0">'+"　TOTAL "+problems.length+'</p>');
+                                </script>
+                            </div>
+                    </div>
+                </li>
+            </div> -->
+            
+                <div class="col-xl-2 text-sm-right text-left order-sm-0 order-3 order-xl-2 col-sm-4 mb-2 mb-xl-0">
+                        <Button id="enrollBtn" class="btn btn-warning">가입하기</Button>
+                        <Button id="moveBtn" class="btn btn-warning">들어가기</Button>
+
+                </div>
+        </div>
+        
+        <hr class="my-4">
+
+        <div class = "col-12 mb-4">
+            <h3>ABOUT STUDY</h3>
+
+            <script>
+            document.write('<p>'+studyInfo+'</p>');
+            </script>
+        </div>
+
+        <!-- <div class="col-12 mb-4">
+                <div class = "row">
+                    <h3 class="mb-3">STUDY OUTLINE</h3>
+                    <button onclick="window.open('add-outline.html','add-outline','width=430,height=600,location=no,status=no,scrollbars=yes');" target="_blank" type="button" class="btn btn-secondary btn-sm" style = "height:30px; width:30px;margin-left:2.5%;" ><i class="fas fa-plus fa-md" style ="margin-left:-27.5%;"></i></button>
+                </div>
+            
+            <div class="col-12 px-0">
+                
+                <div class="row">
+                <div class="col-md-6">
+                  <ul class="list-styled">
+                    <script>
+                        var contents = ['1. 코딩 능력 향상','2. 알고리즘 분석력 강화','3. c++ 정보 습득', '4. 성취도 향상'];
+                        var i = 0;
+                        while(i<contents.length){
+                            document.write('<li>'+contents[i]+'</li>');
+                            i++;
+                        }
+                    </script>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+</body>   
+</html>

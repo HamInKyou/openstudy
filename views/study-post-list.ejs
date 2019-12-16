@@ -1,0 +1,219 @@
+  <!DOCTYPE html>
+  <html lang="ko">
+  <head>
+     <meta charset="UTF-8">
+     <title>OPEN STUDY</title>
+     <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+
+     <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   
+  <style>
+      #hover{
+          color:#343a40;
+      }
+      .page-item.active .page-link {
+        color: white!important;
+        background-color: #ffbc3b!important;
+        border-color: #ffbc3b!important;
+  }
+    .page-link {
+        color: #ffbc3b!important;
+        background-color: #fff;
+        border: 1px solid #dee2e6;  
+    }
+  </style>
+
+  <script>
+    var page = <%-page %>
+    console.log(page);
+    var study = <%-study %>
+    console.log(study);
+    var board = <%-board %>
+    console.log(board);
+    var posts = <%-posts %>
+    console.log(posts);
+    // 스터디 이름 정보
+    var studyName = study.name;
+    var studyInfo = study.info;
+    // 주차 정보
+    var week = board.week;
+    var deadline = board.deadline;
+    var content = board.info;
+
+    //  포스트 정보
+    var postArray = posts;
+    // var postName = posts.title;
+    // var postNo = posts.id;
+    // var pageInfo = posts.boardId;
+    // var date = posts.createdAt;
+    // var postTitle = posts.title;
+    // var postUser = posts.user;
+
+    // 시간 정보
+    var mon = board.deadline.split('-',3)[1];
+    var mon_Eng = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUl", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    var day = board.deadline.split('-',3)[2];
+    var year = 20+board.deadline.split('-',3)[0];
+    //  포스트 정보
+    var postArray = posts;
+    // var postMonth = post.updatedAt.split('-',5)[0];
+    // var postDay = post.updatedAt.split('-',3)[1];
+    // var postMon = post.updatedAt.split()
+  
+    //페이지 정보
+    var totalPage = parseInt(posts.length/10)+1;
+    function openChat(postId){
+      window.open('/chat/' + postId, 'chat','width=430,height=600,location=no,status=no,scrollbars=yes');
+    }
+
+    function list() {
+      for (var i = 0; i < postArray.length; i++) {
+        document.write('<tr data-toggle="modal" data-target="#postModal" href="#" >')
+        document.write('<th scope="row">' + postArray[i].id + '</th>');
+        document.write('<td><a href="/study-post-content/'+postArray[i].id+'" id="hover">' + postArray[i].title + '</a><button onclick = openChat(' + `${postArray[i].id}` + ') target="_blank" type="button" class="btn btn-danger btn-sm" style = "margin-left:2.5%;" >채팅방</button> </td>');
+        document.write('<td>' + postArray[i].user.nick + '</td>');
+        document.write('<td>' + postArray[i].createdAt.split('T',1)[0] + '</td>');
+        document.write('</tr>');
+      }
+    }
+
+
+    function makePageNav() {
+      for(var i = 1; i <= totalPage; i++ ){
+        if(i==page){
+          document.write('<li class="page-item active" aria-current="page">');
+          document.write('<a class="page-link" href="/study-post-list/'+ board.id +'/'+i+'">'+i+'<span class="sr-only">(current)</span>'+'</a>');
+          document.write('</li>');
+        }
+        else{
+          document.write('<li class="page-item"><a class="page-link" href="/study-post-list/'+ board.id +'/'+i+'">'+i+'</a></li>');
+        }
+      }
+    }
+
+  </script>
+  </head>
+  <body style="background:#e9ecef">
+     
+      <nav class="navbar navbar-dark bg-dark fixed-top">
+          <a class="navbar-brand" href="/home" style=color:white;>
+            <img src="/public/images/logo.png" height="30" alt="HOME">
+          </a>
+      
+          <!--다른 메뉴로 전환-->
+          <a class="nav-link" href="/home" style=color:white;>HOME</a>
+          <a class="nav-link active" href="/study-list/1" style="color:#ffbc3b;">MYSTUDY</a>
+          <a class="nav-link" href="/openstudy-list/1" style="color:white;">OPENSTUDY</a>
+      
+          <!--우측상단 드롭다운버튼-->
+          <div class="dropdown">
+            <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+              MY MENU
+            </button>
+      
+            <!--드롭다운 내부 버튼들-->
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+              <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+              <a class="dropdown-item"  href="/auth/logout">로그아웃</a>
+            </div>
+          </div>
+      
+        </nav>
+    
+  
+      <div class="jumbotron jumbotron-fluid" style = "margin-top:2.5%; background:#ffbc3b">
+          <div class="container">
+            <div class = "row">
+                <div class = "col-lg-10">
+            <script>
+              document.write('<p class="display-4">MyStudy <i class="fas fa-chevron-right fa-sm"></i> '+studyName+'</p>');       
+            </script>
+            </div>
+            <div class = "col-lg-6 col-mb-4" style = "margin-top:1%;">    
+              <p></p>
+          </div>
+          </div>
+          <script>
+              document.write('<p class="lead">'+studyInfo+ '</p>');
+            </script>
+          </div>
+      </div>
+  
+  <section class="section">
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex">
+              <div class="text-center mr-4">
+                <div class="p-4 bg-warning text-white">
+                  <script>
+                      document.write('<span class="h2 d-block">' + day + '</span> ' + mon_Eng[mon - 1] + ',' + year);
+                    </script>
+                    
+                </div>
+              </div>
+              <!-- notice content -->
+              <div>
+                <script>
+                
+                document.write('<h3 class="mb-4">'+" "+week+"주차 "+ studyName +'</h3>');
+              </script>
+                <ul class="list-styled mb-5">
+                  <script>
+                    document.write('<li>'+content+"</li>");
+                  </script>
+                </ul>
+              </div>
+            </div>
+  
+              <div class="col-lg-12">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-warning" style = "margin-left:30%; margin-bottom: 10%;  width:200px;height:50px;" onclick="location.href = '/study-post/'+board.id" >게시글 POST</button>
+              </div>
+            </div>
+            <div class="col-lg-12 offset-10">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary " style = "margin-left:15%; margin-bottom: 10% ;  width:100px;height:40px;">게시글</button>
+                <button type="button" class="btn btn-outline-secondary " style = " margin-bottom:10%; width:100px;height:40px;" 
+                onclick = "location.href='/study-quiz-list/'+ board.id+'/1'">문제</button>
+              </div>
+            </div>
+  
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col" style="width:70%;">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col" style="width:10%;">작성일</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                <script>
+                  list();
+                </script>
+              </tbody>
+            </table>
+  
+            <!-- page navigation -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <script>
+                      makePageNav();  
+                    </script>
+                  </ul>
+            </nav>
+  
+          </div>
+        </div>
+      </div>
+    </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+  </body>   
+  </html>

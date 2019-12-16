@@ -6,14 +6,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-       userId : {
-           type : DataTypes.INTEGER,
-           allowNull : false,
-       },
-       boardId : {
-           type : DataTypes.INTEGER,
-           allowNull : false,
-       },
+       //userId
+       //boardId
+       //postId 
+       //studyId
     },{
         timestamps : true,
         paranoid : true,

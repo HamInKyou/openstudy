@@ -1,11 +1,12 @@
 {
   "development": {
     "username": "root",
-    "password": "yonghu",
+    "password": "19981231",
     "database": "openstudy",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging" : false
   },
   "release": {
     "username": "root",
@@ -13,7 +14,8 @@
     "host" : "104.196.68.14",
     "database": "openstudy",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging" : false
   },
   "production": {
     "username": "root",

@@ -7,9 +7,15 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey : true,
         },
         content : {
-            type : DataTypes.STRING(50),
-            allowNull : true,
+            type : DataTypes.STRING(100),
+            allowNull : false,
         },
+        nick :{
+            type : DataTypes.STRING(100),
+            allowNull : false,
+        },
+        //userId
+        //postId
     },{
         timestamps : true,
         paranoid : true,

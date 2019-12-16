@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
             primaryKey : true,
         },
-        line : {
+        userId : {
             type :DataTypes.INTEGER,
             allowNull : false,
         },
@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.STRING(100),
             allowNull : false,
         }
+        //postId
+        //userId in EnorllTag table because N:M
     },{
         timestamps : true,
         paranoid : true,

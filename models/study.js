@@ -13,7 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         info : {
             type : DataTypes.STRING(100),
             allowNull : true,
-        }
+        },
+        imgUrl : {
+            type : DataTypes.STRING(100),
+            allowNull : true,
+        },
+        //userId In Enroll Table , because (N:M)
+        //userId (owner)
     },{
         timestamps : true,
         paranoid : true,

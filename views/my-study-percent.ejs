@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OPEN STUDY</title>
+    <link rel="stylesheet" href="/public/stylesheets/css/bootstrap.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link rel="shortcut icon" href="/public/images/shortcut-logo.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var myStudy = <%-myStudy %>;
+        var myUserId = <%-myUserId %> ;
+        var myPercent = <%-myPercent %> ;
+        var totalPercentList = <%-totalPercentList %> ;
+        var myRank;
+        console.log(myStudy);
+        console.log(myUserId);
+        console.log(myPercent);
+        console.log(totalPercentList);
+
+        totalPercentList.sort(function (a, b) {
+            if (a.percent < b.percent) {
+                return 1;
+            }
+            if (a.percent > b.percent) {
+                 return -1;
+             }
+            // a must be equal to b
+            return 0;
+        });
+        /////////////////
+        var percentValueList = new Array();
+        var memberNameArr = new Array();
+        totalPercentList.forEach(data => {
+            percentValueList.push(data.percent);
+            memberNameArr.push(data.nick);
+        });
+        var barChartData = {       
+            labels: memberNameArr,
+             datasets: [{
+              label: '제출율',
+              backgroundColor: "#1E90FF",
+                data: percentValueList
+            }]
+        };
+        window.onload = function() {
+            var ctx = $('#chart').get(0).getContext("2d");
+            window.theChart = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    scales : {
+                        yAxes: [{
+                            ticks : {
+                                beginAtZero : true
+                            }
+                        }]
+                    }
+                }   
+            });
+        }
+        //rank/////////////////
+       
+    </script>
+</head>
+
+<body style="background:#ffbc3b">
+
+   <!--nav bar 시작-->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/home" style=color:white;>
+          <img src="/public/images/logo.png" height="30" alt="HOME">
+        </a>
+    
+        <!--다른 메뉴로 전환-->
+        <a class="nav-link" href="/home" style='color:white;'>HOME</a>
+        <a class="nav-link" href="/study-list/1" style='color:#ffbc3b;'>MYSTUDY</a>
+        <a class="nav-link" href="/openstudy-list/1" style='color:white;'>OPENSTUDY</a>
+    
+        <!--우측상단 드롭다운버튼-->
+        <div class="dropdown">
+          <button class="btn  btn-warning  dropdown-toggle" data-toggle="dropdown">
+            MY MENU
+          </button>
+    
+          <!--드롭다운 내부 버튼들-->
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/my-calendar">MY Calendar</a>
+            <a class="dropdown-item" href="/my-test-post/1">MY TEST</a>
+            <a class="dropdown-item" href="/auth/logout">로그아웃</a>
+          </div>
+        </div>
+    
+      </nav>
+  
+    <div class="jumbotron" style="margin-top: 60px; height:2500px;">
+        <div class="container">
+            <!-- <h1 class="display-4" style = "font-weight: bold;">My Study의 제출율</h1>
+        <h2 >자신의 제출율과 제출율 순위를 알 수 있습니다!</h2> -->
+            <!-- &nbsp; -->
+            <script>
+                document.write('<h3  style = "font-weight: bold; font-size: 3.5em;">' + myStudy.name +
+                    " " + "의 제출율" + '</h3>');
+                document.write('<p style =" font-size: 1.5em;">' + "자신의 제출율과 순위를 알 수 있습니다." + '</p>');
+            </script>
+            <hr class="my-4">
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <script>
+                    //document.write('<style> ul{ list-style:none;}</style>');
+                    document.write(
+                        '<div style="padding: 20px"><h1 class="display-4" style = "font-weight: bold; font-size: 2.0em;"> >' +
+                        "나의 제출율 분석" + '</h1>');
+                    document.write(' &nbsp; ');
+                    document.write(
+                        '<ul style = "list-style-type : none;"><div style="border: 5px solid #ffbc3b; float: left; width: 100%; padding:20px;">'
+                        );
+                    document.write('<li><h2 class="display-4" style = "font-weight: normal; font-size: 2.0em;">' +
+                        "나의 제출율: " + " " + myPercent + " %" + '</h2></li>&nbsp;');
+                  
+                    document.write(' &nbsp;');
+                    document.write('</ul></div></div>');
+                    // document.write('<h1 class="display-4" style = "margin-left:1.5%" style = "font-weight: normal;">>'+myStudy.name+"에 참여중인 인원: "+" "+memberCount+" 명"+"<br>"+'</h1>');
+                </script>
+
+            </div>
+            &nbsp;
+            <hr class="my-4">
+            <p class="lead">
+                <script>
+                </script>
+            </p>
+            <div class = "container">
+                    &nbsp;
+            <canvas id="chart"></canvas> 
+                &nbsp;
+            <hr class ="my-4">
+            <div class = "col-lg-6">
+                <h3><i class="fas fa-crown" style = "color:#ffbc3b"></i> Ranking</h3>
+            <ol>
+                <script>
+                    totalPercentList.forEach(data => {
+                        document.write('<li style = "margin-bottom:1%; margin-left:5%">' + data.nick + "</li>");
+                    });
+                </script>
+            </ol>
+        </div>
+        </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/public/javascripts/bootstrap.js"></script>
+</body>
+
+</html>

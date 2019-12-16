@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         password : {
             type: DataTypes.STRING(100),
-            allowNull: true,
+            allowNull: false,
         },
+        //studyId in Enroll
+        //tagId in EnrollTag
     },{
         timestamps : true,
         paranoid : true,
